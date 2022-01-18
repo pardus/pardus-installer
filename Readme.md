@@ -1,10 +1,11 @@
 # Pardus Installer
-17g live instaler fork for pardus.
+17g live installer fork for pardus.
 
 ## Packaging
 1. Fetch source
 2. Run this commands:
 ```shell
+mk-build-deps -i
 dpkg-buildpackage -b
 ```
 
@@ -12,6 +13,13 @@ dpkg-buildpackage -b
 ```shell
 cd live-installer
 python3 main.py --test
+```
+
+## Expert mode
+Expert mode is dangerous so disabled by default. Expert mode can help you for advanced installating and debugging.
+```shell
+cd live-installer
+python3 main.py --expert
 ```
 
 ## Configuration:
