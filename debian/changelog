@@ -1,0 +1,271 @@
+pardus-installer (1.0.1) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * translate fix
+  * upstream
+  * Partition sorting fix
+  * menu fix
+  * minor fix
+  * fix locale
+  * fstab looking good
+  * user section moved after partition
+  * auto resize slide pages
+  * resize
+  * resize disabled and window fit slide images
+  * fix size bug
+  * fix minor bug
+  * fix slide size
+  * minor fixes
+  * fix maxlen
+  * fix install button
+  * network configuration script logic added
+  * network customizer disabled
+  * fstab close fix
+  * minor fix
+  * skip user creation feature added
+  * Welcome page back button disabled
+  * fix live-installer application categories
+  * Options box rewritten.
+  * increase max string length on progress
+  * keep_userdata feature added
+  * fix keep_userdata
+  * keep_userdata fix
+  * keep_userdata disabled in config
+  * map resize
+  * useless shadow removed
+  * Please do not turn off message added under progressbar
+  * fix translation
+  * pulse when update
+  * fix grub-efi-ia32 support
+  * fix nvme windows detection
+  * fix windows override
+  * fix partitioning screen
+  * alternative-ui rewritten
+  * fix broken child name
+  * fix winefi part
+  * drop secureboot support (because pardus grub is unsigned)
+  * grub install into chroot
+  * split grub package for different platforms
+  * improve ui
+  * seperator added
+  * fix missing legacy package
+  * localectl is not vital process (some distributions not used it)
+  * fix wrong mbr selection on automated installation
+  * ui improvement
+  * timezone page
+  * fix timezone ui bug
+  * ui improvement
+  * update sources
+  * dynamic swap size config
+  * swap size from config
+  * ram size detect fi
+  * locale and timezone improvements
+  * fix wrong default variable
+  * upstream
+  * fix minor bug
+  * remove extra.xml reading
+  * update install disabled by default
+  * fix scroll
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 21 Dec 2021 10:09:43 +0300
+
+pardus-installer (1.0.0) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * apt fix
+  * add missing dependency
+  * add missing dep
+  * swap enable-disable
+  * fix
+  * fix partition config
+  * update detail
+  * check area
+  * options page improvement
+  * layout improvement
+  * update locale
+  * upstream
+  * hosts file removed
+  * customizable installer launcher
+  * minor fix
+  * update
+  * pep8 fixes and upstream
+  * upstream
+  * update locale
+  * update
+  * box
+  * branding updates
+  * update welcome
+  * fix translation
+  * update branding
+  * fix padding
+  * branding update
+  * fix slidepage sort
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 20 Aug 2021 21:31:40 +0300
+
+pardus-installer (1.0.0~Beta3) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * upstream
+  * fix run function return value
+  * upstream
+  * fix translationx
+  * usrmerge fix
+  * install openrc fix
+  * upstream
+  * if true
+  * usrmerge fix
+  * update
+  * run and update
+  * upstream and customize way changed
+  * fix branding merge
+  * upstream
+  * process
+  * update
+  * debian upgrade command fix
+  * upstream
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 02 Aug 2021 15:34:22 +0300
+
+pardus-installer (1.0.0~Beta2) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * upstream
+  * Çeviri sistemi düzenlemesi
+  * run function update
+  * password bug fixed.
+  * fix
+  * upstream
+  * fix error message definition
+  * fix resolv.conf
+  * update translation
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 13 Jul 2021 18:32:39 +0300
+
+pardus-installer (1.0.0~Beta1) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * Upstream 17g code
+  * upstream 17g
+  * upstream 17g source
+  * upstream source code
+  * upstream
+  * branding update
+  * upstream source
+  * config fixes
+  * codename set pardus
+  * upstream and cohfig fix
+  * fix keyboard variant bug
+  * variant check fix
+  * translation
+  * upstream source
+  * remove bloat dependency and add isoquerş
+  * config update
+  * Upstream 17g source code
+  * upstream 17g source
+  * fix bug
+  * upstream 17g
+  * upstream source code
+  * upstream source code
+  * update branding
+  * svg file convert to inkscape format
+  * fix keyboard detection
+  * typo fix
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 02 Jul 2021 17:17:29 +0300
+
+pardus-installer (0.2.0~Beta1) unstable; urgency=medium
+
+  * fix architecture
+  * fix package name
+  * Fix missing dependencies
+  * pardus-installer replaced with 17g with distro config
+  * fix build
+  * fix locale path
+  * fix config bug
+  * missing gettext-base dependencies added
+  * chowning remove
+  * fix translation
+  * translation fix
+  * fix
+  * branding update
+  * remove disabled sections in overview
+  * fix overview
+  * expand all
+  * upstream 17g source code
+  * update config for new features
+  * autoremove fix
+  * fix config
+  * Update 'live-installer/scripts/fetch-pkg-debian.sh'
+  * Update 'live-installer/frontend/gtk_interface.py'
+  * use_reboot settings
+
+ -- Ali Riza Keskin  <ali.riza.keskin@pardus.org.tr>  Tue, 02 Mar 2021 19:17:25 +0300
+
+pardus-installer (0.1.0~Beta3) unstable; urgency=medium
+
+  * drop btrfs support
+  * default timezone is 'Europe/Istanbul'
+  * username cannot start with number
+  * translation improvement
+  * screensaver disable fix
+  * fix grub device list
+  * interface update
+  * multi core copy files
+
+ -- Ali Riza Keskin  <ali.riza.keskin@pardus.org.tr>  Mon, 21 Dec 2020 09:43:29 +0000
+
+pardus-installer (0.1.0~Beta2) unstable; urgency=medium
+
+  * username check fixes
+  * minor fix
+  * username check fix
+  * minor fix
+  * launcher executable allow fix for gnome
+  * pep8 fixes
+  * translation fix
+
+ -- Ali Riza KESKIN <ali.riza.keskin@pardus.org.tr>  Tue, 03 Nov 2020 12:30:33 +0300
+
+pardus-installer (0.1.0~Beta1) unstable; urgency=medium
+
+  * Initial release.
+  * live-boot dependencies
+  * minor fixes
+  * locale fix
+  * locale fixes & timezone warning dialog
+  * glade changes
+  * glade changes
+  * postinst
+  * postinst
+  * autologin removed
+  * autologin removed
+  * desktop file
+  * gnome and xfce screen blank disable and setup icon on desktop
+  * minor fix
+  * minor fix 2
+  * minor fix 3
+  * timezone selection fix
+  * timezone selection fix
+  * pep8 issue fixes with autopep8
+  * fix init
+  * fix init
+  * fix init
+  * minor fix
+  * layout changes
+  * language list fix
+  * i386 remove event add in script
+  * language fallback
+  * exit button position changed and missing dependencies added
+  * default hostname
+  * default timezone selection
+  * timezone name button fix
+  * hostname fix
+  * laucher logo changed
+  * minor bug fixes and resource replaces
+  * gettext fix
+  * minor fix
+  * translation fix
+
+ -- Ali Riza KESKIN <ali.riza.keskin@pardus.org.tr>  Mon, 02 Nov 2020 18:26:33 +0300
+

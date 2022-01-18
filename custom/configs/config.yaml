@@ -1,0 +1,86 @@
+### 17g installer config
+
+## Distro section
+distro_codename: pardus
+distro_title: Pardus
+# distribution: auto
+# display_manager: auto
+copyright: TÜBİTAK ULAKBİM | 2021
+
+## Base options section
+# loop_directory: /dev/loop0
+# log_file: /var/log/17g-installer.log
+# gtk_theme: default
+welcome_screen: false
+# exclude_dirs:
+#   - /home
+# customizer_address: localhost
+
+## Base system section
+# initramfs_system: auto 
+# using_shell: /bin/bash
+# use_reboot: false
+# netinstall: false
+# use_rsync: true
+# use_unsquashfs: true
+remove_packages:
+  - live-*
+
+## User section
+autologin_enabled: false
+# auto_partition_enabled: true
+set_root_password: false
+# use_chpasswd: true
+# use_usermod: true
+keep_userdata : false
+minimal_instalation_enabled: false
+additional_user_groups:
+  - cdrom
+  - floppy
+  - sudo
+  - audio
+  - dip
+  - video
+  - plugdev
+  - netdev
+  - bluetooth
+  - lpadmin
+  - scanner
+  
+## Partitioning section
+# manual_partition_enabled: true 
+use_swap: true
+swap_size: 4192
+# replace_windows_enabled: true
+lvm_enabled: false
+encryption_enabled: false
+fill_disk_enabled: false
+set_alternative_ui: true
+# fullscreen: false
+# partition_editor: gparted
+
+## Timezone and locale section
+#default_locale: auto
+default_timezone: Europe/Istanbul
+
+## Setup page section
+# skip_language: false
+# skip_timezone: false
+# skip_keyboard: false
+# skip_options: false
+# skip_user: false
+hide_keyboard_model: true
+# allow_uppercase_hostname: true
+allow_week_password: true
+# allow_auto_novariant: false
+# min_password_length: 1
+
+## Pre/Post operations section
+# post_install_hook:
+#   - echo "BRUH"
+# pre_install_hook:
+#   - echo "BRUH"
+# pre_rsync_hook:
+#   - echo "BRUH"
+# post_rsync_hook:
+#   - echo "BRUH"

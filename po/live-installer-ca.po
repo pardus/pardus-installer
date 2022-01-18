@@ -1,0 +1,1237 @@
+# Catalan translation for linuxmint
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the linuxmint package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmint\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-11 12:23+0000\n"
+"PO-Revision-Date: 2020-03-09 21:50+0000\n"
+"Last-Translator: Isidro Pisa <isidro@utils.info>\n"
+"Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2020-03-13 11:20+0000\n"
+"X-Generator: Launchpad (build 3a6db24bbe7280ec09bae73384238390fcc98ad3)\n"
+
+#: live-installer/resources/interface.ui:66
+#: live-installer/resources/interface.ui:85
+#: live-installer/resources/interface2.ui:1845
+#: live-installer/resources/interface2.ui:1885
+#: live-installer/frontend/gtk_interface.py:372
+msgid "Welcome"
+msgstr "Benvingut/da"
+
+#: live-installer/resources/interface.ui:143
+#: live-installer/resources/interface2.ui:66
+#, fuzzy
+msgid "Welcome to the 17g Installer."
+msgstr "Benvingut/da a l'instal·lador de 17G."
+
+#: live-installer/resources/interface.ui:160
+#: live-installer/resources/interface2.ui:83
+#: live-installer/frontend/gtk_interface.py:399
+#: live-installer/frontend/tui_interface.py:25
+#, fuzzy
+msgid ""
+"This program will ask you some questions and set up system on your computer."
+msgstr ""
+"Aquest programa us farà algunes preguntes i configurarà 17G en el vostre "
+"equip."
+
+#: live-installer/resources/interface.ui:228
+#: live-installer/resources/interface2.ui:149
+#: live-installer/frontend/gtk_interface.py:407
+msgid "Keyboard Model:"
+msgstr "Model de teclat:"
+
+#: live-installer/resources/interface.ui:325
+#: live-installer/resources/interface2.ui:242
+#, fuzzy
+msgid "Type here to test your keyboard"
+msgstr "Escriviu aquí per provar la distribució de el teclat"
+
+#: live-installer/resources/interface.ui:380
+#: live-installer/resources/interface.ui:1610
+#: live-installer/resources/interface.ui:1952
+#: live-installer/resources/interface.ui:1964
+#: live-installer/resources/interface.ui:1976
+#: live-installer/resources/interface2.ui:297
+#: live-installer/resources/interface2.ui:1527
+#: live-installer/resources/interface2.ui:1973
+#: live-installer/resources/interface2.ui:1985
+#: live-installer/resources/interface2.ui:1997
+msgid "label"
+msgstr ""
+
+#: live-installer/resources/interface.ui:415
+#: live-installer/resources/interface2.ui:332
+msgid "Continent"
+msgstr ""
+
+#: live-installer/resources/interface.ui:429
+#: live-installer/resources/interface2.ui:346
+#: live-installer/frontend/gtk_interface.py:376
+#: live-installer/frontend/tui_interface.py:41
+msgid "Timezone"
+msgstr "Zona horària"
+
+#: live-installer/resources/interface.ui:487
+#: live-installer/resources/interface2.ui:404
+#: live-installer/frontend/gtk_interface.py:433
+msgid "Automated Installation"
+msgstr "Instal·lació automatitzada"
+
+#: live-installer/resources/interface.ui:503
+#: live-installer/resources/interface2.ui:420
+#, fuzzy
+msgid "Erase a disk and install LMDE on it."
+msgstr "Esborrar un disc i instal·lar-hi 17G."
+
+#: live-installer/resources/interface.ui:531
+#: live-installer/resources/interface2.ui:448
+#: live-installer/frontend/gtk_interface.py:436
+msgid "Disk:"
+msgstr "Disc:"
+
+#: live-installer/resources/interface.ui:581
+#: live-installer/resources/interface2.ui:498
+#: live-installer/frontend/gtk_interface.py:444
+msgid "Use LVM (Logical Volume Management)"
+msgstr "Utilitzar LVM (gestió de volum lògic)"
+
+#: live-installer/resources/interface.ui:628
+#: live-installer/resources/interface2.ui:545
+#: live-installer/frontend/gtk_interface.py:438
+msgid "Encrypt the operating system"
+msgstr "Cifrar el sistema operatiu"
+
+#: live-installer/resources/interface.ui:658
+#: live-installer/resources/interface2.ui:575
+#: live-installer/frontend/gtk_interface.py:440
+msgid "Passphrase"
+msgstr "Frase de pas"
+
+#: live-installer/resources/interface.ui:674
+#: live-installer/resources/interface2.ui:591
+#: live-installer/frontend/gtk_interface.py:442
+msgid "Confirm passphrase"
+msgstr "Confirmeu la frase de pas"
+
+#: live-installer/resources/interface.ui:708
+#: live-installer/resources/interface2.ui:625
+#: live-installer/frontend/gtk_interface.py:461
+msgid "This provides extra security but it can take hours."
+msgstr "Proporciona seguretat extra, però pot trigar hores."
+
+#: live-installer/resources/interface.ui:722
+#: live-installer/resources/interface2.ui:639
+#: live-installer/frontend/gtk_interface.py:459
+msgid "Fill the disk with random data"
+msgstr "Omple el disc amb dades aleatòries"
+
+#: live-installer/resources/interface.ui:805
+#: live-installer/resources/interface2.ui:724
+#: live-installer/frontend/gtk_interface.py:446
+msgid "Manual Partitioning"
+msgstr "Particionat manual"
+
+#: live-installer/resources/interface.ui:821
+#: live-installer/resources/interface2.ui:740
+#, fuzzy
+msgid "Manually create, resize or choose partitions for LMDE."
+msgstr "Crear, redimensionar o triar particions de 17G manualment."
+
+#: live-installer/resources/interface.ui:886
+#: live-installer/resources/interface2.ui:805
+msgid "Remove windows & Install"
+msgstr ""
+
+#: live-installer/resources/interface.ui:902
+#: live-installer/resources/interface2.ui:821
+msgid "Remove existsing windows and install LMDE on it."
+msgstr ""
+
+#: live-installer/resources/interface.ui:954
+#: live-installer/resources/interface2.ui:873
+#: live-installer/frontend/gtk_interface.py:450
+#, fuzzy
+msgid "Expert Mode"
+msgstr "Mode expert"
+
+#: live-installer/resources/interface.ui:970
+#: live-installer/resources/interface2.ui:889
+msgid "The setup tool will not do partitioning."
+msgstr ""
+
+#: live-installer/resources/interface.ui:1032
+#: live-installer/resources/interface2.ui:951
+#: live-installer/frontend/gtk_interface.py:489
+#, fuzzy
+msgid "Minimal installation"
+msgstr "Instal·lació automatitzada"
+
+#: live-installer/resources/interface.ui:1048
+#: live-installer/resources/interface2.ui:967
+#: live-installer/frontend/gtk_interface.py:490
+msgid ""
+"This will only install a minimal desktop environment with a browser and "
+"utilities."
+msgstr ""
+
+#: live-installer/resources/interface.ui:1081
+#: live-installer/resources/interface2.ui:1000
+#: live-installer/frontend/gtk_interface.py:487
+msgid "Install system with updates"
+msgstr ""
+
+#: live-installer/resources/interface.ui:1097
+#: live-installer/resources/interface2.ui:1016
+#: live-installer/frontend/gtk_interface.py:488
+msgid "If you connect internet, updates will install."
+msgstr ""
+
+#: live-installer/resources/interface.ui:1198
+#: live-installer/resources/interface2.ui:1117
+#: live-installer/frontend/gtk_interface.py:478
+msgid "Install the GRUB boot menu on:"
+msgstr "Instal·la el menú d'arrencada GRUB a:"
+
+#: live-installer/resources/interface.ui:1256
+#: live-installer/resources/interface2.ui:1175
+#: live-installer/frontend/gtk_interface.py:464
+msgid "Edit partitions"
+msgstr "Edita les particions"
+
+#: live-installer/resources/interface.ui:1312
+#: live-installer/resources/interface2.ui:1231
+#: live-installer/frontend/gtk_interface.py:412
+msgid "Your name:"
+msgstr "El vostre nom:"
+
+#: live-installer/resources/interface.ui:1355
+#: live-installer/resources/interface2.ui:1274
+#: live-installer/frontend/gtk_interface.py:414
+msgid "Your computer's name:"
+msgstr "El nom del vostre equip:"
+
+#: live-installer/resources/interface.ui:1370
+#: live-installer/resources/interface2.ui:1289
+#: live-installer/frontend/gtk_interface.py:418
+msgid "Pick a username:"
+msgstr "Trieu un nom d'usuari:"
+
+#: live-installer/resources/interface.ui:1383
+#: live-installer/resources/interface2.ui:1302
+#: live-installer/frontend/gtk_interface.py:416
+msgid "The name it uses when it talks to other computers."
+msgstr "El nom de l'equip per comunicar-se amb altres equips."
+
+#: live-installer/resources/interface.ui:1416
+#: live-installer/resources/interface2.ui:1335
+#: live-installer/frontend/gtk_interface.py:420
+msgid "Choose a password:"
+msgstr "Trieu una contrasenya:"
+
+#: live-installer/resources/interface.ui:1463
+#: live-installer/resources/interface2.ui:1382
+#: live-installer/frontend/gtk_interface.py:422
+msgid "Confirm your password:"
+msgstr "Confirmeu la contrasenya:"
+
+#: live-installer/resources/interface.ui:1481
+#: live-installer/resources/interface2.ui:1400
+#: live-installer/frontend/gtk_interface.py:425
+msgid "Log in automatically"
+msgstr "Inicia automàticament la sessió"
+
+#: live-installer/resources/interface.ui:1496
+#: live-installer/resources/interface2.ui:1415
+#: live-installer/frontend/gtk_interface.py:427
+msgid "Require my password to log in"
+msgstr "Demana contrasenya per iniciar sessió"
+
+#: live-installer/resources/interface.ui:1511
+#: live-installer/resources/interface2.ui:1430
+#: live-installer/frontend/gtk_interface.py:429
+msgid "Encrypt my home folder"
+msgstr "Encripta la meva carpeta personal"
+
+#: live-installer/resources/interface.ui:1625
+#: live-installer/resources/interface2.ui:1542
+msgid "0.0"
+msgstr ""
+
+#: live-installer/resources/interface.ui:1657
+#: live-installer/resources/interface2.ui:1574
+#: live-installer/frontend/gtk_interface.py:491
+msgid "Please do not turn off your computer during the installation process."
+msgstr ""
+
+#: live-installer/resources/interface.ui:1707
+#: live-installer/resources/interface2.ui:1642
+#: live-installer/resources/welcome.ui:206
+msgid "17g team"
+msgstr ""
+
+#: live-installer/resources/interface.ui:1988
+#: live-installer/resources/interface2.ui:2009
+msgid "/dev/sda1"
+msgstr ""
+
+#: live-installer/resources/interface.ui:2040
+#: live-installer/resources/interface2.ui:2061
+msgid "read only"
+msgstr ""
+
+#: live-installer/resources/welcome.ui:61
+msgid "Try 17g"
+msgstr ""
+
+#: live-installer/resources/welcome.ui:85
+msgid " "
+msgstr ""
+
+#: live-installer/resources/welcome.ui:121
+#: live-installer/frontend/welcome.py:34
+#, fuzzy
+msgid "Install to Hard Drive"
+msgstr "S’estan instal·lant els controladors"
+
+#: live-installer/resources/welcome.ui:166
+msgid "You are currently running 17g from live media."
+msgstr ""
+
+#: live-installer/resources/welcome.ui:178
+msgid ""
+"You can install 17g now, or chose \"Install to Hard Drive\" in the "
+"Appication Menu later."
+msgstr ""
+
+#: live-installer/resources/welcome.ui:228
+#, fuzzy
+msgid "Welcome to 17g"
+msgstr "Benvingut/da"
+
+#: live-installer/installer.py:135 live-installer/installer.py:156
+#, python-format
+msgid "Copying /%s"
+msgstr "Copiant /%s"
+
+#: live-installer/installer.py:136
+#, python-format
+msgid "rsync exited with return code: %s"
+msgstr ""
+
+#: live-installer/installer.py:140
+msgid "Extracting rootfs."
+msgstr ""
+
+#: live-installer/installer.py:176
+msgid "Entering the system ..."
+msgstr "Entrada al sistema ..."
+
+#: live-installer/installer.py:206
+msgid "Adding new user to the system"
+msgstr "Creació d'un compte d'usuari"
+
+#: live-installer/installer.py:257
+msgid "Writing filesystem mount information to /etc/fstab"
+msgstr ""
+"Escriptura de la informació del muntatge del sistema de fitxers a /etc/fstab"
+
+#: live-installer/installer.py:263 live-installer/installer.py:418
+#, python-format
+msgid "Mounting %(partition)s on %(mountpoint)s"
+msgstr "S’està muntant «%(partition)s» a %(mountpoint)s…"
+
+#: live-installer/installer.py:300
+#, python-format
+msgid "Filling %s with random data (please be patient, this can take hours...)"
+msgstr "Omplint %s amb dades aleatòries (teniu paciència, pot trigar hores...)"
+
+#: live-installer/installer.py:306
+#, python-format
+msgid "Creating partitions on %s"
+msgstr "Creant particions a %s"
+
+#: live-installer/installer.py:371
+#, python-format
+msgid "Formatting %(partition)s as %(format)s ..."
+msgstr "S’està formatant «%(partition)s» com a %(format)s…"
+
+#: live-installer/installer.py:541
+msgid "Setting hostname"
+msgstr "S'està establint el nom de l'amfitrió"
+
+#: live-installer/installer.py:566
+msgid "Setting locale"
+msgstr "S'està establint la configuració regional"
+
+#: live-installer/installer.py:597
+#, fuzzy
+msgid "Setting timezone"
+msgstr "S'està establint el nom de l'amfitrió"
+
+#: live-installer/installer.py:631
+msgid "Setting keyboard options"
+msgstr "S'estan establint les opcions del teclat"
+
+#: live-installer/installer.py:725
+#, fuzzy
+msgid "Removing extra packages"
+msgstr "S'està suprimint la configuració autònoma (paquets)"
+
+#: live-installer/installer.py:732
+msgid "Trying to install updates"
+msgstr ""
+
+#: live-installer/installer.py:737
+msgid "Clearing package manager"
+msgstr ""
+
+#: live-installer/installer.py:754
+msgid "Generating initramfs"
+msgstr ""
+
+#: live-installer/installer.py:759
+msgid "Preparing bootloader installation"
+msgstr ""
+
+#: live-installer/installer.py:771
+msgid "Installing bootloader"
+msgstr "S'està instal·lant el gestor d'arrencada"
+
+#: live-installer/installer.py:783
+msgid "Configuring bootloader"
+msgstr "S'està configurant el gestor d'arrencada"
+
+#: live-installer/installer.py:791
+msgid ""
+"WARNING: The grub bootloader was not configured properly! You need to "
+"configure it manually."
+msgstr ""
+"Atenció: el gestor d'arrencada GRUB no està configurat correctament! Cal "
+"configurar-lo manualment."
+
+#: live-installer/installer.py:821
+#: live-installer/frontend/gtk_interface.py:1351
+msgid "Installation finished"
+msgstr "S'ha finalitzat la instal·lació"
+
+#: live-installer/installer.py:844
+msgid "Checking bootloader"
+msgstr "S'està comprovant el gestor d'arrencada"
+
+#: live-installer/installer.py:876
+msgid "Failed to run command (Exited with {}):"
+msgstr ""
+
+#: live-installer/main.py:38
+msgid "You must be root!"
+msgstr ""
+
+#: live-installer/frontend/welcome.py:32
+#, python-format
+msgid "Try %s"
+msgstr ""
+
+#: live-installer/frontend/welcome.py:36
+#, python-format
+msgid "You are currently running %s from live media."
+msgstr ""
+
+#: live-installer/frontend/welcome.py:38
+#, python-format
+msgid ""
+"You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
+"Menu later."
+msgstr ""
+
+#: live-installer/frontend/welcome.py:39
+#, fuzzy, python-format
+msgid "Welcome to %s"
+msgstr "Benvingut/da"
+
+#: live-installer/frontend/partitioning.py:66
+msgid "B"
+msgstr "B"
+
+#: live-installer/frontend/partitioning.py:66
+#: live-installer/frontend/partitioning.py:428
+msgid "kB"
+msgstr "kB"
+
+#: live-installer/frontend/partitioning.py:66
+#: live-installer/frontend/partitioning.py:428
+msgid "MB"
+msgstr "MB"
+
+#: live-installer/frontend/partitioning.py:66
+#: live-installer/frontend/partitioning.py:429
+msgid "GB"
+msgstr "GB"
+
+#: live-installer/frontend/partitioning.py:67
+#: live-installer/frontend/partitioning.py:429
+msgid "TB"
+msgstr "TB"
+
+#: live-installer/frontend/partitioning.py:74
+msgid "Removable:"
+msgstr "Extraïble:"
+
+#: live-installer/frontend/partitioning.py:205
+msgid "Edit"
+msgstr "Edita"
+
+#: live-installer/frontend/partitioning.py:210
+#: live-installer/frontend/partitioning.py:214
+#: live-installer/frontend/partitioning.py:221
+#: live-installer/frontend/partitioning.py:230
+#, fuzzy, python-format
+msgid "Assign to %s"
+msgstr "Assigna a /"
+
+#: live-installer/frontend/partitioning.py:331
+#: live-installer/frontend/partitioning.py:482
+#: live-installer/frontend/gtk_interface.py:473
+msgid "Free space"
+msgstr "Espai lliure"
+
+#: live-installer/frontend/partitioning.py:348
+#: live-installer/frontend/gtk_interface.py:361
+#: live-installer/frontend/gtk_interface.py:364
+#: live-installer/frontend/gtk_interface.py:941
+#: live-installer/frontend/gtk_interface.py:977
+#: live-installer/frontend/gtk_interface.py:1063
+#: live-installer/frontend/gtk_interface.py:1080
+#: live-installer/frontend/gtk_interface.py:1085
+#: live-installer/frontend/gtk_interface.py:1099
+#: live-installer/frontend/gtk_interface.py:1103
+#: live-installer/frontend/gtk_interface.py:1109
+#: live-installer/frontend/gtk_interface.py:1114
+#: live-installer/frontend/gtk_interface.py:1119
+#: live-installer/frontend/gtk_interface.py:1179
+#: live-installer/frontend/gtk_interface.py:1250
+msgid "Installer"
+msgstr "Instal·lador"
+
+#: live-installer/frontend/partitioning.py:364
+#, python-format
+msgid ""
+"The partition table couldn't be written for %s. Restart the computer and try "
+"again."
+msgstr ""
+"No s'ha pogut escriure la taula de partició de %s. Reinicieu l'equip i "
+"torneu-ho a provar."
+
+#: live-installer/frontend/partitioning.py:415
+#, python-format
+msgid ""
+"The partition %s could not be created. The installation will stop. Restart "
+"the computer and try again."
+msgstr ""
+"No s'ha pogut crear la partició %s. La instal·lació s'aturarà. Reinicieu "
+"l'equip i torneu-ho a provar."
+
+#: live-installer/frontend/partitioning.py:480
+msgid "Logical partition"
+msgstr "Partició lògica"
+
+#: live-installer/frontend/partitioning.py:481
+msgid "Extended partition"
+msgstr "Partició estesa"
+
+#: live-installer/frontend/partitioning.py:485
+msgid "Unknown"
+msgstr "Desconegut"
+
+#: live-installer/frontend/partitioning.py:542
+msgid "bootloader/recovery"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:554
+#, fuzzy
+msgid "EFI System Partition"
+msgstr "Edita la partició"
+
+#: live-installer/frontend/partitioning.py:577
+msgid "Edit partition"
+msgstr "Edita la partició"
+
+#: live-installer/frontend/partitioning.py:579
+msgid "Device:"
+msgstr "Dispositiu:"
+
+#: live-installer/frontend/partitioning.py:581
+msgid "Format as:"
+msgstr "Formata com:"
+
+#: live-installer/frontend/partitioning.py:583
+msgid "Mount point:"
+msgstr "Punt de muntatge:"
+
+#: live-installer/frontend/partitioning.py:584
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: live-installer/frontend/partitioning.py:585
+#: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
+#: live-installer/frontend/dialogs.py:54
+msgid "OK"
+msgstr "Accepta"
+
+#: live-installer/frontend/gtk_interface.py:100
+#: live-installer/frontend/gtk_interface.py:403
+msgid "Country"
+msgstr "País"
+
+#: live-installer/frontend/gtk_interface.py:109
+#: live-installer/frontend/gtk_interface.py:374
+#: live-installer/frontend/gtk_interface.py:402
+#: live-installer/frontend/tui_interface.py:33
+msgid "Language"
+msgstr "Llengua"
+
+#: live-installer/frontend/gtk_interface.py:239
+msgid "Layout"
+msgstr "Disposició"
+
+#: live-installer/frontend/gtk_interface.py:247
+msgid "Variant"
+msgstr "Variant"
+
+#: live-installer/frontend/gtk_interface.py:265
+msgid "Calculating file indexes ..."
+msgstr "Càlcul dels índexs dels fitxers..."
+
+#: live-installer/frontend/gtk_interface.py:374
+#: live-installer/frontend/tui_interface.py:28
+msgid "What language would you like to use?"
+msgstr "Quina llengua voleu utilitzar?"
+
+#: live-installer/frontend/gtk_interface.py:376
+#: live-installer/frontend/tui_interface.py:37
+msgid "Where are you?"
+msgstr "On sou?"
+
+#: live-installer/frontend/gtk_interface.py:378
+msgid "Keyboard layout"
+msgstr "Disposició del teclat"
+
+#: live-installer/frontend/gtk_interface.py:378
+msgid "What is your keyboard layout?"
+msgstr "Quina és la distribució del vostre teclat?"
+
+#: live-installer/frontend/gtk_interface.py:380
+msgid "User account"
+msgstr "Compte d'usuari"
+
+#: live-installer/frontend/gtk_interface.py:380
+msgid "Who are you?"
+msgstr "Qui sou?"
+
+#: live-installer/frontend/gtk_interface.py:382
+msgid "Installation Type"
+msgstr "Tipus d'instal·lació"
+
+#: live-installer/frontend/gtk_interface.py:382
+#: live-installer/frontend/gtk_interface.py:384
+#, fuzzy
+msgid "Where do you want to install system?"
+msgstr "On voleu instal·lar 17G?"
+
+#: live-installer/frontend/gtk_interface.py:384
+msgid "Partitioning"
+msgstr "Particionat"
+
+#: live-installer/frontend/gtk_interface.py:386
+msgid "Summary"
+msgstr "Resum"
+
+#: live-installer/frontend/gtk_interface.py:386
+msgid "Check that everything is correct"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:388
+msgid "Installing"
+msgstr "Instal·lant"
+
+#: live-installer/frontend/gtk_interface.py:388
+msgid "Please wait..."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:391
+msgid "Quit"
+msgstr "Surt"
+
+#: live-installer/frontend/gtk_interface.py:392
+msgid "Back"
+msgstr "Enrere"
+
+#: live-installer/frontend/gtk_interface.py:393
+#: live-installer/frontend/gtk_interface.py:1125
+msgid "Next"
+msgstr "Següent"
+
+#: live-installer/frontend/gtk_interface.py:397
+#: live-installer/frontend/tui_interface.py:23
+#, fuzzy, python-format
+msgid "Welcome to the %s Installer."
+msgstr "Benvingut/da a l'instal·lador de 17G."
+
+#: live-installer/frontend/gtk_interface.py:409
+msgid "Type here to test your keyboard layout"
+msgstr "Escriviu aquí per provar la distribució de el teclat"
+
+#: live-installer/frontend/gtk_interface.py:435
+#, fuzzy
+msgid "Erase a disk and install system on it."
+msgstr "Esborrar un disc i instal·lar-hi 17G."
+
+#: live-installer/frontend/gtk_interface.py:448
+#, fuzzy
+msgid "Manually create, resize or choose partitions for system."
+msgstr "Crear, redimensionar o triar particions de 17G manualment."
+
+#: live-installer/frontend/gtk_interface.py:452
+msgid "The setup tool will not do partitioning"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:454
+msgid "Remove Windows & Install"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:456
+msgid "Remove existsing windows and install system on it."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:465
+msgid "Refresh"
+msgstr "Refresca"
+
+#: live-installer/frontend/gtk_interface.py:467
+msgid "Device"
+msgstr "Dispositiu"
+
+#: live-installer/frontend/gtk_interface.py:468
+msgid "Type"
+msgstr "Tipus"
+
+#: live-installer/frontend/gtk_interface.py:469
+msgid "Operating system"
+msgstr "Sistema operatiu"
+
+#: live-installer/frontend/gtk_interface.py:470
+msgid "Mount point"
+msgstr "Punt de muntatge"
+
+#: live-installer/frontend/gtk_interface.py:471
+msgid "Format as"
+msgstr "Formata com a"
+
+#: live-installer/frontend/gtk_interface.py:472
+msgid "Size"
+msgstr "Mida"
+
+#: live-installer/frontend/gtk_interface.py:481
+msgid "Read only"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:669
+msgid "Quit?"
+msgstr "Voleu sortir?"
+
+#: live-installer/frontend/gtk_interface.py:670
+msgid "Are you sure you want to quit the installer?"
+msgstr "Esteu segur que voleu sortir de l'instal·lador?"
+
+#: live-installer/frontend/gtk_interface.py:942
+msgid "Please choose a language"
+msgstr "Trieu un idioma"
+
+#: live-installer/frontend/gtk_interface.py:978
+#, fuzzy
+msgid "Please provide a kayboard layout for your computer."
+msgstr "Introduïu un nom per al vostre equip."
+
+#: live-installer/frontend/gtk_interface.py:987
+msgid "Please provide your full name."
+msgstr "Proporcioneu el vostre nom complet."
+
+#: live-installer/frontend/gtk_interface.py:992
+msgid "Please provide a name for your computer."
+msgstr "Introduïu un nom per al vostre equip."
+
+#: live-installer/frontend/gtk_interface.py:996
+msgid "Please provide a username."
+msgstr "Proporcioneu un nom d'usuari."
+
+#: live-installer/frontend/gtk_interface.py:1001
+msgid "Please provide a password for your user account."
+msgstr "Proporcioneu una contrasenya per al vostre compte d'usuari."
+
+#: live-installer/frontend/gtk_interface.py:1005
+#, fuzzy
+msgid "Your passwords is too short."
+msgstr "Les vostres contrasenyes no coincideixen."
+
+#: live-installer/frontend/gtk_interface.py:1009
+#, fuzzy
+msgid "Your passwords is not strong."
+msgstr "Les vostres contrasenyes no coincideixen."
+
+#: live-installer/frontend/gtk_interface.py:1010
+msgid "Strong password requirements:\n"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1011
+msgid "- Length must be minimum 8 characters\n"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1012
+msgid "- Must have exclusive characters\n"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1013
+msgid "- Must have big and small letters\n"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1014
+msgid "- Must have number"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1017
+msgid "Are you sure?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1018
+#: live-installer/frontend/gtk_interface.py:1181
+msgid "Warning"
+msgstr "Atenció"
+
+#: live-installer/frontend/gtk_interface.py:1024
+msgid "Your passwords do not match."
+msgstr "Les vostres contrasenyes no coincideixen."
+
+#: live-installer/frontend/gtk_interface.py:1030
+#, fuzzy
+msgid "Your username cannot start with numbers."
+msgstr "El vostre nom d'usuari no ha de contenir espais en blanc."
+
+#: live-installer/frontend/gtk_interface.py:1036
+msgid "Your username must be lower case."
+msgstr "El vostre nom d'usuari ha d'estar en minúscules."
+
+#: live-installer/frontend/gtk_interface.py:1043
+msgid "Your username may not contain whitespace characters."
+msgstr "El vostre nom d'usuari no ha de contenir espais en blanc."
+
+#: live-installer/frontend/gtk_interface.py:1051
+msgid "The computer's name must be lower case."
+msgstr "El nom de l'equip ha d'estar en minúscules."
+
+#: live-installer/frontend/gtk_interface.py:1058
+msgid "The computer's name may not contain whitespace characters."
+msgstr "El nom de l'equip no por contenir espais en blanc."
+
+#: live-installer/frontend/gtk_interface.py:1067
+msgid "Install"
+msgstr "Instal·la"
+
+#: live-installer/frontend/gtk_interface.py:1081
+msgid ""
+"Root filesystem type not specified. Installation will continue without disk "
+"formatting. Do you want to continue?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1085
+msgid "Please select a root (/) partition."
+msgstr "Seleccioneu una partició arrel (/)."
+
+#: live-installer/frontend/gtk_interface.py:1086
+#, fuzzy, python-format
+msgid ""
+"A root partition is needed to install %s on.\n"
+"\n"
+" - Mount point: /\n"
+" - Recommended size: 30GB\n"
+" - Recommended filesystem format: ext4\n"
+"\n"
+msgstr ""
+"Cal una partició arrel on instal·lar Linux Mint.\n"
+"\n"
+"- Punt de muntatge: /\n"
+"- Mida recomanada: 30 GB\n"
+"- Sistema de fitxers recomanat: ext4\n"
+"\n"
+"Nota: La funció d'instantànies btrfs timeshift requereix l'ús de:\n"
+"- Punt de muntatge de subvolum /@\n"
+"- Sistema de fitxers btrfs\n"
+
+#: live-installer/frontend/gtk_interface.py:1100
+msgid "The EFI partition is not bootable. Please edit the partition flags."
+msgstr ""
+"La partició EFI no és d'arrencada. Editeu els indicadors de la partició."
+
+#: live-installer/frontend/gtk_interface.py:1104
+msgid "The EFI partition is too small. It must be at least 35MB."
+msgstr "La partició EFI és massa petita. Ha de tenir almenys 35 MB."
+
+#: live-installer/frontend/gtk_interface.py:1110
+#: live-installer/frontend/gtk_interface.py:1115
+msgid "The EFI partition must be formatted as vfat."
+msgstr "La partició EFI ha de tenir format vfat."
+
+#: live-installer/frontend/gtk_interface.py:1119
+msgid "Please select an EFI partition."
+msgstr "Seleccioneu una partició EFI."
+
+#: live-installer/frontend/gtk_interface.py:1120
+msgid ""
+"An EFI system partition is needed with the following requirements:\n"
+"\n"
+" - Mount point: /boot/efi\n"
+" - Partition flags: Bootable\n"
+" - Size: at least 35MB (100MB or more recommended)\n"
+" - Format: vfat or fat32\n"
+"\n"
+"To ensure compatibility with Windows we recommend you use the first "
+"partition of the disk as the EFI system partition.\n"
+" "
+msgstr ""
+"Cal una partició de sistema EFI amb els següents requisits:\n"
+"\n"
+"- Punt de muntatge: /boot/efi\n"
+"- Flags de partició: arrencable\n"
+"- Mida: mínim 35 MB (es recomanen 100 MB o més)\n"
+"- Format: vfat o fat32\n"
+" "
+
+#: live-installer/frontend/gtk_interface.py:1168
+msgid "Please select a disk."
+msgstr "Trieu un disc"
+
+#: live-installer/frontend/gtk_interface.py:1174
+msgid "Please provide a passphrase for the encryption."
+msgstr "Indiqueu una frase de pas per al xifrat."
+
+#: live-installer/frontend/gtk_interface.py:1177
+msgid "Your passphrases do not match."
+msgstr "Les frases de pas no coincideixen."
+
+#: live-installer/frontend/gtk_interface.py:1182
+#, python-format
+msgid "This will delete all the data on %s. Are you sure?"
+msgstr "Això eliminarà totes les dades a %s. Esteu segur?"
+
+#: live-installer/frontend/gtk_interface.py:1251
+#, fuzzy
+msgid "Please provide a device to install grub."
+msgstr "Proporcioneu un nom d'usuari."
+
+#: live-installer/frontend/gtk_interface.py:1289
+msgid "Localization"
+msgstr "Localització"
+
+#: live-installer/frontend/gtk_interface.py:1290
+msgid "Language: "
+msgstr "Idioma: "
+
+#: live-installer/frontend/gtk_interface.py:1291
+msgid "Timezone: "
+msgstr "Zona horària: "
+
+#: live-installer/frontend/gtk_interface.py:1292
+msgid "Keyboard layout: "
+msgstr "Disposició del teclat: "
+
+#: live-installer/frontend/gtk_interface.py:1296
+msgid "User settings"
+msgstr "Ajusts de l'usuari"
+
+#: live-installer/frontend/gtk_interface.py:1297
+msgid "Real name: "
+msgstr "Nom real: "
+
+#: live-installer/frontend/gtk_interface.py:1298
+msgid "Username: "
+msgstr "Nom d'usuari: "
+
+#: live-installer/frontend/gtk_interface.py:1300
+msgid "Password: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1302
+msgid "Automatic login: "
+msgstr "Inici de sessió automàtic: "
+
+#: live-installer/frontend/gtk_interface.py:1302
+#: live-installer/frontend/gtk_interface.py:1305
+#: live-installer/frontend/gtk_interface.py:1328
+#: live-installer/frontend/gtk_interface.py:1332
+msgid "enabled"
+msgstr "activat"
+
+#: live-installer/frontend/gtk_interface.py:1303
+#: live-installer/frontend/gtk_interface.py:1306
+#: live-installer/frontend/gtk_interface.py:1329
+#: live-installer/frontend/gtk_interface.py:1332
+msgid "disabled"
+msgstr "desactivat"
+
+#: live-installer/frontend/gtk_interface.py:1305
+msgid "Home encryption: "
+msgstr "Encriptat de la carpeta d'usuari "
+
+#: live-installer/frontend/gtk_interface.py:1307
+msgid "System settings"
+msgstr "Ajusts del sistema"
+
+#: live-installer/frontend/gtk_interface.py:1308
+msgid "Computer's name: "
+msgstr "Nom de l'equip: "
+
+#: live-installer/frontend/gtk_interface.py:1311
+#: live-installer/frontend/gtk_interface.py:1313
+msgid "Bios type: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1315
+#, fuzzy
+msgid "Install updates after installation"
+msgstr "Instal·lació automatitzada"
+
+#: live-installer/frontend/gtk_interface.py:1316
+msgid "Filesystem operations"
+msgstr "Operacions del sistema de fitxers"
+
+#: live-installer/frontend/gtk_interface.py:1317
+#, python-format
+msgid "Install bootloader on %s"
+msgstr "Instal·la el gestor d'arrencada a %s"
+
+#: live-installer/frontend/gtk_interface.py:1318
+msgid "Do not install bootloader"
+msgstr "No instal·lis el gestor d'arrencada"
+
+#: live-installer/frontend/gtk_interface.py:1320
+msgid "Use already-mounted /target."
+msgstr "Utilitza /target ja muntat."
+
+#: live-installer/frontend/gtk_interface.py:1325
+#, python-format
+msgid "Automated installation on %s"
+msgstr "Instalació automatitzada a %s"
+
+#: live-installer/frontend/gtk_interface.py:1328
+msgid "LVM: "
+msgstr "LVM: "
+
+#: live-installer/frontend/gtk_interface.py:1331
+msgid "Disk Encryption: "
+msgstr "Xifrat de disc: "
+
+#: live-installer/frontend/gtk_interface.py:1335
+#, python-format
+msgid "Format %(path)s as %(filesystem)s"
+msgstr "Formata %(path)s com a %(filesystem)s"
+
+#: live-installer/frontend/gtk_interface.py:1339
+#, python-format
+msgid "Mount %(path)s as %(mount)s"
+msgstr "Munta %(path)s com a %(mount)s"
+
+#: live-installer/frontend/gtk_interface.py:1352
+msgid ""
+"The installation is now complete. Do you want to restart your computer to "
+"use the new system?"
+msgstr ""
+"Ara s'ha completat la instal·lació. Voleu reiniciar el vostre ordinador per "
+"utilitzar el sistema nou?"
+
+#: live-installer/frontend/gtk_interface.py:1383
+#: live-installer/frontend/gtk_interface.py:1387
+#: live-installer/frontend/gtk_interface.py:1396
+#: live-installer/frontend/gtk_interface.py:1405
+msgid "Installation error"
+msgstr "Error en la instal·lació"
+
+#: live-installer/frontend/tui_interface.py:45
+#, fuzzy
+msgid "What keyboard would you like to use?"
+msgstr "Quina llengua voleu utilitzar?"
+
+#: live-installer/frontend/tui_interface.py:52
+#, fuzzy
+msgid "Keyboard Model"
+msgstr "Model de teclat:"
+
+#: live-installer/frontend/dialogs.py:41
+msgid "No"
+msgstr "No"
+
+#: live-installer/frontend/dialogs.py:42
+msgid "Yes"
+msgstr "Sí"
+
+#: live-installer/frontend/timezones.py:142
+#, fuzzy
+msgid "Select timezone"
+msgstr "Zona horària"
+
+#~ msgid "Installation Tool"
+#~ msgstr "Eina d'instal·lació"
+
+#, python-format
+#~ msgid ""
+#~ "No partition table was found on the hard drive: %s. Do you want the "
+#~ "installer to create a set of partitions for you? Note: This will ERASE "
+#~ "ALL DATA present on this disk."
+#~ msgstr ""
+#~ "No s'ha trobat taula de particions al disc dur: %s. Voleu que el programa "
+#~ "d'instal·lació creï les particions per vostè? Nota: Això ESBORRARÀ TOTES "
+#~ "LES DADES d'aquest disc."
+
+#~ msgid ""
+#~ "Please indicate a filesystem to format the root (/) partition with before "
+#~ "proceeding."
+#~ msgstr ""
+#~ "Indiqueu un sistema de fitxers per formatar la partició arrel (/) abans "
+#~ "de procedir."
+
+#, fuzzy
+#~ msgid "Select additional options"
+#~ msgstr "S'estan establint les opcions del teclat"
+
+#~ msgid ""
+#~ "* Your username, your computer's name and your password should only "
+#~ "contain Latin characters. In addition to your selected layout, English "
+#~ "(US) is set as the default. You can switch layouts by pressing both Ctrl "
+#~ "keys together."
+#~ msgstr ""
+#~ "* El vostre nom d'usuari, el nom del vostre equip i la contrasenya només "
+#~ "han de contenir caràcters llatins. A més del disseny de teclat que heu "
+#~ "seleccionat, l'anglès (US) també hi és per defecte. Podeu canviar entre "
+#~ "dissenys de teclat prement les dues tecles Ctrl alhora."
+
+#~ msgid ""
+#~ "ERROR: You must first manually mount your target filesystem(s) at /target "
+#~ "to do a custom install!"
+#~ msgstr ""
+#~ "ERROR: per fer una instal·lació personalitzada, primer heu de muntar "
+#~ "manualment el sistema de fitxers objectiu a /target"
+
+#~ msgid "ERROR: the use of @subvolumes is limited to btrfs"
+#~ msgstr "ERROR: l'ús de @subvolumes es limita a btrfs"
+
+#~ msgid "Localizing packages"
+#~ msgstr "Configurant llengua dels paquets"
+
+#~ msgid "Cleaning APT"
+#~ msgstr "S'està netejant l'APT"
+
+#~ msgid "Advanced options"
+#~ msgstr "Opcions avançades"
+
+#~ msgid "Installation paused"
+#~ msgstr "Instal·lació en pausa"
+
+#~ msgid ""
+#~ "You selected to manage your partitions manually, this feature is for "
+#~ "ADVANCED USERS ONLY."
+#~ msgstr ""
+#~ "Heu triat gestionar les particions manualment. Aquesta funció és NOMÉS "
+#~ "PER A USUARIS AVANÇATS."
+
+#~ msgid "Before continuing, mount your target filesystem(s) on /target."
+#~ msgstr ""
+#~ "Abans de continuar, munteu els sistemes d'arxius de destinació a /target."
+
+#~ msgid ""
+#~ "Do NOT mount virtual devices such as /dev, /proc, /sys, etc on /target/."
+#~ msgstr ""
+#~ "NO munteu els dispositius virtuals com ara /dev, /proc, /sys, etc. en /"
+#~ "target/."
+
+#~ msgid ""
+#~ "During the install, you will be given time to chroot into /target and "
+#~ "install any packages that will be needed to boot your new system."
+#~ msgstr ""
+#~ "Durant la instal·lació, se us donarà temps per fer chroot /target i "
+#~ "instal·lar qualsevol paquet que necessiteu per arrencar el sistema nou."
+
+#~ msgid ""
+#~ "During the install, you will be required to write your own /etc/fstab."
+#~ msgstr ""
+#~ "Durant la instal·lació, se us demanarà que escriviu el vostre propi /etc/"
+#~ "fstab."
+
+#~ msgid "Do the following and then click Next to finish installation:"
+#~ msgstr ""
+#~ "Feu el que segueix i després feu clic a Següent per a finalitzar la "
+#~ "instal·lació:"
+
+#~ msgid ""
+#~ "Create /target/etc/fstab for the filesystems as they will be mounted in "
+#~ "your new system, matching those currently mounted at /target (without "
+#~ "using the /target prefix in the mount paths themselves)."
+#~ msgstr ""
+#~ "Crea /target/etc/fstab per als sistemes de fitxers, tal com seran muntats "
+#~ "al sistema nou, coincideixen amb els muntats actualment a /target (sense "
+#~ "utilitzar el prefix /target als mateixos camins de muntatge)."
+
+#~ msgid ""
+#~ "Install any packages that may be needed for first boot (mdadm, "
+#~ "cryptsetup, dmraid, etc) by calling \"sudo chroot /target\" followed by "
+#~ "the relevant apt-get/aptitude installations."
+#~ msgstr ""
+#~ "Instal·la els paquets que puguin ser necessaris per a la primera "
+#~ "arrencada (mdadm, cryptsetup, dmraid, etc.) amb la crida a \"sudo chroot /"
+#~ "target\", seguit de les instal·lacions apt-get/aptitude pertinents."
+
+#~ msgid ""
+#~ "Note that in order for update-initramfs to work properly in some cases "
+#~ "(such as dm-crypt), you may need to have drives currently mounted using "
+#~ "the same block device name as they appear in /target/etc/fstab."
+#~ msgstr ""
+#~ "Tingueu en compte que perquè update-initramfs funcioni correctament en "
+#~ "alguns casos (com dm-crypt), podeu necessitar tenir unitats muntades amb "
+#~ "el mateix nom de dispositiu de bloc, tal com apareixen a /target/etc/"
+#~ "fstab."
+
+#~ msgid ""
+#~ "Double-check that your /target/etc/fstab is correct, matches what your "
+#~ "new system will have at first boot, and matches what is currently mounted "
+#~ "at /target."
+#~ msgstr ""
+#~ "Comproveu bé que el vostre /target/etc/fstab és correcte, coincideix amb "
+#~ "el que el vostre sistema nou tindrà en la primera arrencada, i coincideix "
+#~ "amb el que està actualment muntat a /target."
+
+#~ msgid "A root subvolume (/@) requires to format the partition with btrfs."
+#~ msgstr "Un subvolum arrel (/@) requereix formatar la partició amb btrfs."
+
+#~ msgid ""
+#~ "A home subvolume (/@home) requires the use of a btrfs formatted partition."
+#~ msgstr ""
+#~ "Un subvolum d'inici (/@home) requereix l'ús d'una partició btrfs "
+#~ "formatada."
+
+#~ msgid ""
+#~ "The installation is now paused. Please read the instructions on the page "
+#~ "carefully before clicking Next to finish the installation."
+#~ msgstr ""
+#~ "La instal·lació està en pausa. Llegiu atentament les instruccions de la "
+#~ "pàgina abans de fer clic a Següent per finalitzar la instal·lació."
+
+#~ msgid "Assign to /home"
+#~ msgstr "Assigna a /home"
+
+#~ msgid "Assign to /boot/efi"
+#~ msgstr "Assigna a /boot/efi"

@@ -1,0 +1,26 @@
+Source: pardus-installer  
+Maintainer: Ali Riza KESKIN <ali.riza.keskin@pardus.org.tr>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 1.0
+Section: utils
+
+Package: pardus-installer  
+Priority: extra  
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, 
+                    python3-parted,
+                    live-boot,
+                    live-config,
+                    gparted,
+                    python3-gi,
+                    gir1.2-gtk-3.0,
+                    python3-cairo,
+                    python3-yaml,
+                    gettext-base,
+                    isoquery,
+                    librsvg2-common,
+                    parted,
+                    dosfstools
+Description: Pardus live installer (17g)
+ 17G installation tools configured for pardus
+
