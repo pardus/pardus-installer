@@ -228,7 +228,7 @@ msgstr "Bir kullanıcı adı seçin:"
 #: live-installer/resources/interface2.ui:1358
 #: live-installer/frontend/gtk_interface.py:424
 msgid "The name it uses when it talks to other computers."
-msgstr "Bu isim başka bir bilgisayar tarafından kullanılmaktadır."
+msgstr "Diğer bilgisayarlarla konuşurken kullandığı ad."
 
 #: live-installer/resources/interface.ui:1476
 #: live-installer/resources/interface2.ui:1391
