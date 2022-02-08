@@ -44,6 +44,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/share/applications/ || true
 	mkdir -p $(DESTDIR)/usr/bin/ || true
 	mkdir -p $(DESTDIR)/etc/xdg/autostart/
+	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/scalable/status/
 	mkdir -p $(DESTDIR)/$(XINITRCDIR) || true
 	mkdir -p $(DESTDIR)/usr/share/polkit-1/actions/ || true
 	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/symbolic/status/ || true
@@ -56,7 +57,6 @@ install:
 	    install custom/live-installer.desktop $(DESTDIR)/usr/share/applications/live-installer.desktop ; \
 	fi
 	install live-installer/resources/icons/symbolic/*.svg $(DESTDIR)/usr/share/icons/hicolor/scalable/status/
-	
 
 install-systemd:
 	mkdir -p $(DESTDIR)/lib/systemd/system/
