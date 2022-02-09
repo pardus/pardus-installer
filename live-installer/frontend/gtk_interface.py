@@ -477,6 +477,8 @@ class InstallerWindow:
             _("Fill the disk with random data"))
         self.builder.get_object("check_badblocks").set_tooltip_text(
             _("This provides extra security but it can take hours."))
+        self.builder.get_object("label_swap").set_text(
+            _("Create swap partition"))
 
         # Partitions page
         self.builder.get_object("button_edit").set_label(_("Edit partitions"))
