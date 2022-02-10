@@ -179,7 +179,7 @@ class InstallerWindow:
 
         # partitions
         self.builder.get_object("button_edit").connect(
-            "clicked", partitioning.manually_edit_partitions)
+            "clicked", self.manually_edit_partitions)
         self.builder.get_object("button_refresh").connect(
             "clicked", lambda _: partitioning.build_partitions(self))
         self.builder.get_object("treeview_disks").connect(
@@ -366,6 +366,19 @@ class InstallerWindow:
 
         self.ui_init = True
 
+
+    def manually_edit_partitions(self,widget):
+        """ Edit only known disks, selected one first """
+        model, itervar = self.builder.get_object(
+            "treeview_disks").get_selection().get_selected()
+        # prefer disk currently selected and show it first
+        preferred = model[itervar][-1] if itervar else ''
+        disks = ' '.join(sorted((disk for disk, desc in model.disks),
+                            key=lambda disk: disk != preferred))
+        os.system('umount -f ' + disks)
+        os.system('{} {} &'.format(config.get(
+            "partition_editor", "gparted"), disks))
+        partitioning.build_partitions(self)
 
     def fullscreen(self):
         self.window.fullscreen()
