@@ -316,18 +316,17 @@ class PartitionSetup(Gtk.TreeStore):
                 partition.size_percent = round(
                     partition.size_percent / sum_size_percent * 100, 1)
                 installer.setup.partitions.append(partition)
-                if partition.type != _('Free space'):
-                    self.append(disk_iter, (partition.name,
-                                            '<span>{}</span>'.format(
-                                                partition.type),
-                                            partition.description,
-                                            partition.format_as,
-                                            partition.mount_as,
-                                            partition.read_only,
-                                            partition.size,
-                                            partition.free_space,
-                                            partition,
-                                            disk_path))
+                self.append(disk_iter, (partition.name,
+                           '<span>{}</span>'.format(
+                           partition.type),
+                           partition.description,
+                           partition.format_as,
+                           partition.mount_as,
+                           partition.read_only,
+                           partition.size,
+                           partition.free_space,
+                           partition,
+                           disk_path))
 
 
 @idle
