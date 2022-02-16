@@ -67,7 +67,7 @@ def get_disks():
                     'TB'), 'PB', 'EB', 'ZB', 'YB'][unit_index]
                 size = "%s %s" % (
                     str(int(float(size[:-1]) * (1024 / 1000)**unit_index)), l10n_unit)
-                model = model.replace("\\x20", " ")
+                model = model.replace("\\\\x20", " ")
                 description = ('{} ({})'.format(
                     model.strip(), size)).replace("\\n'", "")
                 if int(removable):
