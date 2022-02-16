@@ -454,6 +454,7 @@ class Partition(PartitionBase):
         self.name = self.path if partition.number != -1 else ''
         self.mount_point = None
         self.description = ""
+        self.mbr = partition.disk.device.path
         try:
             self.type = partition.fileSystem.type
             # normalize fs variations (parted.filesystem.fileSystemType.keys())

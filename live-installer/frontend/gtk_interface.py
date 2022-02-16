@@ -188,6 +188,8 @@ class InstallerWindow:
             "button-release-event", partitioning.partitions_popup_menu)
         self.builder.get_object("treeview_disks").connect(
             "cursor-changed", self.partition_change_event)
+        self.builder.get_object("button_add_partition").connect("clicked",self.part_add_button_event)
+        self.builder.get_object("button_remove_partition").connect("clicked",self.part_remove_button_event)
 
         text = Gtk.CellRendererText()
         for i in (partitioning.IDX_PART_PATH,
@@ -889,13 +891,19 @@ class InstallerWindow:
                 self.builder.get_object("button_add_partition").set_sensitive(True)
             elif len(fstype) > 0:
                 self.builder.get_object("button_remove_partition").set_sensitive(True)
-        self.builder.get_object("button_add_partition").connect("clicked",self.part_add_button_event)
 
     def part_add_button_event(self,widget):
         start = self.selected_partition.partition.geometry.start
         end = self.selected_partition.partition.geometry.end
-        mbr = partitioning.find_mbr(self.selected_partition.path)
-        os.system("parted {} mkpart ext4 {}s {}s".format(mbr,start,end))
+        mbr = self.selected_partition.mbr
+        os.system("parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end))
+        partitioning.build_partitions(self)
+
+    def part_remove_button_event(self,widget):
+        path = self.selected_partition.path
+        mbr = self.selected_partition.mbr
+        partnum = partitioning.find_partition_number(path)
+        os.system("parted -s {} rm {}".format(mbr,partnum))
         partitioning.build_partitions(self)
 
 
