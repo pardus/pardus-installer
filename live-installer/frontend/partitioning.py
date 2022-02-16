@@ -295,6 +295,7 @@ class PartitionSetup(Gtk.TreeStore):
                 part = Partition(partition)
                 if part.type == _('Free space'):
                     part.raw_size = part.partition.geometry.end - part.partition.geometry.start
+                    part.raw_size *= part.partition.geometry.device.sectorSize
                     part.size = to_human_readable(part.raw_size)
                     part.free_space = part.size
                 log("{} {}".format(partition.path.replace("-", ""), part.size))
