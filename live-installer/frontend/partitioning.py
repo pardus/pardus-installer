@@ -293,12 +293,16 @@ class PartitionSetup(Gtk.TreeStore):
             partitions = []
             for partition in partition_set:
                 part = Partition(partition)
+                if part.type == _('Free space'):
+                    part.raw_size = part.partition.geometry.end - part.partition.geometry.start
+                    part.size = to_human_readable(part.raw_size)
+                    part.free_space = part.size
                 log("{} {}".format(partition.path.replace("-", ""), part.size))
                 # skip ranges <5MB
                 if part.raw_size > 5242880:
                     partitions.append(part)
-            # partitions = sorted(
-            #    partitions, key=lambda part: part.partition.geometry.start)
+            partitions = sorted(
+                partitions, key=lambda part: part.partition.geometry.start)
 
             try:  # assign mount_as and format_as if disk was just auto-formatted
                 for partition, (mount_as, format_as, read_only) in zip(
@@ -549,6 +553,7 @@ class Partition(PartitionBase):
         log("                  . self.description %s self.os_fs_info %s" % (
             self.description, self.os_fs_info))
         os.system('umount ' + TMP_MOUNTPOINT + ' 2>/dev/null')
+
 
     def print_partition(self):
         log("Device: %s, format as: %s, mount as: %s" %
