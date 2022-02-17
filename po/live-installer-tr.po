@@ -216,7 +216,6 @@ msgstr "Sil"
 #: live-installer/resources/interface.ui:1378
 #: live-installer/resources/interface2.ui:1301
 #: live-installer/frontend/gtk_interface.py:519
-#, fuzzy
 msgid "Format"
 msgstr "Biçimlendir"
 
@@ -234,7 +233,6 @@ msgstr "GRUB önyükleyiciyi buraya kur:"
 
 #: live-installer/resources/interface.ui:1534
 #: live-installer/resources/interface2.ui:1457
-#, fuzzy
 msgid "Edit Partitions"
 msgstr "Bölümleri düzenle"
 
@@ -805,11 +803,11 @@ msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:919
 msgid "Partition {} will removed from {}."
-msgstr ""
+msgstr "{} bölümü {} içerisinden silinecek"
 
 #: live-installer/frontend/gtk_interface.py:927
 msgid "Partition {} will formated from {}."
-msgstr ""
+msgstr "{} bölümü {} içerisinden formatlanacak."
 
 #: live-installer/frontend/gtk_interface.py:1059
 msgid "Please choose a language"

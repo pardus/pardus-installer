@@ -155,6 +155,7 @@ def edit_partition_dialog(widget, path, viewcol):
         response_is_ok, mount_as, format_as, read_only = dlg.show()
         if response_is_ok:
             assign_mount_point(partition, mount_as, format_as, read_only)
+    installer.builder.get_object("checkbutton_readonly").set_label(_("Read only"))
 
 
 def assign_mount_point(partition, mount_point, filesystem, read_only = False):
