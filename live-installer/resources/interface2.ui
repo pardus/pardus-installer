@@ -1180,7 +1180,7 @@
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="icon-name">view-refresh-symbolic.symbolic</property>
+                                    <property name="icon-name">partition-refresh-symbolic</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1227,7 +1227,7 @@
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="icon-name">edit-delete-symbolic</property>
+                                    <property name="icon-name">partition-delete-symbolic</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1274,7 +1274,7 @@
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="icon-name">drive-harddisk-symbolic</property>
+                                    <property name="icon-name">partition-format-symbolic</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1321,7 +1321,7 @@
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="icon-name">list-add-symbolic</property>
+                                    <property name="icon-name">partition-add-symbolic</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1430,7 +1430,7 @@
                                       <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="icon-name">document-edit-symbolic.symbolic</property>
+                                        <property name="icon-name">partition-edit-symbolic</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
