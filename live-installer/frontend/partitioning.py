@@ -85,15 +85,21 @@ def get_partitions():
     partitions = []
     for disk in get_disks():
         dev = parted.Disk(parted.getDevice(disk[0]))
-        for i in dev.getPrimaryPartitions() + dev.getLogicalPartitions() + dev.getRaidPartitions() + dev.getLVMPartitions():
+        for i in get_all_partition_objects(dev):
             partitions.append(disk[0])
     return partitions
+
+def get_all_partition_objects(dev):
+    return dev.getPrimaryPartitions() + \
+        dev.getLogicalPartitions() + \
+        dev.getRaidPartitions() + \
+        dev.getLVMPartitions()
 
 
 def find_mbr(part):
     for disk in get_disks():
         dev = parted.Disk(parted.getDevice(disk[0]))
-        for i in dev.getPrimaryPartitions() + dev.getLogicalPartitions() + dev.getRaidPartitions() + dev.getLVMPartitions():
+        for i in get_all_partition_objects(dev):
             if part == i.path:
                 return disk[0]
     return ""
@@ -442,6 +448,8 @@ class Partition(PartitionBase):
         self.mount_point = None
         self.description = ""
         self.mbr = find_mbr(self.path)
+        if self.mbr == "": # free space
+            self.mbr = partition.disk.device.path
         try:
             self.type = partition.fileSystem.type
             # normalize fs variations (parted.filesystem.fileSystemType.keys())

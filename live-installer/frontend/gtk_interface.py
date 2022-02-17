@@ -911,14 +911,15 @@ class InstallerWindow:
         mbr = self.selected_partition.mbr
         partnum = partitioning.find_partition_number(path)
         if QuestionDialog(_("Are you sure?"), 
-            _("Partition {} will removed. {}").format(path,mbr)):
+            _("Partition {} will removed from {}.").format(path,mbr)):
             os.system("parted -s {} rm {}".format(mbr,partnum))
             partitioning.build_partitions(self)
 
     def part_format_button_event(self,widget):
         path = self.selected_partition.path
+        mbr = self.selected_partition.mbr
         if QuestionDialog(_("Are you sure?"), 
-            _("Partition {} will formated.").format(path)):
+            _("Partition {} will formated from {}.").format(path,mbr)):
             os.system("yes | mkfs.ext4 {}".format(path))
             partitioning.build_partitions(self)
 
