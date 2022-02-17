@@ -517,7 +517,7 @@ class InstallerWindow:
         self.builder.get_object("label_edit").set_text(_("Edit partitions"))
         self.builder.get_object("label_delete").set_text(_("Delete"))
         self.builder.get_object("label_format").set_text(_("Format"))
-        self.builder.get_object("label_new").set_text(_("New"))
+        self.builder.get_object("label_new").set_text(_("Create"))
         for col, title in zip(self.builder.get_object("treeview_disks").get_columns(),
                               (_("Device"),
                                _("Type"),

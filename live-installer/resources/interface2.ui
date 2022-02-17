@@ -5,6 +5,18 @@
   <object class="GtkSizeGroup">
     <property name="mode">vertical</property>
   </object>
+  <object class="GtkListStore" id="model2">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="model3">
+    <columns>
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="width-request">0</property>
     <property name="height-request">0</property>
@@ -1333,7 +1345,7 @@
                                   <object class="GtkLabel" id="label_new">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="label" translatable="yes">New</property>
+                                    <property name="label" translatable="yes">Create</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2219,12 +2231,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="model2">
-    <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkDialog" id="dialog">
     <property name="can-focus">False</property>
     <property name="border-width">5</property>
@@ -2414,11 +2420,5 @@
       <action-widget response="-6">button_cancel</action-widget>
       <action-widget response="-5">button_ok</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkListStore" id="model3">
-    <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>
