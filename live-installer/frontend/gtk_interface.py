@@ -506,8 +506,12 @@ class InstallerWindow:
             _("Create swap partition"))
 
         # Partitions page
-        self.builder.get_object("button_edit").set_label(_("Edit partitions"))
-        self.builder.get_object("button_refresh").set_label(_("Refresh"))
+        self.builder.get_object("label_edit").set_text(_("Edit partitions"))
+        self.builder.get_object("label_refresh").set_text(_("Refresh"))
+        self.builder.get_object("label_edit").set_text(_("Edit partitions"))
+        self.builder.get_object("label_delete").set_text(_("Delete"))
+        self.builder.get_object("label_format").set_text(_("Format"))
+        self.builder.get_object("label_new").set_text(_("New"))
         for col, title in zip(self.builder.get_object("treeview_disks").get_columns(),
                               (_("Device"),
                                _("Type"),

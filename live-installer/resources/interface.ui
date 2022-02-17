@@ -1266,7 +1266,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="label_refresh">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="label" translatable="yes">Refresh</property>
@@ -1313,7 +1313,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="label_delete">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="label" translatable="yes">Delete</property>
@@ -1360,7 +1360,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="label_format">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="label" translatable="yes">Format</property>
@@ -1407,7 +1407,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="label_new">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="label" translatable="yes">New</property>
@@ -1516,7 +1516,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel">
+                                      <object class="GtkLabel" id="label_edit">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="label" translatable="yes">Edit Partitions</property>
