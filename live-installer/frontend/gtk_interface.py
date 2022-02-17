@@ -387,9 +387,14 @@ class InstallerWindow:
         disks = ' '.join(sorted((disk for disk, desc in model.disks),
                             key=lambda disk: disk != preferred))
         os.system('umount -f ' + disks)
+        def update_partition_menu(pid, status):
+            partitioning.build_partitions(self)
         editor = '{} {}'.format(config.get("partition_editor", "gparted"), disks)
-        
-        partitioning.build_partitions(self)
+        pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/sh", "-c", editor],
+            flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
+            standard_output=True,
+            standard_error=True)
+        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def fullscreen(self):
         self.window.fullscreen()
