@@ -84,39 +84,26 @@ def get_partitions():
         return partitions
     partitions = []
     for disk in get_disks():
-        i = 1
-        while os.path.exists("{}{}".format(disk[0], str(i))):
-            partitions.append("{}{}".format(disk[0], str(i)))
-            i += 1
-    for disk in get_disks():
-        i = 1
-        while os.path.exists("{}p{}".format(disk[0], str(i))):
-            partitions.append("{}p{}".format(disk[0], str(i)))
-            i += 1
+        dev = parted.Disk(parted.getDevice(disk[0]))
+        for i in dev.getPrimaryPartitions() + dev.getLogicalPartitions() + dev.getRaidPartitions() + dev.getLVMPartitions():
+            partitions.append(disk[0])
     return partitions
 
 
 def find_mbr(part):
     for disk in get_disks():
-        i = 1
-        while os.path.exists("{}{}".format(disk[0], str(i))) or os.path.exists("{}p{}".format(disk[0], str(i))):
-            if part == "{}{}".format(disk[0], str(i)):
+        dev = parted.Disk(parted.getDevice(disk[0]))
+        for i in dev.getPrimaryPartitions() + dev.getLogicalPartitions() + dev.getRaidPartitions() + dev.getLVMPartitions():
+            if part == i.path:
                 return disk[0]
-            if part == "{}p{}".format(disk[0], str(i)):
-                return disk[0]
-            i += 1
     return ""
 
 def find_partition_number(part):
-    for disk in get_disks():
-        i = 1
-        while os.path.exists("{}{}".format(disk[0], str(i))) or os.path.exists("{}p{}".format(disk[0], str(i))):
-            if part == "{}{}".format(disk[0], str(i)):
-                return i
-            if part == "{}p{}".format(disk[0], str(i)):
-                return i
-            i += 1
-    return 0
+    mbr = find_mbr(part)
+    num = part.replace(mbr,"")
+    if num[0] == "p":
+        return num[1:]
+    return num
 
 def get_partition_flags(part):
     for line in subprocess.getoutput("parted {} print".format(find_mbr(part))).split("\n"):
@@ -454,7 +441,7 @@ class Partition(PartitionBase):
         self.name = self.path if partition.number != -1 else ''
         self.mount_point = None
         self.description = ""
-        self.mbr = partition.disk.device.path
+        self.mbr = find_mbr(self.path)
         try:
             self.type = partition.fileSystem.type
             # normalize fs variations (parted.filesystem.fileSystemType.keys())

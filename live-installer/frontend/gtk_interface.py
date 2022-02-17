@@ -911,7 +911,7 @@ class InstallerWindow:
         mbr = self.selected_partition.mbr
         partnum = partitioning.find_partition_number(path)
         if QuestionDialog(_("Are you sure?"), 
-            _("Partition {} will removed.").format(path)):
+            _("Partition {} will removed. {}").format(path,mbr)):
             os.system("parted -s {} rm {}".format(mbr,partnum))
             partitioning.build_partitions(self)
 
