@@ -348,7 +348,7 @@ class InstallerWindow:
             for disk_path in partitioning.get_partitions():
                 log("Searching: {}".format(disk_path))
                 if 0 == os.system(
-                        "mount -o ro {} /tmp/winroot &>/dev/null".format(disk_path)):
+                        "mount -o ro {} /tmp/winroot".format(disk_path)):
                     if os.path.exists(
                             "/tmp/winroot/Windows/System32/ntoskrnl.exe"):
                         self.setup.winroot = disk_path
@@ -359,7 +359,8 @@ class InstallerWindow:
                     elif os.path.exists("/tmp/winroot/bootmgr"):
                         self.setup.winboot = disk_path
                         log("Found windows boot: {}".format(disk_path))
-                os.system("umount -lf /tmp/winroot &>/dev/null")
+                while 0 == os.system("umount -lf /tmp/winroot"):
+                    True # dummy action
             if self.setup.winroot and (
                     not self.setup.gptonefi or self.setup.winefi):
                 self.builder.get_object("box_replace_win").show_all()
