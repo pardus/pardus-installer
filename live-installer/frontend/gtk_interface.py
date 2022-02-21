@@ -1215,7 +1215,7 @@ class InstallerWindow:
                             if not partition.partition.getFlag(
                                     parted.PARTITION_BOOT):
                                 if QuestionDialog(_("Installer"), _(
-                                    "The EFI partition is not bootable. Do you want to set boot flag")):
+                                    "The EFI partition is not bootable. Do you want to set boot flag?")):
                                     partition.set_boot()
                                 else:
                                     return
