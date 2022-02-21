@@ -896,6 +896,7 @@ class InstallerWindow:
         model, itervar = widget.get_selection().get_selected()
         self.builder.get_object("button_add_partition").set_sensitive(False)
         self.builder.get_object("button_remove_partition").set_sensitive(False)
+        self.builder.get_object("button_format_partition").set_sensitive(False)
         if itervar:
             self.selected_partition = model.get_value(itervar, partitioning.IDX_PART_OBJECT) # partition opject
             fstype = model.get_value(itervar, partitioning.IDX_PART_TYPE).replace("<span>","").replace("</span>","").strip()
@@ -903,6 +904,7 @@ class InstallerWindow:
                 self.builder.get_object("button_add_partition").set_sensitive(True)
             elif len(fstype) > 0:
                 self.builder.get_object("button_remove_partition").set_sensitive(True)
+                self.builder.get_object("button_format_partition").set_sensitive(True)
 
     def part_add_button_event(self,widget):
         start = self.selected_partition.partition.geometry.start
