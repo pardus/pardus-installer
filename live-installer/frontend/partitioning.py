@@ -555,7 +555,7 @@ class Partition(PartitionBase):
             self.description, self.os_fs_info))
         os.system('umount ' + TMP_MOUNTPOINT + ' 2>/dev/null')
 
-    def set_root(self):
+    def set_boot(self):
         os.system("parted --script --align optimal {} set {} boot on".format(self.mbr,self.partition.number))
 
 
