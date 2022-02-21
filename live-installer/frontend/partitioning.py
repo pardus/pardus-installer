@@ -495,6 +495,8 @@ class Partition(PartitionBase):
             self.free_space = to_human_readable(int(free) * 1024)
             self.used_percent = self.used_percent.replace("%", "") or 0
         except:
+            self.free_space = 0
+            self.used_percent = 100
             self.description = ""
         # for mountable partitions, more accurate than the getLength size
         # above
