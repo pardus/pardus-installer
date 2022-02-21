@@ -341,7 +341,7 @@ def full_disk_format(device, create_boot=False, create_swap=False):
                   or is_efi_supported()
                   else 'msdos')
     # Force lazy umount
-    os.system("umount -lf {}* &>/dev/null".format(device.path))
+    os.system("umount -lf {}*".format(device.path))
     # Wipe first 512 byte
     open(device.path, "w").write("\x00" * 512)
     return_code = os.system("parted -s %s mklabel %s" %
@@ -481,7 +481,7 @@ class Partition(PartitionBase):
 
         # identify partition's description and used space
         try:
-            os.system('mount --read-only {} {} &>/dev/null'.format(self.path, TMP_MOUNTPOINT))
+            os.system('mount --read-only {} {}'.format(self.path, TMP_MOUNTPOINT))
             df = getoutput("df {0} | grep '^{0}' | awk '{{print $2,$4,$5,$6}}' | tail -1".format(
                 self.path)).decode("utf-8").split(" ")
             size = df[0]
@@ -495,8 +495,8 @@ class Partition(PartitionBase):
             self.free_space = to_human_readable(int(free) * 1024)
             self.used_percent = self.used_percent.replace("%", "") or 0
         except:
-            self.free_space = 0
-            self.used_percent = 100
+            self.free_space = "0"
+            self.used_percent = "100"
             self.description = ""
         # for mountable partitions, more accurate than the getLength size
         # above
@@ -541,7 +541,8 @@ class Partition(PartitionBase):
                 # best effort
                 err("Could not read partition flags for %s: %s" %
                     (self.path, detail))
-        os.system('umount ' + TMP_MOUNTPOINT + ' &>/dev/null')
+        while 0 == os.system('umount ' + TMP_MOUNTPOINT):
+            True # dummy action
         log(("- Disk: {}\n"+"  - {}\n"*5).format(self.name,self.description, self.size, self.type, self.free_space,self.mbr))
 
     def set_boot(self):
