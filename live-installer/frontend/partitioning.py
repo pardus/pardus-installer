@@ -84,8 +84,11 @@ def get_partitions():
         return partitions
     partitions = []
     for disk in get_disks():
-        dev = parted.Disk(parted.getDevice(disk[0]))
-        for i in get_all_partition_objects(dev):
+        try:
+            dev = parted.Disk(parted.getDevice(disk[0]))
+            for i in get_all_partition_objects(dev):
+                partitions.append(i.path)
+        except:
             partitions.append(disk[0])
     return partitions
 
@@ -551,6 +554,9 @@ class Partition(PartitionBase):
         log("                  . self.description %s self.os_fs_info %s" % (
             self.description, self.os_fs_info))
         os.system('umount ' + TMP_MOUNTPOINT + ' 2>/dev/null')
+
+    def set_root(self):
+        os.system("parted --script --align optimal {} set {} boot on".format(self.mbr,self.partition.number))
 
 
     def print_partition(self):

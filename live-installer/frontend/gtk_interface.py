@@ -1213,9 +1213,11 @@ class InstallerWindow:
                             found_efi_partition = True
                             if not partition.partition.getFlag(
                                     parted.PARTITION_BOOT):
-                                ErrorDialog(_("Installer"), _(
-                                    "The EFI partition is not bootable. Please edit the partition flags."))
-                                return
+                                if QuestionDialog(_("Installer"), _(
+                                    "The EFI partition is not bootable. Do you want to set boot flag")):
+                                    partition.set_boot()
+                                else:
+                                    return
                             if int(float(partition.partition.getLength('MB'))) < 35:
                                 ErrorDialog(_("Installer"), _(
                                     "The EFI partition is too small. It must be at least 35MB."))
