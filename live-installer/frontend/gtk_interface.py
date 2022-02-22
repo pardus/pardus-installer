@@ -1350,6 +1350,7 @@ class InstallerWindow:
                 self.assign_eula()
                 self.builder.get_object("button_back").set_sensitive(True)
                 nex = self.PAGE_EULA
+                self.builder.get_object("check_eula").grab_focus()
                 if config.get("skip_eula", False):
                     self.builder.get_object("button_next").set_sensitive(True)
                     sel = nex
