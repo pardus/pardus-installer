@@ -269,12 +269,19 @@ class PartitionSetup(Gtk.TreeStore):
         log('Disks: ', self.disks)
         already_done_full_disk_format = False
         for disk_path, disk_description in self.disks:
+            disk_device = parted.getDevice(disk_path)
             try:
-                disk_device = parted.getDevice(disk_path)
                 disk = parted.Disk(disk_device)
             except Exception as detail:
                 log("Found an issue while looking for the disk: %s" % detail)
-                continue
+                from frontend.gtk_interface import QuestionDialog
+                if QuestionDialog(_("Installer"),
+                    _("Disk: {} partition table broken or not exists. Do you want to create new partition table?").format(disk_path)):
+                    full_disk_format(disk_device)
+                    disk_device = parted.getDevice(disk_path)
+                    disk = parted.Disk(disk_device)
+                else:
+                    continue
 
             disk_iter = self.append(
                 None, (disk_description, '', '', '', '', False, '', '', None, disk_path))
