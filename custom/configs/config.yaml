@@ -5,7 +5,7 @@ distro_codename: pardus
 distro_title: Pardus
 # distribution: auto
 # display_manager: auto
-copyright: TÜBİTAK ULAKBİM | 2021
+copyright: TÜBİTAK ULAKBİM | 2022
 
 ## Base options section
 # loop_directory: /dev/loop0
@@ -34,6 +34,7 @@ set_root_password: false
 # use_usermod: true
 keep_userdata : false
 minimal_instalation_enabled: false
+keyboard_preview: false
 additional_user_groups:
   - cdrom
   - floppy

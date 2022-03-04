@@ -9,6 +9,7 @@ import parted
 from utils import *
 from frontend import *
 from frontend.dialogs import QuestionDialog, ErrorDialog, WarningDialog
+from frontend.keyboardview import kbdpreview
 from installer import InstallerEngine, Setup, NON_LATIN_KB_LAYOUTS
 
 gettext.bindtextdomain('xkeyboard-config', '/usr/share/locale')
@@ -128,6 +129,12 @@ class InstallerWindow:
 
         # build timezones
         timezones.build_timezones(self)
+
+        # build keyboard preview
+        self.keyboardview = kbdpreview("us")
+        if os.system("which ckbcomp") == 0:
+            if config.get("keyboard_preview", True):
+                self.builder.get_object("vbox_keyboard_variant").add(self.keyboardview)
 
         # type page
         model = Gtk.ListStore(str, str)
@@ -854,7 +861,7 @@ class InstallerWindow:
             nonedesc = model[0]
             name = model[1]
             if name in NON_LATIN_KB_LAYOUTS:
-                nonedesc = "English (US) + %s" % nonedesc
+                nonedesc = "%s + English (US)" % nonedesc
             # Keyboard variant
             for variant in common.get_keyboard_variant_list(model):
                 var_name = variant[0]
@@ -862,7 +869,7 @@ class InstallerWindow:
                 var_desc = var_name if len(
                     var_desc) == 0 else var_desc
                 if name in NON_LATIN_KB_LAYOUTS and "Latin" not in var_desc:
-                    var_desc = "English (US) + %s" % var_desc
+                    var_desc = "%s + English (US)" % var_desc
                 if name+"-"+var_name not in vnames:
                     variants[name].append((var_desc, var_name))
                     vnames.append(name+"-"+var_name)
@@ -1010,6 +1017,8 @@ class InstallerWindow:
         # Set the correct variant list model ...
         model = self.layout_variants[self.setup.keyboard_layout]
         self.builder.get_object("treeview_variants").set_model(model)
+        if config.get("keyboard_preview", True):
+            self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
         # ... and select novariant (if enabled in config)
         if not config.get("allow_auto_novariant", True):
             return
@@ -1031,22 +1040,25 @@ class InstallerWindow:
         (self.setup.keyboard_variant_description,
          self.setup.keyboard_variant) = model[active[0]]
 
+        command = "setxkbmap -layout '%s' -variant '%s'" % (
+            self.setup.keyboard_layout, self.setup.keyboard_variant)
+        os.system(command)
+        
+        if config.get("keyboard_preview", True):
+            self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
+
         if self.setup.keyboard_layout in NON_LATIN_KB_LAYOUTS:
             # Add US layout for non-latin layouts
-            self.setup.keyboard_layout = 'us,%s' % self.setup.keyboard_layout
+            self.setup.keyboard_layout = '%s,us' % self.setup.keyboard_layout
 
         if "Latin" in self.setup.keyboard_variant_description:
             # Remove US layout for Latin variants
             self.setup.keyboard_layout = self.setup.keyboard_layout.replace(
-                "us,", "")
+                ",us", "")
 
-        if "us," in self.setup.keyboard_layout:
+        if ",us" in self.setup.keyboard_layout:
             # Add None variant for US layout
-            self.setup.keyboard_variant = ',%s' % self.setup.keyboard_variant
-
-        command = "setxkbmap -layout '%s' -variant '%s'" % (
-            self.setup.keyboard_layout, self.setup.keyboard_variant)
-        os.system(command)
+            self.setup.keyboard_variant = '%s,us' % self.setup.keyboard_variant
 
     def activate_page(self, nex=0, index=0, goback=False):
         errorFound = False
@@ -1094,6 +1106,8 @@ class InstallerWindow:
                     itervar = model.iter_next(itervar)
         elif index == self.PAGE_KEYBOARD:
             self.builder.get_object("entry_name").grab_focus()
+            if ",us" in self.setup.keyboard_layout:
+                os.system("setxkbmap -layout us -variant ''")
             if not goback and self.setup.keyboard_variant is None:
                 WarningDialog(_("Installer"), _(
                     "Please provide a kayboard layout for your computer."))
@@ -1115,6 +1129,10 @@ class InstallerWindow:
             elif(self.setup.username is None or self.setup.username == ""):
                 errorFound = True
                 errorMessage = _("Please provide a username.")
+                focus_widget = self.builder.get_object("entry_username")
+            elif(self.setup.username[0] in "-0123456789" or not (self.setup.username.isascii() and self.setup.username.isalnum() and self.setup.username.islower())):
+                errorFound = True
+                errorMessage = _("Your username is invalid.")
                 focus_widget = self.builder.get_object("entry_username")
             elif(self.setup.password1 is None or self.setup.password1 == ""):
                 errorFound = True
