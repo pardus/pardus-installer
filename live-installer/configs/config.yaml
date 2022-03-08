@@ -34,6 +34,7 @@
 # use_usermod: true
 # keep_userdata : true
 # minimal_instalation_enabled: true
+# keyboard_preview: true
 # additional_user_groups:
 #   - audio
 #   - video
@@ -56,6 +57,7 @@
 # default_timezone: America/New_York
 
 ## Setup page section
+# skip_eula: false
 # skip_language: false
 # skip_timezone: false
 # skip_keyboard: false
@@ -63,7 +65,7 @@
 # skip_user: false
 # hide_keyboard_model: false
 # allow_uppercase_hostname: true
-# allow_week_password: false
+# allow_week_password: true
 # allow_auto_novariant: false
 # min_password_length: 1
 
