@@ -819,7 +819,7 @@ class InstallerEngine:
         for partition in self.setup.partitions:
             if(partition.mount_as is not None and partition.mount_as != "" and partition.mount_as != "/" and partition.mount_as != "swap"):
                 self.do_unmount("/target" + partition.mount_as)
-        self.run("cat '{0}'> /target/'{0}'".format("/var/log/17g-installer"))
+        self.run("cat '{0}'> /target/'{0}'".format(self.logfile))
         os.sync()
         self.do_unmount("/target")
         self.do_unmount("/source")
