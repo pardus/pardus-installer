@@ -30,7 +30,7 @@ class InstallerEngine:
         # find the squashfs..
         self.media = config.get("loop_directory", "/dev/loop0")
         self.logfile = config.get("log_file", "/var/log/17g-installer")
-        logger.set_logfile(self.logfile)
+        set_logfile(self.logfile)
 
         if(not os.path.exists(self.media)):
             err("Critical Error: Live medium (%s) not found!" % self.media)
