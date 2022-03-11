@@ -855,6 +855,9 @@ class InstallerEngine:
         ''' Mount a filesystem '''
         if typevar == "none" or typevar == "":
             return 0
+        while not os.path.exists(device):
+            os.sync()
+            time.sleep(0.1)
         if(options is not None):
             cmd = "mount -o %s -t %s %s %s" % (options, typevar, device, dest)
         else:

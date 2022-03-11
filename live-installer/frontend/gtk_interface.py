@@ -1572,7 +1572,7 @@ class InstallerWindow:
 
     def error_message(self, message=""):
         self.critical_error_happened = True
-        ErrorDialog(_("Error"),message)
+        self.show_error_dialog(_("Error"),message)
         self.critical_error_message += message + "\n"
 
     @idle
