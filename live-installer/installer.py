@@ -6,7 +6,7 @@ import parted
 import frontend.partitioning as partitioning
 import config
 from utils import run, set_governor, is_cmd
-from logger import log, err, inf
+from logger import log, err, inf, set_logfile
 
 gettext.install("live-installer", "/usr/share/locale")
 
@@ -29,6 +29,8 @@ class InstallerEngine:
 
         # find the squashfs..
         self.media = config.get("loop_directory", "/dev/loop0")
+        self.logfile = config.get("log_file", "/var/log/17g-installer")
+        logger.set_logfile(self.logfile)
 
         if(not os.path.exists(self.media)):
             err("Critical Error: Live medium (%s) not found!" % self.media)
@@ -817,6 +819,8 @@ class InstallerEngine:
         for partition in self.setup.partitions:
             if(partition.mount_as is not None and partition.mount_as != "" and partition.mount_as != "/" and partition.mount_as != "swap"):
                 self.do_unmount("/target" + partition.mount_as)
+        self.run("cat '{0}'> /target/'{0}'".format("/var/log/17g-installer"))
+        os.sync()
         self.do_unmount("/target")
         self.do_unmount("/source")
 
