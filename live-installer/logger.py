@@ -6,8 +6,9 @@ _file = "/var/log/17g-installer"
 
 def set_logfile(path):
     global logfile
-    logfile.flush()
-    logfile.close()
+    if logfile:
+        logfile.flush()
+        logfile.close()
     if os.path.isfile(path):
         os.unlink(path)
     logfile = open(path,"a")
