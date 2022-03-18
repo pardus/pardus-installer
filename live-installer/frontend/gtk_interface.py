@@ -671,7 +671,7 @@ class InstallerWindow:
             if c in self.setup.password1:
                 has_char = True
                 break
-        if not has_char
+        if not has_char:
             isWeek = True
             weeklevel += 10
             set_warning(_("Your password must have exclusive characters"))        
