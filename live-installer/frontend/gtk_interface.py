@@ -617,13 +617,12 @@ class InstallerWindow:
         stronglevel = 0
         weeklevel = 0
         wlabel = self.builder.get_object("label_password_warning")
-        warning = None
+        self.week_warning = None
         def set_warning(message):
-            global warning
-            if warning:
+            if self.week_warning:
                 return
             wlabel.set_text(message)
-            warning = message
+            self.week_warning = message
         self.setup.password1 = self.builder.get_object(
             "entry_password").get_text()
         self.setup.password2 = self.builder.get_object(
