@@ -616,6 +616,7 @@ class InstallerWindow:
         isWeek = False
         stronglevel = 0
         weeklevel = 0
+        wlabel = self.builder.get_object("label_password_warning")
         self.setup.password1 = self.builder.get_object(
             "entry_password").get_text()
         self.setup.password2 = self.builder.get_object(
@@ -626,24 +627,31 @@ class InstallerWindow:
             errorFound = True
         if len(self.setup.password1) < config.get("min_password_length", 1):
             errorFound = True
+            wlabel.set_text("")
         if self.setup.password1.isnumeric():
             isWeek = True
             weeklevel += 20
+            wlabel.set_text(_("Your password is numeric"))
         if self.setup.password1.lower() == self.setup.password1:
             isWeek = True
             weeklevel += 10
+            wlabel.set_text(_("Your password must have big letters"))
         if self.setup.password1.upper() == self.setup.password1:
             isWeek = True
             weeklevel += 10
+            wlabel.set_text(_("Your password must have small letters"))
         if self.setup.password1 == self.setup.username:
             isWeek = True
             stronglevel = 20
+            wlabel.set_text(_("Your password must not be the same as the user name"))
         if len(self.setup.password1) < 8:
             isWeek = True
             stronglevel = 20
+            wlabel.set_text(_("Your password length must be minimum 8 characters"))
         if len(self.setup.password1) == 0:
             isWeek = False
             stronglevel = 1
+            wlabel.set_text("")
 
         has_char = False
         has_num = False
@@ -660,9 +668,12 @@ class InstallerWindow:
         if not has_char or not has_num:
             isWeek = True
             weeklevel += 20
+            wlabel.set_text(_("Your password must have numbers or exclusive characters"))
 
         if stronglevel != 0:
             weeklevel = 100-stronglevel
+        if not isWeek:
+            wlabel.set_text("")
 
         self.assign_entry("entry_password", errorFound ,isWeek)
         self.week_password = isWeek
