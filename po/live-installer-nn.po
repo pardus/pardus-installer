@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 07:43+0000\n"
+"POT-Creation-Date: 2022-03-18 07:58+0000\n"
 "PO-Revision-Date: 2011-09-21 00:39+0000\n"
 "Last-Translator: Yngve Spjeld Landro <l10n@landro.net>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
@@ -455,7 +455,7 @@ msgstr ""
 "opp manuelt."
 
 #: live-installer/installer.py:827
-#: live-installer/frontend/gtk_interface.py:1518
+#: live-installer/frontend/gtk_interface.py:1528
 msgid "Installation finished"
 msgstr "Installasjonen er ferdig"
 
@@ -542,18 +542,18 @@ msgstr ""
 #: live-installer/frontend/partitioning.py:349
 #: live-installer/frontend/gtk_interface.py:417
 #: live-installer/frontend/gtk_interface.py:420
-#: live-installer/frontend/gtk_interface.py:1088
-#: live-installer/frontend/gtk_interface.py:1126
-#: live-installer/frontend/gtk_interface.py:1216
-#: live-installer/frontend/gtk_interface.py:1233
-#: live-installer/frontend/gtk_interface.py:1238
-#: live-installer/frontend/gtk_interface.py:1252
-#: live-installer/frontend/gtk_interface.py:1258
-#: live-installer/frontend/gtk_interface.py:1264
-#: live-installer/frontend/gtk_interface.py:1269
+#: live-installer/frontend/gtk_interface.py:1098
+#: live-installer/frontend/gtk_interface.py:1136
+#: live-installer/frontend/gtk_interface.py:1226
+#: live-installer/frontend/gtk_interface.py:1243
+#: live-installer/frontend/gtk_interface.py:1248
+#: live-installer/frontend/gtk_interface.py:1262
+#: live-installer/frontend/gtk_interface.py:1268
 #: live-installer/frontend/gtk_interface.py:1274
-#: live-installer/frontend/gtk_interface.py:1334
-#: live-installer/frontend/gtk_interface.py:1412
+#: live-installer/frontend/gtk_interface.py:1279
+#: live-installer/frontend/gtk_interface.py:1284
+#: live-installer/frontend/gtk_interface.py:1344
+#: live-installer/frontend/gtk_interface.py:1422
 msgid "Installer"
 msgstr ""
 
@@ -566,7 +566,7 @@ msgstr ""
 #: live-installer/frontend/partitioning.py:305
 #: live-installer/frontend/partitioning.py:499
 #: live-installer/frontend/gtk_interface.py:540
-#: live-installer/frontend/gtk_interface.py:924
+#: live-installer/frontend/gtk_interface.py:934
 msgid "Free space"
 msgstr "Ledig plass"
 
@@ -723,7 +723,7 @@ msgid "Back"
 msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:451
-#: live-installer/frontend/gtk_interface.py:1280
+#: live-installer/frontend/gtk_interface.py:1290
 msgid "Next"
 msgstr ""
 
@@ -786,157 +786,161 @@ msgstr ""
 msgid "Size"
 msgstr "Storleik"
 
-#: live-installer/frontend/gtk_interface.py:634
+#: live-installer/frontend/gtk_interface.py:640
 msgid "Your password is numeric"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:638
+#: live-installer/frontend/gtk_interface.py:644
 msgid "Your password must have big letters"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:642
+#: live-installer/frontend/gtk_interface.py:648
 msgid "Your password must have small letters"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:646
+#: live-installer/frontend/gtk_interface.py:652
 msgid "Your password must not be the same as the user name"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:650
+#: live-installer/frontend/gtk_interface.py:656
 msgid "Your password length must be minimum 8 characters"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:671
-msgid "Your password must have numbers or exclusive characters"
+#: live-installer/frontend/gtk_interface.py:677
+msgid "Your password must have exclusive characters"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:767
+#: live-installer/frontend/gtk_interface.py:681
+msgid "Your password must have numbers"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:777
 msgid "Quit?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:768
+#: live-installer/frontend/gtk_interface.py:778
 msgid "Are you sure you want to quit the installer?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:934
-#: live-installer/frontend/gtk_interface.py:943
-#: live-installer/frontend/gtk_interface.py:951
-#: live-installer/frontend/gtk_interface.py:1170
+#: live-installer/frontend/gtk_interface.py:944
+#: live-installer/frontend/gtk_interface.py:953
+#: live-installer/frontend/gtk_interface.py:961
+#: live-installer/frontend/gtk_interface.py:1180
 msgid "Are you sure?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:935
+#: live-installer/frontend/gtk_interface.py:945
 msgid "New partition will created at {}"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:944
+#: live-installer/frontend/gtk_interface.py:954
 msgid "Partition {} will removed from {}."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:952
+#: live-installer/frontend/gtk_interface.py:962
 msgid "Partition {} will formated from {}."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1089
+#: live-installer/frontend/gtk_interface.py:1099
 msgid "Please choose a language"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1127
+#: live-installer/frontend/gtk_interface.py:1137
 msgid "Please provide a kayboard layout for your computer."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1136
+#: live-installer/frontend/gtk_interface.py:1146
 msgid "Please provide your full name."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1141
+#: live-installer/frontend/gtk_interface.py:1151
 msgid "Please provide a name for your computer."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1145
+#: live-installer/frontend/gtk_interface.py:1155
 msgid "Please provide a username."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1149
+#: live-installer/frontend/gtk_interface.py:1159
 msgid "Your username is invalid."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1154
+#: live-installer/frontend/gtk_interface.py:1164
 msgid "Please provide a password for your user account."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1158
+#: live-installer/frontend/gtk_interface.py:1168
 msgid "Your passwords is too short."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1162
+#: live-installer/frontend/gtk_interface.py:1172
 msgid "Your passwords is not strong."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1163
+#: live-installer/frontend/gtk_interface.py:1173
 msgid "Strong password requirements:\n"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1164
+#: live-installer/frontend/gtk_interface.py:1174
 msgid "- Length must be minimum 8 characters\n"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1165
+#: live-installer/frontend/gtk_interface.py:1175
 msgid "- Must have exclusive characters\n"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1166
+#: live-installer/frontend/gtk_interface.py:1176
 msgid "- Must have big and small letters\n"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1167
+#: live-installer/frontend/gtk_interface.py:1177
 msgid "- Must have number"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1171
-#: live-installer/frontend/gtk_interface.py:1336
+#: live-installer/frontend/gtk_interface.py:1181
+#: live-installer/frontend/gtk_interface.py:1346
 msgid "Warning"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1177
+#: live-installer/frontend/gtk_interface.py:1187
 msgid "Your passwords do not match."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1183
+#: live-installer/frontend/gtk_interface.py:1193
 msgid "Your username cannot start with numbers."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1189
+#: live-installer/frontend/gtk_interface.py:1199
 msgid "Your username must be lower case."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1196
+#: live-installer/frontend/gtk_interface.py:1206
 msgid "Your username may not contain whitespace characters."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1204
+#: live-installer/frontend/gtk_interface.py:1214
 msgid "The computer's name must be lower case."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1211
+#: live-installer/frontend/gtk_interface.py:1221
 msgid "The computer's name may not contain whitespace characters."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1220
+#: live-installer/frontend/gtk_interface.py:1230
 msgid "Install"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1234
+#: live-installer/frontend/gtk_interface.py:1244
 msgid ""
 "Root filesystem type not specified. Installation will continue without disk "
 "formatting. Do you want to continue?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1238
+#: live-installer/frontend/gtk_interface.py:1248
 msgid "Please select a root (/) partition."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1239
+#: live-installer/frontend/gtk_interface.py:1249
 #, python-format
 msgid ""
 "A root partition is needed to install %s on.\n"
@@ -947,24 +951,24 @@ msgid ""
 "\n"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1253
+#: live-installer/frontend/gtk_interface.py:1263
 msgid "The EFI partition is not bootable. Do you want to set boot flag?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1259
+#: live-installer/frontend/gtk_interface.py:1269
 msgid "The EFI partition is too small. It must be at least 35MB."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1265
-#: live-installer/frontend/gtk_interface.py:1270
+#: live-installer/frontend/gtk_interface.py:1275
+#: live-installer/frontend/gtk_interface.py:1280
 msgid "The EFI partition must be formatted as vfat."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1274
+#: live-installer/frontend/gtk_interface.py:1284
 msgid "Please select an EFI partition."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1275
+#: live-installer/frontend/gtk_interface.py:1285
 msgid ""
 "An EFI system partition is needed with the following requirements:\n"
 "\n"
@@ -978,152 +982,152 @@ msgid ""
 " "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1323
+#: live-installer/frontend/gtk_interface.py:1333
 msgid "Please select a disk."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1329
+#: live-installer/frontend/gtk_interface.py:1339
 msgid "Please provide a passphrase for the encryption."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1332
+#: live-installer/frontend/gtk_interface.py:1342
 msgid "Your passphrases do not match."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1337
+#: live-installer/frontend/gtk_interface.py:1347
 #, python-format
 msgid "This will delete all the data on %s. Are you sure?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1413
+#: live-installer/frontend/gtk_interface.py:1423
 msgid "Please provide a device to install grub."
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1456
+#: live-installer/frontend/gtk_interface.py:1466
 msgid "Localization"
 msgstr "Lokalisering"
 
-#: live-installer/frontend/gtk_interface.py:1457
+#: live-installer/frontend/gtk_interface.py:1467
 msgid "Language: "
 msgstr "Språk: "
 
-#: live-installer/frontend/gtk_interface.py:1458
+#: live-installer/frontend/gtk_interface.py:1468
 msgid "Timezone: "
 msgstr "Tidssone: "
 
-#: live-installer/frontend/gtk_interface.py:1459
+#: live-installer/frontend/gtk_interface.py:1469
 msgid "Keyboard layout: "
 msgstr "Tastaturutforming: "
 
-#: live-installer/frontend/gtk_interface.py:1463
+#: live-installer/frontend/gtk_interface.py:1473
 msgid "User settings"
 msgstr "Brukarinnstillingar"
 
-#: live-installer/frontend/gtk_interface.py:1464
+#: live-installer/frontend/gtk_interface.py:1474
 msgid "Real name: "
 msgstr "Verkeleg namn: "
 
-#: live-installer/frontend/gtk_interface.py:1465
+#: live-installer/frontend/gtk_interface.py:1475
 msgid "Username: "
 msgstr "Brukarnamn: "
 
-#: live-installer/frontend/gtk_interface.py:1467
+#: live-installer/frontend/gtk_interface.py:1477
 msgid "Password: "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1469
+#: live-installer/frontend/gtk_interface.py:1479
 msgid "Automatic login: "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1469
-#: live-installer/frontend/gtk_interface.py:1472
-#: live-installer/frontend/gtk_interface.py:1495
-#: live-installer/frontend/gtk_interface.py:1499
+#: live-installer/frontend/gtk_interface.py:1479
+#: live-installer/frontend/gtk_interface.py:1482
+#: live-installer/frontend/gtk_interface.py:1505
+#: live-installer/frontend/gtk_interface.py:1509
 msgid "enabled"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1470
-#: live-installer/frontend/gtk_interface.py:1473
-#: live-installer/frontend/gtk_interface.py:1496
-#: live-installer/frontend/gtk_interface.py:1499
+#: live-installer/frontend/gtk_interface.py:1480
+#: live-installer/frontend/gtk_interface.py:1483
+#: live-installer/frontend/gtk_interface.py:1506
+#: live-installer/frontend/gtk_interface.py:1509
 msgid "disabled"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1472
+#: live-installer/frontend/gtk_interface.py:1482
 msgid "Home encryption: "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1474
+#: live-installer/frontend/gtk_interface.py:1484
 msgid "System settings"
 msgstr "Systeminnstillingar"
 
-#: live-installer/frontend/gtk_interface.py:1475
+#: live-installer/frontend/gtk_interface.py:1485
 msgid "Computer's name: "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1478
-#: live-installer/frontend/gtk_interface.py:1480
+#: live-installer/frontend/gtk_interface.py:1488
+#: live-installer/frontend/gtk_interface.py:1490
 msgid "Bios type: "
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1482
+#: live-installer/frontend/gtk_interface.py:1492
 msgid "Install updates after installation"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1483
+#: live-installer/frontend/gtk_interface.py:1493
 msgid "Filesystem operations"
 msgstr "Filsystemhandlingar"
 
-#: live-installer/frontend/gtk_interface.py:1484
+#: live-installer/frontend/gtk_interface.py:1494
 #, python-format
 msgid "Install bootloader on %s"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1485
+#: live-installer/frontend/gtk_interface.py:1495
 msgid "Do not install bootloader"
 msgstr "Installer ikkje oppstartslastaren"
 
-#: live-installer/frontend/gtk_interface.py:1487
+#: live-installer/frontend/gtk_interface.py:1497
 msgid "Use already-mounted /target."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1492
-#, python-format
-msgid "Automated installation on %s"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1495
-msgid "LVM: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1498
-msgid "Disk Encryption: "
 msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:1502
 #, python-format
+msgid "Automated installation on %s"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1505
+msgid "LVM: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1508
+msgid "Disk Encryption: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1512
+#, python-format
 msgid "Format %(path)s as %(filesystem)s"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1506
+#: live-installer/frontend/gtk_interface.py:1516
 #, python-format
 msgid "Mount %(path)s as %(mount)s"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1519
+#: live-installer/frontend/gtk_interface.py:1529
 msgid ""
 "The installation is now complete. Do you want to restart your computer to "
 "use the new system?"
 msgstr ""
 
-#: live-installer/frontend/gtk_interface.py:1550
-#: live-installer/frontend/gtk_interface.py:1554
-#: live-installer/frontend/gtk_interface.py:1563
-#: live-installer/frontend/gtk_interface.py:1572
+#: live-installer/frontend/gtk_interface.py:1560
+#: live-installer/frontend/gtk_interface.py:1564
+#: live-installer/frontend/gtk_interface.py:1573
+#: live-installer/frontend/gtk_interface.py:1582
 msgid "Installation error"
 msgstr "Installasjonsfeil"
 
-#: live-installer/frontend/gtk_interface.py:1586
+#: live-installer/frontend/gtk_interface.py:1596
 msgid "Error"
 msgstr ""
 
