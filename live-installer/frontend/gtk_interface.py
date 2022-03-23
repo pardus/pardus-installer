@@ -135,7 +135,7 @@ class InstallerWindow:
         timezones.build_timezones(self)
 
         # build keyboard preview
-        self.keyboardview = kbdpreview("us")
+        self.keyboardview = kbdpreview()
         if os.system("which ckbcomp") == 0:
             if config.get("keyboard_preview", True):
                 self.builder.get_object("vbox_keyboard_variant").add(self.keyboardview)
@@ -862,6 +862,7 @@ class InstallerWindow:
         keyboard_geom = subprocess.getoutput("setxkbmap -query | awk '/^(model)/{print $2}'")
         self.setup.keyboard_layout = subprocess.getoutput("setxkbmap -query | awk '/^(layout)/{print $2}'")
         self.setup.keyboard_variant = subprocess.getoutput("setxkbmap -query | awk '/^(variant)/{print $2}'")
+        self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
         if "," in self.setup.keyboard_layout:
             self.setup.keyboard_layout = self.setup.keyboard_layout.split(",")[
                 0]
