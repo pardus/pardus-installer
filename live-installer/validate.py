@@ -9,7 +9,7 @@ def username(username):
     isValid = True
     errorMessage = None
     if username == "" or username == None:
-        errorMessage = _("Please provide a username.")
+        return _("Please provide a username.")
     elif not (username.isascii() and username.replace("-","").isalnum() and username.islower()):
         errorMessage = _("Your username is invalid.")
     elif len(username) > 32:
@@ -30,7 +30,7 @@ def username(username):
 def hostname(hostname):
     errorMessage = None
     if hostname == "" or hostname == None:
-        errorMessage = _("Please provide a name for your computer.")
+        return _("Please provide a name for your computer.")
     for char in hostname:
         if(char.isupper()) and not config.get("allow_uppercase_hostname", True):
             errorMessage = _("The computer's name must be lower case.")
