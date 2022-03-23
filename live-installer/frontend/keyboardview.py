@@ -7,6 +7,7 @@ import subprocess
 
 keys = {}
 shifts = {}
+altgrs = {}
 
 class kbdpreview(Gtk.Box):
 
@@ -26,9 +27,14 @@ class kbdpreview(Gtk.Box):
                 continue
             ucode = line.split("=")[1].strip().split(" ")[0]
             shift = line.split("=")[1].strip().split(" ")[1]
-            num = line.split("=")[0].strip().split(" ")[1]
+            altgr = line.split("=")[1].strip().split(" ")[3]
+            num   = line.split("=")[0].strip().split(" ")[1]
             keys[num] = self.u2str(ucode)
             shifts[num] = self.u2str(shift)
+            if self.u2str(shift) != self.u2str(altgr):
+                altgrs[num] = self.u2str(altgr)
+            else:
+                altgrs[num] = " "
         for but in self.buttons:
             but.update()
 
@@ -85,6 +91,7 @@ class kbdpreview(Gtk.Box):
 
     def getButton(self,num):
         but = button(num)
+        but.set_name("key_button")
         self.buttons.append(but)
         return but
 
@@ -93,17 +100,26 @@ class button(Gtk.Box):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
         self.but = Gtk.Label()
         self.but2 = Gtk.Label()
+        self.but3 = Gtk.Label()
 
-        self.but.set_name("key_label_primary")
-        self.but2.set_name("key_label_secondary")
+        self.box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.box2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+
+        self.but.set_name("key_label")
+        self.but2.set_name("key_label_shift")
+        self.but3.set_name("key_label_altgr")
         self.set_name("key_box")
 
         self.set_margin_top(3)
         self.set_margin_bottom(3)
         self.set_size_request(25,25)
 
-        self.add(self.but)
-        self.add(self.but2)
+        self.box1.add(self.but2)
+        self.box2.add(self.but)
+        self.box2.add(self.but3)
+
+        self.add(self.box1)
+        self.add(self.box2)
         self.num = num
 
     def encode(self,char):
@@ -116,12 +132,15 @@ class button(Gtk.Box):
         try:
             label = keys[str(self.num)]
             label2 = shifts[str(self.num)]
+            label3 = altgrs[str(self.num)]
         except:
-            label = ""
-            label2 = ""
+            label = " "
+            label2 = " "
+            label3 = " "
 
         self.but.set_text(label)
         self.but2.set_text(label2)
+        self.but3.set_text(label3)
 
 # Test & debug
 if __name__ == "__main__":
