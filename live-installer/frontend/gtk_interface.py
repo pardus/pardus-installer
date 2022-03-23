@@ -128,17 +128,17 @@ class InstallerWindow:
         self.builder.get_object("treeview_language_list").connect(
             "cursor-changed", self.assign_language)
 
-        # build the language list
-        self.build_lang_list()
-
-        # build timezones
-        timezones.build_timezones(self)
-
         # build keyboard preview
         self.keyboardview = kbdpreview()
         if os.system("which ckbcomp") == 0:
             if config.get("keyboard_preview", True):
                 self.builder.get_object("vbox_keyboard_variant").add(self.keyboardview)
+
+        # build the language list
+        self.build_lang_list()
+
+        # build timezones
+        timezones.build_timezones(self)
 
         # type page
         model = Gtk.ListStore(str, str)

@@ -39,7 +39,8 @@
 
 }
 
-#key_label_altgr
+#key_label_altgr,
+#key_label_altsft
 {
   font-size: 8px;
 }
