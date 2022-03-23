@@ -1076,11 +1076,13 @@ class InstallerWindow:
             for error in [password_error, username_error, hostname_error]:
                 if error:
                     errorMessage += error+"\n"
+            if self.setup.real_name == "" or self.setup.real_name == None:
+                errorMessage += _("Please provide your full name.") + "\n"
             if errorMessage != "":
                 WarningDialog(_("Installer"), errorMessage)
                 return
             elif weekMessage != "":
-                if not QuestionDialog(_("Your passwords is not strong."), weekMessage + "\n\n"+_("Are you sure?")):
+                if not QuestionDialog(_("Your passwords is not strong."), weekMessage + "\n"+_("Are you sure?")):
                     return
             if not goback:
                 self.show_overview()
