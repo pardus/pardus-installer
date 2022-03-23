@@ -620,7 +620,7 @@ class InstallerWindow:
         self.week_warning = weekMessage
         self.assign_entry("entry_password", errorFound ,self.week_password)
 
-        errorFound = (self.setup.password1 != self.setup.password2)
+        errorFound = (self.setup.password1 != self.setup.password2 or self.setup.password2 == "")
         self.assign_entry("entry_confirm", errorFound,self.week_password)
 
     def assign_options(self, widget, data=None):
