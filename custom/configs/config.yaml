@@ -9,7 +9,7 @@ copyright: TÜBİTAK ULAKBİM | 2022
 
 ## Base options section
 # loop_directory: /dev/loop0
-# log_file: /var/log/17g-installer.log
+log_file: /var/log/pardus-installer.log
 # gtk_theme: default
 welcome_screen: false
 # exclude_dirs:
