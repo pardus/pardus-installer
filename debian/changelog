@@ -1,3 +1,102 @@
+pardus-installer (1.1.1) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * translation
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 28 Mar 2022 16:59:45 +0300
+
+pardus-installer (1.1.0) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * typo fix
+  * config logging
+  * fix minor handle issue
+  * cleanup source
+  * maximum username limit fix
+  * update
+  * translation
+  * fix wrong transtalion
+  * fix ui
+  * fix ui1
+  * swap create button added.
+  * update translation
+  * fix translation
+  * gui bug fixes for create_swap
+  * password strong level bar added
+  * refresh button after exiting gparted
+  * bios type added in manual partitioning
+  * swap options fix
+  * free space added in list
+  * fix free space size bug
+  * fix free space size bug
+  * add remove partition button
+  * partition add button
+  * add remove button events
+  * assign to /boot/efi formating disable
+  * assign to /boot/efi formating disable
+  * partition edit page ui improvements
+  * partition edit page ui improvements
+  * partition edit page ui improvements
+  * label text
+  * process dialogs
+  * improve find mbr partition number and other stuff
+  * freespace mbr detection bug fixed
+  * automatically reload partition menu
+  * translation
+  * update translation
+  * fix partition finder
+  * fix partition finder
+  * logging improvement
+  * fix fullscreen mode
+  * translation
+  * update
+  * fix
+  * fix partitioning
+  * format button disable when free space selected
+  * exit status fix
+  * fix missing mbr bug
+  * fix no medium device bug
+  * eula checkbox focus
+  * username check and no-latin keyboard selector fix
+  * enable keyboard preview feature
+  * fix label size bug
+  * keyboard styling
+  * ui fixes
+  * ui fixes
+  * remove test background
+  * error handler
+  * waiting for disk for slow disks.
+  * custom logger file fix
+  * custom logger file fix
+  * custom logger file fix
+  * custom logger file fix
+  * custom logger file fix
+  * change log file path
+  * fix test mode non-root
+  * week password description added
+  * week password description fix
+  * week password description fix
+  * week password desrciption fix
+  * update description
+  * typo fix
+  * fix translation
+  * some fixes
+  * overview load fix
+  * update
+  * block username already exists
+  * altgr keyboard preview
+  * fix preview update
+  * altgr fix
+  * validate class write
+  * empty confirm box fix
+  * empty username fix
+  * empty username fix
+  * translation
+  * eula page disable
+  * fix missing translation
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 28 Mar 2022 16:06:56 +0300
+
 pardus-installer (1.0.1) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
