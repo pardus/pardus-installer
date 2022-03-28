@@ -65,6 +65,7 @@ set_alternative_ui: true
 default_timezone: Europe/Istanbul
 
 ## Setup page section
+skip_eula: true
 # skip_language: false
 # skip_timezone: false
 # skip_keyboard: false
