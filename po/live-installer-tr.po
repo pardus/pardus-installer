@@ -1143,7 +1143,7 @@ msgstr "Parolanız sadece sayıdan oluşuyor"
 
 #: live-installer/validate.py:58
 msgid "Your password must have big letters"
-msgstr "Parolanız büyük karakter içemelidir"
+msgstr "Parolanız büyük karakter içermelidir"
 
 #: live-installer/validate.py:62
 msgid "Your password must have small letters"
@@ -1163,7 +1163,7 @@ msgstr "Parolanız özel karakter içermelidir"
 
 #: live-installer/validate.py:94
 msgid "Your password must have numbers"
-msgstr "Parolanız sayı içemelidir"
+msgstr "Parolanız sayı içermelidir"
 
 #: live-installer/validate.py:98
 msgid "Please provide a password for your user account."
