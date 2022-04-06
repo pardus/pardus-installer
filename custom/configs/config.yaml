@@ -53,8 +53,8 @@ additional_user_groups:
 use_swap: true
 swap_size: 4192
 # replace_windows_enabled: true
-lvm_enabled: false
-encryption_enabled: false
+#lvm_enabled: true
+#encryption_enabled: true
 fill_disk_enabled: false
 set_alternative_ui: true
 # fullscreen: false
