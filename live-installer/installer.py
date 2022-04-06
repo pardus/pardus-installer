@@ -317,11 +317,12 @@ class InstallerEngine:
         if self.setup.luks:
             log(" --> Encrypting root partition %s" %
                 self.auto_root_partition)
-            self.run("echo -e \"YES\n{0}\n{0}\" | cryptsetup --verbose --cipher 'aes-cbc-essiv:sha256' --key-size 256 \
-                         --verify-passphrase luksFormat {1}".format(self.setup.passphrase1, self.auto_root_partition))
+            with open("/tmp/.lukspass","w") as f:
+                f.write("{0}\n{0}\n".format(self.setup.passphrase1))
+                f.flush()
+            self.run("cat /tmp/.lukspass | cryptsetup --force-password luksFormat {}".format(self.auto_root_partition))
             log(" --> Opening root partition %s" % self.auto_root_partition)
-            self.run("echo -e \"{0}\n{0}\n\" | cryptsetup luksOpen {1} {2}".format(
-                       self.setup.passphrase1, self.auto_root_partition,config.get("distro_codename","linux")))
+            self.run("cat /tmp/.lukspass | cryptsetup luksOpen {} {}".format(self.auto_root_partition,config.get("distro_codename","linux")))
             self.auto_root_partition = "/dev/mapper/{}".format(config.get("distro_codename","linux"))
 
         # Setup LVM
@@ -745,11 +746,11 @@ class InstallerEngine:
             "remove_package_with_unusing_deps", config.get("remove_packages", ["17g-installer"]))))
         self.run("chroot|| rm -rf /lib/live-installer",vital=False)
 
-        if self.setup.luks:
-            with open("/target/etc/default/grub", "a") as f:
-                f.write("\nGRUB_CMDLINE_LINUX_DEFAULT+=\" cryptdevice=%s:lvmlmde root=/dev/lvmlmde/root%s\"\n" %
-                        (self.get_blkid(self.auto_root_physical_partition), " resume=/dev/lvmlmde/swap" if self.auto_swap_partition else ""))
-                f.write("GRUB_ENABLE_CRYPTODISK=y\n")
+        #if self.setup.luks:
+        #    with open("/target/etc/default/grub", "a") as f:
+        #        f.write("\nGRUB_CMDLINE_LINUX_DEFAULT+=\" cryptdevice=%s:lvmlmde root=/dev/lvmlmde/root%s\"\n" %
+        #                (self.get_blkid(self.auto_root_physical_partition), " resume=/dev/lvmlmde/swap" if self.auto_swap_partition else ""))
+        #        f.write("GRUB_ENABLE_CRYPTODISK=y\n")
 
         # recreate initramfs (needed in case of skip_mount also, to include
         # things like mdadm/dm-crypt/etc in case its needed to boot a custom
