@@ -1197,7 +1197,6 @@ class InstallerWindow:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
             self.setup.grub_device = self.setup.disk
-            errorFound = True
             if self.setup.luks:
                 errorMessage , weekMessage = self.assign_passphrase()
                 if errorMessage != None:
