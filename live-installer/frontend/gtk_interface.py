@@ -223,7 +223,7 @@ class InstallerWindow:
         self.builder.get_object("entry_hostname").connect(
             "changed", self.assign_hostname)
         product_name = open("/sys/devices/virtual/dmi/id/product_name","r").read().strip().replace(" ","-").lower()
-        self.builder.get_object("entry_hostname").set_text(product_name)
+        self.builder.get_object("entry_hostname").set_text(config.get("distro","linux")+"-"+product_name)
 
         # events for detecting password mismatch..
         self.builder.get_object("entry_password").connect(
@@ -1337,8 +1337,8 @@ class InstallerWindow:
             if config.get("autologin_enabled", True):
                 model.append(top, (_("Automatic login: ") + bold(_("enabled")
                                                              if self.setup.autologin else _("disabled")),))
-            if config.get("encryption_enabled", True):
-                model.append(top, (_("Home encryption: ") + bold(_("enabled")
+    #        if config.get("encryption_enabled", True):
+    #            model.append(top, (_("Home encryption: ") + bold(_("enabled")
                                                              if self.setup.ecryptfs else _("disabled")),))
         top = model.append(None, (_("System settings"),))
         model.append(top, (_("Computer's name: ") +
