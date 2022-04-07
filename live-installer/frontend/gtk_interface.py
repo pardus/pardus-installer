@@ -1342,7 +1342,7 @@ class InstallerWindow:
                                                              if self.setup.autologin else _("disabled")),))
     #        if config.get("encryption_enabled", True):
     #            model.append(top, (_("Home encryption: ") + bold(_("enabled")
-                                                             if self.setup.ecryptfs else _("disabled")),))
+    #                                                            if self.setup.ecryptfs else _("disabled")),))
         top = model.append(None, (_("System settings"),))
         model.append(top, (_("Computer's name: ") +
                            bold(self.setup.hostname),))
