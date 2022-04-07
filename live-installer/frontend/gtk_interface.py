@@ -697,11 +697,14 @@ class InstallerWindow:
         self.setup.badblocks = self.builder.get_object(
             "check_badblocks").get_active()
 
-    def assign_passphrase(self, widget):
+    def assign_passphrase(self, widget=None):
         self.setup.passphrase1 = self.builder.get_object(
             "entry_passphrase").get_text()
         self.setup.passphrase2 = self.builder.get_object(
             "entry_passphrase2").get_text()
+        if self.setup.passphrase2 == self.setup.passphrase1:
+            return True
+        return False
 
     def quit_cb(self, widget, data=None):
         if QuestionDialog(_("Quit?"), _(
@@ -1192,7 +1195,7 @@ class InstallerWindow:
                 errorMessage = _("Please select a disk.")
             self.setup.grub_device = self.setup.disk
             if self.setup.luks:
-                if (self.setup.passphrase1 is None or self.setup.passphrase1 == ""):
+                if assign_passphrase():
                     errorFound = True
                     errorMessage = _(
                         "Please provide a passphrase for the encryption.")
