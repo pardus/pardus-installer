@@ -1,3 +1,24 @@
+pardus-installer (1.2.0) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * lvm fixed for debian
+  * libparted lvm bug fix
+  * fix luks
+  * default hostname fix
+  * enable encryption in config
+  * quick fixes
+  * assign_passphrase fix
+  * syntax fix
+  * syntax fix
+  * distro codiname fix
+  * bug fixes and improvements
+  * configuration fixes for grub theme luks
+  * error handle fix
+  * fix initramfs setup
+  * fix wrong order initramfs configure for luks and lvm
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 07 Apr 2022 11:41:42 +0300
+
 pardus-installer (1.1.3) unstable; urgency=medium
 
   [ Ali Rıza KESKİN ]
