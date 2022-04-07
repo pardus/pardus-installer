@@ -702,9 +702,12 @@ class InstallerWindow:
             "entry_passphrase").get_text()
         self.setup.passphrase2 = self.builder.get_object(
             "entry_passphrase2").get_text()
-        if self.setup.passphrase2 == self.setup.passphrase1:
-            return True
-        return False
+        if self.setup.passphrase1 == "":
+            return _("Please provide a passphrase for the encryption."), ""
+        if self.setup.passphrase2 != self.setup.passphrase1:
+            return _("Your passwords do not match."), ""
+        password_error, weekMessage, weeklevel = validate.password(self.setup.passphrase1,"")
+        return password_error, weekMessage
 
     def quit_cb(self, widget, data=None):
         if QuestionDialog(_("Quit?"), _(
@@ -1194,14 +1197,14 @@ class InstallerWindow:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
             self.setup.grub_device = self.setup.disk
+            errorFound = True
             if self.setup.luks:
-                if self.assign_passphrase():
+                errorMessage , weekMessage = self.assign_passphrase()
+                if errorMessage != None:
                     errorFound = True
-                    errorMessage = _(
-                        "Please provide a passphrase for the encryption.")
-                elif (self.setup.passphrase1 != self.setup.passphrase1):
-                    errorFound = True
-                    errorMessage = _("Your passphrases do not match.")
+                if weekMessage != "":
+                    if not QuestionDialog(_("Your passwords is not strong."), weekMessage + "\n"+_("Are you sure?")):
+                        return
             if (errorFound):
                 WarningDialog(_("Installer"), errorMessage)
             else:
@@ -1363,12 +1366,6 @@ class InstallerWindow:
             model.append(
                 top, (bold(_("Automated installation on %s") % self.setup.diskname),))
         else:
-            if config.get("lvm_enabled", True):
-                model.append(top, (_("LVM: ") + bold(_("enabled")
-                                                     if self.setup.lvm else _("disabled")),))
-            if config.get("encryption_enabled", True):
-                model.append(top, (_("Disk Encryption: ") +
-                                   bold(_("enabled") if self.setup.luks else _("disabled")),))
             for p in self.setup.partitions:
                 if p.format_as:
                     model.append(top, (bold(_("Format %(path)s as %(filesystem)s") % {
@@ -1377,6 +1374,12 @@ class InstallerWindow:
                 if p.mount_as:
                     model.append(top, (bold(_("Mount %(path)s as %(mount)s") % {
                                  'path': p.path, 'mount': p.mount_as}),))
+        if config.get("lvm_enabled", True):
+            model.append(top, (_("LVM: ") + bold(_("enabled")
+                                   if self.setup.lvm else _("disabled")),))
+        if config.get("encryption_enabled", True):
+            model.append(top, (_("Disk Encryption: ") +
+                                   bold(_("enabled") if self.setup.luks else _("disabled")),))
         self.builder.get_object("treeview_overview").expand_all()
 
     @idle
