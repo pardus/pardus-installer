@@ -9,8 +9,6 @@ Priority: extra
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, 
                     python3-parted,
-                    live-boot,
-                    live-config,
                     gparted,
                     python3-gi,
                     gir1.2-gtk-3.0,
