@@ -24,8 +24,9 @@ welcome_screen: false
 # use_rsync: true
 # use_unsquashfs: true
 remove_packages:
-  - live-config
-  - live-boot
+  - live-config-*
+  - live-boot-*
+  - live-tools
   - pardus-installer
 
 ## User section
