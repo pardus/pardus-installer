@@ -7,7 +7,8 @@ Section: utils
 Package: pardus-installer  
 Priority: extra  
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, 
+Depends: ${shlibs:Depends}, ${misc:Depends},
+                    live-boot,
                     python3-parted,
                     gparted,
                     python3-gi,
