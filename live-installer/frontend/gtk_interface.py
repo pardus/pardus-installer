@@ -1149,7 +1149,7 @@ class InstallerWindow:
                         " - Recommended filesystem format: ext4\n\n") % config.get("distro_title", "17g"))
                     return
 
-                if self.setup.gptonefi:
+                if self.setup.gptonefi and self.grub_check.get_active():
                     # Check for an EFI partition
                     found_efi_partition = False
                     for partition in self.setup.partitions:
