@@ -303,7 +303,7 @@ class InstallerEngine:
         partitioning.full_disk_format(disk_device,
             create_boot = (self.auto_boot_partition is not None),
             create_swap = (self.auto_swap_partition is not None), 
-            swap_size   = self.setup.swap_size*1024)
+            swap_size   = self.setup.swap_size)
 
         # Encrypt root partition
         if self.setup.luks:
@@ -328,7 +328,7 @@ class InstallerEngine:
             self.run("lvcreate -y -n root -L 1GB {}".format(lvm))
             if config.get("use_swap",False) and self.setup.create_swap:
                 log(" --> LVM: Creating LV swap")
-                self.run("lvcreate -y -n swap -L {}MB {}".format(self.setup.swap_size*1024,lvm))
+                self.run("lvcreate -y -n swap -L {}MB {}".format(self.setup.swap_size,lvm))
             log(" --> LVM: Extending LV root")
             self.run("lvextend -l 100\\%FREE /dev/{}/root".format(lvm))
             log(" --> LVM: Formatting LV root")

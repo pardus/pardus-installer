@@ -5,6 +5,11 @@
   <object class="GtkSizeGroup">
     <property name="mode">vertical</property>
   </object>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
   <object class="GtkListStore" id="model2">
     <columns>
       <!-- column-name gchararray -->

@@ -218,6 +218,8 @@ class InstallerWindow:
 
         self.builder.get_object("entry_name").connect(
             "changed", self.assign_realname)
+        self.builder.get_object("swap_size").connect(
+            "changed", self.assign_swap_size)
         self.builder.get_object("entry_username").connect(
             "changed", self.assign_username)
         self.builder.get_object("entry_hostname").connect(
@@ -586,6 +588,9 @@ class InstallerWindow:
     def hide_password_text(self,entry, icon_pos, event):
         entry.set_visibility(False)
         entry.set_icon_from_icon_name(0,"view-reveal-symbolic")
+
+    def assign_swap_size(self, entry):
+        self.setup.swap_size = int(entry.props.text)*1024
 
     def assign_realname(self, entry):
         self.setup.real_name = entry.props.text
