@@ -218,6 +218,8 @@ class InstallerWindow:
 
         self.builder.get_object("entry_name").connect(
             "changed", self.assign_realname)
+        self.builder.get_object("swap_size").connect(
+            "changed", self.assign_swap_size)
         self.builder.get_object("entry_username").connect(
             "changed", self.assign_username)
         self.builder.get_object("entry_hostname").connect(
@@ -573,6 +575,10 @@ class InstallerWindow:
         self.builder.get_object("label_minimal").set_text(_("Minimal installation"))
         self.builder.get_object("label_minimal2").set_text(_("This will only install a minimal desktop environment with a browser and utilities."))
         self.builder.get_object("label_donotturnoff").set_text(_("Please do not turn off your computer during the installation process."))
+        self.builder.get_object("swap_size").set_range(1,64)
+        self.setup.swap_size = int(round(int(subprocess.getoutput(
+                    "awk '/^MemTotal/{ print $2 }' /proc/meminfo")) / 1024, 0))
+        self.builder.get_object("swap_size").set_value(1)
 
     def view_password_text(self,entry, icon_pos, event):
         entry.set_visibility(True)
@@ -582,6 +588,9 @@ class InstallerWindow:
     def hide_password_text(self,entry, icon_pos, event):
         entry.set_visibility(False)
         entry.set_icon_from_icon_name(0,"view-reveal-symbolic")
+
+    def assign_swap_size(self, entry):
+        self.setup.swap_size = int(entry.props.text)*1024
 
     def assign_realname(self, entry):
         self.setup.real_name = entry.props.text
@@ -643,6 +652,9 @@ class InstallerWindow:
             "check_minimal").get_active()
         self.setup.create_swap = self.builder.get_object(
             "check_swap").get_active()
+        self.builder.get_object("swap_size").set_sensitive(self.setup.create_swap)
+        self.builder.get_object("swap_size").set_value(1)
+            
 
     def assign_type_options(self, widget, data=None):
         self.setup.automated = self.builder.get_object(
@@ -894,8 +906,14 @@ class InstallerWindow:
         mbr = self.selected_partition.mbr
         if QuestionDialog(_("Are you sure?"), 
             _("New partition will created at {}").format(mbr)):
-            os.system("parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end))
-            partitioning.build_partitions(self)
+            command = "parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end)
+            def update_partition_menu(pid, status):
+                partitioning.build_partitions(self)
+            pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/bash", "-c", command],
+            flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
+            standard_output=True,
+            standard_error=True)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def part_remove_button_event(self,widget):
         path = self.selected_partition.path
@@ -903,16 +921,28 @@ class InstallerWindow:
         partnum = partitioning.find_partition_number(path)
         if QuestionDialog(_("Are you sure?"), 
             _("Partition {} will removed from {}.").format(path,mbr)):
-            os.system("parted -s {} rm {}".format(mbr,partnum))
-            partitioning.build_partitions(self)
+            def update_partition_menu(pid, status):
+                partitioning.build_partitions(self)
+            command = "parted -s {} rm {}".format(mbr,partnum)
+            pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/bash", "-c", command],
+            flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
+            standard_output=True,
+            standard_error=True)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def part_format_button_event(self,widget):
         path = self.selected_partition.path
         mbr = self.selected_partition.mbr
-        if QuestionDialog(_("Are you sure?"), 
+        if QuestionDialog(_("Are you sure?"),
             _("Partition {} will formated from {}.").format(path,mbr)):
-            os.system("yes | mkfs.ext4 {}".format(path))
-            partitioning.build_partitions(self)
+            def update_partition_menu(pid, status):
+                partitioning.build_partitions(self)
+            command = "yes | mkfs.ext4 {}".format(path)
+            pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/bash", "-c", command],
+            flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
+            standard_output=True,
+            standard_error=True)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def assign_eula(self,widget=None):
         widget = self.builder.get_object("check_eula")
@@ -1131,7 +1161,7 @@ class InstallerWindow:
                         " - Recommended filesystem format: ext4\n\n") % config.get("distro_title", "17g"))
                     return
 
-                if self.setup.gptonefi:
+                if self.setup.gptonefi and self.grub_check.get_active():
                     # Check for an EFI partition
                     found_efi_partition = False
                     for partition in self.setup.partitions:

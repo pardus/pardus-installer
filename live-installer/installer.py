@@ -210,12 +210,11 @@ class InstallerEngine:
                 self.run("chroot||usermod -aG {} {}".format(group, self.setup.username), False)
 
             if is_cmd("openssl") and config.get("use_usermod", True):
-                fp = open("/target/tmp/.passwd", "w")
-                fp.write(self.setup.password1+"\n")
-                fp.close()
-                self.run("chroot||usermod -p $(openssl passwd -in /target/tmp/.passwd) {0}".format(self.setup.username))
+                pass_hash = subprocess.run(["openssl", "passwd", "-6", self.setup.password1], capture_output=True)
+                pass_hash = pass_hash.stdout.decode("utf-8").strip()
+                os.system("chroot /target usermod -p '{0}' {1}".format(pass_hash, self.setup.username))
                 if config.get("set_root_password", True):
-                    self.run("chroot||usermod -p $(openssl passwd -in /target/tmp/.passwd) root")
+                    os.system("chroot /target usermod -p '{0}' root".format(pass_hash))
             elif is_cmd("chpasswd") and config.get("use_chpasswd", True):
                 fp = open("/target/tmp/.passwd", "w")
                 fp.write(self.setup.username + ":" + self.setup.password1 + "\n")
@@ -228,7 +227,7 @@ class InstallerEngine:
                 fp = open("/target/tmp/.passwd", "w")
                 fp.write(self.setup.password1+"\n"+self.setup.password2+"\n")
                 fp.close()
-                self.run("chroot||cat /tmp/.passwd | passwd {0}".format(self.setup.username))
+                self.run("chroot||cat /tmp/.passwd | passwd '{0}'".format(self.setup.username))
                 if config.get("set_root_password", True):
                     self.run("chroot||cat /tmp/.passwd | passwd")
 
@@ -282,7 +281,7 @@ class InstallerEngine:
             if config.get("use_swap",False) and self.setup.create_swap:
                 self.auto_swap_partition = get_next()
         self.auto_root_partition = get_next()
-        
+
         log("EFI:" + str(self.auto_efi_partition))
         log("BOOT:" + str(self.auto_boot_partition))
         log("Root:" + str(self.auto_root_partition))
@@ -301,8 +300,10 @@ class InstallerEngine:
         log(" --> Creating partitions on %s" % self.setup.disk)
         disk_device = parted.getDevice(self.setup.disk)
         # replae this with changeable function
-        partitioning.full_disk_format(disk_device, create_boot=(
-            self.auto_boot_partition is not None), create_swap=(self.auto_swap_partition is not None))
+        partitioning.full_disk_format(disk_device,
+            create_boot = (self.auto_boot_partition is not None),
+            create_swap = (self.auto_swap_partition is not None), 
+            swap_size   = self.setup.swap_size)
 
         # Encrypt root partition
         if self.setup.luks:
@@ -327,9 +328,7 @@ class InstallerEngine:
             self.run("lvcreate -y -n root -L 1GB {}".format(lvm))
             if config.get("use_swap",False) and self.setup.create_swap:
                 log(" --> LVM: Creating LV swap")
-                swap_size = int(round(int(subprocess.getoutput(
-                    "awk '/^MemTotal/{ print $2 }' /proc/meminfo")) / 1024, 0))
-                self.run("lvcreate -y -n swap -L {}MB {}".format(swap_size,lvm))
+                self.run("lvcreate -y -n swap -L {}MB {}".format(self.setup.swap_size,lvm))
             log(" --> LVM: Extending LV root")
             self.run("lvextend -l 100\\%FREE /dev/{}/root".format(lvm))
             log(" --> LVM: Formatting LV root")
@@ -341,7 +340,7 @@ class InstallerEngine:
                 self.run("swapon /dev/{}/swap".format(lvm))
                 self.auto_swap_partition = "/dev/{}/swap".format(lvm)
             self.auto_root_partition = "/dev/{}/root".format(lvm)
-            
+
 
         self.do_mount(self.auto_root_partition, "/target", "ext4", None)
         if (self.auto_boot_partition is not None):
@@ -421,14 +420,14 @@ class InstallerEngine:
 
         # move old files if available
         olds = os.listdir("/target/")
-        if len(olds) > 0:
+        if len(olds) > 1:
             target="/target/{}.old".format(config.get("distro_codename","linux"))
             if os.path.exists(target):
                  self.run("rm -rf {}".format(target),vital=False)
             os.mkdir(target)
             for old in olds:
                 self.run("mv /target/{0} {1}/{0}".format(old,target),vital=False)
-            
+
 
         # Mount the other partitions
         for partition in self.setup.partitions:
@@ -466,7 +465,6 @@ class InstallerEngine:
                 "echo \"#### Static Filesystem Table File\" > /target/etc/fstab")
         fstab = open("/target/etc/fstab", "a")
         fstab.write("proc /proc proc defaults 0 0\n")
-        fstab.write("tmpfs /tmp tmpfs nosuid,nodev,noatime 0 0\n")
         if self.setup.expert_mode:
             log("  --> Expert mode detected")
         elif self.setup.automated:
@@ -560,11 +558,14 @@ class InstallerEngine:
         self.our_current += 1
         self.update_progress(_("Setting locale"))
         # locale-gen
-        l = open("/target/etc/locale.gen", "a")
-        l.write("%s.UTF-8 UTF-8\n" % self.setup.language)
+        def add_locale(lang):
+            if lang not in open("/target/etc/locale.gen", "r").read().split("\n"):
+                f = open("/target/etc/locale.gen", "a")
+                f.write(lang+"\n")
+                f.close()
+        add_locale("{}.UTF-8 UTF-8".format(self.setup.language))
         if self.setup.language != "en_US":
-            l.write("en_US.UTF-8 UTF-8\n")
-        l.close()
+            add_locale("en_US.UTF-8 UTF-8")
         self.run("chroot||locale-gen")
         # etc/default/locale
         l = open("/target/etc/default/locale", "w")
@@ -573,9 +574,11 @@ class InstallerEngine:
         # localectl
         self.run("chroot||localectl set-locale LANG=\"%s.UTF-8\"" %
             self.setup.language,vital=False)
+        self.run("chroot||localectl set-locale LC_CTYPE=\"en_US.UTF-8\"",vital=False)
         # locale.conf
         l = open("/target/etc/locale.conf", "w")
         l.write("LANG=%s.UTF-8" % self.setup.language)
+        l.write("LC_CTYPE=en_US.UTF-8")
         l.close()
         # set the locale for gentoo / sulin
         if os.path.exists("/target/etc/env.d"):
@@ -698,7 +701,7 @@ class InstallerEngine:
             newconsolefh.write("keymap=\"{}{}\"\n".format(
                 self.setup.keyboard_layout, self.setup.keyboard_variant))
             newconsolefh.close()
-        
+
         # Keyboard settings (gnome)
         if os.path.exists("/target/usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.xml"):
             with open("/target/usr/share/glib-2.0/schemas/99_17g-gnome-keyboard-config.gschema.override", "w") as schema:
@@ -798,7 +801,7 @@ class InstallerEngine:
 
         # Custom commands
         self.do_hook_commands("post_install_hook")
-        
+
         # Customization with network
         if config.get("customizer_address","localhost") != "localhost":
             self.run("curl {} | chroot /target bash".format(config.get("customizer_address","localhost")),vital=False)
@@ -879,7 +882,7 @@ class InstallerEngine:
         while p.poll() is None:
             line = str(p.stdout.readline().decode("utf-8").replace("\n", ""))
             self.update_progress(line,pulse)
-            
+
     def run(self,cmd,vital=True):
         if "{distro_codename}" in cmd:
             cmd = cmd.replace("{distro_codename}", config.get("distro_codename", "linux"))
@@ -918,6 +921,7 @@ class Setup(object):
     luks = False
     badblocks = False
     create_swap = False
+    swap_size = 0
     winroot = None
     winboot = None
     winefi = None
@@ -935,7 +939,7 @@ class Setup(object):
     keyboard_model_description = None
     keyboard_layout_description = None
     keyboard_variant_description = None
-    
+
     # Additional options
     install_updates = False
     minimal_installation = False
