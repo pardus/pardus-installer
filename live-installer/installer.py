@@ -558,11 +558,14 @@ class InstallerEngine:
         self.our_current += 1
         self.update_progress(_("Setting locale"))
         # locale-gen
-        l = open("/target/etc/locale.gen", "a")
-        l.write("%s.UTF-8 UTF-8\n" % self.setup.language)
+        def add_locale(lang):
+            if lang not in open("/target/etc/locale.gen", "r").read().split("\n"):
+                f = open("/target/etc/locale.gen", "a")
+                f.write(lang+"\n")
+                f.close()
+        add_locale("{}.UTF-8 UTF-8".format(self.setup.language))
         if self.setup.language != "en_US":
-            l.write("en_US.UTF-8 UTF-8\n")
-        l.close()
+            add_locale("en_US.UTF-8 UTF-8")
         self.run("chroot||locale-gen")
         # etc/default/locale
         l = open("/target/etc/default/locale", "w")
