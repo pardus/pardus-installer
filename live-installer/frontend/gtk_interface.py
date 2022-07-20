@@ -1585,5 +1585,4 @@ class InstallerWindow:
         self.cur_slide_pos = self.cur_slide_pos + 1
         if(self.cur_slide_pos > self.max_slide_page):
             self.cur_slide_pos = 0
-        print(self.cur_slide_pos)
         GLib.timeout_add(15000, self.set_slide_page)
