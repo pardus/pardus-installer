@@ -226,7 +226,11 @@ class InstallerWindow:
             "changed", self.assign_username)
         self.builder.get_object("entry_hostname").connect(
             "changed", self.assign_hostname)
-        product_name = open("/sys/devices/virtual/dmi/id/product_name","r").read().strip().replace(" ","-").lower()
+        _product_name = open("/sys/devices/virtual/dmi/id/product_name","r").read().strip().replace(" ","-").lower()
+        product_name = ""
+        for c in _product_name:
+            if c.lower() in "abcdefghijklmnopqrstuvwxyz.1234567890-":
+                product_name += c
         self.builder.get_object("entry_hostname").set_text(config.get("distro_codename","linux")+"-"+product_name)
 
         # events for detecting password mismatch..
