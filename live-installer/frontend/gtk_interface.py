@@ -159,6 +159,9 @@ class InstallerWindow:
             self.setup.diskname = row[0]
             # Fix calculate max spaw_size value
             self.assign_type_options(None,None)
+        else:
+            self.builder.get_object("swap_size").set_range(1,1)
+
 
         self.builder.get_object("entry_passphrase").connect(
             "changed", self.assign_passphrase)
@@ -574,9 +577,6 @@ class InstallerWindow:
         self.builder.get_object("label_minimal").set_text(_("Minimal installation"))
         self.builder.get_object("label_minimal2").set_text(_("This will only install a minimal desktop environment with a browser and utilities."))
         self.builder.get_object("label_donotturnoff").set_text(_("Please do not turn off your computer during the installation process."))
-        self.builder.get_object("swap_size").set_range(1,1)
-        self.setup.swap_size = int(round(int(subprocess.getoutput(
-                    "awk '/^MemTotal/{ print $2 }' /proc/meminfo")) / 1024, 0))
         self.builder.get_object("swap_size").set_value(1)
 
     def view_password_text(self,entry, icon_pos, event):
