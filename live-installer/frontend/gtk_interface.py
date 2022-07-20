@@ -157,6 +157,8 @@ class InstallerWindow:
             row = model[0]
             self.setup.disk = row[1]
             self.setup.diskname = row[0]
+            # Fix calculate max spaw_size value
+            self.assign_type_options(None,None)
 
         self.builder.get_object("entry_passphrase").connect(
             "changed", self.assign_passphrase)
