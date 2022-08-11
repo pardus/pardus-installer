@@ -1,3 +1,62 @@
+pardus-installer (1.3.0) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * async gui update
+  * Update 'debian/control'
+  * Update 'custom/configs/config.yaml'
+  * Update 'custom/configs/config.yaml'
+  * Update 'debian/control'
+  * hide unused page dots
+  * fix usermod password bug
+  * update source
+  * fix usermod -p
+  * usermod -p fix
+  * usermod -p fix
+  * fix usermod -p
+  * fix usermod security
+  * fix freeze button event bug
+  * fix minor bug
+  * fix efi check issue for disable bootloader installation
+  * hostname validate improvements
+  * translation
+  * remove /tmp as tmpfs
+  * fix multiple locale.gen line
+  * swap partition size
+  * fix swap issues
+  * LC_CTYPE fix
+  * fix language config file write
+  * drop set_alternative_ui
+  * fix fullscreen slideshow bug
+  * swap range is half of disk size
+  * fix swap size when single disk
+  * fix swap size when single disk
+  * remove debug prints
+  * trim product name
+  * minor check
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Wed, 20 Jul 2022 19:17:51 +0300
+
+pardus-installer (1.2.0) unstable; urgency=medium
+
+  [ Ali Rıza KESKİN ]
+  * lvm fixed for debian
+  * libparted lvm bug fix
+  * fix luks
+  * default hostname fix
+  * enable encryption in config
+  * quick fixes
+  * assign_passphrase fix
+  * syntax fix
+  * syntax fix
+  * distro codiname fix
+  * bug fixes and improvements
+  * configuration fixes for grub theme luks
+  * error handle fix
+  * fix initramfs setup
+  * fix wrong order initramfs configure for luks and lvm
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 07 Apr 2022 11:41:42 +0300
+
 pardus-installer (1.1.3) unstable; urgency=medium
 
   [ Ali Rıza KESKİN ]
