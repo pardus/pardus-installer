@@ -343,7 +343,7 @@ msgstr ""
 #: live-installer/resources/welcome.ui:178
 msgid ""
 "You can install 17g now, or chose \"Install to Hard Drive\" in the "
-"Appication Menu later."
+"Application Menu later."
 msgstr ""
 
 #: live-installer/resources/welcome.ui:228
@@ -476,7 +476,7 @@ msgstr ""
 #: live-installer/frontend/welcome.py:38
 #, python-format
 msgid ""
-"You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
+"You can install %s now, or chose \"Install to Hard Drive\" in the Application "
 "Menu later."
 msgstr ""
 
@@ -819,7 +819,7 @@ msgid "Please choose a language"
 msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:1105
-msgid "Please provide a kayboard layout for your computer."
+msgid "Please provide a keyboard layout for your computer."
 msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:1119
