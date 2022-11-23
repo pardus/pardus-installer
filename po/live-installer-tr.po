@@ -761,7 +761,7 @@ msgstr "Kurulum aracı bölümlendirme yapmayacak"
 
 #: live-installer/frontend/gtk_interface.py:532
 msgid "Remove Windows & Install"
-msgstr "Winsowsu sil ve yerine yükle"
+msgstr "Windowsu sil ve yerine yükle"
 
 #: live-installer/frontend/gtk_interface.py:534
 msgid "Remove existsing windows and install system on it."
