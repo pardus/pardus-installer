@@ -12,8 +12,9 @@ fetch_deb(){
         fi
     done
     chroot /target apt-get update
-    if chroot /target apt-get install ${missing[@]} -o Dpkg::Options::="--force-confnew" --yes ; then
-        echo "Failed to install ${missing[@]}"
+    if [[ ${#missing[@]} -gt 0 ]]  ; then
+       chroot /target apt-get update
+       chroot /target apt-get install ${missing[@]} -o Dpkg::Options::="--force-confnew" --yes
     fi
 }
 
