@@ -1,17 +1,20 @@
 #!/bin/bash
 # install grub packages for debian
 fetch_deb(){
-    chroot /target apt-get update
-    if chroot /target apt-get install $@ -o Dpkg::Options::="--force-confnew" --yes ; then
-        return 0
-    fi
+    missing=()
     mkdir -p /target/debs/ || true
     for pkg in $@ ; do
         f="$(find /run/live/medium/pool/ -type f  -iname ${pkg}_*.deb)"
         if [ "" !=  "$f" ] ; then
             cp -pvf "$f" /target/debs/
+        else
+            missing+=(pkg)
         fi
     done
+    chroot /target apt-get update
+    if chroot /target apt-get install ${missing[@]} -o Dpkg::Options::="--force-confnew" --yes ; then
+        echo "Failed to install ${missing[@]}"
+    fi
 }
 
 # fetch microcode packages
