@@ -11,7 +11,6 @@ fetch_deb(){
             missing+=(pkg)
         fi
     done
-    chroot /target apt-get update
     if [[ ${#missing[@]} -gt 0 ]]  ; then
        chroot /target apt-get update
        chroot /target apt-get install ${missing[@]} -o Dpkg::Options::="--force-confnew" --yes
