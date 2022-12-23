@@ -36,7 +36,7 @@ set_root_password: false
 # use_chpasswd: true
 # use_usermod: true
 keep_userdata : false
-minimal_instalation_enabled: true
+minimal_instalation_enabled: false
 # keyboard_preview: true
 additional_user_groups:
   - cdrom
