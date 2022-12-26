@@ -1,3 +1,33 @@
+pardus-installer (1.4.0) unstable; urgency=medium
+
+  [ aliriza ]
+  * fix work directory issue non-usrmerge system
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+
+  [ CorruptedFile ]
+  * Fixed Typo's in live-installer.pot
+
+  [ Ali Esat Güngör ]
+  * Update live-installer-tr.po
+
+  [ aliriza ]
+  * fix mmcblk0boot1 issue
+  * fix initramfs update for debian config
+  * fix missing dependencies
+  * update
+  * install grub packages from iso or repository order fix for debian
+  * install grub packages from iso or repository order fix for debian
+  * disable minimal installation config
+  * remove unused config
+  * remove duplicated line
+  * slide update
+  * initramfs-tools fix
+  * 2023
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 26 Dec 2022 18:39:34 +0300
+
 pardus-installer (1.3.0) unstable; urgency=medium
 
   [ Ali Rıza KESKİN ]
