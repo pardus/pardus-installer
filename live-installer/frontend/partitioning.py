@@ -129,6 +129,8 @@ def get_partition_flags(part):
 
 
 def get_disk_size(disk):
+    if disk == None:
+        return 0
     name = os.path.basename(disk)
     lsblk = subprocess.getoutput(
         'LC_ALL=en_US.UTF-8 lsblk -rbindo TYPE,NAME,RM,SIZE,MODEL | sort -k3,2')
