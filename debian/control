@@ -23,7 +23,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
                     librsvg2-common,
                     parted,
                     dosfstools,
-                    console-setup
+                    console-setup,
+                    btrfs-progs
 Description: Pardus live installer (17g)
  17G installation tools configured for pardus
 
