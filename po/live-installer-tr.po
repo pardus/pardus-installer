@@ -292,7 +292,7 @@ msgstr "Ev dizinimi şifrele"
 #: live-installer/resources/interface2.ui:1749
 #: live-installer/frontend/gtk_interface.py:500
 msgid "Confirm your password:"
-msgstr "Parolanınız doğrulayın:"
+msgstr "Parolanızı doğrulayın:"
 
 #: live-installer/resources/interface.ui:1843
 #: live-installer/resources/interface2.ui:1778
