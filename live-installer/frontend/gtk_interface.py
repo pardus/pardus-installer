@@ -1115,7 +1115,7 @@ class InstallerWindow:
             password_error, weekMessage, weeklevel = validate.password(_pass1, _user)
             username_error = validate.username(_user)
             hostname_error = validate.hostname(_host)
-            if _pass1 =! _pass2:
+            if _pass1 != _pass2:
                 password_error = _("Your passwords do not match.")
             for error in [password_error, username_error, hostname_error]:
                 if error:
