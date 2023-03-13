@@ -1106,15 +1106,21 @@ class InstallerWindow:
         elif index == self.PAGE_USER and not goback:
             errorMessage = ""
             focus_widget = None
-            password_error, weekMessage, weeklevel = validate.password(self.setup.password1,self.setup.username)
-            username_error = validate.username(self.setup.username)
-            hostname_error = validate.hostname(self.setup.hostname)
-            if self.setup.password1 != self.setup.password2:
+            _pass1 = self.builder.get_object("entry_password").get_text()
+            _pass2 = self.builder.get_object("entry_confirm").get_text()
+            _user = self.builder.get_object("entry_username").get_text()
+            _realname = self.builder.get_object("entry_name").get_text()
+            _host = self.builder.get_object("entry_hostname").get_text()
+
+            password_error, weekMessage, weeklevel = validate.password(_pass1, _user)
+            username_error = validate.username(_user)
+            hostname_error = validate.hostname(_host)
+            if _pass1 =! _pass2:
                 password_error = _("Your passwords do not match.")
             for error in [password_error, username_error, hostname_error]:
                 if error:
                     errorMessage += error+"\n"
-            if self.setup.real_name == "" or self.setup.real_name == None:
+            if _realname == "" or _realname == None:
                 errorMessage += _("Please provide your full name.") + "\n"
             if errorMessage != "":
                 WarningDialog(_("Installer"), errorMessage)
