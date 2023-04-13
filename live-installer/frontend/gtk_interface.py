@@ -151,7 +151,7 @@ class InstallerWindow:
         self.builder.get_object("combo_disk").pack_start(renderer_text, True)
         self.builder.get_object("combo_disk").add_attribute(
             renderer_text, "text", 0)
-        if len(partitioning.get_disks()) == 1:
+        if len(partitioning.get_disks()) >= 1:
             self.builder.get_object("combo_disk").set_active_iter(disk_iterators[0])
             model = self.builder.get_object("combo_disk").get_model()
             row = model[0]
