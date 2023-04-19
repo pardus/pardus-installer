@@ -1,3 +1,40 @@
+pardus-installer (1.5.0) unstable; urgency=medium
+
+  [ aliriza ]
+  * fix for auto partition mmcblk
+  * return None partition size as 0
+  * emmc fix
+  * minor fix
+
+  [ Ömer Arda CANBOLAT ]
+  * Avoid CWE-20 vulnerability that could happen due to unsafe use of yaml
+  * Replace xml.etree.ElementTree with the equivalent defusedxml package and methods
+  * Fix: missing python3-defusedxml dependency
+
+  [ misile00 ]
+  * Re-add BTRFS support
+
+  [ sulincix ]
+  * Update control
+
+  [ Sabri Ünal ]
+  * Fix a typo in Turkish translation
+
+  [ aliriza ]
+  * initrd update fix
+  * change upgrade priority
+  * variable update function
+  * variable update function
+  * variable update function
+  * fix overview
+  * update
+  * fff
+  * minimum disk size messages added and efi disk type fix
+  * setup settings improvements
+  * ignore removable drive automated installation list and select first disk as default automated installation disk
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Wed, 19 Apr 2023 11:03:26 +0300
+
 pardus-installer (1.4.0) unstable; urgency=medium
 
   [ aliriza ]
