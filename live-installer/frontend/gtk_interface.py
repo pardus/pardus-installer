@@ -1230,10 +1230,10 @@ class InstallerWindow:
         self.builder.get_object("notebook1").set_visible_child_name(str(nex))
 
     def activate_page_type(self):
-        if self.testmode or self.setup.expert_mode:
+        if self.testmode or self.builder.get_object("radio_expert_mode").get_active():
             self.activate_page(self.PAGE_USER)
             return
-        if self.setup.automated:
+        if self.builder.get_object("radio_automated").get_active():
             errorFound = False
             errorMessage = ""
             if self.setup.disk is None:
@@ -1258,7 +1258,7 @@ class InstallerWindow:
                         self.activate_page(self.PAGE_OVERVIEW)
                     else:
                         self.activate_page(self.PAGE_USER)
-        elif self.setup.replace_windows:
+        elif self.builder.get_object("radio_replace_win").get_active():
             rootfs = partitioning.PartitionBase()
             rootfs.path = self.setup.winroot
             rootfs.format_as = 'ext4'
