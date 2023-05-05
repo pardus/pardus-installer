@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-04 12:29+0000\n"
-"PO-Revision-Date: 2021-07-14 15:53+0300\n"
+"PO-Revision-Date: 2023-05-05 14:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -302,8 +302,8 @@ msgid ""
 "You can install 17g now, or chose \"Install to Hard Drive\" in the "
 "Appication Menu later."
 msgstr ""
-"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
-"yükle\" seçebilirsiniz."
+"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske yükle"
+"\" seçebilirsiniz."
 
 #: live-installer/resources/welcome.ui:228
 msgid "Welcome to 17g"
@@ -442,13 +442,13 @@ msgid ""
 "You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
 "Menu later."
 msgstr ""
-"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
-"yükle\" seçebilirsiniz."
+"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske yükle"
+"\" seçebilirsiniz."
 
 #: live-installer/frontend/welcome.py:39
-#, fuzzy, python-format
+#, python-format
 msgid "Welcome to %s"
-msgstr "Hoş geldiniz"
+msgstr "Hoş geldiniz %s"
 
 #: live-installer/frontend/partitioning.py:72
 msgid "B"
@@ -814,12 +814,6 @@ msgstr ""
 "Devam etmek istiyor musunuz?"
 
 #: live-installer/frontend/gtk_interface.py:1153
-msgid ""
-"The root partition is too small. It should be at least 16GB. Do you want to "
-"continue?"
-msgid ""
-"Kök bölümü çok küçük. En az 16GB olmalıdır. Devam etmek istiyor musunuz?"
-
 #: live-installer/frontend/gtk_interface.py:1157
 msgid "Please select a root (/) partition."
 msgstr "Lütfen kök (/) bölümü seçin."
@@ -850,7 +844,6 @@ msgid "The EFI partition is not bootable. Do you want to set boot flag?"
 msgstr "EFI bölümü önyüklenebilir değil. Önyükleme bayrağı ayarlansın mı?"
 
 #: live-installer/frontend/gtk_interface.py:1178
-#, fuzzy
 msgid "The EFI partition is too small. It must be at least 100MB."
 msgstr "EFI bölümü çok küçük. En az 35MB olmalıdır."
 
@@ -864,7 +857,6 @@ msgid "Please select an EFI partition."
 msgstr "Lütfen bir EFI bölümü seçin."
 
 #: live-installer/frontend/gtk_interface.py:1194
-#, fuzzy
 msgid ""
 "An EFI system partition is needed with the following requirements:\n"
 "\n"
@@ -1037,19 +1029,16 @@ msgid "Keyboard Model"
 msgstr "Klavye modeli"
 
 #: live-installer/frontend/tui_interface.py:73
-#, fuzzy
 msgid "Installation type?"
-msgstr "Kurulum türü"
+msgstr "Kurulum türü?"
 
 #: live-installer/frontend/tui_interface.py:80
-#, fuzzy
 msgid "Select a disk?"
-msgstr "Lütfen bir disk seçin."
+msgstr "Lütfen bir disk seçin?"
 
 #: live-installer/frontend/tui_interface.py:84
-#, fuzzy
 msgid "Disk"
-msgstr "Disk:"
+msgstr "Disk"
 
 #: live-installer/frontend/dialogs.py:41
 msgid "No"
