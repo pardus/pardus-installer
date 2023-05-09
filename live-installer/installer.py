@@ -897,6 +897,8 @@ class InstallerEngine:
                     time.sleep(0.1)
                 else:
                     self.update_progress(line)
+        for command in os.path.listdir("/lib/live-installer/hooks/"):
+            run_and_update("chroot /target/ /bin/sh -c \"{}/{} {}\"".format("/lib/live-installer/hooks/"), command, hook))
 
     def do_check_grub(self):
         self.update_progress(_("Checking bootloader"), True)
