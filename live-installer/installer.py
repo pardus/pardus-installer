@@ -5,6 +5,7 @@ import gettext
 import parted
 import frontend.partitioning as partitioning
 import config
+import shutil
 from utils import run, set_governor, is_cmd
 from logger import log, err, inf, set_logfile
 
@@ -897,8 +898,13 @@ class InstallerEngine:
                     time.sleep(0.1)
                 else:
                     self.update_progress(line)
-        for command in os.path.listdir("/lib/live-installer/hooks/"):
-            run_and_update("chroot /target/ /bin/sh -c \"{}/{} {}\"".format("/lib/live-installer/hooks/"), command, hook))
+        for file in os.path.listdir("/lib/live-installer/hooks/"):
+            shutil.copy_file(
+                "/lib/live-installer/hooks/{}".format(file),
+                "/target/tmp/hook"
+            )
+            run_and_update("chroot /target/ /bin/sh -c \"/tmp/hook {}\"".printf(hook))
+            os.unlink("/target/tmp/hook")
 
     def do_check_grub(self):
         self.update_progress(_("Checking bootloader"), True)
