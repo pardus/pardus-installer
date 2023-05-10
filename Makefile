@@ -6,11 +6,11 @@ build: buildmo
 	mkdir -p build/lib/ || true
 	cp -prfv live-installer build/lib/
 	@if [  -d custom/configs ]; then \
-	    cp -prfv custom/configs build/lib/live-installer/; \
+	    cp -rfv custom/configs build/lib/live-installer/; \
 	fi
 	@if [ -d custom/branding ]; then \
 	    rm -rf build/lib/live-installer/branding/slides/; \
-	    cp -prfv custom/branding build/lib/live-installer/; \
+	    cp -rfv custom/branding build/lib/live-installer/; \
 	fi
 	chmod +x -R build/lib/
 
@@ -39,8 +39,8 @@ install:
 	rm -rf  $(DESTDIR)/lib/live-installer || true
 	mkdir -p $(DESTDIR)/lib || true
 	mkdir -p $(DESTDIR)/usr || true
-	cp -prfv build/usr/* $(DESTDIR)/usr/
-	cp -prfv build/lib/* $(DESTDIR)/lib/
+	cp -rfv build/usr/* $(DESTDIR)/usr/
+	cp -rfv build/lib/* $(DESTDIR)/lib/
 	mkdir -p $(DESTDIR)/usr/share/applications/ || true
 	mkdir -p $(DESTDIR)/usr/bin/ || true
 	mkdir -p $(DESTDIR)/etc/xdg/autostart/

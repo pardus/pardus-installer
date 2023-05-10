@@ -898,13 +898,14 @@ class InstallerEngine:
                     time.sleep(0.1)
                 else:
                     self.update_progress(line)
-        for file in os.path.listdir("/lib/live-installer/hooks/"):
-            shutil.copy_file(
-                "/lib/live-installer/hooks/{}".format(file),
-                "/target/tmp/hook"
-            )
-            run_and_update("chroot /target/ /bin/sh -c \"/tmp/hook {}\"".printf(hook))
-            os.unlink("/target/tmp/hook")
+        if os.path.isdir("/lib/live-installer/hooks/"):
+            for file in os.listdir("/lib/live-installer/hooks/"):
+                shutil.copyfile(
+                    "/lib/live-installer/hooks/{}".format(file),
+                    "/target/tmp/hook"
+                )
+                run_and_update("chroot /target/ /bin/sh -c \"/tmp/hook {}\"".printf(hook))
+                os.unlink("/target/tmp/hook")
 
     def do_check_grub(self):
         self.update_progress(_("Checking bootloader"), True)
