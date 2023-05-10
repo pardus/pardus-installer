@@ -900,12 +900,7 @@ class InstallerEngine:
                     self.update_progress(line)
         if os.path.isdir("/lib/live-installer/hooks/"):
             for file in os.listdir("/lib/live-installer/hooks/"):
-                shutil.copyfile(
-                    "/lib/live-installer/hooks/{}".format(file),
-                    "/target/tmp/hook"
-                )
-                run_and_update("chroot /target/ /bin/sh -c \"/tmp/hook {}\"".printf(hook))
-                os.unlink("/target/tmp/hook")
+                self.run_and_update("/bin/sh /lib/live-installer/hooks/{} \"{}\"".format(file,hook))
 
     def do_check_grub(self):
         self.update_progress(_("Checking bootloader"), True)
