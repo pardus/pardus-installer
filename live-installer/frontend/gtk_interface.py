@@ -231,6 +231,20 @@ class InstallerWindow:
                 product_name += c
         self.builder.get_object("entry_hostname").set_text(config.get("distro_codename","linux")+"-"+product_name)
 
+        # events for enter
+        def enter_event(widget=None, name=""):
+            self.builder.get_object(name).grab_focus()
+        self.builder.get_object("entry_name").connect(
+            "activate",enter_event, "entry_hostname")
+        self.builder.get_object("entry_hostname").connect(
+            "activate",enter_event, "entry_username")
+        self.builder.get_object("entry_username").connect(
+            "activate",enter_event, "entry_password")
+        self.builder.get_object("entry_password").connect(
+            "activate",enter_event, "entry_confirm")
+        self.builder.get_object("entry_confirm").connect(
+            "activate",self.wizard_cb, False)
+
         # events for detecting password mismatch..
         self.builder.get_object("entry_password").connect(
             "changed", self.assign_password)
@@ -404,7 +418,7 @@ class InstallerWindow:
         if config.get("skip_keyboard",False):
             self.builder.get_object("progress_%d" % self.PAGE_KEYBOARD).hide()
         if config.get("skip_user",False):
-            self.builder.get_object("progress_%d" % self.PAGE_USER).hide()        
+            self.builder.get_object("progress_%d" % self.PAGE_USER).hide()
 
         self.ui_init = True
         if self.testmode:
@@ -1232,6 +1246,8 @@ class InstallerWindow:
     def activate_page_type(self):
         if self.testmode or self.builder.get_object("radio_expert_mode").get_active():
             self.activate_page(self.PAGE_USER)
+            self.builder.get_object("entry_name").grab_focus()
+
             return
         if self.builder.get_object("radio_automated").get_active():
             errorFound = False
