@@ -1423,11 +1423,13 @@ class InstallerWindow:
             return
         if self.builder.get_object("radio_automated").get_active():
             self.setup.grub_device = self.setup.disk
-            swap_info = self.builder.get_object("swap_size").get_text()
-            if swap_info != "0":
-                swap_info = _(" (with %s GB swap)") % swap_info
-            else:
-                swap_info = ""
+            swap_info = ""
+            if self.builder.get_object("check_swap").get_active():
+                swap_info = self.builder.get_object("swap_size").get_text()
+                if swap_info != "0":
+                    swap_info = _(" (with %s GB swap)") % swap_info
+                else:
+                    swap_info = ""
             model.append(
                 top, (bold(_("Automated installation on %s") % self.setup.diskname)+ swap_info,))
         else:
