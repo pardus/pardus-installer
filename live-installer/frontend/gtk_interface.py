@@ -1429,7 +1429,7 @@ class InstallerWindow:
             else:
                 swap_info = ""
             model.append(
-                top, (bold(_("Automated installation on %s%s") % self.setup.diskname, swap_info),))
+                top, (bold(_("Automated installation on %s") % self.setup.diskname)+ swap_info,))
         else:
             for p in self.setup.partitions:
                 if p.format_as:
