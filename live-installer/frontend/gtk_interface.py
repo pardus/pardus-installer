@@ -1252,6 +1252,13 @@ class InstallerWindow:
         if self.builder.get_object("radio_automated").get_active():
             errorFound = False
             errorMessage = ""
+            model = self.builder.get_object("combo_disk").get_model()
+            active = self.builder.get_object("combo_disk").get_active()
+            if(active > -1):
+                row = model[active]
+                self.setup.disk = row[1]
+                self.setup.diskname = row[0]
+        
             if self.setup.disk is None:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
