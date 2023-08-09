@@ -14,7 +14,7 @@ def get_user_list():
         if uid != "1000":
             users.append(user)
     return users
-    
+
 
 def get_country_list():
     countries = {}

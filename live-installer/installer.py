@@ -93,7 +93,7 @@ class InstallerEngine:
             self.mount_partitions()
         if os.path.isdir("/lib/live-installer"):
             os.chdir("/lib/live-installer")
-                    
+
         # Custom commands
         self.do_hook_commands("pre_rsync_hook")
 
@@ -158,11 +158,11 @@ class InstallerEngine:
                         self.our_current = min(
                             self.our_current + 1, self.our_total)
                         self.update_progress(_("Copying /%s") % line)
-               
+
 
         # Custom commands
         self.do_hook_commands("post_rsync_hook")
-        
+
         # Steps:
         self.our_total = 12
         self.our_current = 0

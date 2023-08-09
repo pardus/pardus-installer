@@ -36,7 +36,7 @@ if config.get("enable_live", True) and (
                     config.get("live_password", "live"), config.get("live_user", "user")))
         else:
             os.system("passwd -d {}".format(config.get("live_user", "user")))
-            
+
         for i in config.get("additional_user_groups", (["audio", "video", "netdev"])):
                 os.system("usermod -aG \"{}\" \"{}\"".format(i, config.get("live_user", "user")))
 

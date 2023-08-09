@@ -69,7 +69,7 @@ class InstallerWindow:
         # slide gtk images
         self.gtkimages = []
         self.gtkpixbufs = []
-        
+
         # user list
         validate.userlist = common.get_user_list()
 
@@ -97,7 +97,7 @@ class InstallerWindow:
         self.builder.get_object("button_quit").connect(
             "clicked", self.quit_cb)
 
-        
+
         self.builder.get_object("check_eula").connect(
             "clicked", self.assign_eula)
         self.builder.get_object("text_eula").get_buffer().set_text(open("./branding/eula.txt","r").read())
@@ -325,7 +325,7 @@ class InstallerWindow:
         # build options page
         if config.get("skip_options", False):
             obox.hide()
-        
+
         if not config.get("use_swap",False):
             self.builder.get_object("check_swap").hide()
 
@@ -597,8 +597,8 @@ class InstallerWindow:
     def view_password_text(self,entry, icon_pos, event):
         entry.set_visibility(True)
         entry.set_icon_from_icon_name(0,"view-conceal-symbolic")
-        
-        
+
+
     def hide_password_text(self,entry, icon_pos, event):
         entry.set_visibility(False)
         entry.set_icon_from_icon_name(0,"view-reveal-symbolic")
@@ -642,11 +642,11 @@ class InstallerWindow:
 
         self.week_password = (weekMessage != "")
         errorFound = (password_error != None)
-        
+
         if errorFound:
             wlabel.set_text("")
             self.week_password = False
-        
+
         self.week_warning = weekMessage
         self.assign_entry("entry_password", errorFound ,self.week_password)
 
@@ -1049,7 +1049,7 @@ class InstallerWindow:
         command = "setxkbmap -layout '%s' -variant '%s'" % (
             self.setup.keyboard_layout, self.setup.keyboard_variant)
         os.system(command)
-        
+
         if config.get("keyboard_preview", True):
             self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
 
@@ -1071,7 +1071,7 @@ class InstallerWindow:
         if self.testmode:
             self.builder.get_object("notebook1").set_visible_child_name(str(nex))
             return
-        
+
         if index == self.PAGE_LANGUAGE:
             if goback:
                 True # Do nothing
@@ -1256,7 +1256,7 @@ class InstallerWindow:
                 row = model[active]
                 self.setup.disk = row[1]
                 self.setup.diskname = row[0]
-        
+
             if self.setup.disk is None:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
@@ -1357,7 +1357,7 @@ class InstallerWindow:
                 nex = self.PAGE_INSTALL
                 self.activate_page(nex, nex)
         else:
-        
+
             if sel == self.PAGE_OVERVIEW:
                 nex = self.PAGE_USER
             if sel == self.PAGE_PARTITIONS:
