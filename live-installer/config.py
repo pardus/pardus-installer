@@ -115,7 +115,7 @@ def package_manager(process, packages=[]):
         if "{packages}" not in pm[process]:
             return pm[process]
         elif len(packages) == 0:
-            return ":" 
+            return ":"
         pkgs = ""
 
         for p in packages:

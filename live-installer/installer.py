@@ -13,7 +13,7 @@ gettext.install("live-installer", "/usr/share/locale")
 
 NON_LATIN_KB_LAYOUTS = ['am', 'af', 'ara', 'ben', 'bd', 'bg', 'bn', 'bt', 'by', 'deva', 'et', 'ge', 'gh', 'gn', 'gr',
                         'guj', 'guru', 'id', 'il', 'iku', 'in', 'iq', 'ir', 'kan', 'kg', 'kh', 'kz', 'la', 'lao', 'lk',
-                        'ma', 'mk', 'mm', 'mn', 'mv', 'mal', 'my', 'np', 'ori', 'pk', 'ru', 'rs', 'scc', 'sy', 'syr', 
+                        'ma', 'mk', 'mm', 'mn', 'mv', 'mal', 'my', 'np', 'ori', 'pk', 'ru', 'rs', 'scc', 'sy', 'syr',
                         'tel', 'th', 'tj', 'tam', 'tz', 'ua', 'uz']
 
 
@@ -303,7 +303,7 @@ class InstallerEngine:
         # replae this with changeable function
         partitioning.full_disk_format(disk_device,
             create_boot = (self.auto_boot_partition is not None),
-            create_swap = (self.auto_swap_partition is not None), 
+            create_swap = (self.auto_swap_partition is not None),
             swap_size   = self.setup.swap_size)
 
         # Encrypt root partition

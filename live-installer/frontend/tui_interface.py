@@ -16,7 +16,7 @@ class InstallerWindow:
         self.installer.set_progress_hook(self.progress_hook)
         self.d = Dialog(dialog="dialog", autowidgetsize=True)
         pages = [
-            self.page_welcome, 
+            self.page_welcome,
             self.page_language,
             self.page_timezone,
             self.page_keyboard_model,

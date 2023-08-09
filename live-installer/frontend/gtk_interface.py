@@ -905,7 +905,7 @@ class InstallerWindow:
         start = self.selected_partition.partition.geometry.start
         end = self.selected_partition.partition.geometry.end
         mbr = self.selected_partition.mbr
-        if QuestionDialog(_("Are you sure?"), 
+        if QuestionDialog(_("Are you sure?"),
             _("New partition will created at {}").format(mbr)):
             command = "parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end)
             def update_partition_menu(pid, status):
@@ -920,7 +920,7 @@ class InstallerWindow:
         path = self.selected_partition.path
         mbr = self.selected_partition.mbr
         partnum = partitioning.find_partition_number(path)
-        if QuestionDialog(_("Are you sure?"), 
+        if QuestionDialog(_("Are you sure?"),
             _("Partition {} will removed from {}.").format(path,mbr)):
             def update_partition_menu(pid, status):
                 partitioning.build_partitions(self)
