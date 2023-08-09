@@ -28,5 +28,5 @@ Icon=/lib/live-installer/branding/icon.svg
 Terminal=false
 
 # Describes the categories in which this entry should be shown
-Categories=System;
+Categories=System;X-Pardus-Apps;
 
