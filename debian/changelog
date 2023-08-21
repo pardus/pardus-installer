@@ -1,3 +1,29 @@
+pardus-installer (2.0.0) unstable; urgency=medium
+
+  [ Ali Riza Keskin ]
+  * post install hook feature added
+  * hook improvement
+  * fix1
+  * fix2
+  * fix missing libfuse2 for grub prepare
+  * fix live-installer desktop icon for xfce
+  * user page enter event added.
+  * swap size overview
+  * translation
+  * disable swap info if disabled
+  * automated install disk selection fix
+  * Update 'custom/live-installer.desktop'
+  * remove @asynchronous from functions for fixing crach
+  * cleanup empty lines
+  * cleanup code spaces
+  * update app icon
+  * update app icon
+
+  [ Yusuf Düzgün ]
+  * add brand pics for pardus23
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 21 Aug 2023 17:53:17 +0300
+
 pardus-installer (1.5.2) unstable; urgency=medium
 
   [ aliriza ]
