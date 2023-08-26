@@ -1,23 +1,23 @@
 # Portuguese translation for linuxmint
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the linuxmint package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: linuxmint\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-09 13:04+0000\n"
-"PO-Revision-Date: 2022-11-21 14:06+0000\n"
+"PO-Revision-Date: 2023-08-26 19:07+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2020-03-13 11:20+0000\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: live-installer/resources/interface.ui:71
 msgid "Welcome to the 17g Installer."
@@ -85,7 +85,7 @@ msgstr "Criar partição swap"
 
 #: live-installer/resources/interface.ui:595
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: live-installer/resources/interface.ui:613
 #: live-installer/frontend/partitioning.py:72
@@ -817,11 +817,12 @@ msgstr ""
 "sem a formatação do disco. Quer continuar?"
 
 #: live-installer/frontend/gtk_interface.py:1167
-#, fuzzy
 msgid ""
 "The root partition is too small. It should be at least 16GB. Do you want to "
 "continue?"
-msgstr "A partição EFI é demasiado pequena. Tem que ter, pelo menos, 35 MB."
+msgstr ""
+"A partição root é demasiado pequena. Deveria ter pelo menos 16 GB. Quer "
+"continuar?"
 
 #: live-installer/frontend/gtk_interface.py:1171
 msgid "Please select a root (/) partition."
@@ -850,9 +851,8 @@ msgstr ""
 "A partição EFI não é de arranque. Quer definir uma 'flag' de arranque(boot)?"
 
 #: live-installer/frontend/gtk_interface.py:1192
-#, fuzzy
 msgid "The EFI partition is too small. It must be at least 100MB."
-msgstr "A partição EFI é demasiado pequena. Tem que ter, pelo menos, 35 MB."
+msgstr "A partição EFI é demasiado pequena. Deve ter pelo menos 100MB."
 
 #: live-installer/frontend/gtk_interface.py:1198
 #: live-installer/frontend/gtk_interface.py:1203
@@ -864,7 +864,6 @@ msgid "Please select an EFI partition."
 msgstr "Selecione a partição EFI."
 
 #: live-installer/frontend/gtk_interface.py:1208
-#, fuzzy
 msgid ""
 "An EFI system partition is needed with the following requirements:\n"
 "\n"
@@ -881,7 +880,7 @@ msgstr ""
 "\n"
 " - Ponto de montagem: /boot/efi\n"
 " - Flags de partição: Bootable\n"
-" - Tamanho: no mínimo 35MB (recomendamos 100MB ou mais)\n"
+" - Tamanho: no mínimo 100MB\n"
 " - Formato: vfat ou fat32\n"
 "\n"
 "Para assegurar compatibilidade com sistemas Windows, recomendamos que "
@@ -990,7 +989,7 @@ msgstr "Utilizar /target montado."
 #: live-installer/frontend/gtk_interface.py:1428
 #, python-format
 msgid " (with %s GB swap)"
-msgstr ""
+msgstr " (com %s GB swap)"
 
 #: live-installer/frontend/gtk_interface.py:1432
 #, python-format
@@ -1043,19 +1042,16 @@ msgid "Keyboard Model"
 msgstr "Modelo do teclado"
 
 #: live-installer/frontend/tui_interface.py:73
-#, fuzzy
 msgid "Installation type?"
-msgstr "Tipo de instalação"
+msgstr "Tipo de instalação?"
 
 #: live-installer/frontend/tui_interface.py:80
-#, fuzzy
 msgid "Select a disk?"
-msgstr "Selecione um disco."
+msgstr "Selecionar um disco?"
 
 #: live-installer/frontend/tui_interface.py:84
-#, fuzzy
 msgid "Disk"
-msgstr "Disco:"
+msgstr "Disco"
 
 #: live-installer/frontend/dialogs.py:41
 msgid "No"
