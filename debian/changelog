@@ -1,3 +1,17 @@
+pardus-installer (2.0.1) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+
+  [ Sabri Ünal ]
+  * data: Update Turkish translation
+
+  [ Fatih Altun ]
+  * Rm translatable
+  * Revert "legacy" translation for now
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 28 Aug 2023 20:12:50 +0300
+
 pardus-installer (2.0.0) unstable; urgency=medium
 
   [ Ali Riza Keskin ]
