@@ -203,7 +203,7 @@ msgstr "Bölümleri Düzenle"
 
 #: live-installer/resources/interface.ui:1552
 msgid "Legacy"
-msgstr "Eski"
+msgstr ""
 
 #: live-installer/resources/interface.ui:1610
 #: live-installer/frontend/gtk_interface.py:509
