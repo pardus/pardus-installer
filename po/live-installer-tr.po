@@ -691,7 +691,7 @@ msgstr "İleri"
 #: live-installer/frontend/tui_interface.py:34
 #, python-format
 msgid "Welcome to the %s Installer."
-msgstr "%s kurucuya Hoş Geldiniz."
+msgstr "%s Kurucuya Hoş Geldiniz."
 
 #: live-installer/frontend/gtk_interface.py:506
 msgid "Type here to test your keyboard layout"
