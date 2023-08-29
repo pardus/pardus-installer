@@ -9,19 +9,19 @@ msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-09 13:04+0000\n"
-"PO-Revision-Date: 2023-08-27 19:46+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"PO-Revision-Date: 2023-08-29 18:48+0300\n"
+"Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #: live-installer/resources/interface.ui:71
 msgid "Welcome to the 17g Installer."
-msgstr "17g kurucuya Hoş Geldiniz."
+msgstr "17g Kurucuya Hoş Geldiniz."
 
 #: live-installer/resources/interface.ui:88
 #: live-installer/frontend/gtk_interface.py:493
@@ -304,8 +304,8 @@ msgid ""
 "You can install 17g now, or chose \"Install to Hard Drive\" in the "
 "Appication Menu later."
 msgstr ""
-"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
-"yükle\" seçebilirsiniz."
+"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske yükle"
+"\" seçebilirsiniz."
 
 #: live-installer/resources/welcome.ui:228
 msgid "Welcome to 17g"
@@ -444,8 +444,8 @@ msgid ""
 "You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
 "Menu later."
 msgstr ""
-"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
-"yükle\" seçebilirsiniz."
+"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske yükle"
+"\" seçebilirsiniz."
 
 #: live-installer/frontend/welcome.py:39
 #, python-format
