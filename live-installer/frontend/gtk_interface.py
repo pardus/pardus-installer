@@ -137,6 +137,7 @@ class InstallerWindow:
 
         # build timezones
         timezones.build_timezones(self)
+        self.timezone_init()
 
         # type page
         model = Gtk.ListStore(str, str)
@@ -322,9 +323,6 @@ class InstallerWindow:
         # build partition list
         self.should_pulse = False
 
-        # build options page
-        if config.get("skip_options", False):
-            obox.hide()
 
         if not config.get("use_swap",False):
             self.builder.get_object("check_swap").hide()
@@ -336,7 +334,7 @@ class InstallerWindow:
         self.builder.get_object("button_back").set_sensitive(False)
         self.slideshow()
         self.window.set_position(Gtk.WindowPosition.CENTER)
-        self.window.show_all()
+        self.window.show()
         if not fullscreen and config.get("set_alternative_ui", False):
             self.builder.get_object("button_quit").hide()
         if fullscreen:
@@ -395,7 +393,7 @@ class InstallerWindow:
                     True # dummy action
             if self.setup.winroot and (
                     not self.setup.gptonefi or self.setup.winefi):
-                self.builder.get_object("box_replace_win").show_all()
+                self.builder.get_object("box_replace_win").show()
 
         self.builder.get_object("label_copyright").set_label(
             config.get("copyright", "17g Developer Team"))
@@ -424,6 +422,18 @@ class InstallerWindow:
         if self.testmode:
             self.builder.get_object("label_install_progress").set_text("text "*100)
 
+    def timezone_init(self):
+        lang_country_code = self.setup.language.split('_')[-1]
+        for value in (self.cur_timezone,      # timezone guessed from IP
+                      self.cur_country_code,  # otherwise pick country from IP
+                      lang_country_code):     # otherwise use country from language selection
+            if not value:
+                continue
+            for row in timezones.timezones:
+                if value in row:
+                    timezones.select_timezone(row)
+                    break
+            break
 
     def manually_edit_partitions(self,widget):
         """ Edit only known disks, selected one first """
@@ -1079,19 +1089,6 @@ class InstallerWindow:
                 WarningDialog(_("Installer"), _(
                     "Please choose a language"))
                 return
-            else:
-                self.set_language(self.setup.language)
-                lang_country_code = self.setup.language.split('_')[-1]
-                for value in (self.cur_timezone,      # timezone guessed from IP
-                              self.cur_country_code,  # otherwise pick country from IP
-                              lang_country_code):     # otherwise use country from language selection
-                    if not value:
-                        continue
-                    for row in timezones.timezones:
-                        if value in row:
-                            timezones.select_timezone(row)
-                            break
-                    break
         elif index == self.PAGE_TIMEZONE:
             if ("_" in self.setup.language):
                 country_code = self.setup.language.split("_")[1]
@@ -1276,6 +1273,7 @@ class InstallerWindow:
                     partitioning.build_partitions(self)
                     partitioning.build_grub_partitions()
                     if config.get("skip_user", False):
+                        self.show_overview()
                         self.activate_page(self.PAGE_OVERVIEW)
                     else:
                         self.activate_page(self.PAGE_USER)
@@ -1338,6 +1336,8 @@ class InstallerWindow:
                     sel = nex
             if sel == self.PAGE_TIMEZONE:
                 nex = self.PAGE_TYPE
+                if config.get("skip_partition", False):
+                    sel = nex
             if sel == self.PAGE_USER:
                 nex = self.PAGE_OVERVIEW
             if sel == self.PAGE_TYPE:
@@ -1360,10 +1360,14 @@ class InstallerWindow:
 
             if sel == self.PAGE_OVERVIEW:
                 nex = self.PAGE_USER
+                if config.get("skip_user", False):
+                    sel = nex
             if sel == self.PAGE_PARTITIONS:
                 nex = self.PAGE_TYPE
             if sel == self.PAGE_USER:
                 nex = self.PAGE_TYPE
+                if config.get("skip_partition", False):
+                    sel = nex
             if sel == self.PAGE_TYPE:
                 nex = self.PAGE_TIMEZONE
                 if config.get("skip_timezone", False):
@@ -1601,6 +1605,7 @@ class InstallerWindow:
             page_num = self.images.index(i)
             self.slides.add_titled(im, str(page_num), str(page_num))
         self.cur_slide_pos = 0
+        self.slides.show_all()
         #GLib.timeout_add(100, self.set_slide_page)
 
     def set_slide_page(self):

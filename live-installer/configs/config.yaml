@@ -62,6 +62,7 @@
 # skip_keyboard: false
 # skip_options: false
 # skip_user: false
+# skip_partition: false
 # hide_keyboard_model: false
 # allow_uppercase_hostname: true
 # allow_week_password: true
