@@ -618,6 +618,15 @@ class InstallerWindow:
     def automated_install_button_event(self,widget):
         config.set("automated",True)
         self.setup.automated = True
+        self.builder.get_object("entry_username").set_text(os.uname()[1])
+        self.builder.get_object("entry_password").set_text("1")
+        self.builder.get_object("entry_confirm").set_text("1")
+        self.builder.get_object("entry_hostname").set_text(os.uname()[1])
+        self.builder.get_object("entry_name").set_text(os.uname()[1])
+        self.builder.get_object("swap_size").set_text("0")
+        self.builder.get_object("button_next").set_label(_("Install"))
+        self.builder.get_object("button_next").get_style_context().add_class("suggested-action")
+        self.show_overview()
         self.activate_page(self.PAGE_OVERVIEW)
 
     def assign_realname(self, entry):
@@ -1415,8 +1424,12 @@ class InstallerWindow:
             _pass1 = self.builder.get_object("entry_password").get_text()
             model.append(top, (_("Real name: ") + bold(_realname),))
             model.append(top, (_("Username: ") + bold(_username),))
-            model.append(
-                top, (_("Password: ") + bold(len(str(_pass1)) * "*"),))
+            if config.get("automated",False):
+                model.append(
+                    top, (_("Password: ") + bold(str(_pass1)),))
+            else:
+                model.append(
+                    top, (_("Password: ") + bold(len(str(_pass1)) * "*"),))
             if config.get("autologin_enabled", True):
                 model.append(top, (_("Automatic login: ") + bold(_("enabled")
                                                              if self.setup.autologin else _("disabled")),))
