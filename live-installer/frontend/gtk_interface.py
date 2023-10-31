@@ -131,6 +131,8 @@ class InstallerWindow:
         if os.system("which ckbcomp") == 0:
             if config.get("keyboard_preview", True):
                 self.builder.get_object("vbox_keyboard_variant").add(self.keyboardview)
+                self.keyboardview.show_all()
+
 
         # build the language list
         self.build_lang_list()
@@ -331,7 +333,7 @@ class InstallerWindow:
 
         # make sure we're on the right page (no pun.)
         self.activate_page(0)
-        self.builder.get_object("button_automated").show()
+        self.builder.get_object("label_automated_warning").hide()
         self.builder.get_object("button_back").set_sensitive(False)
         self.slideshow()
         self.window.set_position(Gtk.WindowPosition.CENTER)
@@ -418,7 +420,6 @@ class InstallerWindow:
             self.builder.get_object("progress_%d" % self.PAGE_USER).hide()
 
         self.ui_init = True
-        print(config.get("expert",False))
 
         if self.testmode:
             self.builder.get_object("label_install_progress").set_text("text "*100)
@@ -604,6 +605,10 @@ class InstallerWindow:
         self.builder.get_object("label_donotturnoff").set_text(_("Please do not turn off your computer during the installation process."))
         self.builder.get_object("swap_size").set_value(1)
 
+       # automated install
+        self.builder.get_object("label_automated_warning").set_text(_("Automated installation enabled!"))
+        self.builder.get_object("button_automated").set_label(_("Automated install"))
+
     def view_password_text(self,entry, icon_pos, event):
         entry.set_visibility(True)
         entry.set_icon_from_icon_name(0,"view-conceal-symbolic")
@@ -624,6 +629,7 @@ class InstallerWindow:
         self.builder.get_object("swap_size").set_text("0")
         self.builder.get_object("button_next").set_label(_("Install"))
         self.builder.get_object("button_next").get_style_context().add_class("suggested-action")
+        self.builder.get_object("label_automated_warning").show()
         self.show_overview()
         self.activate_page(self.PAGE_OVERVIEW)
 
@@ -1037,8 +1043,6 @@ class InstallerWindow:
 
     def assign_keyboard_layout(self, treeview):
         ''' Called whenever someone updates the keyboard layout '''
-        if not self.ui_init:
-            return
         model, active = treeview.get_selection().get_selected_rows()
         if not active:
             return
@@ -1091,7 +1095,10 @@ class InstallerWindow:
             self.setup.keyboard_variant = '%s,us' % self.setup.keyboard_variant
 
     def activate_page(self, nex=0, index=0, goback=False):
-        self.builder.get_object("button_automated").hide()
+        if nex == 0:
+            self.builder.get_object("button_automated").show()
+        else:
+            self.builder.get_object("button_automated").hide()
         errorFound = False
         if self.testmode:
             self.builder.get_object("notebook1").set_visible_child_name(str(nex))
