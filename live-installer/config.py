@@ -54,6 +54,9 @@ def get(key, default=""):
         return default
     return default
 
+def set(key, value):
+    main[key] = value
+
 set_logfile(get("log_file","/var/log/17g-installer.log"))
 
 # Distribution

@@ -54,4 +54,6 @@ if __name__ == "__main__":
         os.system("gtk-update-icon-cache /usr/share/icons/hicolor/ || true")
         from frontend.gtk_interface import InstallerWindow
         win = InstallerWindow("--fullscreen" in sys.argv)
+        if "--automated" in sys.argv:
+            win.automated_install_button_event(None)
     Gtk.main()

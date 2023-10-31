@@ -419,6 +419,8 @@ class InstallerWindow:
             self.builder.get_object("progress_%d" % self.PAGE_USER).hide()
 
         self.ui_init = True
+        print(config.get("expert",False))
+
         if self.testmode:
             self.builder.get_object("label_install_progress").set_text("text "*100)
 
@@ -612,6 +614,11 @@ class InstallerWindow:
     def hide_password_text(self,entry, icon_pos, event):
         entry.set_visibility(False)
         entry.set_icon_from_icon_name(0,"view-reveal-symbolic")
+
+    def automated_install_button_event(self,widget):
+        config.set("automated",True)
+        self.setup.automated = True
+        self.activate_page(self.PAGE_OVERVIEW)
 
     def assign_realname(self, entry):
         errorFound = False
