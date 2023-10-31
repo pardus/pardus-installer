@@ -94,8 +94,8 @@ class InstallerWindow:
             "clicked", self.wizard_cb, False)
         self.builder.get_object("button_back").connect(
             "clicked", self.wizard_cb, True)
-        self.builder.get_object("button_quit").connect(
-            "clicked", self.quit_cb)
+        self.builder.get_object("button_automated").connect(
+            "clicked", self.automated_install_button_event)
 
 
         self.builder.get_object("check_eula").connect(
@@ -331,12 +331,11 @@ class InstallerWindow:
 
         # make sure we're on the right page (no pun.)
         self.activate_page(0)
+        self.builder.get_object("button_automated").show()
         self.builder.get_object("button_back").set_sensitive(False)
         self.slideshow()
         self.window.set_position(Gtk.WindowPosition.CENTER)
         self.window.show()
-        if not fullscreen and config.get("set_alternative_ui", False):
-            self.builder.get_object("button_quit").hide()
         if fullscreen:
             self.fullscreen()
 
@@ -458,7 +457,6 @@ class InstallerWindow:
     def fullscreen(self):
         self.window.set_resizable(True)
         GLib.timeout_add(300, self.window.fullscreen)
-        self.builder.get_object("button_quit").show()
 
     def i18n(self):
 
@@ -494,7 +492,7 @@ class InstallerWindow:
             _("Installing"), "system-run-symbolic", _("Please wait..."))
 
         # Buttons
-        self.builder.get_object("button_quit").set_label(_("Quit"))
+        self.builder.get_object("button_automated").set_label(_("Automated install"))
         self.builder.get_object("button_back").set_label(_("Back"))
         self.builder.get_object("button_next").set_label(_("Next"))
 
@@ -1093,6 +1091,7 @@ class InstallerWindow:
             self.setup.keyboard_variant = '%s,us' % self.setup.keyboard_variant
 
     def activate_page(self, nex=0, index=0, goback=False):
+        self.builder.get_object("button_automated").hide()
         errorFound = False
         if self.testmode:
             self.builder.get_object("notebook1").set_visible_child_name(str(nex))
@@ -1227,7 +1226,6 @@ class InstallerWindow:
         elif index == self.PAGE_INSTALL:
             self.builder.get_object("button_next").set_sensitive(False)
             self.builder.get_object("button_back").set_sensitive(False)
-            self.builder.get_object("button_quit").set_sensitive(False)
             self.builder.get_object("dot_box").hide()
             self.window.resize(0, 0)
             GLib.timeout_add(100, self.set_slide_page)
