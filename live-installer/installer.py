@@ -825,18 +825,19 @@ class InstallerEngine:
                     break
 
 
-        # Update if enabled
-        if self.setup.install_updates:
-            self.update_progress(_("Trying to install updates"), True)
-            self.run_and_update(config.package_manager(
-                "full_system_update"),True)
-
         # Custom commands
         self.do_hook_commands("post_install_hook")
 
         # Customization with network
         if config.get("customizer_address","localhost") != "localhost":
             self.run("curl {} | chroot /target bash".format(config.get("customizer_address","localhost")),vital=False)
+
+        # Update if enabled
+        if self.setup.install_updates:
+            self.update_progress(_("Trying to install updates"), True)
+            self.run_and_update(config.package_manager(
+                "full_system_update"),True)
+
 
         # now unmount it
         log(" --> Unmounting partitions")
