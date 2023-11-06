@@ -706,6 +706,8 @@ class InstallerWindow:
             self.builder.get_object("combo_disk").set_active(-1)
             self.builder.get_object("entry_passphrase").set_text("")
             self.builder.get_object("entry_passphrase2").set_text("")
+        else:
+            self.builder.get_object("combobox_grub").set_active(self.builder.get_object("combo_disk").get_active())
 
 
         if not _lvm:
@@ -731,6 +733,7 @@ class InstallerWindow:
 
         self.builder.get_object("swap_size").set_range(1,32)
         self.builder.get_object("swap_size").set_sensitive(_swap)
+        
 
     def assign_passphrase(self, widget=None):
         _pass1 = self.builder.get_object("entry_passphrase").get_text()
@@ -784,20 +787,20 @@ class InstallerWindow:
         self.setup.username = self.builder.get_object("entry_username").get_text()
         self.setup.real_name = self.builder.get_object("entry_name").get_text()
         self.setup.swap_size = int(self.builder.get_object("swap_size").get_text())*1024
-        if self.setup.automated:
+        if not self.grub_check.get_active():
+             self.setup.grub_device = None
+        elif self.setup.automated:
             self.setup.grub_device = self.setup.disk
         elif self.setup.replace_windows:
             self.setup.grub_device = partitioning.find_mbr(self.setup.winroot)
         else:
             model = self.builder.get_object("combobox_grub").get_model()
-            active = self.builder.get_object("combobox_grub").get_model()
+            active = self.builder.get_object("combobox_grub").get_active()
             if(active > -1):
                 row = model[active]
                 self.setup.grub_device = row[0]
             else:
                 self.setup.grub_device = self.setup.disk
-        if not self.grub_check.get_active():
-             self.setup.grub_device = None
 
     def build_lang_list(self):
 
