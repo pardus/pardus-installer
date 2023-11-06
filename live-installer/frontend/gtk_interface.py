@@ -271,7 +271,6 @@ class InstallerWindow:
         self.grub_check = self.builder.get_object("checkbutton_grub")
         self.grub_box = self.builder.get_object("combobox_grub")
         self.grub_check.connect("toggled", self.assign_grub_install)
-        self.grub_box.connect("changed", self.assign_grub_device)
 
         # install Grub by default
         self.grub_check.set_active(True)
@@ -373,28 +372,7 @@ class InstallerWindow:
         self.assign_password(None)
 
         self.builder.get_object("box_replace_win").hide()
-        if config.get("replace_windows_enabled", True):
-            if not os.path.exists("/tmp/winroot"):
-                os.mkdir("/tmp/winroot")
-            for disk_path in partitioning.get_partitions():
-                log("Searching: {}".format(disk_path))
-                if 0 == os.system(
-                        "mount -o ro {} /tmp/winroot".format(disk_path)):
-                    if os.path.exists(
-                            "/tmp/winroot/Windows/System32/ntoskrnl.exe"):
-                        self.setup.winroot = disk_path
-                        log("Found windows rootfs: {}".format(disk_path))
-                    elif os.path.exists("/tmp/winroot/EFI/Microsoft/Boot/bootmgfw.efi"):
-                        self.setup.winefi = disk_path
-                        log("Found windows efifs: {}".format(disk_path))
-                    elif os.path.exists("/tmp/winroot/bootmgr"):
-                        self.setup.winboot = disk_path
-                        log("Found windows boot: {}".format(disk_path))
-                while 0 == os.system("umount -lf /tmp/winroot"):
-                    True # dummy action
-            if self.setup.winroot and (
-                    not self.setup.gptonefi or self.setup.winefi):
-                self.builder.get_object("box_replace_win").show()
+        self.winroot_init()
 
         self.builder.get_object("label_copyright").set_label(
             config.get("copyright", "17g Developer Team"))
@@ -423,6 +401,31 @@ class InstallerWindow:
 
         if self.testmode:
             self.builder.get_object("label_install_progress").set_text("text "*100)
+
+    @asynchronous
+    def winroot_init(self):
+        if config.get("replace_windows_enabled", True):
+            if not os.path.exists("/tmp/winroot"):
+                os.mkdir("/tmp/winroot")
+            for disk_path in partitioning.get_partitions():
+                log("Searching: {}".format(disk_path))
+                if 0 == os.system(
+                        "mount -o ro {} /tmp/winroot".format(disk_path)):
+                    if os.path.exists(
+                            "/tmp/winroot/Windows/System32/ntoskrnl.exe"):
+                        self.setup.winroot = disk_path
+                        log("Found windows rootfs: {}".format(disk_path))
+                    elif os.path.exists("/tmp/winroot/EFI/Microsoft/Boot/bootmgfw.efi"):
+                        self.setup.winefi = disk_path
+                        log("Found windows efifs: {}".format(disk_path))
+                    elif os.path.exists("/tmp/winroot/bootmgr"):
+                        self.setup.winboot = disk_path
+                        log("Found windows boot: {}".format(disk_path))
+                while 0 == os.system("umount -lf /tmp/winroot"):
+                    True # dummy action
+            if self.setup.winroot and (
+                    not self.setup.gptonefi or self.setup.winefi):
+                self.builder.get_object("box_replace_win").show()
 
     def timezone_init(self):
         lang_country_code = self.setup.language.split('_')[-1]
@@ -781,6 +784,20 @@ class InstallerWindow:
         self.setup.username = self.builder.get_object("entry_username").get_text()
         self.setup.real_name = self.builder.get_object("entry_name").get_text()
         self.setup.swap_size = int(self.builder.get_object("swap_size").get_text())*1024
+        if self.setup.automated:
+            self.setup.grub_device = self.setup.disk
+        elif self.setup.replace_windows:
+            self.setup.grub_device = partitioning.find_mbr(self.setup.winroot)
+        else:
+            model = self.builder.get_object("combobox_grub").get_model()
+            active = self.builder.get_object("combobox_grub").get_model()
+            if(active > -1):
+                row = model[active]
+                self.setup.grub_device = row[0]
+            else:
+                self.setup.grub_device = self.setup.disk
+        if not self.grub_check.get_active():
+             self.setup.grub_device = None
 
     def build_lang_list(self):
 
@@ -1020,18 +1037,7 @@ class InstallerWindow:
 
     def assign_grub_install(self, checkbox, data=None):
         self.grub_box.set_sensitive(checkbox.get_active())
-        if checkbox.get_active():
-            self.assign_grub_device(self.grub_box)
-        else:
-            self.setup.grub_device = None
 
-    def assign_grub_device(self, combobox, data=None):
-        ''' Called whenever someone updates the grub device '''
-        model = combobox.get_model()
-        active = combobox.get_active()
-        if(active > -1):
-            row = model[active]
-            self.setup.grub_device = row[0]
 
     def assign_keyboard_model(self, combobox):
         ''' Called whenever someone updates the keyboard model '''
@@ -1278,7 +1284,6 @@ class InstallerWindow:
             if self.setup.disk is None:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
-            self.setup.grub_device = self.setup.disk
             if self.setup.luks:
                 errorMessage , weekMessage = self.assign_passphrase()
                 if errorMessage != None:
@@ -1310,8 +1315,6 @@ class InstallerWindow:
                 efifs.format_as = 'vfat'
                 efifs.mount_as = '/boot/efi'
                 self.setup.partitions.append(efifs)
-            self.setup.grub_device = partitioning.find_mbr(
-                self.setup.winroot)
             if self.setup.winboot:
                 boot = partitioning.PartitionBase()
                 boot.path = self.setup.winboot
