@@ -708,25 +708,31 @@ class InstallerWindow:
             self.builder.get_object("entry_passphrase2").set_text("")
             model = self.builder.get_object("combobox_grub").get_model()
             active = self.builder.get_object("combobox_grub").get_active()
+            self.setup.disk = None
             if(active > -1):
                 row = model[active]
                 self.setup.grub_device = row[0]
-        else:
-            self.builder.get_object("combobox_grub").set_active(self.builder.get_object("combo_disk").get_active())
 
         model = self.builder.get_object("combo_disk").get_model()
         active = self.builder.get_object("combo_disk").get_active()
-        if(active > -1):
+        if _auto:
+            if(active <= -1):
+                self.builder.get_object("combo_disk").set_active(0)
+                active = 0
             row = model[active]
             self.setup.disk = row[1]
             self.setup.diskname = row[0]
-            if _auto:
-                self.setup.grub_disk = row[1]
+            self.setup.grub_disk = row[1]
 
-        if not self.grub_check.get_active():
-            self.setup.grub_device = None
-        elif self.builder.get_object("radio_replace_win").get_active():
-            self.setup.grub_device = partitioning.find_mbr(self.setup.winroot)
+
+
+        if not _auto:
+            if not self.builder.get_object("checkbutton_grub").get_active():
+                self.setup.grub_device = None
+            elif self.builder.get_object("radio_replace_win").get_active():
+                self.setup.grub_device = partitioning.find_mbr(self.setup.winroot)
+        else:
+            self.setup.grub_device = self.setup.disk
 
         if not _lvm:
             # Force LVM for LUKs
@@ -751,8 +757,7 @@ class InstallerWindow:
 
         self.builder.get_object("swap_size").set_range(1,32)
         self.builder.get_object("swap_size").set_sensitive(_swap)
-        
-        
+        print(self.setup.grub_device, _auto, self.setup.disk)
 
     def assign_passphrase(self, widget=None):
         _pass1 = self.builder.get_object("entry_passphrase").get_text()
@@ -1418,6 +1423,7 @@ class InstallerWindow:
         self.activate_page(nex, sel, goback)
 
     def show_overview(self):
+        self.assign_options(None, None)
         def bold(strvar):
             return '<b>' + str(strvar) + '</b>'
         model = Gtk.TreeStore(str)
