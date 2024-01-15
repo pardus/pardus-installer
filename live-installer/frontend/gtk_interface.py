@@ -621,14 +621,30 @@ class InstallerWindow:
         entry.set_visibility(False)
         entry.set_icon_from_icon_name(0,"view-reveal-symbolic")
 
+
     def automated_install_button_event(self,widget):
+        def find_realname_current():
+            with open("/etc/passwd","r") as f:
+                for line in f.read().split("\n"):
+                    if ":" in line:
+                        user = line.split(":")[0]
+                        real = line.split(":")[4]
+                        uid = line.split(":")[2]
+                        if real == "":
+                            real = user
+                        if real.endswith(",,,"):
+                            real = real[:-3]
+                        if int(uid) > 999 and int(uid) < 9999:
+                            return (user, real)
+            return "user", "Linux User"
         config.set("automated",True)
         self.setup.automated = True
-        self.builder.get_object("entry_username").set_text(os.uname()[1])
+        (user, real) = find_realname_current()
+        self.builder.get_object("entry_name").set_text(real)
+        self.builder.get_object("entry_username").set_text(user)
         self.builder.get_object("entry_password").set_text("1")
         self.builder.get_object("entry_confirm").set_text("1")
         self.builder.get_object("entry_hostname").set_text(os.uname()[1])
-        self.builder.get_object("entry_name").set_text(os.uname()[1])
         self.builder.get_object("swap_size").set_text("0")
         self.builder.get_object("button_next").set_label(_("Install"))
         self.builder.get_object("button_next").get_style_context().add_class("suggested-action")
@@ -1437,7 +1453,7 @@ class InstallerWindow:
         if not config.get("skip_user", False):
             top = model.append(None, (_("User settings"),))
             _realname = self.builder.get_object("entry_name").get_text()
-            _username = self.builder.get_object("entry_name").get_text()
+            _username = self.builder.get_object("entry_username").get_text()
             _pass1 = self.builder.get_object("entry_password").get_text()
             model.append(top, (_("Real name: ") + bold(_realname),))
             model.append(top, (_("Username: ") + bold(_username),))
