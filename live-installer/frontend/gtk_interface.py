@@ -623,6 +623,9 @@ class InstallerWindow:
 
 
     def automated_install_button_event(self,widget):
+        if not QuestionDialog(_("Warning"), 
+            _("This will delete all the data on %s. Are you sure?") % self.setup.diskname):
+            return
         def find_realname_current():
             with open("/etc/passwd","r") as f:
                 for line in f.read().split("\n"):
