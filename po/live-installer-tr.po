@@ -66,7 +66,7 @@ msgstr "Zaman dilimi"
 #: live-installer/resources/interface.ui:484
 #: live-installer/frontend/gtk_interface.py:540
 msgid "Automated Installation"
-msgstr "Otomatik kurulum"
+msgstr "Otomatik Kurulum"
 
 #: live-installer/resources/interface.ui:500
 msgid "Erase a disk and install LMDE on it."
