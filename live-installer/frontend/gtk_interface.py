@@ -496,7 +496,7 @@ class InstallerWindow:
             _("Installing"), "system-run-symbolic", _("Please wait..."))
 
         # Buttons
-        self.builder.get_object("button_automated").set_label(_("Automated install"))
+        self.builder.get_object("button_automated").set_label(_("Automated Install"))
         self.builder.get_object("button_back").set_label(_("Back"))
         self.builder.get_object("button_next").set_label(_("Next"))
 
@@ -610,7 +610,7 @@ class InstallerWindow:
 
        # automated install
         self.builder.get_object("label_automated_warning").set_text(_("Automated installation enabled!"))
-        self.builder.get_object("button_automated").set_label(_("Automated install"))
+        self.builder.get_object("button_automated").set_label(_("Automated Install"))
 
     def view_password_text(self,entry, icon_pos, event):
         entry.set_visibility(True)

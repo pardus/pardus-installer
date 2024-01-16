@@ -633,8 +633,8 @@ msgstr "Lütfen bekleyin..."
 
 #: live-installer/frontend/gtk_interface.py:495
 #: live-installer/frontend/gtk_interface.py:609
-msgid "Automated install"
-msgstr "Otomatik kurulum"
+msgid "Automated Install"
+msgstr "Otomatik Kurulum"
 
 #: live-installer/frontend/gtk_interface.py:496
 msgid "Back"
