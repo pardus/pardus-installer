@@ -1,3 +1,28 @@
+pardus-installer (2.0.3) unstable; urgency=medium
+
+  [ aliriza.keskin ]
+  * update
+  * automated button
+  * automated installation improvement
+  * automated install button and quit button removed
+  * fixes
+  * Create blank.yml
+  * full system upgrade
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+
+  [ aliriza ]
+  * grub device variable update location improvement and winroot detect event async
+  * grub device variable update fix
+  * grub device variable update fix
+  * disk select improvement
+
+  [ Fatih Altun ]
+  * Update copyright to 2024
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jan 2024 11:29:26 +0300
+
 pardus-installer (2.0.2) unstable; urgency=medium
 
   * Fix typo
