@@ -1,14 +1,15 @@
-# Portuguese translation for linuxmint
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the linuxmint package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-31 16:00+0300\n"
-"PO-Revision-Date: 2023-10-31 23:07+0000\n"
+"PO-Revision-Date: 2024-03-20 20:30+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2020-03-13 11:20+0000\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: live-installer/resources/interface.ui:71
 msgid "Welcome to the 17g Installer."
@@ -71,7 +72,7 @@ msgstr "Instalação automatizada"
 
 #: live-installer/resources/interface.ui:500
 msgid "Erase a disk and install LMDE on it."
-msgstr "Apagar disco e instalar o LMDE."
+msgstr "Apagar o disco e instalar o sistema no mesmo."
 
 #: live-installer/resources/interface.ui:528
 #: live-installer/frontend/gtk_interface.py:543
@@ -130,7 +131,9 @@ msgstr "Particionamento manual"
 
 #: live-installer/resources/interface.ui:900
 msgid "Manually create, resize or choose partitions for LMDE."
-msgstr "Criar, redimensionar e escolher as partições para LMDE."
+msgstr ""
+"Criar, redimensionar ou escolher manualmente partições de disco para o "
+"sistema."
 
 #: live-installer/resources/interface.ui:965
 msgid "Remove windows & Install"
@@ -138,7 +141,7 @@ msgstr "Remover o Windows e Instalar"
 
 #: live-installer/resources/interface.ui:981
 msgid "Remove existsing windows and install LMDE on it."
-msgstr "Remover o Windows existente e instalar o LMDE."
+msgstr "Remover o Windows existente e instalá-lo em seu lugar."
 
 #: live-installer/resources/interface.ui:1033
 #: live-installer/frontend/gtk_interface.py:557
@@ -635,8 +638,8 @@ msgstr "Aguarde..."
 
 #: live-installer/frontend/gtk_interface.py:495
 #: live-installer/frontend/gtk_interface.py:609
-msgid "Automated install"
-msgstr "Instalação automatizada"
+msgid "Automated Install"
+msgstr "Instalação Automatizada"
 
 #: live-installer/frontend/gtk_interface.py:496
 msgid "Back"
@@ -792,8 +795,7 @@ msgid ""
 "The root partition is too small. It should be at least 16GB. Do you want to "
 "continue?"
 msgstr ""
-"A partição root é demasiado pequena. Deveria ter pelo menos 16 GB. Quer "
-"continuar?"
+"A partição root é demasiado pequena. Deveria ter pelo menos 16 GB. Continuar?"
 
 #: live-installer/frontend/gtk_interface.py:1189
 msgid "Please select a root (/) partition."
@@ -815,6 +817,10 @@ msgstr ""
 " - Tamanho recomendado: 30GB\n"
 " - Sistema de ficheiros recomendado: ext4\n"
 "\n"
+"Nota: Requisitos para usar a funcionalidade de cópia de sistema btrfs da "
+"aplicação Timeshift:\n"
+" - subsecção Ponto de ligação /@\n"
+" - btrfs como formato de sistema de ficheiros\n"
 
 #: live-installer/frontend/gtk_interface.py:1204
 msgid "The EFI partition is not bootable. Do you want to set boot flag?"
@@ -1170,157 +1176,3 @@ msgstr "Sim"
 
 #~ msgid "Quit"
 #~ msgstr "Sair"
-
-#~ msgid "Your passphrases do not match."
-#~ msgstr "Disparidade nas palavras-passe."
-
-#~ msgid "Home encryption: "
-#~ msgstr "Encriptação da pasta pessoal: "
-
-#~ msgid "Installation Tool"
-#~ msgstr "Ferramenta de instalação"
-
-#, python-format
-#~ msgid ""
-#~ "No partition table was found on the hard drive: %s. Do you want the "
-#~ "installer to create a set of partitions for you? Note: This will ERASE "
-#~ "ALL DATA present on this disk."
-#~ msgstr ""
-#~ "Não foi encontrada qualquer tabela de partições no disco rígido: %s. "
-#~ "Deseja que o instalador crie um conjunto de partições para si? Note: irá "
-#~ "apagar todos os dados deste disco."
-
-#~ msgid ""
-#~ "Please indicate a filesystem to format the root (/) partition with before "
-#~ "proceeding."
-#~ msgstr ""
-#~ "Por favor indique o sistema de ficheiros para formatar a partição raiz "
-#~ "(/) antes de avançar."
-
-#, fuzzy
-#~ msgid "Select additional options"
-#~ msgstr "A definir opções de teclado"
-
-#~ msgid ""
-#~ "* Your username, your computer's name and your password should only "
-#~ "contain Latin characters. In addition to your selected layout, English "
-#~ "(US) is set as the default. You can switch layouts by pressing both Ctrl "
-#~ "keys together."
-#~ msgstr ""
-#~ "* O nome de utilizador, o nome do computador e a palavra-passe apenas "
-#~ "devem ser constituídos por caracteres latinos. Para além do esquema de "
-#~ "teclado escolhido, o esquema Inglês (USA) também será definido como "
-#~ "padrão. Pode trocar entre esquemas de teclado premindo ambas a teclas "
-#~ "Ctrl em simultâneo."
-
-#~ msgid ""
-#~ "ERROR: You must first manually mount your target filesystem(s) at /target "
-#~ "to do a custom install!"
-#~ msgstr ""
-#~ "Erro: tem de primeiro montar o seu sistema de ficheiros alvo em /target "
-#~ "para fazer uma instalação personalizada!"
-
-#~ msgid "ERROR: the use of @subvolumes is limited to btrfs"
-#~ msgstr "ERRO: a utilização de @subvolumes está limitado a btrfs"
-
-#~ msgid "Localizing packages"
-#~ msgstr "A traduzir as aplicações"
-
-#~ msgid "Cleaning APT"
-#~ msgstr "A limpar APT"
-
-#~ msgid "Advanced options"
-#~ msgstr "Opções avançadas"
-
-#~ msgid "Installation paused"
-#~ msgstr "Instalação parada"
-
-#~ msgid ""
-#~ "You selected to manage your partitions manually, this feature is for "
-#~ "ADVANCED USERS ONLY."
-#~ msgstr ""
-#~ "Optou por gerir as partições manualmente, esta funcionalidade só deve ser "
-#~ "efetuada por utilizadores avançados."
-
-#~ msgid "Before continuing, mount your target filesystem(s) on /target."
-#~ msgstr "Antes de continuar, monte o sistema de ficheiros em /target,"
-
-#~ msgid ""
-#~ "Do NOT mount virtual devices such as /dev, /proc, /sys, etc on /target/."
-#~ msgstr ""
-#~ "Não monte dispositivos virtuais tais como /dev, /proc, /sys e /etc em /"
-#~ "target/."
-
-#~ msgid ""
-#~ "During the install, you will be given time to chroot into /target and "
-#~ "install any packages that will be needed to boot your new system."
-#~ msgstr ""
-#~ "Durante a instalação ser-lhe-á dado tenpo para chroot em /target e "
-#~ "instalar quaisquer pacotes que precise para arrancar o seu novo sistema."
-
-#~ msgid ""
-#~ "During the install, you will be required to write your own /etc/fstab."
-#~ msgstr "Durante a instalação terá de escrever em /etc/fstab."
-
-#~ msgid "Do the following and then click Next to finish installation:"
-#~ msgstr "Execute o seguinte e clique Seguinte para terminar a instalação."
-
-#~ msgid ""
-#~ "Create /target/etc/fstab for the filesystems as they will be mounted in "
-#~ "your new system, matching those currently mounted at /target (without "
-#~ "using the /target prefix in the mount paths themselves)."
-#~ msgstr ""
-#~ "Crie  /target/etc/fstab para os sistemas de ficheiros tal como eles serão "
-#~ "montados no seu novo sistema, correspondendo aos atualmente montados em /"
-#~ "target (sem utilizar o prefixo /target nos pontos de montagem)"
-
-#~ msgid ""
-#~ "Install any packages that may be needed for first boot (mdadm, "
-#~ "cryptsetup, dmraid, etc) by calling \"sudo chroot /target\" followed by "
-#~ "the relevant apt-get/aptitude installations."
-#~ msgstr ""
-#~ "Instalar quaisquer pacotes que possam ser precisos antes do primeiro "
-#~ "arranque (mdadm, cryptsetup, dmraid, etc) recorrendo a \"sudo chroot /"
-#~ "target\" seguido das instalações apt-get/aptitude relevantes."
-
-#~ msgid ""
-#~ "Note that in order for update-initramfs to work properly in some cases "
-#~ "(such as dm-crypt), you may need to have drives currently mounted using "
-#~ "the same block device name as they appear in /target/etc/fstab."
-#~ msgstr ""
-#~ "Para que update-initramfs funcione corretamente em determinadas situações "
-#~ "(tais como dm-crypt), talvez tenha que ter as partições atualmente "
-#~ "montadas utilizando o mesmo nome de dispositivo que aparece em /target/"
-#~ "etc/fstab."
-
-#~ msgid ""
-#~ "Double-check that your /target/etc/fstab is correct, matches what your "
-#~ "new system will have at first boot, and matches what is currently mounted "
-#~ "at /target."
-#~ msgstr ""
-#~ "Verifique se /target/etc/fstab está correto, corresponde ao que o seu "
-#~ "sistema terá no seu primeiro arranque e que corresponde ao que se "
-#~ "encontra atualmente montado em /target."
-
-#~ msgid "A root subvolume (/@) requires to format the partition with btrfs."
-#~ msgstr ""
-#~ "É necessário um subvolume 'root'  (/@) para formatar a partição com btrfs."
-
-#~ msgid ""
-#~ "A home subvolume (/@home) requires the use of a btrfs formatted partition."
-#~ msgstr ""
-#~ "É necessário um subvolume 'home'  (/@) para utilizar uma partição "
-#~ "formatada em btrfs."
-
-#~ msgid ""
-#~ "The installation is now paused. Please read the instructions on the page "
-#~ "carefully before clicking Next to finish the installation."
-#~ msgstr ""
-#~ "A instalação está em pausa. Leia as instruções cuidadosamente antes de "
-#~ "clicar em Seguinte para terminar a instalação."
-
-#~ msgid "Assign to /home"
-#~ msgstr "Atribuir a /home"
-
-#~ msgid "Assign to /boot/efi"
-#~ msgstr "Atribuir a /boot/efi"
