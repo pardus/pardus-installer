@@ -104,6 +104,25 @@ def get_all_partition_objects(dev):
         dev.getRaidPartitions() + \
         dev.getLVMPartitions()
 
+# This function will return BtrfsSubvolume array for a given partition 
+def get_btrfs_partition_subvolumes(partition):
+    if partition.type != "btrfs":
+        return []
+    try:
+        os.system("mount %s %s" % (partition.path, TMP_MOUNTPOINT))
+        list_subvolumes = getoutput(
+            "LC_ALL=en_US.UTF-8 btrfs subvolume list %s" % TMP_MOUNTPOINT).decode("utf-8").strip().split("\n")
+        os.system("umount %s" % TMP_MOUNTPOINT)
+        subvolumes = []
+        for subvol in list_subvolumes:
+            subvolume = BtrfsSubvolume()
+            subvolume.name = subvol.split(" path ")[1]
+            subvolume.parent = partition
+            subvolumes.append(subvolume)
+            log("subvolume: %s" % subvolume.name)
+        return subvolumes
+    except:
+        return []
 
 def find_mbr(part):
     for disk in get_disks():
@@ -349,7 +368,7 @@ class PartitionSetup(Gtk.TreeStore):
                 partition.size_percent = round(
                     partition.size_percent / sum_size_percent * 100, 1)
                 installer.setup.partitions.append(partition)
-                self.append(disk_iter, (partition.name,
+                partition_iter = self.append(disk_iter, (partition.name,
                            '<span>{}</span>'.format(
                            partition.type),
                            partition.description,
@@ -360,6 +379,22 @@ class PartitionSetup(Gtk.TreeStore):
                            partition.free_space,
                            partition,
                            disk_path))
+                # if partition is btrfs, add its subvolumes
+                if partition.type == 'btrfs':
+                    partition.subvolumes = get_btrfs_partition_subvolumes(
+                        partition)
+                    for subvolume in partition.subvolumes:
+                        self.append(partition_iter, (subvolume.name, '<span>{}</span>'.format(
+                            subvolume.type),
+                            subvolume.description,
+                            '',
+                            '',
+                            False,
+                            '',
+                            '',
+                            subvolume,
+                            subvolume.parent.path))
+
 
 
 @idle
@@ -597,6 +632,15 @@ class Partition(PartitionBase):
         log("Device: %s, format as: %s, mount as: %s" %
             (self.path, self.format_as, self.mount_as))
 
+
+class BtrfsSubvolume(object):
+    def __init__(self):
+        self.name = ""
+        self.type = _('btrfs subvolume')
+        self.description = ""
+        self.parent = None
+        self.partition = self
+        self.mount_as = ''
 
 class PartitionDialog(object):
     def __init__(self, path, mount_as, format_as, typevar, read_only=False):
