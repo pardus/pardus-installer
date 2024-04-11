@@ -963,15 +963,25 @@ class InstallerWindow:
 
     def partition_change_event(self,widget):
         model, itervar = widget.get_selection().get_selected()
+        self.builder.get_object("label_new").set_label(_("Create"))
+
         self.builder.get_object("button_add_partition").set_sensitive(False)
         self.builder.get_object("button_remove_partition").set_sensitive(False)
         self.builder.get_object("button_format_partition").set_sensitive(False)
         if itervar:
             self.selected_partition = model.get_value(itervar, partitioning.IDX_PART_OBJECT) # partition opject
             fstype = model.get_value(itervar, partitioning.IDX_PART_TYPE).replace("<span>","").replace("</span>","").strip()
+            format_as = model.get_value(itervar,partitioning.IDX_PART_FORMAT_AS)
             if fstype == _('Free space'):
                 self.builder.get_object("button_add_partition").set_sensitive(True)
+            elif fstype == _('btrfs subvolume'):
+                self.builder.get_object("button_remove_partition").set_sensitive(True)
             elif len(fstype) > 0:
+                if (fstype == 'btrfs' and (format_as == "" or format_as == 'btrfs' or format_as == None)) or (fstype != 'btrfs' and format_as == 'btrfs'):
+                    self.builder.get_object(
+                        "button_add_partition").set_sensitive(True)
+                    self.builder.get_object("label_new").set_label(
+                        _("Create a subvolume"))
                 self.builder.get_object("button_remove_partition").set_sensitive(True)
                 self.builder.get_object("button_format_partition").set_sensitive(True)
 
@@ -979,7 +989,9 @@ class InstallerWindow:
         start = self.selected_partition.partition.geometry.start
         end = self.selected_partition.partition.geometry.end
         mbr = self.selected_partition.mbr
-        if QuestionDialog(_("Are you sure?"),
+        if self.builder.get_object("label_new").get_label() == _("Create a subvolume"):
+            partitioning.create_subvolume_dialog(widget)
+        elif QuestionDialog(_("Are you sure?"),
             _("New partition will created at {}").format(mbr)):
             command = "parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end)
             def update_partition_menu(pid, status):
@@ -991,6 +1003,22 @@ class InstallerWindow:
             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def part_remove_button_event(self,widget):
+        if self.selected_partition.type == _("btrfs subvolume"):
+            subvolume_name = self.selected_partition.name
+            subvolume_parent = self.selected_partition.parent
+            if QuestionDialog(_("Are you sure?"),
+                              _("subvolume {} will removed from {}.").format(subvolume_name, subvolume_parent.path)):
+                model, itervar = self.builder.get_object(
+                    "treeview_disks").get_selection().get_selected()
+                subvolume_parent.subvolumes.remove(self.selected_partition)
+                mount_point = getoutput("mktemp -d").decode("utf-8").strip()
+                os.system("mount -t btrfs %s %s" %
+                          (subvolume_parent.path, mount_point))
+                os.system("btrfs subvolume delete %s/%s" %
+                          (mount_point, subvolume_name))
+                os.system("umount --force %s" % mount_point)
+                model.remove(itervar)
+            return
         path = self.selected_partition.path
         mbr = self.selected_partition.mbr
         partnum = partitioning.find_partition_number(path)
