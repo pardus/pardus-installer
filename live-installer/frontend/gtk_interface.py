@@ -1244,6 +1244,20 @@ class InstallerWindow:
                             if not QuestionDialog(_("Installer"), _(
                                 "The root partition is too small. It should be at least 16GB. Do you want to continue?")):
                                 return
+                if not found_root_partition:
+                    for partition in self.setup.partitions:
+                        for subvolume in partition.subvolumes:
+                            print("subvolume",subvolume.mount_as, "name", subvolume.name)
+                            if(subvolume.mount_as == "/"):
+                                found_root_partition = True
+                                if partition.format_as is None or partition.format_as == "":
+                                    if not QuestionDialog(_("Installer"), _(
+                                        "Root filesystem type not specified. Installation will continue without disk formatting. Do you want to continue?")):
+                                        return
+                                if int(float(partition.partition.getLength('GB'))) < 16:
+                                    if not QuestionDialog(_("Installer"), _(
+                                        "The root partition is too small. It should be at least 16GB. Do you want to continue?")):
+                                        return
 
                 if not found_root_partition:
                     ErrorDialog(_("Installer"), "<b>%s</b>" % _("Please select a root (/) partition."), _(

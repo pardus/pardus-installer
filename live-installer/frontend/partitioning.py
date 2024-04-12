@@ -241,8 +241,7 @@ def create_subvolume_dialog(widget):
 
 def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None):
     # Assign it in the treeview
-    model, itervar = installer.builder.get_object(
-        "treeview_disks").get_selection().get_selected()
+    model = installer.builder.get_object("treeview_disks").get_model()
     for disk in model:
         for part in disk.iterchildren():
             if partition == part[IDX_PART_OBJECT]:
