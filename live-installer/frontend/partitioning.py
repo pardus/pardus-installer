@@ -186,6 +186,14 @@ def edit_partition_dialog(widget, path, viewcol):
         return
     row = model[itervar]
     partition = row[IDX_PART_OBJECT]
+    if partition.partition.type == _('btrfs subvolume'):
+        dlg = SubvolDialog(partition.name,
+                              row[IDX_PART_MOUNT_AS],
+                              row[IDX_PART_TYPE],
+                              _("Edit Subvolume"))
+        response_is_ok, subvolume_name, mount_as = dlg.show()
+        assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
+        return
     if (partition.partition.type != parted.PARTITION_EXTENDED and
             partition.partition.number != -1):
         dlg = PartitionDialog(row[IDX_PART_PATH],
@@ -231,11 +239,36 @@ def create_subvolume_dialog(widget):
         model.append(itervar, (subvolume.name, subvolume.type, '', '',
                      subvolume.mount_as, False, '', '', subvolume, partition.path))
 
-def assign_mount_point(partition, mount_point, filesystem, read_only = False):
+def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None):
     # Assign it in the treeview
-    model = installer.builder.get_object("treeview_disks").get_model()
+    model, itervar = installer.builder.get_object(
+        "treeview_disks").get_selection().get_selected()
     for disk in model:
         for part in disk.iterchildren():
+            if partition == part[IDX_PART_OBJECT]:
+                # Remove subvolumes if partition formatted to another filesystem
+                if filesystem != _("btrfs subvolume") and filesystem != "":
+                    installer.builder.get_object(
+                        "button_add_partition").set_sensitive(False)
+                    installer.builder.get_object(
+                        "label_new").set_label(_("Create"))
+                    for subvol in part.iterchildren():
+                        model.remove(subvol.iter)
+                    part[IDX_PART_OBJECT].subvolumes = []
+
+                if filesystem == "btrfs":
+                    installer.builder.get_object(
+                        "button_add_partition").set_sensitive(True)
+                    installer.builder.get_object(
+                        "label_new").set_label(_("Create a subvolume"))
+
+            for subvol in part.iterchildren():
+                if partition == subvol[IDX_PART_OBJECT]:
+                    subvol[IDX_PART_MOUNT_AS] = mount_point
+                    subvol[IDX_PART_PATH] = partition.name
+                elif mount_point == subvol[IDX_PART_MOUNT_AS] and mount_point != "":
+                    subvol[IDX_PART_MOUNT_AS] = ""
+
             if partition == part[IDX_PART_OBJECT]:
                 part[IDX_PART_MOUNT_AS] = mount_point
                 part[IDX_PART_FORMAT_AS] = filesystem
@@ -250,6 +283,11 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False):
             partition.mount_as, partition.format_as, partition.read_only = mount_point, filesystem, read_only
         elif part.mount_as == mount_point:
             part.mount_as, part.format_as, partition.read_only = '', '', False
+        for subvol in part.subvolumes:
+            if subvol == partition:
+                partition.name, partition.mount_as = subvolume_name, mount_point
+            elif subvol.mount_as == mount_point:
+                subvol.mount_as = ''
 
 
 
@@ -748,12 +786,12 @@ class PartitionDialog(object):
         return response_is_ok, mount_as, format_as, read_only
 
 class SubvolDialog(object):
-    def __init__(self, name, mount_as, typevar):
+    def __init__(self, name, mount_as, typevar, title=_("Create Subvolume")):
         glade_file = RESOURCE_DIR + 'interface.ui'
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
         self.window = self.builder.get_object("subvol_dialog")
-        self.window.set_title(_("Create Subvolume"))
+        self.window.set_title(title)
         self.builder.get_object("label_subvolume_name").set_markup(
             "<b>%s</b>" % _("Name:"))
         self.builder.get_object(
