@@ -313,8 +313,9 @@ def partitions_popup_menu(widget, event):
     partition = model.get_value(itervar, IDX_PART_OBJECT)
     if not partition:
         return
-    partition_type = model.get_value(itervar, IDX_PART_TYPE)
-    if (partition.partition.type == parted.PARTITION_EXTENDED or
+    partition_type = model.get_value(itervar, IDX_PART_TYPE).replace("<span>","").replace("</span>","").strip()
+
+    if (partition_type != _("btrfs subvolume")) and (partition.partition.type == parted.PARTITION_EXTENDED or
         partition.partition.number == -1 or
             "swap" in partition_type):
         return
@@ -324,6 +325,18 @@ def partitions_popup_menu(widget, event):
     menu.append(menuItem)
     menuItem = Gtk.SeparatorMenuItem()
     menu.append(menuItem)
+
+    # if the selected "partition" is a subvolume then show a custom menu
+    if partition_type == "btrfs subvolume":
+        mount_points = ["/", "/home", "/var", "/tmp", "/srv", "/opt"]
+        for mount_point in mount_points:
+            menuItem = Gtk.MenuItem(_("Assign to %s") % mount_point)
+            menuItem.connect("activate", lambda w: assign_mount_point(partition, mount_point, _("btrfs subvolume"), False, partition.name))
+            menu.append(menuItem)
+        menu.show_all()
+        menu.popup(None, None, None, None, 0, event.time)
+        return
+
     menuItem = Gtk.MenuItem(_("Assign to %s") % "/")
     menuItem.connect("activate", lambda w: assign_mount_point(
         partition, '/', 'ext4'))
