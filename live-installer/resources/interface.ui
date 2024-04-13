@@ -2404,7 +2404,7 @@ install</property>
           </packing>
         </child>
         <child>
-          <!-- n-columns=3 n-rows=4 -->
+          <!-- n-columns=3 n-rows=5 -->
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -2512,6 +2512,24 @@ install</property>
                 <property name="left-attach">1</property>
                 <property name="top-attach">3</property>
               </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton_default_btrfs_subvols">
+                <property name="label" translatable="yes">Use default Btrfs subvolumes</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>

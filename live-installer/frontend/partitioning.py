@@ -201,9 +201,9 @@ def edit_partition_dialog(widget, path, viewcol):
                               row[IDX_PART_FORMAT_AS],
                               row[IDX_PART_TYPE],
                               row[IDX_PART_READ_ONLY])
-        response_is_ok, mount_as, format_as, read_only = dlg.show()
+        response_is_ok, mount_as, format_as, read_only, use_default_subvols = dlg.show()
         if response_is_ok:
-            assign_mount_point(partition, mount_as, format_as, read_only)
+            assign_mount_point(partition, mount_as, format_as, read_only, None, use_default_subvols)
     installer.builder.get_object("checkbutton_readonly").set_label(_("Read only"))
 
 # This function will open a dialog to create a subvolume for a partition
@@ -239,7 +239,18 @@ def create_subvolume_dialog(widget):
         model.append(itervar, (subvolume.name, subvolume.type, '', '',
                      subvolume.mount_as, False, '', '', subvolume, partition.path))
 
-def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None):
+# This will create subvolumes using a predefined scheme
+def assign_default_subvolumes(partition):
+    model, itervar = installer.builder.get_object(
+        "treeview_disks").get_selection().get_selected()
+    for subvol in [("@", "/"), ("@home", "/home")]:
+        subvolume = BtrfsSubvolume()
+        subvolume.name, subvolume.mount_as, subvolume.parent = subvol[0], subvol[1], partition
+        partition.subvolumes.append(subvolume)
+        model.append(itervar, (subvolume.name, subvolume.type, '', '',
+                     subvolume.mount_as, False, '', '', subvolume, partition.path))
+
+def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None, use_default_subvols = False):
     # Assign it in the treeview
     model = installer.builder.get_object("treeview_disks").get_model()
     for disk in model:
@@ -260,6 +271,8 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
                         "button_add_partition").set_sensitive(True)
                     installer.builder.get_object(
                         "label_new").set_label(_("Create a subvolume"))
+                    if use_default_subvols:
+                        assign_default_subvolumes(partition)
 
             for subvol in part.iterchildren():
                 if partition == subvol[IDX_PART_OBJECT]:
@@ -750,9 +763,13 @@ class PartitionDialog(object):
 
         check_readonly = self.builder.get_object("checkbutton_readonly")
         check_readonly.set_active(read_only)
-        self.builder.get_object("combobox_use_as").set_model(model)
-        self.builder.get_object("combobox_use_as").set_active(
+        combobox_use_as = self.builder.get_object("combobox_use_as")
+        combobox_use_as.set_model(model)
+        combobox_use_as.set_active(
             filesystems.index(format_as))
+        combobox_use_as.connect(
+            "changed", self.show_chkbtn_btrfs_subvols)
+
         # Build list of pre-provided mountpoints
         combobox = self.builder.get_object("comboboxentry_mount_point")
         model = Gtk.ListStore(str, str)
@@ -768,6 +785,15 @@ class PartitionDialog(object):
         combobox.set_id_column(1)
         combobox.get_child().set_text(mount_as)
 
+    # Show the default subvolumes checkbox only if btrfs is selected from combobox
+    def show_chkbtn_btrfs_subvols(self,widget):
+        w = self.builder.get_object("combobox_use_as")
+        format_as = w.get_model()[w.get_active()][0]
+        if format_as == _("btrfs"):
+            self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(True)
+        else:
+            self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(False)
+
     def show(self):
         response = self.window.run()
         w = self.builder.get_object("comboboxentry_mount_point")
@@ -776,13 +802,15 @@ class PartitionDialog(object):
         format_as = w.get_model()[w.get_active()][0]
         w = self.builder.get_object("checkbutton_readonly")
         read_only = w.get_active()
+        w = self.builder.get_object("checkbutton_default_btrfs_subvols")
+        create_default_subvols = w.get_active()
         self.window.destroy()
         if response in (Gtk.ResponseType.YES, Gtk.ResponseType.APPLY,
                         Gtk.ResponseType.OK, Gtk.ResponseType.ACCEPT):
             response_is_ok = True
         else:
             response_is_ok = False
-        return response_is_ok, mount_as, format_as, read_only
+        return response_is_ok, mount_as, format_as, read_only, create_default_subvols
 
 class SubvolDialog(object):
     def __init__(self, name, mount_as, typevar, title=_("Create Subvolume")):
