@@ -327,7 +327,7 @@ def partitions_popup_menu(widget, event):
     menu.append(menuItem)
 
     # if the selected "partition" is a subvolume then show a custom menu
-    if partition_type == "btrfs subvolume":
+    if partition_type == _("btrfs subvolume"):
         mount_points = ["/", "/home", "/var", "/tmp", "/srv", "/opt"]
         for mount_point in mount_points:
             menuItem = Gtk.MenuItem(_("Assign to %s") % mount_point)
@@ -802,7 +802,7 @@ class PartitionDialog(object):
     def show_chkbtn_btrfs_subvols(self,widget):
         w = self.builder.get_object("combobox_use_as")
         format_as = w.get_model()[w.get_active()][0]
-        if format_as == _("btrfs"):
+        if format_as == "btrfs":
             self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(True)
         else:
             self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(False)

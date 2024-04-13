@@ -1547,6 +1547,15 @@ class InstallerWindow:
                 if p.mount_as:
                     model.append(top, (bold(_("Mount %(path)s as %(mount)s") % {
                                  'path': p.path, 'mount': p.mount_as}),))
+            for p in self.setup.partitions:
+                if (p.type == "btrfs" or p.format_as == "btrfs") and p.subvolumes != []:
+                    for subvol in p.subvolumes:
+                        model.append(top, (bold(_("Create btrfs subvolume %(path)s under %(parentPath)s ") % {
+                                     'path': subvol.name, 'parentPath': p.path}),))
+                    for subvol in p.subvolumes:
+                        if subvol.mount_as:
+                            model.append(top, (bold(_("Mount %(path)s subvolume as %(mount)s") % {
+                                         'path': subvol.name, 'mount': subvol.mount_as}),))
         if config.get("lvm_enabled", True):
             _lvm = self.builder.get_object("check_lvm").get_active()
             _lux = self.builder.get_object("check_encrypt").get_active()
