@@ -285,7 +285,7 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
                 part[IDX_PART_MOUNT_AS] = mount_point
                 part[IDX_PART_FORMAT_AS] = filesystem
                 part[IDX_PART_READ_ONLY] = read_only
-            elif mount_point == part[IDX_PART_MOUNT_AS]:
+            elif mount_point == part[IDX_PART_MOUNT_AS] and mount_point != "":
                 part[IDX_PART_MOUNT_AS] = ""
                 part[IDX_PART_FORMAT_AS] = ""
                 part[IDX_PART_READ_ONLY] = False
