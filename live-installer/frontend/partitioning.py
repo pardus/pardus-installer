@@ -596,6 +596,16 @@ def get_partition_label(partition_path):
             return dev
     return None
 
+def does_objects_has_the_mount_points(mount_points):
+    model = installer.builder.get_object("treeview_disks").get_model()
+    for disk in model:
+        for part in disk.iterchildren():
+            if part[IDX_PART_MOUNT_AS] == mount_points[0] or part[IDX_PART_MOUNT_AS] == mount_points[1]:
+                return True
+            for subvol in part.iterchildren():
+                if subvol[IDX_PART_MOUNT_AS] == mount_points[0] or subvol[IDX_PART_MOUNT_AS] == mount_points[1]:
+                    return True
+    return False
 
 class PartitionBase(object):
     # Partition object but only struct
@@ -806,7 +816,7 @@ class PartitionDialog(object):
     def show_chkbtn_btrfs_subvols(self,widget):
         w = self.builder.get_object("combobox_use_as")
         format_as = w.get_model()[w.get_active()][0]
-        if format_as == "btrfs":
+        if format_as == "btrfs" and not does_objects_has_the_mount_points(("/","/home")):
             self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(True)
         else:
             self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(False)
