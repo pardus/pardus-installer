@@ -222,20 +222,20 @@ def create_subvolume_dialog(widget):
     response_is_ok, subvolume_name, mount_as = dlg.show()
     if response_is_ok:
         if subvolume_name == "" or "/" in subvolume_name or " " in subvolume_name:
-            dialogs.ErrorDialog(_("Installer"), _(
+            show_error(_(
                 "The name of a subvolume must not be blank or contain a space or a forward slash"))
             return
         if " " in mount_as:
-            dialogs.ErrorDialog(_("Installer"), _(
+            show_error(_(
                 "The mount point of a subvolume must not contain a space"))
             return
         for subvol in partition.subvolumes:
             if subvol.name == subvolume_name:
-                dialogs.ErrorDialog(_("Installer"), _(
+                show_error(_(
                     "Subvolume with name '%s' already exists") % subvolume_name)
                 return
             if subvol.mount_as == mount_as and subvol.mount_as != "":
-                dialogs.ErrorDialog(_("Installer"), _(
+                show_error(_(
                     "Subvolume with mount point '%s' already exists") % mount_as)
                 return
         subvolume = BtrfsSubvolume()
