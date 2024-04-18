@@ -192,7 +192,8 @@ def edit_partition_dialog(widget, path, viewcol):
                               row[IDX_PART_TYPE],
                               _("Edit Subvolume"))
         response_is_ok, subvolume_name, mount_as = dlg.show()
-        assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
+        if response_is_ok:
+            assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
         return
     if (partition.partition.type != parted.PARTITION_EXTENDED and
             partition.partition.number != -1):
