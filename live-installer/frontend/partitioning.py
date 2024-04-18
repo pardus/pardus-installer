@@ -213,18 +213,22 @@ def create_subvolume_dialog(widget):
     if not itervar:
         return
     partition = model.get_value(itervar, IDX_PART_OBJECT)
-    if not partition or partition.type != 'btrfs' or partition.format_as != 'btrfs':
+    if not (partition or (partition.type == 'btrfs' and partition.format_as == '') or partition.format_as == 'btrfs'):
         return
     dlg = SubvolDialog("",
                        partition.mount_as,
                        partition.partition.type)
     response_is_ok, subvolume_name, mount_as = dlg.show()
     if response_is_ok:
+        if subvolume_name == "" or "/" in subvolume_name or " " in subvolume_name:
+            dialogs.ErrorDialog(_("Installer"), _(
+                "The name of a subvolume must not be blank or contain a space or a forward slash"))
+            return
+        if " " in mount_as:
+            dialogs.ErrorDialog(_("Installer"), _(
+                "The mount point of a subvolume must not contain a space"))
+            return
         for subvol in partition.subvolumes:
-            if subvol.name == "":
-                dialogs.ErrorDialog(_("Installer"), _(
-                    "You cant create a subvolume with empty name or mount point"))
-                return
             if subvol.name == subvolume_name:
                 dialogs.ErrorDialog(_("Installer"), _(
                     "Subvolume with name '%s' already exists") % subvolume_name)
