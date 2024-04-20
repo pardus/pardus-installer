@@ -189,7 +189,6 @@ def edit_partition_dialog(widget, path, viewcol):
     if partition.partition.type == _('btrfs subvolume'):
         dlg = SubvolDialog(partition.name,
                               row[IDX_PART_MOUNT_AS],
-                              row[IDX_PART_TYPE],
                               _("Edit Subvolume"))
         response_is_ok, subvolume_name, mount_as = dlg.show()
         if response_is_ok:
@@ -217,8 +216,7 @@ def create_subvolume_dialog(widget):
     if not (partition or (partition.type == 'btrfs' and partition.format_as == '') or partition.format_as == 'btrfs'):
         return
     dlg = SubvolDialog("",
-                       partition.mount_as,
-                       partition.partition.type)
+                       "")
     response_is_ok, subvolume_name, mount_as = dlg.show()
     if response_is_ok:
         if subvolume_name == "" or "/" in subvolume_name or " " in subvolume_name:
@@ -234,15 +232,14 @@ def create_subvolume_dialog(widget):
                 show_error(_(
                     "Subvolume with name '%s' already exists") % subvolume_name)
                 return
-            if subvol.mount_as == mount_as and subvol.mount_as != "":
-                show_error(_(
-                    "Subvolume with mount point '%s' already exists") % mount_as)
-                return
         subvolume = BtrfsSubvolume()
-        subvolume.name, subvolume.mount_as, subvolume.parent = subvolume_name, mount_as, partition
+        # mount point will be assigned in assign_mount_point
+        subvolume.name, subvolume.mount_as, subvolume.parent = subvolume_name, "", partition
         partition.subvolumes.append(subvolume)
         model.append(itervar, (subvolume.name, subvolume.type, '', '',
-                     subvolume.mount_as, False, '', '', subvolume, partition.path))
+                     '', False, '', '', subvolume, partition.path))
+        #ensure that the mount point is assigned correctly
+        assign_mount_point(subvolume, mount_as, _("btrfs subvolume"), False, subvolume_name)
 
 # This will create subvolumes using a predefined scheme
 def assign_default_subvolumes(partition):
@@ -335,8 +332,10 @@ def partitions_popup_menu(widget, event):
     if partition_type == _("btrfs subvolume"):
         mount_points = ["/", "/home", "/var", "/tmp", "/srv", "/opt"]
         for mount_point in mount_points:
+            def menu_event(w,mount_point=mount_point):
+                assign_mount_point(partition, mount_point, _("btrfs subvolume"))
             menuItem = Gtk.MenuItem(_("Assign to %s") % mount_point)
-            menuItem.connect("activate", lambda w: assign_mount_point(partition, mount_point, _("btrfs subvolume"), False, partition.name))
+            menuItem.connect("activate", menu_event)
             menu.append(menuItem)
         menu.show_all()
         menu.popup(None, None, None, None, 0, event.time)
@@ -841,7 +840,7 @@ class PartitionDialog(object):
         return response_is_ok, mount_as, format_as, read_only, create_default_subvols
 
 class SubvolDialog(object):
-    def __init__(self, name, mount_as, typevar, title=_("Create Subvolume")):
+    def __init__(self, name, mount_as, title=_("Create Subvolume")):
         glade_file = RESOURCE_DIR + 'interface.ui'
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
@@ -857,7 +856,7 @@ class SubvolDialog(object):
         # Build list of pre-provided mountpoints
         combobox = self.builder.get_object("comboboxentry_subvol_mount_point")
         model = Gtk.ListStore(str, str)
-        mount_points = ["/", "/home", "/var", "/tmp", "/srv", "/opt"]
+        mount_points = ["", "/", "/home", "/var", "/tmp", "/srv", "/opt"]
         for mount_point in mount_points:
             model.append(["", mount_point])
         combobox.set_model(model)
