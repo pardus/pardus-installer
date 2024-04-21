@@ -118,6 +118,7 @@ def get_btrfs_partition_subvolumes(partition):
             subvolume = BtrfsSubvolume()
             subvolume.name = subvol.split(" path ")[1]
             subvolume.parent = partition
+            subvolume.exists_on_disk = True
             subvolumes.append(subvolume)
             log("subvolume: %s" % subvolume.name)
         return subvolumes
@@ -763,6 +764,7 @@ class BtrfsSubvolume(object):
         self.parent = None
         self.partition = self
         self.mount_as = ''
+        self.exists_on_disk = False
 
 class PartitionDialog(object):
     def __init__(self, path, mount_as, format_as, typevar, read_only=False):

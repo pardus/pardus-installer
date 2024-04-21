@@ -1004,20 +1004,20 @@ class InstallerWindow:
 
     def part_remove_button_event(self,widget):
         if self.selected_partition.type == _("btrfs subvolume"):
-            subvolume_name = self.selected_partition.name
-            subvolume_parent = self.selected_partition.parent
+            subvolume = self.selected_partition
             if QuestionDialog(_("Are you sure?"),
-                              _("subvolume {} will removed from {}.").format(subvolume_name, subvolume_parent.path)):
+                              _("subvolume {} will removed from {}.").format(subvolume.name, subvolume.parent.path)):
                 model, itervar = self.builder.get_object(
                     "treeview_disks").get_selection().get_selected()
-                subvolume_parent.subvolumes.remove(self.selected_partition)
-                mount_point = getoutput("mktemp -d").decode("utf-8").strip()
-                os.system("mount -t btrfs %s %s" %
-                          (subvolume_parent.path, mount_point))
-                os.system("btrfs subvolume delete %s/%s" %
-                          (mount_point, subvolume_name))
-                os.system("umount --force %s" % mount_point)
+                subvolume.parent.subvolumes.remove(subvolume)
                 model.remove(itervar)
+                if not subvolume.exists_on_disk:
+                    mount_point = getoutput("mktemp -d").decode("utf-8").strip()
+                    os.system("mount -t btrfs %s %s" %
+                              (subvolume.parent.path, mount_point))
+                    os.system("btrfs subvolume delete %s/%s" %
+                              (mount_point, subvolume.name))
+                    os.system("umount --force %s" % mount_point)
             return
         path = self.selected_partition.path
         mbr = self.selected_partition.mbr

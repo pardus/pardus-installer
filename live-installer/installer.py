@@ -418,10 +418,12 @@ class InstallerEngine:
                     if 0 == self.do_mount(partition.path, "/target", partition.type, None):
                         if fs == "btrfs":
                             log(" ------ Found btrfs filesystem")
-                            # Create subvolumes for Btrfs
                             if partition.subvolumes != []:
+                                # Create subvolumes
                                 partition.subvolumes.sort(key = lambda x : x.name, reverse=False)
                                 for subvolume in partition.subvolumes:
+                                    if subvolume.exists_on_disk:
+                                        continue
                                     log(" ------ Creating btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))
                                     # btrfs-progs have a parameter to create subvolumes with parent directories but in a version newer(v6.5.3) than the debian 12 package(v6.2)
                                     # you can replace this with "btrfs subvolume create -p" when next debian release(trixie) based pardus is out 
@@ -432,6 +434,7 @@ class InstallerEngine:
                                     os.system("btrfs subvolume create /target/{}".format(subvolume.name))
 
                                 os.system("umount --force /target")
+                                # Mount subvolumes
                                 partition.subvolumes.sort(key = lambda x : x.mount_as, reverse=False)
                                 for subvolume in partition.subvolumes:
                                     log(" ------ Mounting btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))
