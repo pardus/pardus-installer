@@ -292,7 +292,7 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
             for subvol in part.iterchildren():
                 if partition == subvol[IDX_PART_OBJECT]:
                     subvol[IDX_PART_MOUNT_AS] = mount_point
-                    subvol[IDX_PART_PATH] = partition.name
+                    subvol[IDX_PART_PATH] = subvolume_name
                 elif mount_point == subvol[IDX_PART_MOUNT_AS] and mount_point != "":
                     subvol[IDX_PART_MOUNT_AS] = ""
 
