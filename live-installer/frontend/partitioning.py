@@ -278,6 +278,16 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
                         "label_new").set_label(_("Create a subvolume"))
                     if use_default_subvols:
                         assign_default_subvolumes(partition)
+                        # ignore the mount_point that is given to the partition if its same with the default subvolumes
+                        if mount_point in ["/", "/home"]:
+                            mount_point = ""
+                part[IDX_PART_MOUNT_AS] = mount_point
+                part[IDX_PART_FORMAT_AS] = filesystem
+                part[IDX_PART_READ_ONLY] = read_only
+            elif mount_point == part[IDX_PART_MOUNT_AS] and mount_point != "":
+                part[IDX_PART_MOUNT_AS] = ""
+                part[IDX_PART_FORMAT_AS] = ""
+                part[IDX_PART_READ_ONLY] = False
 
             for subvol in part.iterchildren():
                 if partition == subvol[IDX_PART_OBJECT]:
@@ -286,14 +296,6 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
                 elif mount_point == subvol[IDX_PART_MOUNT_AS] and mount_point != "":
                     subvol[IDX_PART_MOUNT_AS] = ""
 
-            if partition == part[IDX_PART_OBJECT]:
-                part[IDX_PART_MOUNT_AS] = mount_point
-                part[IDX_PART_FORMAT_AS] = filesystem
-                part[IDX_PART_READ_ONLY] = read_only
-            elif mount_point == part[IDX_PART_MOUNT_AS] and mount_point != "":
-                part[IDX_PART_MOUNT_AS] = ""
-                part[IDX_PART_FORMAT_AS] = ""
-                part[IDX_PART_READ_ONLY] = False
     # Assign it in our setup
     for part in installer.setup.partitions:
         if part == partition:
@@ -819,10 +821,14 @@ class PartitionDialog(object):
     def show_chkbtn_btrfs_subvols(self,widget):
         w = self.builder.get_object("combobox_use_as")
         format_as = w.get_model()[w.get_active()][0]
+        w = self.builder.get_object("checkbutton_default_btrfs_subvols")
         if format_as == "btrfs" and not does_objects_has_the_mount_points(("/","/home")):
-            self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(True)
+            w.set_visible(True)
+            # Use the default btrfs subvols scheme by default
+            w.set_active(True)
         else:
-            self.builder.get_object("checkbutton_default_btrfs_subvols").set_visible(False)
+            w.set_visible(False)
+            w.set_active(False)
 
     def show(self):
         response = self.window.run()
