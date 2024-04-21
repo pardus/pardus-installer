@@ -219,9 +219,12 @@ def create_subvolume_dialog(widget):
                        "")
     response_is_ok, subvolume_name, mount_as = dlg.show()
     if response_is_ok:
-        if subvolume_name == "" or "/" in subvolume_name or " " in subvolume_name:
+        if subvolume_name.startswith("/") or subvolume_name.endswith("/"):
+            show_error(_("The name of a subvolume must not start or end with a forward slash"))
+            return
+        if subvolume_name == "" or  " " in subvolume_name:
             show_error(_(
-                "The name of a subvolume must not be blank or contain a space or a forward slash"))
+                "The name of a subvolume must not be blank or contain a space"))
             return
         if " " in mount_as:
             show_error(_(

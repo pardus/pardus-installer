@@ -420,17 +420,21 @@ class InstallerEngine:
                             log(" ------ Found btrfs filesystem")
                             # Create subvolumes for Btrfs
                             if partition.subvolumes != []:
+                                partition.subvolumes.sort(key = lambda x : x.name, reverse=False)
+                                for subvolume in partition.subvolumes:
+                                    log(" ------ Creating btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))
+                                    # btrfs-progs have a parameter to create subvolumes with parent directories but in a version newer(v6.5.3) than the debian 12 package(v6.2)
+                                    # you can replace this with "btrfs subvolume create -p" when next debian release(trixie) based pardus is out 
+                                    if "/" in subvolume.name:
+                                        x = subvolume.name.rsplit("/", 1)
+                                        os.system("mkdir -p /target/{}".format(x[0]))
+
+                                    os.system("btrfs subvolume create /target/{}".format(subvolume.name))
+
+                                os.system("umount --force /target")
                                 partition.subvolumes.sort(key = lambda x : x.mount_as, reverse=False)
                                 for subvolume in partition.subvolumes:
-                                    print("mounting subvolume {}".format(subvolume.name))
                                     log(" ------ Mounting btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))
-                                    os.system("btrfs subvolume create /target/{}".format(subvolume.name))
-                                os.system("umount --force /target")
-                                for subvolume in partition.subvolumes:
-                                    log(" ------ Umount btrfs to remount subvolume {}".format(subvolume.name))
-                                    # self.do_mount(partition.path, "/target", fs, "subvol={}".format(subvolume))
-
-                                    print("mounting subvolume {}".format(subvolume.mount_as))
                                     self.do_mount(partition.path, "/target/{}".format(subvolume.mount_as), fs, "subvol={}".format(subvolume.name),"--mkdir") 
                             if partition.mount_as != "":
                                 self.do_mount(partition.path, "/target", fs, "subvol=@")
@@ -446,8 +450,18 @@ class InstallerEngine:
             if os.path.exists(target):
                  self.run("rm -rf {}".format(target),vital=False)
             os.mkdir(target)
+            subvols = []
+            if getoutput("stat -f -c %T /target") == b'btrfs':
+                subvols = getoutput(
+                    "LC_ALL=en_US.UTF-8 btrfs subvolume list /target | awk -F ' path ' '{ print $2 }'").decode("utf-8").strip().split("\n")
             for old in olds:
-                self.run("mv /target/{0} {1}/{0}".format(old,target),vital=False)
+                notOld = False
+                for s in subvols:
+                    if old in s:
+                        notOld = True
+                        break
+                if not notOld:
+                    self.run("mv /target/{0} {1}/{0}".format(old,target),vital=False)
 
 
         # Mount the other partitions
