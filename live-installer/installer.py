@@ -571,7 +571,7 @@ class InstallerEngine:
                         fstab.write("%s %s %s %s %s %s\n" % (
                             partition_uuid, partition.mount_as, fs, fstab_mount_options, "0", fstab_fsck_option))
 
-                if partition.subvolumes != []:
+                if partition.subvolumes != [] and partition.type == "btrfs":
                     for subvolume in partition.subvolumes:
                         fstab.write("# %s\n" % (partition.path))
                         rw="rw"
