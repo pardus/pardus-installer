@@ -563,9 +563,8 @@ class InstallerEngine:
                         rw="ro"
                     if fs == "fat16" or fs == "fat32":
                         fs = "vfat"
-                    else:
-                        fstab_mount_options = "defaults,{}".format(rw)
 
+                    fstab_mount_options = "defaults,{}".format(rw)
                     partition_uuid = self.get_blkid(partition.path)
                     if(fs == "swap"):
                         fstab.write("%s swap swap sw 0 0\n" %
