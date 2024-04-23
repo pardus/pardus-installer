@@ -806,20 +806,25 @@ class PartitionDialog(object):
         combobox_use_as.connect(
             "changed", self.show_chkbtn_btrfs_subvols)
 
-        # Build list of pre-provided mountpoints
         combobox = self.builder.get_object("comboboxentry_mount_point")
-        model = Gtk.ListStore(str, str)
-        model.append(["", "/"])
-        model.append(["", "swap"])
-        for i in config.distro["additional_mountpoints"]:
-            model.append(["", i])
-        if is_efi_supported():
-            for i in config.distro["additional_efi_mountpoints"]:
+        typevar = typevar.replace("<span>", "").replace("</span>", "").strip()
+        if typevar == _("Unknown"):
+            # If the partition is unknown, we can't assign a mount point
+            combobox.set_sensitive(False)
+        else:
+            # Build list of pre-provided mountpoints
+            model = Gtk.ListStore(str, str)
+            model.append(["", "/"])
+            model.append(["", "swap"])
+            for i in config.distro["additional_mountpoints"]:
                 model.append(["", i])
-        combobox.set_model(model)
-        combobox.set_entry_text_column(1)
-        combobox.set_id_column(1)
-        combobox.get_child().set_text(mount_as)
+            if is_efi_supported():
+                for i in config.distro["additional_efi_mountpoints"]:
+                    model.append(["", i])
+            combobox.set_model(model)
+            combobox.set_entry_text_column(1)
+            combobox.set_id_column(1)
+            combobox.get_child().set_text(mount_as)
 
     # Show the default subvolumes checkbox only if btrfs is selected from combobox
     def show_chkbtn_btrfs_subvols(self,widget):
