@@ -1026,7 +1026,8 @@ class InstallerWindow:
             _("Partition {} will removed from {}.").format(path,mbr)):
             def update_partition_menu(pid, status):
                 partitioning.build_partitions(self)
-            command = "parted -s {} rm {}".format(mbr,partnum)
+            #  Use wipefs to ensure that filesystem signature is removed so that partition will not be restored after create new partition with same blocks
+            command = "wipefs -a {} && parted -s {} rm {}".format(path,mbr,partnum)
             pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/bash", "-c", command],
             flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
             standard_output=True,
