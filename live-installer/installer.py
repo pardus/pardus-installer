@@ -428,10 +428,8 @@ class InstallerEngine:
                                 # Mount subvolumes
                                 partition.subvolumes.sort(key = lambda x : x.mount_as, reverse=False)
                                 for subvolume in partition.subvolumes:
-                                    log(" ------ Mounting btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))
-                                    self.do_mount(partition.path, "/target/{}".format(subvolume.mount_as), fs, "subvol={}".format(subvolume.name),"--mkdir") 
-                            if partition.mount_as != "":
-                                self.do_mount(partition.path, "/target", fs, "subvol=@")
+                                    log(" ------ Mounting btrfs subvolume {} on /target{}".format(subvolume.name,subvolume.mount_as))
+                                    self.do_mount(partition.path, "/target{}".format(subvolume.mount_as), fs, "subvol={}".format(subvolume.name),"--mkdir") 
                     else:
                         self.error_message(
                             "Cannot mount rootfs (type: {}): {}".format(partition.type, partition.path))
@@ -455,7 +453,7 @@ class InstallerEngine:
                         notOld = True
                         break
                 if not notOld:
-                    self.run("mv /target/{0} {1}/{0}".format(old,target),vital=False)
+                    self.run("mv /target{0} {1}/{0}".format(old,target),vital=False)
 
 
         # Mount the other partitions
