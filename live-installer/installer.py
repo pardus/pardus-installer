@@ -396,16 +396,7 @@ class InstallerEngine:
 
     def mount_partitions(self):
         # Sort partitions for mount order
-        partitions_sorted = []
-        mountpoint_sorted = []
-        for partition in self.setup.partitions:
-            mountpoint_sorted.append(partition.mount_as)
-        mountpoint_sorted.sort()
-        for dir in mountpoint_sorted:
-            for partition in self.setup.partitions:
-                if partition.mount_as == dir:
-                    partitions_sorted.append(partition)
-        self.setup.partitions = partitions_sorted
+        self.setup.partitions.sort(key = lambda x : x.mount_as, reverse=False)
         # Mount the target partition
         for partition in self.setup.partitions:
             if(partition.mount_as not in [None, "swap"] and partition.subvolumes != [] and not self.is_subvolume_has_mountpoint(partition.subvolumes,"")) or (partition.mount_as not in ["", None, "swap"]):
