@@ -303,12 +303,12 @@ def assign_mount_point(partition, mount_point, filesystem, read_only = False, su
     for part in installer.setup.partitions:
         if part == partition:
             partition.mount_as, partition.format_as, partition.read_only = mount_point, filesystem, read_only
-        elif part.mount_as == mount_point:
+        elif part.mount_as == mount_point and mount_point != "":
             part.mount_as, part.format_as, partition.read_only = '', '', False
         for subvol in part.subvolumes:
             if subvol == partition:
                 partition.name, partition.mount_as = subvolume_name, mount_point
-            elif subvol.mount_as == mount_point:
+            elif subvol.mount_as == mount_point and mount_point != "":
                 subvol.mount_as = ''
 
 
