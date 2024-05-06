@@ -244,10 +244,6 @@ def validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as, subvo
         show_error(_(
             "The name of a subvolume must not be blank or contain a space"))
         return False
-    if " " in mount_as:
-        show_error(_(
-            "The mount point of a subvolume must not contain a space"))
-        return False
     for subvol in partition.subvolumes:
         if subvolume != None and subvol == subvolume:
             continue
