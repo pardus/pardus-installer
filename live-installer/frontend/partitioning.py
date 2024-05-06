@@ -191,9 +191,13 @@ def edit_partition_dialog(widget, path, viewcol):
         dlg = SubvolDialog(partition.name,
                               row[IDX_PART_MOUNT_AS],
                               partition.exists_on_disk,
+                              partition.format,
                               _("Edit Subvolume"))
-        response_is_ok, subvolume_name, mount_as = dlg.show()
+        response_is_ok, subvolume_name, mount_as, format_subvolume = dlg.show()
         if response_is_ok and validate_subvolume_and_mountpoint(partition.parent, subvolume_name, mount_as, partition):
+            if format_subvolume:
+                row[IDX_PART_FORMAT_AS] = _("btrfs subvolume")
+            partition.format = format_subvolume
             assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
         return
     if (partition.partition.type != parted.PARTITION_EXTENDED and
@@ -220,7 +224,7 @@ def create_subvolume_dialog(widget):
     dlg = SubvolDialog("",
                        "",
                        False)
-    response_is_ok, subvolume_name, mount_as = dlg.show()
+    response_is_ok, subvolume_name, mount_as, format_subvolume = dlg.show()
     if response_is_ok and validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as):
         subvolume = BtrfsSubvolume()
         # mount point will be assigned in assign_mount_point
@@ -775,6 +779,7 @@ class BtrfsSubvolume(object):
         self.partition = self
         self.mount_as = ''
         self.exists_on_disk = False
+        self.format = False
 
 class PartitionDialog(object):
     def __init__(self, path, mount_as, format_as, typevar, read_only=False):
@@ -866,7 +871,7 @@ class PartitionDialog(object):
         return response_is_ok, mount_as, format_as, read_only, create_default_subvols
 
 class SubvolDialog(object):
-    def __init__(self, name, mount_as, exists_on_disk: bool, title=_("Create Subvolume")):
+    def __init__(self, name, mount_as, exists_on_disk: bool, format=False, title=_("Create Subvolume")):
         glade_file = RESOURCE_DIR + 'interface.ui'
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
@@ -876,6 +881,14 @@ class SubvolDialog(object):
             "<b>%s</b>" % _("Name:"))
         self.builder.get_object(
             "label_subvol_mount_point").set_markup(_("Mount point:"))
+        self.checkbutton_format_subvolume = self.builder.get_object(
+            "checkbutton_format_subvolume")
+        if exists_on_disk:
+            self.checkbutton_format_subvolume.set_visible(True)
+            self.checkbutton_format_subvolume.set_label(_("Format subvolume"))
+            self.checkbutton_format_subvolume.set_active(format)
+        else:
+            self.checkbutton_format_subvolume.set_visible(False)
         self.builder.get_object("button_subvol_cancel").set_label(_("Cancel"))
         self.builder.get_object("button_subvol_ok").set_label(_("OK"))
         self.builder.get_object("entry_subvol_name").set_text(name)
@@ -898,10 +911,12 @@ class SubvolDialog(object):
         mount_as = w.get_child().get_text().strip()
         w = self.builder.get_object("entry_subvol_name")
         subvol_name = w.get_text().strip()
+        w = self.builder.get_object("checkbutton_format_subvolume")
+        format_subvol = w.get_active()
         self.window.destroy()
         if response in (Gtk.ResponseType.YES, Gtk.ResponseType.APPLY,
                         Gtk.ResponseType.OK, Gtk.ResponseType.ACCEPT):
             response_is_ok = True
         else:
             response_is_ok = False
-        return response_is_ok, subvol_name, mount_as
+        return response_is_ok, subvol_name, mount_as, format_subvol

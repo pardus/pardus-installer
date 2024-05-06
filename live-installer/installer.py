@@ -413,6 +413,9 @@ class InstallerEngine:
                                 # Create subvolumes
                                 partition.subvolumes.sort(key = lambda x : x.name, reverse=False)
                                 for subvolume in partition.subvolumes:
+                                    if subvolume.format:
+                                        os.system("btrfs subvolume delete /target/{}".format(subvolume.name))
+                                        subvolume.exists_on_disk = False
                                     if subvolume.exists_on_disk:
                                         continue
                                     log(" ------ Creating btrfs subvolume {} on /target/{}".format(subvolume.name,subvolume.mount_as))

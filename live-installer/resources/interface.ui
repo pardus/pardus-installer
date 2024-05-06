@@ -2609,7 +2609,7 @@ install</property>
           </packing>
         </child>
         <child>
-          <!-- n-columns=2 n-rows=2 -->
+          <!-- n-columns=2 n-rows=3 -->
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -2672,6 +2672,22 @@ install</property>
                 <property name="left-attach">1</property>
                 <property name="top-attach">0</property>
               </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton_format_subvolume">
+                <property name="label" translatable="yes">checkbutton</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>

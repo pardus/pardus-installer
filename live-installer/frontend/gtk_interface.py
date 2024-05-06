@@ -1251,7 +1251,7 @@ class InstallerWindow:
                             print("subvolume",subvolume.mount_as, "name", subvolume.name)
                             if(subvolume.mount_as == "/"):
                                 found_root_partition = True
-                                if partition.format_as is None or partition.format_as == "":
+                                if subvolume.exists_on_disk and (not subvolume.format or subvolume.format is None):
                                     if not QuestionDialog(_("Installer"), _(
                                         "Root filesystem type not specified. Installation will continue without disk formatting. Do you want to continue?")):
                                         return
