@@ -1011,7 +1011,7 @@ class InstallerWindow:
                     "treeview_disks").get_selection().get_selected()
                 subvolume.parent.subvolumes.remove(subvolume)
                 model.remove(itervar)
-                if not subvolume.exists_on_disk:
+                if subvolume.exists_on_disk:
                     mount_point = getoutput("mktemp -d").decode("utf-8").strip()
                     os.system("mount -t btrfs %s %s" %
                               (subvolume.parent.path, mount_point))
