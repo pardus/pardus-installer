@@ -193,7 +193,7 @@ def edit_partition_dialog(widget, path, viewcol):
                               partition.exists_on_disk,
                               _("Edit Subvolume"))
         response_is_ok, subvolume_name, mount_as = dlg.show()
-        if response_is_ok:
+        if response_is_ok and validate_subvolume_and_mountpoint(partition.parent, subvolume_name, mount_as, partition):
             assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
         return
     if (partition.partition.type != parted.PARTITION_EXTENDED and
@@ -221,23 +221,7 @@ def create_subvolume_dialog(widget):
                        "",
                        False)
     response_is_ok, subvolume_name, mount_as = dlg.show()
-    if response_is_ok:
-        if subvolume_name.startswith("/") or subvolume_name.endswith("/"):
-            show_error(_("The name of a subvolume must not start or end with a forward slash"))
-            return
-        if subvolume_name == "" or  " " in subvolume_name:
-            show_error(_(
-                "The name of a subvolume must not be blank or contain a space"))
-            return
-        if " " in mount_as:
-            show_error(_(
-                "The mount point of a subvolume must not contain a space"))
-            return
-        for subvol in partition.subvolumes:
-            if subvol.name == subvolume_name:
-                show_error(_(
-                    "Subvolume with name '%s' already exists") % subvolume_name)
-                return
+    if response_is_ok and validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as):
         subvolume = BtrfsSubvolume()
         # mount point will be assigned in assign_mount_point
         subvolume.name, subvolume.mount_as, subvolume.parent = subvolume_name, "", partition
@@ -246,6 +230,28 @@ def create_subvolume_dialog(widget):
                      '', False, '', '', subvolume, partition.path))
         #ensure that the mount point is assigned correctly
         assign_mount_point(subvolume, mount_as, _("btrfs subvolume"), False, subvolume_name)
+
+# Check if the subvolume name and mount point are valid
+def validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as, subvolume = None):
+    if subvolume_name.startswith("/") or subvolume_name.endswith("/"):
+        show_error(_("The name of a subvolume must not start or end with a forward slash"))
+        return False
+    if subvolume_name == "" or  " " in subvolume_name:
+        show_error(_(
+            "The name of a subvolume must not be blank or contain a space"))
+        return False
+    if " " in mount_as:
+        show_error(_(
+            "The mount point of a subvolume must not contain a space"))
+        return False
+    for subvol in partition.subvolumes:
+        if subvolume != None and subvol == subvolume:
+            continue
+        if subvol.name == subvolume_name:
+            show_error(_(
+                "Subvolume with name '%s' already exists") % subvolume_name)
+            return False
+    return True
 
 # This will create subvolumes using a predefined scheme
 def assign_default_subvolumes(partition):
