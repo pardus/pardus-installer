@@ -2675,7 +2675,7 @@ install</property>
             </child>
             <child>
               <object class="GtkCheckButton" id="checkbutton_format_subvolume">
-                <property name="label" translatable="yes">checkbutton</property>
+                <property name="label" translatable="yes">Format subvolume</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>

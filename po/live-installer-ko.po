@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 17:00+0300\n"
+"POT-Creation-Date: 2024-05-06 19:10+0300\n"
 "PO-Revision-Date: 2020-02-15 20:21+0000\n"
 "Last-Translator: Litty <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -92,7 +92,7 @@ msgstr ""
 
 #: live-installer/resources/interface.ui:613
 #: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:592
+#: live-installer/frontend/partitioning.py:604
 msgid "GB"
 msgstr "GB"
 
@@ -193,9 +193,9 @@ msgid "Format"
 msgstr "포맷하기"
 
 #: live-installer/resources/interface.ui:1419
+#: live-installer/frontend/partitioning.py:282
 #: live-installer/frontend/gtk_interface.py:582
 #: live-installer/frontend/gtk_interface.py:966
-#: live-installer/frontend/partitioning.py:272
 msgid "Create"
 msgstr ""
 
@@ -300,6 +300,12 @@ msgstr ""
 msgid "Use default Btrfs subvolumes"
 msgstr ""
 
+#: live-installer/resources/interface.ui:2678
+#: live-installer/frontend/partitioning.py:888
+#, fuzzy
+msgid "Format subvolume"
+msgstr "포맷하기"
+
 #: live-installer/resources/welcome.ui:61
 msgid "Try 17g"
 msgstr ""
@@ -331,8 +337,8 @@ msgstr "환영합니다"
 
 #: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
 #: live-installer/frontend/dialogs.py:54
-#: live-installer/frontend/partitioning.py:785
-#: live-installer/frontend/partitioning.py:872
+#: live-installer/frontend/partitioning.py:798
+#: live-installer/frontend/partitioning.py:893
 msgid "OK"
 msgstr "OK"
 
@@ -423,23 +429,94 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "환영합니다"
 
-#: live-installer/frontend/gtk_interface.py:109
-#: live-installer/frontend/gtk_interface.py:514
-msgid "Country"
-msgstr "국가"
+#: live-installer/frontend/partitioning.py:72
+msgid "B"
+msgstr "B"
 
-#: live-installer/frontend/gtk_interface.py:290
-msgid "Layout"
-msgstr "배치"
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:603
+msgid "kB"
+msgstr "kB"
 
-#: live-installer/frontend/gtk_interface.py:298
-msgid "Variant"
-msgstr "변형"
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:603
+msgid "MB"
+msgstr "MB"
 
-#: live-installer/frontend/gtk_interface.py:316
-msgid "Calculating file indexes ..."
-msgstr "파일 색인을 계산하는 중입니다 ..."
+#: live-installer/frontend/partitioning.py:73
+#: live-installer/frontend/partitioning.py:604
+msgid "TB"
+msgstr "TB"
 
+#: live-installer/frontend/partitioning.py:80
+msgid "Removable:"
+msgstr "이동식 매체:"
+
+#: live-installer/frontend/partitioning.py:190
+#: live-installer/frontend/partitioning.py:199
+#: live-installer/frontend/partitioning.py:201
+#: live-installer/frontend/partitioning.py:236
+#: live-installer/frontend/partitioning.py:278
+#: live-installer/frontend/partitioning.py:340
+#: live-installer/frontend/partitioning.py:352
+#: live-installer/frontend/partitioning.py:356
+#: live-installer/frontend/partitioning.py:776
+#: live-installer/frontend/gtk_interface.py:977
+#: live-installer/frontend/gtk_interface.py:1006
+msgid "btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:195
+msgid "Edit Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:213
+#: live-installer/frontend/gtk_interface.py:598
+msgid "Read only"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:241
+msgid "The name of a subvolume must not start or end with a forward slash"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:245
+msgid "The name of a subvolume must not be blank or contain a space"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:249
+msgid "The mount point of a subvolume must not contain a space"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:256
+#, python-format
+msgid "Subvolume with name '%s' already exists"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:291
+#: live-installer/frontend/gtk_interface.py:984
+#: live-installer/frontend/gtk_interface.py:992
+msgid "Create a subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:345
+msgid "Edit"
+msgstr "편집하기"
+
+#: live-installer/frontend/partitioning.py:357
+#: live-installer/frontend/partitioning.py:364
+#: live-installer/frontend/partitioning.py:368
+#: live-installer/frontend/partitioning.py:375
+#: live-installer/frontend/partitioning.py:384
+#, fuzzy, python-format
+msgid "Assign to %s"
+msgstr "/로 할당합니다"
+
+#: live-installer/frontend/partitioning.py:391
+msgid "Create btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:446
+#: live-installer/frontend/partitioning.py:529
 #: live-installer/frontend/gtk_interface.py:467
 #: live-installer/frontend/gtk_interface.py:470
 #: live-installer/frontend/gtk_interface.py:1173
@@ -457,10 +534,104 @@ msgstr "파일 색인을 계산하는 중입니다 ..."
 #: live-installer/frontend/gtk_interface.py:1300
 #: live-installer/frontend/gtk_interface.py:1365
 #: live-installer/frontend/gtk_interface.py:1444
-#: live-installer/frontend/partitioning.py:434
-#: live-installer/frontend/partitioning.py:517
 msgid "Installer"
 msgstr ""
+
+#: live-installer/frontend/partitioning.py:447
+msgid ""
+"Disk: {} partition table broken or not exists. Do you want to create new "
+"partition table?"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:469
+#: live-installer/frontend/partitioning.py:687
+#: live-installer/frontend/gtk_interface.py:590
+#: live-installer/frontend/gtk_interface.py:975
+msgid "Free space"
+msgstr "남은 공간"
+
+#: live-installer/frontend/partitioning.py:545
+#, python-format
+msgid ""
+"The partition table couldn't be written for %s. Restart the computer and try "
+"again."
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:590
+#, python-format
+msgid ""
+"The partition %s could not be created. The installation will stop. Restart "
+"the computer and try again."
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:685
+msgid "Logical partition"
+msgstr "논리 파티션"
+
+#: live-installer/frontend/partitioning.py:686
+msgid "Extended partition"
+msgstr "확장 파티션"
+
+#: live-installer/frontend/partitioning.py:690
+#: live-installer/frontend/partitioning.py:824
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: live-installer/frontend/partitioning.py:741
+msgid "bootloader/recovery"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:754
+#, fuzzy
+msgid "EFI System Partition"
+msgstr "파티션 편집하기"
+
+#: live-installer/frontend/partitioning.py:790
+msgid "Edit partition"
+msgstr "파티션 편집하기"
+
+#: live-installer/frontend/partitioning.py:792
+msgid "Device:"
+msgstr "장치:"
+
+#: live-installer/frontend/partitioning.py:794
+msgid "Format as:"
+msgstr "포맷하기:"
+
+#: live-installer/frontend/partitioning.py:796
+#: live-installer/frontend/partitioning.py:883
+msgid "Mount point:"
+msgstr "장착 지점:"
+
+#: live-installer/frontend/partitioning.py:797
+#: live-installer/frontend/partitioning.py:892
+msgid "Cancel"
+msgstr "취소"
+
+#: live-installer/frontend/partitioning.py:874
+msgid "Create Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:881
+msgid "Name:"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:109
+#: live-installer/frontend/gtk_interface.py:514
+msgid "Country"
+msgstr "국가"
+
+#: live-installer/frontend/gtk_interface.py:290
+msgid "Layout"
+msgstr "배치"
+
+#: live-installer/frontend/gtk_interface.py:298
+msgid "Variant"
+msgstr "변형"
+
+#: live-installer/frontend/gtk_interface.py:316
+msgid "Calculating file indexes ..."
+msgstr "파일 색인을 계산하는 중입니다 ..."
 
 #: live-installer/frontend/gtk_interface.py:480
 msgid "License Agreement"
@@ -576,18 +747,6 @@ msgstr "포맷하기"
 msgid "Size"
 msgstr "크기"
 
-#: live-installer/frontend/gtk_interface.py:590
-#: live-installer/frontend/gtk_interface.py:975
-#: live-installer/frontend/partitioning.py:457
-#: live-installer/frontend/partitioning.py:675
-msgid "Free space"
-msgstr "남은 공간"
-
-#: live-installer/frontend/gtk_interface.py:598
-#: live-installer/frontend/partitioning.py:209
-msgid "Read only"
-msgstr ""
-
 #: live-installer/frontend/gtk_interface.py:626
 #: live-installer/frontend/gtk_interface.py:1367
 msgid "Warning"
@@ -620,25 +779,6 @@ msgstr "종료하시겠습니까?"
 #: live-installer/frontend/gtk_interface.py:793
 msgid "Are you sure you want to quit the installer?"
 msgstr "정말 설치 프로그램을 종료하시겠습니까?"
-
-#: live-installer/frontend/gtk_interface.py:977
-#: live-installer/frontend/gtk_interface.py:1006
-#: live-installer/frontend/partitioning.py:190
-#: live-installer/frontend/partitioning.py:197
-#: live-installer/frontend/partitioning.py:248
-#: live-installer/frontend/partitioning.py:268
-#: live-installer/frontend/partitioning.py:328
-#: live-installer/frontend/partitioning.py:340
-#: live-installer/frontend/partitioning.py:344
-#: live-installer/frontend/partitioning.py:764
-msgid "btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:984
-#: live-installer/frontend/gtk_interface.py:992
-#: live-installer/frontend/partitioning.py:281
-msgid "Create a subvolume"
-msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:994
 #: live-installer/frontend/gtk_interface.py:1008
@@ -881,7 +1021,7 @@ msgid "Disk Encryption: "
 msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:1578
-#: live-installer/installer.py:878
+#: live-installer/installer.py:881
 msgid "Installation finished"
 msgstr "설치가 완료되었습니다"
 
@@ -902,139 +1042,6 @@ msgstr "설치 오류가 발생했습니다"
 
 #: live-installer/frontend/gtk_interface.py:1647
 msgid "Error"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:72
-msgid "B"
-msgstr "B"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:591
-msgid "kB"
-msgstr "kB"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:591
-msgid "MB"
-msgstr "MB"
-
-#: live-installer/frontend/partitioning.py:73
-#: live-installer/frontend/partitioning.py:592
-msgid "TB"
-msgstr "TB"
-
-#: live-installer/frontend/partitioning.py:80
-msgid "Removable:"
-msgstr "이동식 매체:"
-
-#: live-installer/frontend/partitioning.py:194
-msgid "Edit Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:226
-msgid "The name of a subvolume must not start or end with a forward slash"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:230
-msgid "The name of a subvolume must not be blank or contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:234
-msgid "The mount point of a subvolume must not contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:239
-#, python-format
-msgid "Subvolume with name '%s' already exists"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:333
-msgid "Edit"
-msgstr "편집하기"
-
-#: live-installer/frontend/partitioning.py:345
-#: live-installer/frontend/partitioning.py:352
-#: live-installer/frontend/partitioning.py:356
-#: live-installer/frontend/partitioning.py:363
-#: live-installer/frontend/partitioning.py:372
-#, fuzzy, python-format
-msgid "Assign to %s"
-msgstr "/로 할당합니다"
-
-#: live-installer/frontend/partitioning.py:379
-msgid "Create btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:435
-msgid ""
-"Disk: {} partition table broken or not exists. Do you want to create new "
-"partition table?"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:533
-#, python-format
-msgid ""
-"The partition table couldn't be written for %s. Restart the computer and try "
-"again."
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:578
-#, python-format
-msgid ""
-"The partition %s could not be created. The installation will stop. Restart "
-"the computer and try again."
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:673
-msgid "Logical partition"
-msgstr "논리 파티션"
-
-#: live-installer/frontend/partitioning.py:674
-msgid "Extended partition"
-msgstr "확장 파티션"
-
-#: live-installer/frontend/partitioning.py:678
-#: live-installer/frontend/partitioning.py:811
-msgid "Unknown"
-msgstr "알 수 없음"
-
-#: live-installer/frontend/partitioning.py:729
-msgid "bootloader/recovery"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:742
-#, fuzzy
-msgid "EFI System Partition"
-msgstr "파티션 편집하기"
-
-#: live-installer/frontend/partitioning.py:777
-msgid "Edit partition"
-msgstr "파티션 편집하기"
-
-#: live-installer/frontend/partitioning.py:779
-msgid "Device:"
-msgstr "장치:"
-
-#: live-installer/frontend/partitioning.py:781
-msgid "Format as:"
-msgstr "포맷하기:"
-
-#: live-installer/frontend/partitioning.py:783
-#: live-installer/frontend/partitioning.py:870
-msgid "Mount point:"
-msgstr "장착 지점:"
-
-#: live-installer/frontend/partitioning.py:784
-#: live-installer/frontend/partitioning.py:871
-msgid "Cancel"
-msgstr "취소"
-
-#: live-installer/frontend/partitioning.py:861
-msgid "Create Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:868
-msgid "Name:"
 msgstr ""
 
 #: live-installer/main.py:38
@@ -1193,49 +1200,49 @@ msgstr "%s에 파티션 만드는 중"
 msgid "Formatting %(partition)s as %(format)s ..."
 msgstr "%(partition)s를 %(format)s로 포맷하는 중입니다 ..."
 
-#: live-installer/installer.py:591
+#: live-installer/installer.py:594
 msgid "Setting hostname"
 msgstr "호스트 이름을 설정하는 중입니다"
 
-#: live-installer/installer.py:616
+#: live-installer/installer.py:619
 msgid "Setting locale"
 msgstr "로케일을 설정하는 중입니다"
 
-#: live-installer/installer.py:656
+#: live-installer/installer.py:659
 #, fuzzy
 msgid "Setting timezone"
 msgstr "호스트 이름을 설정하는 중입니다"
 
-#: live-installer/installer.py:691
+#: live-installer/installer.py:694
 msgid "Setting keyboard options"
 msgstr "키보드 선택 사항을 설정하는 중입니다"
 
-#: live-installer/installer.py:768
+#: live-installer/installer.py:771
 #, fuzzy
 msgid "Removing extra packages"
 msgstr "라이브 환경 설정을 제거하는 중입니다(패키지)"
 
-#: live-installer/installer.py:774
+#: live-installer/installer.py:777
 msgid "Clearing package manager"
 msgstr ""
 
-#: live-installer/installer.py:793
+#: live-installer/installer.py:796
 msgid "Generating initramfs"
 msgstr ""
 
-#: live-installer/installer.py:798
+#: live-installer/installer.py:801
 msgid "Preparing bootloader installation"
 msgstr ""
 
-#: live-installer/installer.py:818
+#: live-installer/installer.py:821
 msgid "Installing bootloader"
 msgstr "부트로더를 설치하는 중입니다"
 
-#: live-installer/installer.py:830
+#: live-installer/installer.py:833
 msgid "Configuring bootloader"
 msgstr "부트로더를 설정하는 중입니다"
 
-#: live-installer/installer.py:838
+#: live-installer/installer.py:841
 msgid ""
 "WARNING: The grub bootloader was not configured properly! You need to "
 "configure it manually."
@@ -1243,15 +1250,15 @@ msgstr ""
 "주의: grub 부트로더가 올바르게 설정되지 않았습니다! 수동으로 설정하셔야 합니"
 "다."
 
-#: live-installer/installer.py:851
+#: live-installer/installer.py:854
 msgid "Trying to install updates"
 msgstr ""
 
-#: live-installer/installer.py:904
+#: live-installer/installer.py:907
 msgid "Checking bootloader"
 msgstr "부트로더를 확인하는 중입니다"
 
-#: live-installer/installer.py:941
+#: live-installer/installer.py:944
 msgid "Failed to run command (Exited with {}):"
 msgstr ""
 

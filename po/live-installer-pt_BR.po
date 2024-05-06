@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 17:00+0300\n"
+"POT-Creation-Date: 2024-05-06 19:10+0300\n"
 "PO-Revision-Date: 2020-03-10 18:54+0000\n"
 "Last-Translator: Alberlan Lopes <alberlan@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 
 #: live-installer/resources/interface.ui:613
 #: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:592
+#: live-installer/frontend/partitioning.py:604
 msgid "GB"
 msgstr "GB"
 
@@ -196,9 +196,9 @@ msgid "Format"
 msgstr "Formatar como"
 
 #: live-installer/resources/interface.ui:1419
+#: live-installer/frontend/partitioning.py:282
 #: live-installer/frontend/gtk_interface.py:582
 #: live-installer/frontend/gtk_interface.py:966
-#: live-installer/frontend/partitioning.py:272
 msgid "Create"
 msgstr ""
 
@@ -303,6 +303,12 @@ msgstr ""
 msgid "Use default Btrfs subvolumes"
 msgstr ""
 
+#: live-installer/resources/interface.ui:2678
+#: live-installer/frontend/partitioning.py:888
+#, fuzzy
+msgid "Format subvolume"
+msgstr "Formatar como"
+
 #: live-installer/resources/welcome.ui:61
 msgid "Try 17g"
 msgstr ""
@@ -334,8 +340,8 @@ msgstr "Bem Vindo"
 
 #: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
 #: live-installer/frontend/dialogs.py:54
-#: live-installer/frontend/partitioning.py:785
-#: live-installer/frontend/partitioning.py:872
+#: live-installer/frontend/partitioning.py:798
+#: live-installer/frontend/partitioning.py:893
 msgid "OK"
 msgstr "OK"
 
@@ -427,23 +433,94 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "Bem Vindo"
 
-#: live-installer/frontend/gtk_interface.py:109
-#: live-installer/frontend/gtk_interface.py:514
-msgid "Country"
-msgstr "País"
+#: live-installer/frontend/partitioning.py:72
+msgid "B"
+msgstr "B"
 
-#: live-installer/frontend/gtk_interface.py:290
-msgid "Layout"
-msgstr "Leiaute"
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:603
+msgid "kB"
+msgstr "kB"
 
-#: live-installer/frontend/gtk_interface.py:298
-msgid "Variant"
-msgstr "Variante"
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:603
+msgid "MB"
+msgstr "MB"
 
-#: live-installer/frontend/gtk_interface.py:316
-msgid "Calculating file indexes ..."
-msgstr "Calculando índices de arquivo..."
+#: live-installer/frontend/partitioning.py:73
+#: live-installer/frontend/partitioning.py:604
+msgid "TB"
+msgstr "TB"
 
+#: live-installer/frontend/partitioning.py:80
+msgid "Removable:"
+msgstr "Removível:"
+
+#: live-installer/frontend/partitioning.py:190
+#: live-installer/frontend/partitioning.py:199
+#: live-installer/frontend/partitioning.py:201
+#: live-installer/frontend/partitioning.py:236
+#: live-installer/frontend/partitioning.py:278
+#: live-installer/frontend/partitioning.py:340
+#: live-installer/frontend/partitioning.py:352
+#: live-installer/frontend/partitioning.py:356
+#: live-installer/frontend/partitioning.py:776
+#: live-installer/frontend/gtk_interface.py:977
+#: live-installer/frontend/gtk_interface.py:1006
+msgid "btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:195
+msgid "Edit Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:213
+#: live-installer/frontend/gtk_interface.py:598
+msgid "Read only"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:241
+msgid "The name of a subvolume must not start or end with a forward slash"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:245
+msgid "The name of a subvolume must not be blank or contain a space"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:249
+msgid "The mount point of a subvolume must not contain a space"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:256
+#, python-format
+msgid "Subvolume with name '%s' already exists"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:291
+#: live-installer/frontend/gtk_interface.py:984
+#: live-installer/frontend/gtk_interface.py:992
+msgid "Create a subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:345
+msgid "Edit"
+msgstr "Editar"
+
+#: live-installer/frontend/partitioning.py:357
+#: live-installer/frontend/partitioning.py:364
+#: live-installer/frontend/partitioning.py:368
+#: live-installer/frontend/partitioning.py:375
+#: live-installer/frontend/partitioning.py:384
+#, fuzzy, python-format
+msgid "Assign to %s"
+msgstr "Atribuir à /"
+
+#: live-installer/frontend/partitioning.py:391
+msgid "Create btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:446
+#: live-installer/frontend/partitioning.py:529
 #: live-installer/frontend/gtk_interface.py:467
 #: live-installer/frontend/gtk_interface.py:470
 #: live-installer/frontend/gtk_interface.py:1173
@@ -461,10 +538,108 @@ msgstr "Calculando índices de arquivo..."
 #: live-installer/frontend/gtk_interface.py:1300
 #: live-installer/frontend/gtk_interface.py:1365
 #: live-installer/frontend/gtk_interface.py:1444
-#: live-installer/frontend/partitioning.py:434
-#: live-installer/frontend/partitioning.py:517
 msgid "Installer"
 msgstr "Instalador"
+
+#: live-installer/frontend/partitioning.py:447
+msgid ""
+"Disk: {} partition table broken or not exists. Do you want to create new "
+"partition table?"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:469
+#: live-installer/frontend/partitioning.py:687
+#: live-installer/frontend/gtk_interface.py:590
+#: live-installer/frontend/gtk_interface.py:975
+msgid "Free space"
+msgstr "Espaço livre"
+
+#: live-installer/frontend/partitioning.py:545
+#, python-format
+msgid ""
+"The partition table couldn't be written for %s. Restart the computer and try "
+"again."
+msgstr ""
+"A tabela de partições não pode ser gravada em %s. Reinicie o computador e "
+"tente novamente."
+
+#: live-installer/frontend/partitioning.py:590
+#, python-format
+msgid ""
+"The partition %s could not be created. The installation will stop. Restart "
+"the computer and try again."
+msgstr ""
+"A partição %s não pode ser criada. A instalação será interrompida. Reinicie "
+"o computador e tente novamente."
+
+#: live-installer/frontend/partitioning.py:685
+msgid "Logical partition"
+msgstr "Partição lógica"
+
+#: live-installer/frontend/partitioning.py:686
+msgid "Extended partition"
+msgstr "Partição estendida"
+
+#: live-installer/frontend/partitioning.py:690
+#: live-installer/frontend/partitioning.py:824
+msgid "Unknown"
+msgstr "Desconhecido(a)"
+
+#: live-installer/frontend/partitioning.py:741
+msgid "bootloader/recovery"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:754
+#, fuzzy
+msgid "EFI System Partition"
+msgstr "Editar partição"
+
+#: live-installer/frontend/partitioning.py:790
+msgid "Edit partition"
+msgstr "Editar partição"
+
+#: live-installer/frontend/partitioning.py:792
+msgid "Device:"
+msgstr "Dispositivo:"
+
+#: live-installer/frontend/partitioning.py:794
+msgid "Format as:"
+msgstr "Formatar como:"
+
+#: live-installer/frontend/partitioning.py:796
+#: live-installer/frontend/partitioning.py:883
+msgid "Mount point:"
+msgstr "Ponto de montagem:"
+
+#: live-installer/frontend/partitioning.py:797
+#: live-installer/frontend/partitioning.py:892
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: live-installer/frontend/partitioning.py:874
+msgid "Create Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:881
+msgid "Name:"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:109
+#: live-installer/frontend/gtk_interface.py:514
+msgid "Country"
+msgstr "País"
+
+#: live-installer/frontend/gtk_interface.py:290
+msgid "Layout"
+msgstr "Leiaute"
+
+#: live-installer/frontend/gtk_interface.py:298
+msgid "Variant"
+msgstr "Variante"
+
+#: live-installer/frontend/gtk_interface.py:316
+msgid "Calculating file indexes ..."
+msgstr "Calculando índices de arquivo..."
 
 #: live-installer/frontend/gtk_interface.py:480
 msgid "License Agreement"
@@ -582,18 +757,6 @@ msgstr "Formatar como"
 msgid "Size"
 msgstr "Tamanho"
 
-#: live-installer/frontend/gtk_interface.py:590
-#: live-installer/frontend/gtk_interface.py:975
-#: live-installer/frontend/partitioning.py:457
-#: live-installer/frontend/partitioning.py:675
-msgid "Free space"
-msgstr "Espaço livre"
-
-#: live-installer/frontend/gtk_interface.py:598
-#: live-installer/frontend/partitioning.py:209
-msgid "Read only"
-msgstr ""
-
 #: live-installer/frontend/gtk_interface.py:626
 #: live-installer/frontend/gtk_interface.py:1367
 msgid "Warning"
@@ -626,25 +789,6 @@ msgstr "Sair?"
 #: live-installer/frontend/gtk_interface.py:793
 msgid "Are you sure you want to quit the installer?"
 msgstr "Tem certeza de que deseja sair do instalador?"
-
-#: live-installer/frontend/gtk_interface.py:977
-#: live-installer/frontend/gtk_interface.py:1006
-#: live-installer/frontend/partitioning.py:190
-#: live-installer/frontend/partitioning.py:197
-#: live-installer/frontend/partitioning.py:248
-#: live-installer/frontend/partitioning.py:268
-#: live-installer/frontend/partitioning.py:328
-#: live-installer/frontend/partitioning.py:340
-#: live-installer/frontend/partitioning.py:344
-#: live-installer/frontend/partitioning.py:764
-msgid "btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:984
-#: live-installer/frontend/gtk_interface.py:992
-#: live-installer/frontend/partitioning.py:281
-msgid "Create a subvolume"
-msgstr ""
 
 #: live-installer/frontend/gtk_interface.py:994
 #: live-installer/frontend/gtk_interface.py:1008
@@ -907,7 +1051,7 @@ msgid "Disk Encryption: "
 msgstr "Criptografia de disco: "
 
 #: live-installer/frontend/gtk_interface.py:1578
-#: live-installer/installer.py:878
+#: live-installer/installer.py:881
 msgid "Installation finished"
 msgstr "Instalação concluída"
 
@@ -928,143 +1072,6 @@ msgstr "Erro na instalação"
 
 #: live-installer/frontend/gtk_interface.py:1647
 msgid "Error"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:72
-msgid "B"
-msgstr "B"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:591
-msgid "kB"
-msgstr "kB"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:591
-msgid "MB"
-msgstr "MB"
-
-#: live-installer/frontend/partitioning.py:73
-#: live-installer/frontend/partitioning.py:592
-msgid "TB"
-msgstr "TB"
-
-#: live-installer/frontend/partitioning.py:80
-msgid "Removable:"
-msgstr "Removível:"
-
-#: live-installer/frontend/partitioning.py:194
-msgid "Edit Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:226
-msgid "The name of a subvolume must not start or end with a forward slash"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:230
-msgid "The name of a subvolume must not be blank or contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:234
-msgid "The mount point of a subvolume must not contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:239
-#, python-format
-msgid "Subvolume with name '%s' already exists"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:333
-msgid "Edit"
-msgstr "Editar"
-
-#: live-installer/frontend/partitioning.py:345
-#: live-installer/frontend/partitioning.py:352
-#: live-installer/frontend/partitioning.py:356
-#: live-installer/frontend/partitioning.py:363
-#: live-installer/frontend/partitioning.py:372
-#, fuzzy, python-format
-msgid "Assign to %s"
-msgstr "Atribuir à /"
-
-#: live-installer/frontend/partitioning.py:379
-msgid "Create btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:435
-msgid ""
-"Disk: {} partition table broken or not exists. Do you want to create new "
-"partition table?"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:533
-#, python-format
-msgid ""
-"The partition table couldn't be written for %s. Restart the computer and try "
-"again."
-msgstr ""
-"A tabela de partições não pode ser gravada em %s. Reinicie o computador e "
-"tente novamente."
-
-#: live-installer/frontend/partitioning.py:578
-#, python-format
-msgid ""
-"The partition %s could not be created. The installation will stop. Restart "
-"the computer and try again."
-msgstr ""
-"A partição %s não pode ser criada. A instalação será interrompida. Reinicie "
-"o computador e tente novamente."
-
-#: live-installer/frontend/partitioning.py:673
-msgid "Logical partition"
-msgstr "Partição lógica"
-
-#: live-installer/frontend/partitioning.py:674
-msgid "Extended partition"
-msgstr "Partição estendida"
-
-#: live-installer/frontend/partitioning.py:678
-#: live-installer/frontend/partitioning.py:811
-msgid "Unknown"
-msgstr "Desconhecido(a)"
-
-#: live-installer/frontend/partitioning.py:729
-msgid "bootloader/recovery"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:742
-#, fuzzy
-msgid "EFI System Partition"
-msgstr "Editar partição"
-
-#: live-installer/frontend/partitioning.py:777
-msgid "Edit partition"
-msgstr "Editar partição"
-
-#: live-installer/frontend/partitioning.py:779
-msgid "Device:"
-msgstr "Dispositivo:"
-
-#: live-installer/frontend/partitioning.py:781
-msgid "Format as:"
-msgstr "Formatar como:"
-
-#: live-installer/frontend/partitioning.py:783
-#: live-installer/frontend/partitioning.py:870
-msgid "Mount point:"
-msgstr "Ponto de montagem:"
-
-#: live-installer/frontend/partitioning.py:784
-#: live-installer/frontend/partitioning.py:871
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: live-installer/frontend/partitioning.py:861
-msgid "Create Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:868
-msgid "Name:"
 msgstr ""
 
 #: live-installer/main.py:38
@@ -1228,49 +1235,49 @@ msgstr "Criando partições no %s"
 msgid "Formatting %(partition)s as %(format)s ..."
 msgstr "Formatando %(partition)s como %(format)s..."
 
-#: live-installer/installer.py:591
+#: live-installer/installer.py:594
 msgid "Setting hostname"
 msgstr "Definindo o nome do host"
 
-#: live-installer/installer.py:616
+#: live-installer/installer.py:619
 msgid "Setting locale"
 msgstr "Definindo localização"
 
-#: live-installer/installer.py:656
+#: live-installer/installer.py:659
 #, fuzzy
 msgid "Setting timezone"
 msgstr "Definindo o nome do host"
 
-#: live-installer/installer.py:691
+#: live-installer/installer.py:694
 msgid "Setting keyboard options"
 msgstr "Definindo opções de teclado"
 
-#: live-installer/installer.py:768
+#: live-installer/installer.py:771
 #, fuzzy
 msgid "Removing extra packages"
 msgstr "Removendo configuração live (pacotes)"
 
-#: live-installer/installer.py:774
+#: live-installer/installer.py:777
 msgid "Clearing package manager"
 msgstr ""
 
-#: live-installer/installer.py:793
+#: live-installer/installer.py:796
 msgid "Generating initramfs"
 msgstr ""
 
-#: live-installer/installer.py:798
+#: live-installer/installer.py:801
 msgid "Preparing bootloader installation"
 msgstr ""
 
-#: live-installer/installer.py:818
+#: live-installer/installer.py:821
 msgid "Installing bootloader"
 msgstr "Instalando o carregador de inicialização"
 
-#: live-installer/installer.py:830
+#: live-installer/installer.py:833
 msgid "Configuring bootloader"
 msgstr "Configurando o carregador de inicialização"
 
-#: live-installer/installer.py:838
+#: live-installer/installer.py:841
 msgid ""
 "WARNING: The grub bootloader was not configured properly! You need to "
 "configure it manually."
@@ -1278,15 +1285,15 @@ msgstr ""
 "ATENÇÃO: O carregador de inicialização GRUB não foi configurado "
 "corretamente! Você irá precisar configurar manualmente."
 
-#: live-installer/installer.py:851
+#: live-installer/installer.py:854
 msgid "Trying to install updates"
 msgstr ""
 
-#: live-installer/installer.py:904
+#: live-installer/installer.py:907
 msgid "Checking bootloader"
 msgstr "Verificando o carregador de inicialização"
 
-#: live-installer/installer.py:941
+#: live-installer/installer.py:944
 msgid "Failed to run command (Exited with {}):"
 msgstr ""
 
