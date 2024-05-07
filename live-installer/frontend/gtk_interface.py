@@ -963,15 +963,25 @@ class InstallerWindow:
 
     def partition_change_event(self,widget):
         model, itervar = widget.get_selection().get_selected()
+        self.builder.get_object("label_new").set_label(_("Create"))
+
         self.builder.get_object("button_add_partition").set_sensitive(False)
         self.builder.get_object("button_remove_partition").set_sensitive(False)
         self.builder.get_object("button_format_partition").set_sensitive(False)
         if itervar:
             self.selected_partition = model.get_value(itervar, partitioning.IDX_PART_OBJECT) # partition opject
             fstype = model.get_value(itervar, partitioning.IDX_PART_TYPE).replace("<span>","").replace("</span>","").strip()
+            format_as = model.get_value(itervar,partitioning.IDX_PART_FORMAT_AS)
             if fstype == _('Free space'):
                 self.builder.get_object("button_add_partition").set_sensitive(True)
+            elif fstype == _('btrfs subvolume'):
+                self.builder.get_object("button_remove_partition").set_sensitive(True)
             elif len(fstype) > 0:
+                if (fstype == 'btrfs' and (format_as == "" or format_as == 'btrfs' or format_as == None)) or (fstype != 'btrfs' and format_as == 'btrfs'):
+                    self.builder.get_object(
+                        "button_add_partition").set_sensitive(True)
+                    self.builder.get_object("label_new").set_label(
+                        _("Create a subvolume"))
                 self.builder.get_object("button_remove_partition").set_sensitive(True)
                 self.builder.get_object("button_format_partition").set_sensitive(True)
 
@@ -979,7 +989,9 @@ class InstallerWindow:
         start = self.selected_partition.partition.geometry.start
         end = self.selected_partition.partition.geometry.end
         mbr = self.selected_partition.mbr
-        if QuestionDialog(_("Are you sure?"),
+        if self.builder.get_object("label_new").get_label() == _("Create a subvolume"):
+            partitioning.create_subvolume_dialog(widget)
+        elif QuestionDialog(_("Are you sure?"),
             _("New partition will created at {}").format(mbr)):
             command = "parted -s {} mkpart primary ext4 {}s {}s".format(mbr,start,end)
             def update_partition_menu(pid, status):
@@ -991,6 +1003,22 @@ class InstallerWindow:
             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, update_partition_menu)
 
     def part_remove_button_event(self,widget):
+        if self.selected_partition.type == _("btrfs subvolume"):
+            subvolume = self.selected_partition
+            if QuestionDialog(_("Are you sure?"),
+                              _("subvolume {} will removed from {}.").format(subvolume.name, subvolume.parent.path)):
+                model, itervar = self.builder.get_object(
+                    "treeview_disks").get_selection().get_selected()
+                subvolume.parent.subvolumes.remove(subvolume)
+                model.remove(itervar)
+                if subvolume.exists_on_disk:
+                    mount_point = getoutput("mktemp -d").decode("utf-8").strip()
+                    os.system("mount -t btrfs %s %s" %
+                              (subvolume.parent.path, mount_point))
+                    os.system("btrfs subvolume delete %s/%s" %
+                              (mount_point, subvolume.name))
+                    os.system("umount --force %s" % mount_point)
+            return
         path = self.selected_partition.path
         mbr = self.selected_partition.mbr
         partnum = partitioning.find_partition_number(path)
@@ -998,7 +1026,8 @@ class InstallerWindow:
             _("Partition {} will removed from {}.").format(path,mbr)):
             def update_partition_menu(pid, status):
                 partitioning.build_partitions(self)
-            command = "parted -s {} rm {}".format(mbr,partnum)
+            #  Use wipefs to ensure that filesystem signature is removed so that partition will not be restored after create new partition with same blocks
+            command = "wipefs -a {} && parted -s {} rm {}".format(path,mbr,partnum)
             pid, stdin, stdout, stderr = GLib.spawn_async(["/bin/bash", "-c", command],
             flags=GLib.SPAWN_DO_NOT_REAP_CHILD,
             standard_output=True,
@@ -1216,6 +1245,20 @@ class InstallerWindow:
                             if not QuestionDialog(_("Installer"), _(
                                 "The root partition is too small. It should be at least 16GB. Do you want to continue?")):
                                 return
+                if not found_root_partition:
+                    for partition in self.setup.partitions:
+                        for subvolume in partition.subvolumes:
+                            print("subvolume",subvolume.mount_as, "name", subvolume.name)
+                            if(subvolume.mount_as == "/"):
+                                found_root_partition = True
+                                if subvolume.exists_on_disk and (not subvolume.format or subvolume.format is None):
+                                    if not QuestionDialog(_("Installer"), _(
+                                        "Root filesystem type not specified. Installation will continue without disk formatting. Do you want to continue?")):
+                                        return
+                                if int(float(partition.partition.getLength('GB'))) < 16:
+                                    if not QuestionDialog(_("Installer"), _(
+                                        "The root partition is too small. It should be at least 16GB. Do you want to continue?")):
+                                        return
 
                 if not found_root_partition:
                     ErrorDialog(_("Installer"), "<b>%s</b>" % _("Please select a root (/) partition."), _(
@@ -1505,6 +1548,15 @@ class InstallerWindow:
                 if p.mount_as:
                     model.append(top, (bold(_("Mount %(path)s as %(mount)s") % {
                                  'path': p.path, 'mount': p.mount_as}),))
+            for p in self.setup.partitions:
+                if (p.type == "btrfs" or p.format_as == "btrfs") and p.subvolumes != []:
+                    for subvol in p.subvolumes:
+                        model.append(top, (bold(_("Create btrfs subvolume %(path)s under %(parentPath)s ") % {
+                                     'path': subvol.name, 'parentPath': p.path}),))
+                    for subvol in p.subvolumes:
+                        if subvol.mount_as:
+                            model.append(top, (bold(_("Mount %(path)s subvolume as %(mount)s") % {
+                                         'path': subvol.name, 'mount': subvol.mount_as}),))
         if config.get("lvm_enabled", True):
             _lvm = self.builder.get_object("check_lvm").get_active()
             _lux = self.builder.get_object("check_encrypt").get_active()

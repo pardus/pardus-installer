@@ -104,6 +104,26 @@ def get_all_partition_objects(dev):
         dev.getRaidPartitions() + \
         dev.getLVMPartitions()
 
+# This function will return BtrfsSubvolume array for a given partition 
+def get_btrfs_partition_subvolumes(partition):
+    if partition.type != "btrfs":
+        return []
+    try:
+        os.system("mount %s %s" % (partition.path, TMP_MOUNTPOINT))
+        list_subvolumes = getoutput(
+            "LC_ALL=en_US.UTF-8 btrfs subvolume list %s" % TMP_MOUNTPOINT).decode("utf-8").strip().split("\n")
+        os.system("umount %s" % TMP_MOUNTPOINT)
+        subvolumes = []
+        for subvol in list_subvolumes:
+            subvolume = BtrfsSubvolume()
+            subvolume.name = subvol.split(" path ")[1]
+            subvolume.parent = partition
+            subvolume.exists_on_disk = True
+            subvolumes.append(subvolume)
+            log("subvolume: %s" % subvolume.name)
+        return subvolumes
+    except:
+        return []
 
 def find_mbr(part):
     for disk in get_disks():
@@ -167,6 +187,19 @@ def edit_partition_dialog(widget, path, viewcol):
         return
     row = model[itervar]
     partition = row[IDX_PART_OBJECT]
+    if partition.partition.type == _('btrfs subvolume'):
+        dlg = SubvolDialog(partition.name,
+                              row[IDX_PART_MOUNT_AS],
+                              partition.exists_on_disk,
+                              partition.format,
+                              _("Edit Subvolume"))
+        response_is_ok, subvolume_name, mount_as, format_subvolume = dlg.show()
+        if response_is_ok and validate_subvolume_and_mountpoint(partition.parent, subvolume_name, mount_as, partition):
+            if format_subvolume:
+                row[IDX_PART_FORMAT_AS] = _("btrfs subvolume")
+            partition.format = format_subvolume
+            assign_mount_point(partition, mount_as, _("btrfs subvolume"), False, subvolume_name)
+        return
     if (partition.partition.type != parted.PARTITION_EXTENDED and
             partition.partition.number != -1):
         dlg = PartitionDialog(row[IDX_PART_PATH],
@@ -174,31 +207,117 @@ def edit_partition_dialog(widget, path, viewcol):
                               row[IDX_PART_FORMAT_AS],
                               row[IDX_PART_TYPE],
                               row[IDX_PART_READ_ONLY])
-        response_is_ok, mount_as, format_as, read_only = dlg.show()
+        response_is_ok, mount_as, format_as, read_only, use_default_subvols = dlg.show()
         if response_is_ok:
-            assign_mount_point(partition, mount_as, format_as, read_only)
+            assign_mount_point(partition, mount_as, format_as, read_only, None, use_default_subvols)
     installer.builder.get_object("checkbutton_readonly").set_label(_("Read only"))
 
+# This function will open a dialog to create a subvolume for a partition
+def create_subvolume_dialog(widget):
+    treeview = installer.builder.get_object("treeview_disks")
+    model, itervar = treeview.get_selection().get_selected()
+    if not itervar:
+        return
+    partition = model.get_value(itervar, IDX_PART_OBJECT)
+    if not (partition or (partition.type == 'btrfs' and partition.format_as == '') or partition.format_as == 'btrfs'):
+        return
+    dlg = SubvolDialog("",
+                       "",
+                       False)
+    response_is_ok, subvolume_name, mount_as, format_subvolume = dlg.show()
+    if response_is_ok and validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as):
+        subvolume = BtrfsSubvolume()
+        # mount point will be assigned in assign_mount_point
+        subvolume.name, subvolume.mount_as, subvolume.parent = subvolume_name, "", partition
+        partition.subvolumes.append(subvolume)
+        model.append(itervar, (subvolume.name, subvolume.type, '', '',
+                     '', False, '', '', subvolume, partition.path))
+        #ensure that the mount point is assigned correctly
+        assign_mount_point(subvolume, mount_as, _("btrfs subvolume"), False, subvolume_name)
 
-def assign_mount_point(partition, mount_point, filesystem, read_only = False):
+# Check if the subvolume name and mount point are valid
+def validate_subvolume_and_mountpoint(partition, subvolume_name, mount_as, subvolume = None):
+    if subvolume_name.startswith("/") or subvolume_name.endswith("/"):
+        show_error(_("The name of a subvolume must not start or end with a forward slash"))
+        return False
+    if subvolume_name == "" or  " " in subvolume_name:
+        show_error(_(
+            "The name of a subvolume must not be blank or contain a space"))
+        return False
+    for subvol in partition.subvolumes:
+        if subvolume != None and subvol == subvolume:
+            continue
+        if subvol.name == subvolume_name:
+            show_error(_(
+                "Subvolume with name '%s' already exists") % subvolume_name)
+            return False
+    return True
+
+# This will create subvolumes using a predefined scheme
+def assign_default_subvolumes(partition):
+    model, itervar = installer.builder.get_object(
+        "treeview_disks").get_selection().get_selected()
+    for subvol in [("@", "/"), ("@home", "/home")]:
+        subvolume = BtrfsSubvolume()
+        subvolume.name, subvolume.mount_as, subvolume.parent = subvol[0], subvol[1], partition
+        partition.subvolumes.append(subvolume)
+        model.append(itervar, (subvolume.name, subvolume.type, '', '',
+                     subvolume.mount_as, False, '', '', subvolume, partition.path))
+
+def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None, use_default_subvols = False):
     # Assign it in the treeview
     model = installer.builder.get_object("treeview_disks").get_model()
     for disk in model:
         for part in disk.iterchildren():
             if partition == part[IDX_PART_OBJECT]:
+                # Remove subvolumes if partition formatted to another filesystem
+                if filesystem != _("btrfs subvolume") and filesystem != "":
+                    installer.builder.get_object(
+                        "button_add_partition").set_sensitive(False)
+                    installer.builder.get_object(
+                        "label_new").set_label(_("Create"))
+                    for subvol in part.iterchildren():
+                        model.remove(subvol.iter)
+                    part[IDX_PART_OBJECT].subvolumes = []
+
+                if filesystem == "btrfs":
+                    installer.builder.get_object(
+                        "button_add_partition").set_sensitive(True)
+                    installer.builder.get_object(
+                        "label_new").set_label(_("Create a subvolume"))
+                    if use_default_subvols:
+                        assign_default_subvolumes(partition)
+                        # ignore the mount_point that is given to the partition if its same with the default subvolumes
+                        if mount_point in ["/", "/home"]:
+                            mount_point = ""
                 part[IDX_PART_MOUNT_AS] = mount_point
                 part[IDX_PART_FORMAT_AS] = filesystem
                 part[IDX_PART_READ_ONLY] = read_only
-            elif mount_point == part[IDX_PART_MOUNT_AS]:
+            elif mount_point == part[IDX_PART_MOUNT_AS] and mount_point != "":
                 part[IDX_PART_MOUNT_AS] = ""
                 part[IDX_PART_FORMAT_AS] = ""
                 part[IDX_PART_READ_ONLY] = False
+
+            for subvol in part.iterchildren():
+                if partition == subvol[IDX_PART_OBJECT]:
+                    if subvolume_name == None:
+                        subvolume_name = partition.name
+                    subvol[IDX_PART_MOUNT_AS] = mount_point
+                    subvol[IDX_PART_PATH] = subvolume_name
+                elif mount_point == subvol[IDX_PART_MOUNT_AS] and mount_point != "":
+                    subvol[IDX_PART_MOUNT_AS] = ""
+
     # Assign it in our setup
     for part in installer.setup.partitions:
         if part == partition:
             partition.mount_as, partition.format_as, partition.read_only = mount_point, filesystem, read_only
-        elif part.mount_as == mount_point:
+        elif part.mount_as == mount_point and mount_point != "":
             part.mount_as, part.format_as, partition.read_only = '', '', False
+        for subvol in part.subvolumes:
+            if subvol == partition:
+                partition.name, partition.mount_as = subvolume_name, mount_point
+            elif subvol.mount_as == mount_point and mount_point != "":
+                subvol.mount_as = ''
 
 
 
@@ -212,8 +331,9 @@ def partitions_popup_menu(widget, event):
     partition = model.get_value(itervar, IDX_PART_OBJECT)
     if not partition:
         return
-    partition_type = model.get_value(itervar, IDX_PART_TYPE)
-    if (partition.partition.type == parted.PARTITION_EXTENDED or
+    partition_type = model.get_value(itervar, IDX_PART_TYPE).replace("<span>","").replace("</span>","").strip()
+
+    if (partition_type != _("btrfs subvolume")) and (partition.partition.type == parted.PARTITION_EXTENDED or
         partition.partition.number == -1 or
             "swap" in partition_type):
         return
@@ -223,6 +343,20 @@ def partitions_popup_menu(widget, event):
     menu.append(menuItem)
     menuItem = Gtk.SeparatorMenuItem()
     menu.append(menuItem)
+
+    # if the selected "partition" is a subvolume then show a custom menu
+    if partition_type == _("btrfs subvolume"):
+        mount_points = ["/", "/home", "/var", "/tmp", "/srv", "/opt"]
+        for mount_point in mount_points:
+            def menu_event(w,mount_point=mount_point):
+                assign_mount_point(partition, mount_point, _("btrfs subvolume"))
+            menuItem = Gtk.MenuItem(_("Assign to %s") % mount_point)
+            menuItem.connect("activate", menu_event)
+            menu.append(menuItem)
+        menu.show_all()
+        menu.popup(None, None, None, None, 0, event.time)
+        return
+
     menuItem = Gtk.MenuItem(_("Assign to %s") % "/")
     menuItem.connect("activate", lambda w: assign_mount_point(
         partition, '/', 'ext4'))
@@ -245,6 +379,13 @@ def partitions_popup_menu(widget, event):
                 assign_mount_point(partition, i, '')
         menuItem = Gtk.MenuItem(_("Assign to %s") % i)
         menuItem.connect("activate", menu_event)
+        menu.append(menuItem)
+    # if the selected partition is btrfs then add an item to create a subvolume 
+    if partition_type == "btrfs" or partition.format_as == "btrfs":
+        menuItem = Gtk.SeparatorMenuItem()
+        menu.append(menuItem)
+        menuItem = Gtk.MenuItem(_("Create btrfs subvolume"))
+        menuItem.connect("activate", create_subvolume_dialog)
         menu.append(menuItem)
     menu.show_all()
     menu.popup(None, None, None, None, 0, event.time)
@@ -349,7 +490,7 @@ class PartitionSetup(Gtk.TreeStore):
                 partition.size_percent = round(
                     partition.size_percent / sum_size_percent * 100, 1)
                 installer.setup.partitions.append(partition)
-                self.append(disk_iter, (partition.name,
+                partition_iter = self.append(disk_iter, (partition.name,
                            '<span>{}</span>'.format(
                            partition.type),
                            partition.description,
@@ -360,6 +501,22 @@ class PartitionSetup(Gtk.TreeStore):
                            partition.free_space,
                            partition,
                            disk_path))
+                # if partition is btrfs, add its subvolumes
+                if partition.type == 'btrfs':
+                    partition.subvolumes = get_btrfs_partition_subvolumes(
+                        partition)
+                    for subvolume in partition.subvolumes:
+                        self.append(partition_iter, (subvolume.name, '<span>{}</span>'.format(
+                            subvolume.type),
+                            subvolume.description,
+                            '',
+                            '',
+                            False,
+                            '',
+                            '',
+                            subvolume,
+                            subvolume.parent.path))
+
 
 
 @idle
@@ -455,6 +612,16 @@ def get_partition_label(partition_path):
             return dev
     return None
 
+def does_objects_has_the_mount_points(mount_points):
+    model = installer.builder.get_object("treeview_disks").get_model()
+    for disk in model:
+        for part in disk.iterchildren():
+            if part[IDX_PART_MOUNT_AS] == mount_points[0] or part[IDX_PART_MOUNT_AS] == mount_points[1]:
+                return True
+            for subvol in part.iterchildren():
+                if subvol[IDX_PART_MOUNT_AS] == mount_points[0] or subvol[IDX_PART_MOUNT_AS] == mount_points[1]:
+                    return True
+    return False
 
 class PartitionBase(object):
     # Partition object but only struct
@@ -464,6 +631,7 @@ class PartitionBase(object):
         self.read_only = False
         self.type = ''
         self.path = ''
+        self.subvolumes = []
 
 
 class Partition(PartitionBase):
@@ -598,6 +766,17 @@ class Partition(PartitionBase):
             (self.path, self.format_as, self.mount_as))
 
 
+class BtrfsSubvolume(object):
+    def __init__(self):
+        self.name = ""
+        self.type = _('btrfs subvolume')
+        self.description = ""
+        self.parent = None
+        self.partition = self
+        self.mount_as = ''
+        self.exists_on_disk = False
+        self.format = False
+
 class PartitionDialog(object):
     def __init__(self, path, mount_as, format_as, typevar, read_only=False):
         glade_file = RESOURCE_DIR + 'interface.ui'
@@ -629,23 +808,45 @@ class PartitionDialog(object):
 
         check_readonly = self.builder.get_object("checkbutton_readonly")
         check_readonly.set_active(read_only)
-        self.builder.get_object("combobox_use_as").set_model(model)
-        self.builder.get_object("combobox_use_as").set_active(
+        combobox_use_as = self.builder.get_object("combobox_use_as")
+        combobox_use_as.set_model(model)
+        combobox_use_as.set_active(
             filesystems.index(format_as))
-        # Build list of pre-provided mountpoints
+        combobox_use_as.connect(
+            "changed", self.show_chkbtn_btrfs_subvols)
+
         combobox = self.builder.get_object("comboboxentry_mount_point")
-        model = Gtk.ListStore(str, str)
-        model.append(["", "/"])
-        model.append(["", "swap"])
-        for i in config.distro["additional_mountpoints"]:
-            model.append(["", i])
-        if is_efi_supported():
-            for i in config.distro["additional_efi_mountpoints"]:
+        typevar = typevar.replace("<span>", "").replace("</span>", "").strip()
+        if typevar == _("Unknown"):
+            # If the partition is unknown, we can't assign a mount point
+            combobox.set_sensitive(False)
+        else:
+            # Build list of pre-provided mountpoints
+            model = Gtk.ListStore(str, str)
+            model.append(["", "/"])
+            model.append(["", "swap"])
+            for i in config.distro["additional_mountpoints"]:
                 model.append(["", i])
-        combobox.set_model(model)
-        combobox.set_entry_text_column(1)
-        combobox.set_id_column(1)
-        combobox.get_child().set_text(mount_as)
+            if is_efi_supported():
+                for i in config.distro["additional_efi_mountpoints"]:
+                    model.append(["", i])
+            combobox.set_model(model)
+            combobox.set_entry_text_column(1)
+            combobox.set_id_column(1)
+            combobox.get_child().set_text(mount_as)
+
+    # Show the default subvolumes checkbox only if btrfs is selected from combobox
+    def show_chkbtn_btrfs_subvols(self,widget):
+        w = self.builder.get_object("combobox_use_as")
+        format_as = w.get_model()[w.get_active()][0]
+        w = self.builder.get_object("checkbutton_default_btrfs_subvols")
+        if format_as == "btrfs" and not does_objects_has_the_mount_points(("/","/home")):
+            w.set_visible(True)
+            # Use the default btrfs subvols scheme by default
+            w.set_active(True)
+        else:
+            w.set_visible(False)
+            w.set_active(False)
 
     def show(self):
         response = self.window.run()
@@ -655,10 +856,63 @@ class PartitionDialog(object):
         format_as = w.get_model()[w.get_active()][0]
         w = self.builder.get_object("checkbutton_readonly")
         read_only = w.get_active()
+        w = self.builder.get_object("checkbutton_default_btrfs_subvols")
+        create_default_subvols = w.get_active()
         self.window.destroy()
         if response in (Gtk.ResponseType.YES, Gtk.ResponseType.APPLY,
                         Gtk.ResponseType.OK, Gtk.ResponseType.ACCEPT):
             response_is_ok = True
         else:
             response_is_ok = False
-        return response_is_ok, mount_as, format_as, read_only
+        return response_is_ok, mount_as, format_as, read_only, create_default_subvols
+
+class SubvolDialog(object):
+    def __init__(self, name, mount_as, exists_on_disk: bool, format=False, title=_("Create Subvolume")):
+        glade_file = RESOURCE_DIR + 'interface.ui'
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file(glade_file)
+        self.window = self.builder.get_object("subvol_dialog")
+        self.window.set_title(title)
+        self.builder.get_object("label_subvolume_name").set_markup(
+            "<b>%s</b>" % _("Name:"))
+        self.builder.get_object(
+            "label_subvol_mount_point").set_markup(_("Mount point:"))
+        self.checkbutton_format_subvolume = self.builder.get_object(
+            "checkbutton_format_subvolume")
+        if exists_on_disk:
+            self.checkbutton_format_subvolume.set_visible(True)
+            self.checkbutton_format_subvolume.set_label(_("Format subvolume"))
+            self.checkbutton_format_subvolume.set_active(format)
+        else:
+            self.checkbutton_format_subvolume.set_visible(False)
+        self.builder.get_object("button_subvol_cancel").set_label(_("Cancel"))
+        self.builder.get_object("button_subvol_ok").set_label(_("OK"))
+        self.builder.get_object("entry_subvol_name").set_text(name)
+        if exists_on_disk:
+            self.builder.get_object("entry_subvol_name").set_sensitive(False)
+        # Build list of pre-provided mountpoints
+        combobox = self.builder.get_object("comboboxentry_subvol_mount_point")
+        model = Gtk.ListStore(str, str)
+        mount_points = ["", "/", "/home", "/var", "/tmp", "/srv", "/opt"]
+        for mount_point in mount_points:
+            model.append(["", mount_point])
+        combobox.set_model(model)
+        combobox.set_entry_text_column(1)
+        combobox.set_id_column(1)
+        combobox.get_child().set_text(mount_as)
+
+    def show(self):
+        response = self.window.run()
+        w = self.builder.get_object("comboboxentry_subvol_mount_point")
+        mount_as = w.get_child().get_text().strip()
+        w = self.builder.get_object("entry_subvol_name")
+        subvol_name = w.get_text().strip()
+        w = self.builder.get_object("checkbutton_format_subvolume")
+        format_subvol = w.get_active()
+        self.window.destroy()
+        if response in (Gtk.ResponseType.YES, Gtk.ResponseType.APPLY,
+                        Gtk.ResponseType.OK, Gtk.ResponseType.ACCEPT):
+            response_is_ok = True
+        else:
+            response_is_ok = False
+        return response_is_ok, subvol_name, mount_as, format_subvol
