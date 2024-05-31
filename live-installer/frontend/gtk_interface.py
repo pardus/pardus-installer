@@ -3,6 +3,7 @@
 import frontend.timezones
 import frontend.partitioning
 import frontend.common
+import inotify.adapters
 import threading
 import time
 import parted
@@ -12,6 +13,7 @@ from frontend import *
 from frontend.dialogs import QuestionDialog, ErrorDialog, WarningDialog
 from frontend.keyboardview import kbdpreview
 from installer import InstallerEngine, Setup, NON_LATIN_KB_LAYOUTS
+from logger import _file as LOG_FILE_PATH
 
 gettext.bindtextdomain('xkeyboard-config', '/usr/share/locale')
 gettext.textdomain('xkeyboard-config')
@@ -314,12 +316,23 @@ class InstallerWindow:
         # install page
         self.builder.get_object("label_install_progress").set_text(
             _("Calculating file indexes ..."))
+        self.builder.get_object("button_logs").connect_after(
+            "toggled", self.show_logs)
+
         img = self.builder.get_object("image_welcome")
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             "branding/welcome.png", 832, 468, False)
         img.set_from_pixbuf(pixbuf)
         self.gtkimages.append(img)
         self.gtkpixbufs.append(pixbuf)
+        self.buffer = Gtk.TextBuffer()
+        self.text_logs = self.builder.get_object("text_logs")
+        self.text_logs_container = self.builder.get_object("text_logs_container")
+        self.slidebox = self.builder.get_object("slidebox")
+        self.log_file = open(LOG_FILE_PATH, "r")
+        threading.Thread(target=self.monitor_logs,daemon=True).start()
+        self.size_allocation_handler = self.text_logs.connect("size-allocate", self.scroll_to_bottom)
+        self.text_logs.connect("map", self.scroll_to_bottom)
 
         # build partition list
         self.should_pulse = False
@@ -1566,6 +1579,40 @@ class InstallerWindow:
             model.append(top, (_("Disk Encryption: ") +
                                    bold(_("enabled") if _lux else _("disabled")),))
         self.builder.get_object("treeview_overview").expand_all()
+
+    def monitor_logs(self):
+        i = inotify.adapters.Inotify()
+        i.add_watch(LOG_FILE_PATH, mask=inotify.constants.IN_MODIFY)
+        
+        # Continuously monitor for file modifications
+        for _ in i.event_gen(yield_nones=False):
+            self.buffer.insert(self.buffer.get_end_iter(), self.log_file.read())
+            self.text_logs.set_buffer(self.buffer)
+            
+            # Scroll to the bottom of the text_logs_container if necessary
+            adj = self.text_logs_container.get_vadjustment()
+            adj_value = adj.get_upper() - adj.get_page_size()
+            if adj_value - adj.get_page_size() < adj.get_value():
+                GLib.idle_add(adj.set_value, adj_value)
+
+    def show_logs(self, widget):
+        if widget.get_active():
+            self.slidebox.set_visible(False)
+            self.text_logs_container.set_visible(True)
+            # Scroll to the bottom of the text_logs GtkTextView when the text_logs_container is visible
+            self.text_logs.handler_unblock(self.size_allocation_handler)
+        else:
+            self.text_logs_container.set_visible(False)
+            self.slidebox.set_visible(True)
+            # This will prevent a bug that sometimes causes the text_logs_containers not scrolling to the bottom
+            self.text_logs.handler_unblock(self.size_allocation_handler)
+    
+    def scroll_to_bottom(self, widget, *args):
+        adj = self.text_logs_container.get_vadjustment()
+        adj_value = adj.get_upper() - adj.get_page_size()
+        GLib.idle_add(adj.set_value, adj_value)
+        # Blocking the handler allows the user to scroll to the top of the text_logs_container
+        self.text_logs.handler_block(self.size_allocation_handler)
 
     @idle
     def show_error_dialog(self, message, detail):
