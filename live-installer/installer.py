@@ -779,6 +779,11 @@ class InstallerEngine:
         log(config.get("remove_packages", ["17g-installer"]))
         self.run("chroot||yes | {}".format(config.package_manager(
             "remove_package_with_unusing_deps", config.get("remove_packages", ["17g-installer"]))))
+
+        log(config.get("remove_packages_finally", []))
+        self.run("chroot||yes | {}".format(config.package_manager(
+            "remove_package_with_unusing_deps", config.get("remove_packages_finally", []))))
+
         self.run("chroot|| rm -rf /lib/live-installer",vital=False)
 
 
