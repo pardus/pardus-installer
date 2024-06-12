@@ -3,7 +3,6 @@
 import frontend.timezones
 import frontend.partitioning
 import frontend.common
-import inotify.adapters
 import threading
 import time
 import parted
@@ -1580,13 +1579,19 @@ class InstallerWindow:
                                    bold(_("enabled") if _lux else _("disabled")),))
         self.builder.get_object("treeview_overview").expand_all()
 
+    def continuously_read_file(self, file_path):
+        with open(file_path, 'r') as file:
+            file.seek(0,2)
+            while True:
+                line = file.readline()
+                if not line:
+                    time.sleep(0.1)
+                    continue
+                yield line
+
     def monitor_logs(self):
-        i = inotify.adapters.Inotify()
-        i.add_watch(LOG_FILE_PATH, mask=inotify.constants.IN_MODIFY)
-        
-        # Continuously monitor for file modifications
-        for _ in i.event_gen(yield_nones=False):
-            self.buffer.insert(self.buffer.get_end_iter(), self.log_file.read())
+        for line in self.continuously_read_file(LOG_FILE_PATH):
+            self.buffer.insert(self.buffer.get_end_iter(), line)
             self.text_logs.set_buffer(self.buffer)
             
             # Scroll to the bottom of the text_logs_container if necessary
