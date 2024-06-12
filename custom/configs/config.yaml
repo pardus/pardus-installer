@@ -26,8 +26,11 @@ welcome_screen: false
 remove_packages:
   - live-config-*
   - live-boot-*
-  - live-tools
   - pardus-installer
+
+# This should stay here to prevent generating initramfs multiple times (which will take extra unnecessary time)
+remove_packages_finally:
+  - live-tools
 
 ## User section
 autologin_enabled: false
