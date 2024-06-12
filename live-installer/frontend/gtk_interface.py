@@ -1593,7 +1593,9 @@ class InstallerWindow:
         for line in self.continuously_read_file(LOG_FILE_PATH):
             self.buffer.insert(self.buffer.get_end_iter(), line)
             self.text_logs.set_buffer(self.buffer)
-            
+            # This is neccecary to prevent a bug that sometimes causes the text_logs_containers not scrolling to the bottom
+            time.sleep(0.1)
+
             # Scroll to the bottom of the text_logs_container if necessary
             adj = self.text_logs_container.get_vadjustment()
             adj_value = adj.get_upper() - adj.get_page_size()
