@@ -1,14 +1,14 @@
-# Portuguese translation for linuxmint
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the linuxmint package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-06 19:10+0300\n"
-"PO-Revision-Date: 2023-10-31 23:07+0000\n"
+"PO-Revision-Date: 2024-05-09 18:28+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2020-03-13 11:20+0000\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: live-installer/resources/interface.ui:71
 msgid "Welcome to the 17g Installer."
@@ -295,13 +295,12 @@ msgstr "apenas leitura"
 
 #: live-installer/resources/interface.ui:2518
 msgid "Use default Btrfs subvolumes"
-msgstr ""
+msgstr "Usar subvolumes Btrfs predefinidos"
 
 #: live-installer/resources/interface.ui:2678
 #: live-installer/frontend/partitioning.py:888
-#, fuzzy
 msgid "Format subvolume"
-msgstr "Formatar como"
+msgstr "Formatar subvolume"
 
 #: live-installer/resources/welcome.ui:61
 msgid "Try 17g"
@@ -458,11 +457,11 @@ msgstr "Removível:"
 #: live-installer/frontend/gtk_interface.py:977
 #: live-installer/frontend/gtk_interface.py:1006
 msgid "btrfs subvolume"
-msgstr ""
+msgstr "subvolume btrfs"
 
 #: live-installer/frontend/partitioning.py:195
 msgid "Edit Subvolume"
-msgstr ""
+msgstr "Editar subvolume"
 
 #: live-installer/frontend/partitioning.py:213
 #: live-installer/frontend/gtk_interface.py:598
@@ -471,26 +470,26 @@ msgstr "Apenas leitura"
 
 #: live-installer/frontend/partitioning.py:241
 msgid "The name of a subvolume must not start or end with a forward slash"
-msgstr ""
+msgstr "O nome de um subvolume não deve começar ou terminar com uma barra"
 
 #: live-installer/frontend/partitioning.py:245
 msgid "The name of a subvolume must not be blank or contain a space"
-msgstr ""
+msgstr "O nome de um subvolume não pode estar em branco ou conter um espaço"
 
 #: live-installer/frontend/partitioning.py:249
 msgid "The mount point of a subvolume must not contain a space"
-msgstr ""
+msgstr "O ponto de montagem de um subvolume não pode conter um espaço"
 
 #: live-installer/frontend/partitioning.py:256
 #, python-format
 msgid "Subvolume with name '%s' already exists"
-msgstr ""
+msgstr "Já existe um subvolume com o nome '%s'"
 
 #: live-installer/frontend/partitioning.py:291
 #: live-installer/frontend/gtk_interface.py:984
 #: live-installer/frontend/gtk_interface.py:992
 msgid "Create a subvolume"
-msgstr ""
+msgstr "Criar um subvolume"
 
 #: live-installer/frontend/partitioning.py:345
 msgid "Edit"
@@ -507,7 +506,7 @@ msgstr "Atribuir a %s"
 
 #: live-installer/frontend/partitioning.py:391
 msgid "Create btrfs subvolume"
-msgstr ""
+msgstr "Criar um subvolume btrfs"
 
 #: live-installer/frontend/partitioning.py:446
 #: live-installer/frontend/partitioning.py:529
@@ -609,11 +608,11 @@ msgstr "Cancelar"
 
 #: live-installer/frontend/partitioning.py:874
 msgid "Create Subvolume"
-msgstr ""
+msgstr "Criar subvolume"
 
 #: live-installer/frontend/partitioning.py:881
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: live-installer/frontend/gtk_interface.py:109
 #: live-installer/frontend/gtk_interface.py:514
@@ -683,7 +682,6 @@ msgstr "Aguarde..."
 
 #: live-installer/frontend/gtk_interface.py:499
 #: live-installer/frontend/gtk_interface.py:613
-#, fuzzy
 msgid "Automated Install"
 msgstr "Instalação automatizada"
 
@@ -793,9 +791,8 @@ msgid "New partition will created at {}"
 msgstr "Nova partição será criada em {}"
 
 #: live-installer/frontend/gtk_interface.py:1009
-#, fuzzy
 msgid "subvolume {} will removed from {}."
-msgstr "A partição {} será removida de {}."
+msgstr "subvolume {} será removida de {}."
 
 #: live-installer/frontend/gtk_interface.py:1026
 msgid "Partition {} will removed from {}."
@@ -1017,12 +1014,12 @@ msgstr "Montar %(path)s como %(mount)s"
 #: live-installer/frontend/gtk_interface.py:1554
 #, python-format
 msgid "Create btrfs subvolume %(path)s under %(parentPath)s "
-msgstr ""
+msgstr "Criar subvolume btrfs %(path)s sob %(parentPath)s "
 
 #: live-installer/frontend/gtk_interface.py:1558
-#, fuzzy, python-format
+#, python-format
 msgid "Mount %(path)s subvolume as %(mount)s"
-msgstr "Montar %(path)s como %(mount)s"
+msgstr "Montar %(path)s subvolume como %(mount)s"
 
 #: live-installer/frontend/gtk_interface.py:1563
 msgid "LVM: "
