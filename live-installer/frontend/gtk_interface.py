@@ -1333,8 +1333,9 @@ class InstallerWindow:
                 self.builder.get_object("button_next").get_style_context().remove_class("suggested-action")
             self.show_overview()
         elif index == self.PAGE_INSTALL:
-            self.builder.get_object("button_next").set_sensitive(False)
-            self.builder.get_object("button_back").set_sensitive(False)
+            self.builder.get_object("button_next").hide()
+            self.builder.get_object("button_back").hide()
+            self.builder.get_object("button_automated").hide()
             self.builder.get_object("dot_box").hide()
             self.window.resize(0, 0)
             GLib.timeout_add(100, self.set_slide_page)
