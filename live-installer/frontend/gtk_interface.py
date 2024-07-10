@@ -794,11 +794,19 @@ class InstallerWindow:
         _pass1 = self.builder.get_object("entry_passphrase").get_text()
         _pass2 = self.builder.get_object("entry_passphrase2").get_text()
         if _pass1 == "":
-            return _("Please provide a passphrase for the encryption."), ""
+            self.builder.get_object("button_next").set_sensitive(False)
+            self.builder.get_object("lux_warning").show()
+            self.builder.get_object("lux_warning").set_text(
+                _("Please provide a passphrase for the encryption."))
+            return
         if _pass1 != _pass2:
-            return _("Your passwords do not match."), ""
-        password_error, weekMessage, weeklevel = validate.password(_pass1,"")
-        return password_error, weekMessage
+            self.builder.get_object("button_next").set_sensitive(False)
+            self.builder.get_object("lux_warning").show()
+            self.builder.get_object("lux_warning").set_text(
+                _("Your passwords do not match."))
+            return
+        self.builder.get_object("button_next").set_sensitive(True)
+        self.builder.get_object("lux_warning").hide()
 
     def quit_cb(self, widget, data=None):
         if QuestionDialog(_("Quit?"), _(
@@ -1366,13 +1374,6 @@ class InstallerWindow:
             if self.setup.disk is None:
                 errorFound = True
                 errorMessage = _("Please select a disk.")
-            if self.setup.luks:
-                errorMessage , weekMessage = self.assign_passphrase()
-                if errorMessage != None:
-                    errorFound = True
-                if weekMessage != "":
-                    if not QuestionDialog(_("Your passwords is not strong."), weekMessage + "\n"+_("Are you sure?")):
-                        return
             if (errorFound):
                 WarningDialog(_("Installer"), errorMessage)
             else:
