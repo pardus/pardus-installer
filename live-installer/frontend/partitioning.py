@@ -399,9 +399,7 @@ def build_grub_partitions():
             p.partition.disk.device.path for p in installer.setup.partitions if p.mount_as == '/'][0]
     except IndexError:
         preferred = ''
-    devices = sorted(list(d[0] for d in installer.setup.partition_setup.disks) +
-                     list(
-                         [_f for _f in (p.name for p in installer.setup.partitions) if _f]),
+    devices = sorted(list(d[0] for d in installer.setup.partition_setup.disks),
                      key=lambda path: path != preferred)
     for p in devices:
         grub_model.append([p])
