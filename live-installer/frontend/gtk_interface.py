@@ -788,11 +788,17 @@ class InstallerWindow:
 
         self.builder.get_object("swap_size").set_range(1,32)
         self.builder.get_object("swap_size").set_sensitive(_swap)
+        self.assign_passphrase(None)
         print(self.setup.grub_device, _auto, self.setup.disk)
 
     def assign_passphrase(self, widget=None):
         _pass1 = self.builder.get_object("entry_passphrase").get_text()
         _pass2 = self.builder.get_object("entry_passphrase2").get_text()
+        if not self.builder.get_object("check_encrypt").get_active():
+            self.builder.get_object("button_next").set_sensitive(True)
+            self.builder.get_object("lux_warning").hide()
+            return
+
         if _pass1 == "":
             self.builder.get_object("button_next").set_sensitive(False)
             self.builder.get_object("lux_warning").show()
