@@ -1,3 +1,61 @@
+pardus-installer (3.0.0) unstable; urgency=medium
+
+  [ vilez ]
+  * feat: show subvolume list in gui
+  * feat: Add support for creating and remove btrfs subvolumes
+  * feat: Add support for editing btrfs subvolumes in gui
+  * feat: add support for install with subvolumes
+  * feat: add checkbutton for creating subvolumes using a default scheme
+  * feat: add a custom popup menu for btrfs subvolumes
+  * feat: Show overview for btrfs setup in overview page and fix typos
+  * fix: fixed a bug that didnt allow to more than 1 partition to be formatted
+  * fix: fix subvolume creation validation
+  * fix: dont allow to use default btrfs subvol schema if there / or /home mountpoints exists
+  * fix: execute the function only when response_is_ok in subvol edit dialog
+  * refactor: Use show_error function instead of dialogs.ErrorDialog
+  * fix: some bugfixes and refactoring
+  * feat: Allow nested subvolumes
+  * fix: ensure that the partition is btrfs before adding "subvol=" to fstab
+  * feat: use default btrfs subvols on format by default and some fixes in assign_mount_point logic
+  * fix: fix subvolume name sometimes doesnt change on ui
+  * fix: improve subvolume create/delete logic and add a exists_on_disk atrribute to BtrfsSubvolume
+  * fix: fix a bug can cause writing wrong fstab to a vfat partition
+  * fix: Dont allow to edit subvolume name if subvolume exists on the disk
+  * fix: remove fs signature before partition removal to ensure that the partition will not be restored after recreating it
+  * fix: Dont allow to assign mount point in partition edit dialog if filesystem is unknown
+  * fix: fixed a bug that caused some devices with empty mount_point to be appended multiple times to self.setup.partitions
+  * chore: remove dead code and some typofixes
+  * fix: dont change partition mount_as if the mount_point is empty
+  * chore: update po files
+  * fix: set subvolume_name to partition.name if subvolume_name is None
+  * fix: fix subvolume removing logic
+  * fix: validate name and mountpoint after edit subvolume dialog
+  * feat: allow format subvolumes (that exists on disk)
+  * chore: update translations
+  * chore: remove dead code
+  * chore: turkish translations
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ vilez ]
+  * feat: add a show logs button to the installer
+  * perf: prevent generating initramfs multiple times
+  * chore: config: apt: update remove_package_with_unusing_deps  to use 1 command instead of 2 commands
+  * refactor: remove python3-inotify dependency and use a while true loop instead
+  * fix: fix a bug didnt allowed the container to scroll to the bottom when new lines inserted
+
+  [ Ali Riza KESKIN ]
+  * lux password check improvements
+  * do not list partitions on grub device selection
+  * fix lux password check issue
+  * hide buttons on install page
+
+  [ Yusuf Düzgün ]
+  * update slides icon
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jul 2024 15:43:11 +0300
+
 pardus-installer (2.0.4) unstable; urgency=medium
 
   * Fix typo
