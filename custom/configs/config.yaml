@@ -5,7 +5,7 @@ distro_codename: pardus
 distro_title: Pardus
 # distribution: auto
 # display_manager: auto
-copyright: TÜBİTAK ULAKBİM | 2024
+copyright: TÜBİTAK BİLGEM | 2024
 
 ## Base options section
 # loop_directory: /dev/loop0
@@ -48,12 +48,12 @@ additional_user_groups:
   - audio
   - dip
   - video
+  - users
   - plugdev
   - netdev
   - bluetooth
   - lpadmin
-  - scanner
-  
+
 ## Partitioning section
 # manual_partition_enabled: true 
 use_swap: true
