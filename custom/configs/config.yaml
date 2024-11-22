@@ -5,7 +5,7 @@ distro_codename: pardus
 distro_title: Pardus
 # distribution: auto
 # display_manager: auto
-copyright: TÜBİTAK BİLGEM | 2024
+copyright: © TÜBİTAK BİLGEM
 
 ## Base options section
 # loop_directory: /dev/loop0
