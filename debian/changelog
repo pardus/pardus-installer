@@ -1,3 +1,18 @@
+pardus-installer (3.0.1) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * ulakbim -> bilgem
+  * update bilgem
+
+  [ Yusuf Düzgün ]
+  * changed slides for pardus 23.3
+  * slide picture time out changed 15sec to 5sec
+
+  [ Fatih Altun ]
+  * Update 4.svg slide picture
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 02 Dec 2024 19:45:42 +0300
+
 pardus-installer (3.0.0) unstable; urgency=medium
 
   [ vilez ]
