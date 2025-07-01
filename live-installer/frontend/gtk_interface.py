@@ -144,9 +144,11 @@ class InstallerWindow:
 
         # type page
         model = Gtk.ListStore(str, str)
-        model.set_sort_column_id(0, Gtk.SortType.ASCENDING)
+        model.set_sort_func(0, lambda x, y, _: locale.strcoll(x, y))
+        self.disks = partitioning.get_disks()
+        self.disks_models = {}
         disk_iterators = []
-        for disk_path, disk_description in partitioning.get_disks():
+        for disk_path, disk_description in self.disks:
             iterator = model.append(
                 ("%s (%s)" % (disk_description, disk_path), disk_path))
             disk_iterators.append(iterator)
@@ -155,7 +157,7 @@ class InstallerWindow:
         self.builder.get_object("combo_disk").pack_start(renderer_text, True)
         self.builder.get_object("combo_disk").add_attribute(
             renderer_text, "text", 0)
-        if len(partitioning.get_disks()) >= 1:
+        if len(self.disks) >= 1:
             self.builder.get_object("combo_disk").set_active_iter(disk_iterators[0])
             model = self.builder.get_object("combo_disk").get_model()
             row = model[0]
@@ -196,6 +198,9 @@ class InstallerWindow:
             "toggled", self.assign_options)
 
         # partitions
+        self._combobox_disk_selection = None
+        self.builder.get_object("combobox_disk_selection").connect("changed", self.on_combobox_disk_selection_changed)
+
         self.builder.get_object("button_edit").connect(
             "clicked", self.manually_edit_partitions)
         self.builder.get_object("button_refresh").connect(
@@ -458,7 +463,7 @@ class InstallerWindow:
             "treeview_disks").get_selection().get_selected()
         # prefer disk currently selected and show it first
         preferred = model[itervar][-1] if itervar else ''
-        disks = ' '.join(sorted((disk for disk, desc in model.disks),
+        disks = ' '.join(sorted((disk for disk, desc in self.disks),
                             key=lambda disk: disk != preferred))
         os.system('umount -f ' + disks)
         def update_partition_menu(pid, status):
@@ -986,6 +991,19 @@ class InstallerWindow:
             treeview.scroll_to_cell(path)
         except NameError:
             pass  # set_keyboard_layout not set
+
+    def on_combobox_disk_selection_changed(self, widget):
+        # save current treeview model
+        treeview_model = self.builder.get_object("treeview_disks").get_model()
+        self.disks_models[self._combobox_disk_selection] = treeview_model
+
+        model = widget.get_model()
+        active = widget.get_active()
+        if active < 0:
+            return
+        row = model[active]
+        self._combobox_disk_selection = row[1]
+        self.builder.get_object("treeview_disks").set_model(self.disks_models[row[1]])
 
     def partition_change_event(self,widget):
         model, itervar = widget.get_selection().get_selected()

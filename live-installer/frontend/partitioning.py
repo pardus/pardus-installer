@@ -168,13 +168,39 @@ def build_partitions(_installer):
         Gdk.Cursor.new(Gdk.CursorType.WATCH))  # "busy" cursor
     installer.window.set_sensitive(False)
     log("Starting PartitionSetup()")
-    partition_setup = PartitionSetup()
+    installer._combobox_disk_selection = None
+    installer.disks = get_disks()
+    installer.setup.partitions = []
+    installer.disks_models = {}
+    for disk in disks:
+        disk_name = disk[0]
+        prt_setup = PartitionSetup().init_partitions(disk_name)
+        if not prt_setup:
+            continue
+        installer.disks_models[disk_name] = prt_setup
     log("Finished PartitionSetup()")
-    if partition_setup.disks:
-        installer._selected_disk = partition_setup.disks[0][0]
+
     log("Showing the partition screen")
-    installer.builder.get_object("treeview_disks").set_model(partition_setup)
-    installer.builder.get_object("treeview_disks").expand_all()
+    model = Gtk.ListStore(str, str)
+    renderer_text = Gtk.CellRendererText()
+    model.set_sort_func(0, lambda x, y, _: locale.strcoll(x, y))
+    for disk in disks:
+        if disk[0] in installer.disks_models:
+            model.append(
+                ("%s (%s)" % (disk[1], disk[0]), disk[0]))
+
+    combobox_disk_selection = installer.builder.get_object("combobox_disk_selection")
+    combobox_disk_selection.clear()
+    combobox_disk_selection.set_model(model)
+    combobox_disk_selection.pack_start(renderer_text, True)
+    combobox_disk_selection.add_attribute(renderer_text, "text", 0)
+    if len(model) > 0:
+        combobox_disk_selection.set_active(0)
+        installer._combobox_disk_selection = model[0][1]
+        installer.builder.get_object("treeview_disks").set_model(installer.disks_models[model[0][1]])
+        installer.builder.get_object("treeview_disks").expand_all()
+    else:
+        dialogs.WarningDialog(_("Installer"), _("No usable disks found."))
     installer.window.get_window().set_cursor(None)
     installer.window.set_sensitive(True)
 
@@ -265,10 +291,11 @@ def assign_default_subvolumes(partition):
                      subvolume.mount_as, False, '', '', subvolume, partition.path))
 
 def assign_mount_point(partition, mount_point, filesystem, read_only = False, subvolume_name = None, use_default_subvols = False):
-    # Assign it in the treeview
-    model = installer.builder.get_object("treeview_disks").get_model()
+    model = list(installer.disks_models.values())
     for disk in model:
-        for part in disk.iterchildren():
+        if disk == None:
+            continue
+        for part in disk:
             if partition == part[IDX_PART_OBJECT]:
                 # Remove subvolumes if partition formatted to another filesystem
                 if filesystem != _("btrfs subvolume") and filesystem != "":
@@ -399,7 +426,7 @@ def build_grub_partitions():
             p.partition.disk.device.path for p in installer.setup.partitions if p.mount_as == '/'][0]
     except IndexError:
         preferred = ''
-    devices = sorted(list(d[0] for d in installer.setup.partition_setup.disks),
+    devices = sorted(list(d[0] for d in installer.disks),
                      key=lambda path: path != preferred)
     for p in devices:
         grub_model.append([p])
@@ -419,101 +446,96 @@ class PartitionSetup(Gtk.TreeStore):
                                              str,  # free space
                                              object,  # partition object
                                              str)  # disk device path
-        installer.setup.partitions = []
         installer.setup.partition_setup = self
 
+    def init_partitions(self, disk_path):
         os.popen('mkdir -p ' + TMP_MOUNTPOINT)
-        self.disks = get_disks()
-        log('Disks: ', self.disks)
-        already_done_full_disk_format = False
-        for disk_path, disk_description in self.disks:
-            try:
-                disk_device = parted.getDevice(disk_path)
-            except Exception as detail:
-                log("Found an issue while looking for the disk: %s" % detail)
-                continue
-            try:
-                disk = parted.Disk(disk_device)
-            except Exception as detail:
-                log("Found an issue while looking for the disk: %s" % detail)
-                from frontend.gtk_interface import QuestionDialog
-                if QuestionDialog(_("Installer"),
-                    _("Disk: {} partition table broken or not exists. Do you want to create new partition table?").format(disk_path)):
-                    full_disk_format(disk_device)
-                    try:
-                        disk_device = parted.getDevice(disk_path)
-                        disk = parted.Disk(disk_device)
-                    except:
-                        continue
-                else:
-                    continue
+        try:
+            disk_device = parted.getDevice(disk_path)
+        except Exception as detail:
+            log("Found an issue while looking for the disk: %s" % detail)
+            return None
+        try:
+            disk = parted.Disk(disk_device)
+        except Exception as detail:
+            log("Found an issue while looking for the disk: %s" % detail)
+            from frontend.gtk_interface import QuestionDialog
+            if QuestionDialog(_("Installer"),
+                _("Disk: {} partition table broken or not exists. Do you want to create new partition table?").format(disk_path)):
+                full_disk_format(disk_device)
+                try:
+                    disk_device = parted.getDevice(disk_path)
+                    disk = parted.Disk(disk_device)
+                except:
+                    return None
+            else:
+                return None
 
-            disk_iter = self.append(
-                None, (disk_description, '', '', '', '', False, '', '', None, disk_path))
-            free_space_partition = disk.getFreeSpacePartitions()
-            primary_partitions = disk.getPrimaryPartitions()
-            logical_partitions = disk.getLogicalPartitions()
-            raid_partitions = disk.getRaidPartitions()
-            lvm_partitions = disk.getLVMPartitions()
-            partition_set = tuple(free_space_partition + primary_partitions +
-                                  logical_partitions + raid_partitions + lvm_partitions)
-            partitions = []
-            for partition in partition_set:
-                part = Partition(partition)
-                if part.type == _('Free space'):
-                    part.raw_size = part.partition.geometry.end - part.partition.geometry.start
-                    part.raw_size *= part.partition.geometry.device.sectorSize
-                    part.size = to_human_readable(part.raw_size)
-                    part.free_space = part.size
-                log("{} {}".format(partition.path.replace("-", ""), part.size))
-                # skip ranges <5MB
-                if part.raw_size > 5242880:
-                    partitions.append(part)
-            partitions = sorted(
-                partitions, key=lambda part: part.partition.geometry.start)
+        free_space_partition = disk.getFreeSpacePartitions()
+        primary_partitions = disk.getPrimaryPartitions()
+        logical_partitions = disk.getLogicalPartitions()
+        raid_partitions = disk.getRaidPartitions()
+        lvm_partitions = disk.getLVMPartitions()
+        partition_set = tuple(free_space_partition + primary_partitions +
+                              logical_partitions + raid_partitions + lvm_partitions)
+        partitions = []
+        for partition in partition_set:
+            part = Partition(partition)
+            if part.type == _('Free space'):
+                part.raw_size = part.partition.geometry.end - part.partition.geometry.start
+                part.raw_size *= part.partition.geometry.device.sectorSize
+                part.size = to_human_readable(part.raw_size)
+                part.free_space = part.size
+            log("{} {}".format(partition.path.replace("-", ""), part.size))
+            # skip ranges <5MB
+            if part.raw_size > 5242880:
+                partitions.append(part)
+        partitions = sorted(
+            partitions, key=lambda part: part.partition.geometry.start)
 
-            try:  # assign mount_as and format_as if disk was just auto-formatted
-                for partition, (mount_as, format_as, read_only) in zip(
-                        partitions, assign_mount_format):
-                    partition.mount_as = mount_as
-                    partition.format_as = format_as
-                    partition.read_only = read_only
-                del assign_mount_format
-            except NameError:
-                pass
-            # Needed to fix the 1% minimum Partition.size_percent
-            # .5 for good measure
-            sum_size_percent = sum(p.size_percent for p in partitions) + .5
-            for partition in partitions:
-                partition.size_percent = round(
-                    partition.size_percent / sum_size_percent * 100, 1)
-                installer.setup.partitions.append(partition)
-                partition_iter = self.append(disk_iter, (partition.name,
-                           '<span>{}</span>'.format(
-                           partition.type),
-                           partition.description,
-                           partition.format_as,
-                           partition.mount_as,
-                           partition.read_only,
-                           partition.size,
-                           partition.free_space,
-                           partition,
-                           disk_path))
-                # if partition is btrfs, add its subvolumes
-                if partition.type == 'btrfs':
-                    partition.subvolumes = get_btrfs_partition_subvolumes(
-                        partition)
-                    for subvolume in partition.subvolumes:
-                        self.append(partition_iter, (subvolume.name, '<span>{}</span>'.format(
-                            subvolume.type),
-                            subvolume.description,
-                            '',
-                            '',
-                            False,
-                            '',
-                            '',
-                            subvolume,
-                            subvolume.parent.path))
+        try:  # assign mount_as and format_as if disk was just auto-formatted
+            for partition, (mount_as, format_as, read_only) in zip(
+                    partitions, assign_mount_format):
+                partition.mount_as = mount_as
+                partition.format_as = format_as
+                partition.read_only = read_only
+            del assign_mount_format
+        except NameError:
+            pass
+        # Needed to fix the 1% minimum Partition.size_percent
+        # .5 for good measure
+        sum_size_percent = sum(p.size_percent for p in partitions) + .5
+        for partition in partitions:
+            partition.size_percent = round(
+                partition.size_percent / sum_size_percent * 100, 1)
+            installer.setup.partitions.append(partition)
+            partition_iter = self.append(None, (partition.name,
+                       '<span>{}</span>'.format(
+                       partition.type),
+                       partition.description,
+                       partition.format_as,
+                       partition.mount_as,
+                       partition.read_only,
+                       partition.size,
+                       partition.free_space,
+                       partition,
+                       disk_path))
+            # if partition is btrfs, add its subvolumes
+            if partition.type == 'btrfs':
+                partition.subvolumes = get_btrfs_partition_subvolumes(
+                    partition)
+                for subvolume in partition.subvolumes:
+                    self.append(partition_iter, (subvolume.name, '<span>{}</span>'.format(
+                        subvolume.type),
+                        subvolume.description,
+                        '',
+                        '',
+                        False,
+                        '',
+                        '',
+                        subvolume,
+                        subvolume.parent.path))
+        return self
 
 
 
