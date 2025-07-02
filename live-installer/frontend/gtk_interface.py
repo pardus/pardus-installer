@@ -201,6 +201,13 @@ class InstallerWindow:
         self._combobox_disk_selection = None
         self.builder.get_object("combobox_disk_selection").connect("changed", self.on_combobox_disk_selection_changed)
 
+        self.drawing_area_selected_partition=None
+        self.builder.get_object("drawing_area_partitions").connect(
+            "draw", self.drawing_area_partitions_on_draw)
+        self.builder.get_object("drawing_area_partitions").set_events(
+            Gdk.EventMask.BUTTON_PRESS_MASK) # Listen for click events, without this the widget will not receive any click events
+        self.builder.get_object("drawing_area_partitions").connect(
+            "button-press-event", self.drawing_area_partitions_on_click)
         self.builder.get_object("button_edit").connect(
             "clicked", self.manually_edit_partitions)
         self.builder.get_object("button_refresh").connect(
@@ -1004,6 +1011,121 @@ class InstallerWindow:
         row = model[active]
         self._combobox_disk_selection = row[1]
         self.builder.get_object("treeview_disks").set_model(self.disks_models[row[1]])
+        self.builder.get_object("drawing_area_partitions").queue_draw()
+
+    def drawing_area_partitions_on_draw(self, widget, cr):
+        partitions = [partition for partition in self.setup.partitions if partition.mbr == self._combobox_disk_selection]
+        width = widget.get_allocated_width()
+        height = widget.get_allocated_height()
+        gap = 15
+        parts_total_size = sum([partition.raw_size for partition in partitions if partition.raw_size]) / (1024 * 1024 * 1024)
+        available_width = width - (gap * (len(partitions) - 1))
+        x_position = 0
+
+        for partition in partitions:
+            raw_size_gb = partition.raw_size / (1024 * 1024 * 1024)
+            raw_free_space_gb = partition.raw_free_space / (1024 * 1024 * 1024)
+
+            partition_width = (raw_size_gb / parts_total_size) * available_width
+            used_ratio = 1 - (raw_free_space_gb / raw_size_gb) # used_ratio + free_ratio = 1 => used_ratio = 1 - free_ratio
+            used_width = partition_width * used_ratio
+            free_width = partition_width - used_width
+
+            # Used
+            cr.set_source_rgba(1.0, 1.0, 0.2, 0.8)  # Yellow color
+            cr.rectangle(x_position, 0, used_width, height)
+            cr.fill()
+
+            # Free
+            cr.set_source_rgb(1.0, 1.0, 1.0)  # White Color
+            cr.rectangle(x_position + used_width, 0, free_width, height)
+            cr.fill()
+
+            # Draw a border
+            # vertical lines
+            cr.set_line_width(4)
+            cr.set_source_rgb(0.0, 0.0, 0.0)  # Black color
+            cr.move_to(x_position, 0)
+            cr.line_to(x_position, height)
+            cr.move_to(x_position + partition_width, 0)
+            cr.line_to(x_position + partition_width, height)
+            cr.stroke()
+            
+            # horizontal lines
+            cr.set_line_width(8) # workaround for a bug that shows the horizontal lines with half the width
+            cr.move_to(x_position, height)
+            cr.line_to(x_position + partition_width, height)
+            cr.move_to(x_position, 0)
+            cr.line_to(x_position + partition_width, 0)
+            cr.stroke()
+
+            # Draw a border for selected partition
+            if partition == self.drawing_area_selected_partition:
+                cr.set_dash([4.0, 4.0], 1)
+                cr.set_source_rgb(1.0, 0.0, 0.0)  # Red color
+                cr.set_line_width(2)
+                # vertical lines
+                cr.move_to(x_position , 0)
+                cr.line_to(x_position , height)
+                cr.move_to(x_position + partition_width, 0)
+                cr.line_to(x_position + partition_width, height)
+
+                # horizontal lines
+                # leave 2 pixels from top and bottom (center the red lines in the black ones)
+                cr.move_to(x_position, height -2)
+                cr.line_to(x_position + partition_width, height -2)
+                cr.move_to(x_position, 2)
+                cr.line_to(x_position + partition_width, 2)
+                cr.stroke()
+                cr.set_dash([], 0)
+
+            # Type partition name and size
+            cr.set_source_rgb(0.0, 0.0, 0.0)  # Black color
+            cr.set_font_size(12)
+            text = "{} ({:.1f} GiB)".format(partition.name, raw_size_gb)
+            text_extents = cr.text_extents(text)
+            if text_extents.width < partition_width:
+                text_x = x_position + (partition_width - text_extents.width) / 2
+                text_y = height/2 + text_extents.height/2
+                cr.move_to(text_x, text_y)
+                cr.show_text(text)
+            x_position += partition_width + gap
+
+    def drawing_area_partitions_on_click(self, widget, event):
+        x = event.x
+        partitions = [partition for partition in self.setup.partitions if partition.mbr == self._combobox_disk_selection]
+        width = widget.get_allocated_width()
+        gap = 15
+        parts_total_size = sum([partition.raw_size for partition in partitions]) / (1024 * 1024 * 1024)
+        available_width = width - (gap * (len(partitions) - 1))
+        x_position = 0
+
+        for partition in partitions:
+            raw_size_gb = partition.raw_size / (1024 * 1024 * 1024)
+            partition_width = (raw_size_gb / parts_total_size) * available_width
+            if x >= x_position and x <= x_position + partition_width:
+                self.drawing_area_selected_partition = partition
+                self.builder.get_object("drawing_area_partitions").queue_draw()
+                # activate partition from treeview
+                model = self.builder.get_object("treeview_disks").get_model()
+                for row in model:
+                    if row[partitioning.IDX_PART_OBJECT] == partition:
+                        treeview = self.builder.get_object("treeview_disks")
+                        treeview.get_selection().select_iter(row.iter)
+                        treeview.emit("cursor-changed") # this will run partition_change_event so it will enable some buttons
+                        self.selected_partition = partition
+                        if event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
+                            if partition.type == _("Free space"):
+                                self.builder.get_object("button_add_partition").emit("clicked")
+                            else:
+                                treeview.row_activated(row.path, treeview.get_column(0))
+
+                        if event.button == 3: # right click event
+                            partitioning.partitions_popup_menu(treeview, event)
+
+                        break
+                break
+            x_position += partition_width + gap
 
     def partition_change_event(self,widget):
         model, itervar = widget.get_selection().get_selected()

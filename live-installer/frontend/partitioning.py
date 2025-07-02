@@ -485,6 +485,7 @@ class PartitionSetup(Gtk.TreeStore):
                 part.raw_size = part.partition.geometry.end - part.partition.geometry.start
                 part.raw_size *= part.partition.geometry.device.sectorSize
                 part.size = to_human_readable(part.raw_size)
+                part.raw_free_space = part.raw_size
                 part.free_space = part.size
             log("{} {}".format(partition.path.replace("-", ""), part.size))
             # skip ranges <5MB
@@ -724,9 +725,11 @@ class Partition(PartitionBase):
 
             self.size = to_human_readable(int(size) * 1024)
             # df returns values in 1024B-blocks by default
-            self.free_space = to_human_readable(int(free) * 1024)
+            self.raw_free_space = int(free) * 1024
+            self.free_space = to_human_readable(self.raw_free_space)
             self.used_percent = self.used_percent.replace("%", "") or 0
         except:
+            self.raw_free_space = 0
             self.free_space = "0"
             self.used_percent = "100"
             self.description = ""
