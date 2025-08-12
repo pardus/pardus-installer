@@ -524,6 +524,7 @@ def show_error(message):
 
 
 def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024, rootfs_type="ext4"):
+    print("Rootfs type:", rootfs_type)
     # Create a default partition set up
     disk_label = ('gpt' if device.getLength('B') > 2**32 * .9 * device.sectorSize  # size of disk > ~2TB
                   or is_efi_supported()
@@ -542,7 +543,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
 
     format_cmd = 'mkfs.ext4 -F {}'
     if rootfs_type == "btrfs":
-        'mkfs.btrfs {}'
+        format_cmd = 'mkfs.btrfs -f {}'
 
     mkpart = (
         # (condition, mount_as, format_as, mkfs command, size_mb)

@@ -730,12 +730,13 @@ class InstallerWindow:
 
     def get_combo_var(self, combo):
         model = combo.get_model()
-        if model == None :
+        if model == None:
             return None
         active = combo.get_active()
         if active < 0:
             active = 0
             combo.set_active(0)
+        print(model[active][1])
         return model[active][1]
 
     def assign_options(self, widget, data=None):
@@ -845,7 +846,7 @@ class InstallerWindow:
         self.setup.replace_windows = self.builder.get_object("radio_replace_win").get_active()
         self.setup.expert_mode = self.builder.get_object("radio_expert_mode").get_active()
         self.setup.lvm = (self.get_combo_var(self.builder.get_object("combo_fstype")) == "lvm")
-        self.setup.fstype = self.get_combo_var(self.builder.get_object("combo_fstype"))
+        self.setup.fstype = str(self.get_combo_var(self.builder.get_object("combo_fstype")))
         self.setup.passphrase1 = self.builder.get_object("entry_passphrase").get_text()
         self.setup.passphrase2 = self.builder.get_object("entry_passphrase2").get_text()
         self.setup.luks = self.builder.get_object("check_encrypt").get_active()
@@ -1570,6 +1571,7 @@ class InstallerWindow:
                     swap_info = ""
             model.append(
                 top, (bold(_("Automated installation on %s") % self.setup.diskname)+ swap_info,))
+            model.append(top, (_("Type: ") + bold(self.get_combo_var(self.builder.get_object("combo_fstype"))),))
         else:
             for p in self.setup.partitions:
                 if p.format_as:
@@ -1588,6 +1590,8 @@ class InstallerWindow:
                         if subvol.mount_as:
                             model.append(top, (bold(_("Mount %(path)s subvolume as %(mount)s") % {
                                          'path': subvol.name, 'mount': subvol.mount_as}),))
+
+
         if config.get("lvm_enabled", True):
             _lvm = (self.get_combo_var(self.builder.get_object("combo_fstype")) == "lvm")
             _lux = self.builder.get_object("check_encrypt").get_active()

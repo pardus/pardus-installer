@@ -344,7 +344,7 @@ class InstallerEngine:
             self.auto_root_partition = "/dev/{}/root".format(lvm)
 
 
-        self.do_mount(self.auto_root_partition, "/target", "ext4", None)
+        self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
         if (self.auto_boot_partition is not None):
             self.run("mkdir -p /target/boot")
             self.do_mount(self.auto_boot_partition,
@@ -527,8 +527,8 @@ class InstallerEngine:
                                 self.auto_swap_partition)
             else:
                 fstab.write("# %s\n" % self.auto_root_partition)
-                fstab.write("%s /  ext4 defaults 0 1\n" %
-                            self.get_blkid(self.auto_root_partition))
+                fstab.write("%s /  %s defaults 0 1\n" %
+                            (self.get_blkid(self.auto_root_partition), self.setup.fstype))
                 fstab.write("# %s\n" % self.auto_swap_partition)
                 if self.auto_swap_partition:
                     fstab.write("%s none   swap sw 0 0\n" %
