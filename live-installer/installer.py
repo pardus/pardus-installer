@@ -342,9 +342,10 @@ class InstallerEngine:
                 self.run("swapon /dev/{}/swap".format(lvm))
                 self.auto_swap_partition = "/dev/{}/swap".format(lvm)
             self.auto_root_partition = "/dev/{}/root".format(lvm)
+            self.do_mount(self.auto_root_partition, "/target", "ext4", None)
+        else:
+            self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
 
-
-        self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
         if (self.auto_boot_partition is not None):
             self.run("mkdir -p /target/boot")
             self.do_mount(self.auto_boot_partition,
