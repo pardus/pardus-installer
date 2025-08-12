@@ -751,6 +751,7 @@ class InstallerWindow:
         self.builder.get_object("combo_fstype").set_sensitive(_auto)
         self.builder.get_object("entry_passphrase").set_sensitive(_auto)
         self.builder.get_object("entry_passphrase2").set_sensitive(_auto)
+        self.builder.get_object("revealer_lvm").set_reveal_child(_lvm)
         if not _auto:
             self.builder.get_object("check_badblocks").set_active(False)
             self.builder.get_object("check_encrypt").set_active(False)
