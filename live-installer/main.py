@@ -5,6 +5,9 @@ from utils import *
 from frontend import *
 from frontend.dialogs import ErrorDialog
 
+single_instance()
+
+
 gettext.install("live-installer", "/usr/share/locale")
 sys.path.insert(1, '/lib/live-installer')
 if (os.path.isdir("/lib/live-installer")):

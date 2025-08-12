@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 import sys
@@ -134,3 +133,20 @@ def set_governor(governor):
     while os.path.exists("{}cpu{}{}".format(path, str(i), node)):
         os.system("echo {} > {}cpu{}{}".format(governor, path, str(i), node))
         i += 1
+
+def single_instance():
+    pidfile = "/run/live-installer.pid"
+    def writepid():
+        with open(pidfile, "w") as f:
+            f.write(str(os.getpid()))
+
+    try:
+        if os.path.isfile(pidfile):
+            with open(pidfile, "r") as f:
+                pid = f.read()
+                if os.path.isdir(f"/proc/{pid}"):
+                    exit(0)
+        writepid()
+    except socket.error as e:
+        print(e)
+        sys.exit(0)
