@@ -523,7 +523,7 @@ def show_error(message):
     ErrorDialog(_("Installer"), message)
 
 
-def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024):
+def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024, rootfs_type="ext4"):
     # Create a default partition set up
     disk_label = ('gpt' if device.getLength('B') > 2**32 * .9 * device.sectorSize  # size of disk > ~2TB
                   or is_efi_supported()
@@ -540,6 +540,10 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
         Gtk.main_quit()
         sys.exit(1)
 
+    format_cmd = 'mkfs.ext4 -F {}'
+    if rootfs_type == "btrfs":
+        'mkfs.btrfs {}'
+
     mkpart = (
         # (condition, mount_as, format_as, mkfs command, size_mb)
         # EFI
@@ -550,7 +554,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
         # swap - equal to RAM for hibernate to work well (but capped at ~8GB)
         (create_swap, SWAP_MOUNT_POINT, 'swap', 'mkswap {}', swap_size),
         # root
-        (True, '/', 'ext4', 'mkfs.ext4 -F {}', 0),
+        (True, '/', rootfs_type, format_cmd, 0),
     )
     def run_parted(cmd): return os.system(
         'parted --script --align optimal {} {} ; sync'.format(device.path, cmd))

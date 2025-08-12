@@ -147,6 +147,6 @@ def single_instance():
                 if os.path.isdir(f"/proc/{pid}"):
                     exit(0)
         writepid()
-    except socket.error as e:
+    except Exception as e:
         print(e)
         sys.exit(0)

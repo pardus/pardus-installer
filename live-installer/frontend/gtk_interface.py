@@ -166,6 +166,18 @@ class InstallerWindow:
         else:
             self.builder.get_object("swap_size").set_range(1,1)
 
+        fstypes = Gtk.ListStore(str, str)
+        fstypes.append((_("Ext4 (Default)"), "ext4"))
+        if config.get("lvm_enabled", True):
+            fstypes.append((_("LVM (Logical Volume Manager)"), "lvm"))
+        fstypes.append((_("Btrfs"), "btrfs"))
+        self.builder.get_object("combo_fstype").set_model(fstypes)
+        renderer_text_fstpye = Gtk.CellRendererText()
+        self.builder.get_object("combo_fstype").pack_start(renderer_text_fstpye, True)
+        self.builder.get_object("combo_fstype").add_attribute(
+            renderer_text_fstpye, "text", 0)
+        self.builder.get_object("combo_fstype").set_active(0)
+
 
         self.builder.get_object("entry_passphrase").connect(
             "changed", self.assign_passphrase)
@@ -179,9 +191,9 @@ class InstallerWindow:
             "toggled", self.assign_options)
         self.builder.get_object("check_encrypt").connect(
             "toggled", self.assign_options)
-        self.builder.get_object("check_lvm").connect(
-            "toggled", self.assign_options)
         self.builder.get_object("combo_disk").connect(
+            "changed", self.assign_options)
+        self.builder.get_object("combo_fstype").connect(
             "changed", self.assign_options)
 
         # options
@@ -338,7 +350,7 @@ class InstallerWindow:
 
 
         if not config.get("use_swap",False):
-            self.builder.get_object("check_swap").hide()
+            self.builder.get_object("box_swap").hide()
 
         self.i18n()
 
@@ -362,10 +374,10 @@ class InstallerWindow:
         if not config.get("manual_partition_enabled", True):
             self.builder.get_object("box_manual").hide()
         else:
-            if not config.get("lvm_enabled", True):
-                self.builder.get_object("box_lvm").hide()
             if not config.get("encryption_enabled", True):
                 self.builder.get_object("box_encryption").hide()
+            if not config.get("lvm_enabled", True):
+                self.builder.get_object("box_lvm").hide()
             if not config.get("fill_disk_enabled", True):
                 self.builder.get_object("box_fill").hide()
         if not config.get("autologin_enabled", True):
@@ -563,8 +575,6 @@ class InstallerWindow:
             "entry_passphrase").set_placeholder_text(_("Passphrase"))
         self.builder.get_object("entry_passphrase2").set_placeholder_text(
             _("Confirm passphrase"))
-        self.builder.get_object("label_lvm").set_text(
-            _("Use LVM (Logical Volume Management)"))
         self.builder.get_object("label_manual").set_text(
             _("Manual Partitioning"))
         self.builder.get_object("label_manual2").set_text(
@@ -718,22 +728,31 @@ class InstallerWindow:
         self.assign_entry("entry_confirm", errorFound,self.week_password)
 
 
+    def get_combo_var(self, combo):
+        model = combo.get_model()
+        if model == None :
+            return None
+        active = combo.get_active()
+        if active < 0:
+            active = 0
+            combo.set_active(0)
+        return model[active][1]
+
     def assign_options(self, widget, data=None):
         _auto = self.builder.get_object("radio_automated").get_active()
-        _lvm = self.builder.get_object("check_lvm").get_active()
+        _lvm = (self.get_combo_var(self.builder.get_object("combo_fstype")) == "lvm")
         _encrypt = self.builder.get_object("check_encrypt").get_active()
         _swap = self.builder.get_object("check_swap").get_active()
         self.builder.get_object("check_swap").set_sensitive(_auto)
         self.builder.get_object("check_badblocks").set_sensitive(_auto)
         self.builder.get_object("check_encrypt").set_sensitive(_auto)
-        self.builder.get_object("check_lvm").set_sensitive(_auto)
         self.builder.get_object("combo_disk").set_sensitive(_auto)
+        self.builder.get_object("combo_fstype").set_sensitive(_auto)
         self.builder.get_object("entry_passphrase").set_sensitive(_auto)
         self.builder.get_object("entry_passphrase2").set_sensitive(_auto)
         if not _auto:
             self.builder.get_object("check_badblocks").set_active(False)
             self.builder.get_object("check_encrypt").set_active(False)
-            self.builder.get_object("check_lvm").set_active(False)
             self.builder.get_object("combo_disk").set_active(-1)
             self.builder.get_object("entry_passphrase").set_text("")
             self.builder.get_object("entry_passphrase2").set_text("")
@@ -756,7 +775,6 @@ class InstallerWindow:
             self.setup.grub_disk = row[1]
 
 
-
         if not _auto:
             if not self.builder.get_object("checkbutton_grub").get_active():
                 self.setup.grub_device = None
@@ -765,26 +783,18 @@ class InstallerWindow:
         else:
             self.setup.grub_device = self.setup.disk
 
+        # Force LVM for LUKs
+        self.builder.get_object("check_encrypt").set_sensitive(_lvm and _auto)
+        self.builder.get_object("check_badblocks").set_sensitive(_lvm and _encrypt and _auto)
+        self.builder.get_object("entry_passphrase").set_sensitive(_lvm and _encrypt and _auto)
+        self.builder.get_object("entry_passphrase2").set_sensitive(_lvm and _encrypt and _auto)
         if not _lvm:
-            # Force LVM for LUKs
             self.builder.get_object("check_badblocks").set_active(False)
             self.builder.get_object("check_encrypt").set_active(False)
-            self.builder.get_object("entry_passphrase").set_text("")
-            self.builder.get_object("entry_passphrase2").set_text("")
-            self.builder.get_object("check_badblocks").set_sensitive(False)
-            self.builder.get_object("check_encrypt").set_sensitive(False)
 
         if not _encrypt:
             self.builder.get_object("entry_passphrase").set_text("")
             self.builder.get_object("entry_passphrase2").set_text("")
-            self.builder.get_object("entry_passphrase").set_sensitive(False)
-            self.builder.get_object("entry_passphrase2").set_sensitive(False)
-            self.builder.get_object("check_badblocks").set_active(False)
-            self.builder.get_object("check_badblocks").set_sensitive(False)
-        else:
-            self.builder.get_object("entry_passphrase").set_sensitive(True)
-            self.builder.get_object("entry_passphrase2").set_sensitive(True)
-            self.builder.get_object("check_badblocks").set_sensitive(True)
 
         self.builder.get_object("swap_size").set_range(1,32)
         self.builder.get_object("swap_size").set_sensitive(_swap)
@@ -834,7 +844,8 @@ class InstallerWindow:
         self.setup.automated = self.builder.get_object("radio_automated").get_active()
         self.setup.replace_windows = self.builder.get_object("radio_replace_win").get_active()
         self.setup.expert_mode = self.builder.get_object("radio_expert_mode").get_active()
-        self.setup.lvm = self.builder.get_object("check_lvm").get_active()
+        self.setup.lvm = (self.get_combo_var(self.builder.get_object("combo_fstype")) == "lvm")
+        self.setup.fstype = self.get_combo_var(self.builder.get_object("combo_fstype"))
         self.setup.passphrase1 = self.builder.get_object("entry_passphrase").get_text()
         self.setup.passphrase2 = self.builder.get_object("entry_passphrase2").get_text()
         self.setup.luks = self.builder.get_object("check_encrypt").get_active()
@@ -1578,7 +1589,7 @@ class InstallerWindow:
                             model.append(top, (bold(_("Mount %(path)s subvolume as %(mount)s") % {
                                          'path': subvol.name, 'mount': subvol.mount_as}),))
         if config.get("lvm_enabled", True):
-            _lvm = self.builder.get_object("check_lvm").get_active()
+            _lvm = (self.get_combo_var(self.builder.get_object("combo_fstype")) == "lvm")
             _lux = self.builder.get_object("check_encrypt").get_active()
             model.append(top, (_("LVM: ") + bold(_("enabled")
                                    if _lvm else _("disabled")),))

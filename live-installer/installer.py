@@ -300,11 +300,12 @@ class InstallerEngine:
         self.update_progress(_("Creating partitions on %s") % self.setup.disk)
         log(" --> Creating partitions on %s" % self.setup.disk)
         disk_device = parted.getDevice(self.setup.disk)
-        # replae this with changeable function
+        # replace this with changeable function
         partitioning.full_disk_format(disk_device,
             create_boot = (self.auto_boot_partition is not None),
             create_swap = (self.auto_swap_partition is not None),
-            swap_size   = self.setup.swap_size)
+            swap_size   = self.setup.swap_size,
+            rootfs_type = self.setup.fstype)
 
         # Encrypt root partition
         if self.setup.luks:
@@ -985,6 +986,7 @@ class Setup(object):
     replace_windows = False
     expert_mode = False
     disk = None
+    fstype = None
     diskname = None
     passphrase1 = None
     passphrase2 = None
