@@ -56,8 +56,8 @@ additional_user_groups:
 
 ## Partitioning section
 # manual_partition_enabled: true 
-use_swap: true
-swap_size: 4192
+#use_swap: false
+#swap_size: 4192
 # replace_windows_enabled: true
 #lvm_enabled: true
 #encryption_enabled: true
