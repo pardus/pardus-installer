@@ -26,7 +26,7 @@ def exceptdebug(e, v, tb):
     traceback.print_tb(tb)
 
 
-sys.excapthook = exceptdebug
+sys.excepthook = exceptdebug
 
 # main entry
 if __name__ == "__main__":
