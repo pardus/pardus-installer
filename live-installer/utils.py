@@ -135,7 +135,11 @@ def set_governor(governor):
         i += 1
 
 def single_instance():
-    pidfile = "/run/live-installer.pid"
+    # Use temp directory for PID file in test mode
+    if "TEST" in os.environ:
+        pidfile = "/tmp/live-installer.pid"
+    else:
+        pidfile = "/run/live-installer.pid"
     def writepid():
         with open(pidfile, "w") as f:
             f.write(str(os.getpid()))
