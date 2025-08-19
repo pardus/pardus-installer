@@ -1,3 +1,23 @@
+pardus-installer (4.0.0~alpha1) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * single instance
+  * rootfs type selection combobox
+
+  [ aliriza ]
+  * btrfs fixes about auto install
+
+  [ Ali Riza KESKIN ]
+  * visual improvements
+  * lvm mount fix
+  * translation update
+
+  [ sulincix ]
+  * try --removable parameter fallback grub installation mechanism
+  * disable swap config
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 19 Aug 2025 15:26:22 +0300
+
 pardus-installer (3.0.1) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
