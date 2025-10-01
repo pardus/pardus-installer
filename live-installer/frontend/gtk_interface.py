@@ -930,9 +930,9 @@ class InstallerWindow:
     def build_kb_lists(self):
         ''' Do some xml kung-fu and load the keyboard stuffs '''
         # Determine the layouts in use
-        keyboard_geom = subprocess.getoutput("setxkbmap -query | awk '/^(model)/{print $2}'")
-        self.setup.keyboard_layout = subprocess.getoutput("setxkbmap -query | awk '/^(layout)/{print $2}'")
-        self.setup.keyboard_variant = subprocess.getoutput("setxkbmap -query | awk '/^(variant)/{print $2}'")
+        keyboard_geom = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(model)/{print $2}'")
+        self.setup.keyboard_layout = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(layout)/{print $2}'")
+        self.setup.keyboard_variant = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(variant)/{print $2}'")
         self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
         if "," in self.setup.keyboard_layout:
             self.setup.keyboard_layout = self.setup.keyboard_layout.split(",")[
