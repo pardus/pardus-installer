@@ -759,6 +759,22 @@ class InstallerEngine:
             self.run("chroot||rm /etc/default/keyboard")
             self.run("chroot||mv /etc/default/keyboard.new /etc/default/keyboard")
 
+        # Keyboard settings (gnome)
+        if os.path.exists("/target/usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.xml"):
+            with open("/target/usr/share/glib-2.0/schemas/99-gnome-keyboard-config.gschema.override", "w") as schema:
+                layouts, variants = self.setup.keyboard_layout.split(","), self.setup.keyboard_variant.split(",")
+
+                schema.write("[org.gnome.desktop.input-sources]\n")
+
+                output = "sources = ["
+                for i in range(2 if "," in self.setup.keyboard_layout else 1):
+                    output += "('xkb', '" + layouts[i]
+                    if variants[i]:
+                        output += "+" + variants[i]
+                    output += "')" + (", " if i == 0 and "," in self.setup.keyboard_layout else "")
+                schema.write(output + "]")
+            self.run("chroot||glib-compile-schemas /usr/share/glib-2.0/schemas/",vital=False)
+
         # Keyboard settings openrc
         if os.path.exists("/target/etc/conf.d/keymaps"):
             newconsolefh = open("/target/etc/conf.d/keymaps", "w")
