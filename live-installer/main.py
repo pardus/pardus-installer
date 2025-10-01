@@ -16,6 +16,10 @@ if (os.path.isdir("/lib/live-installer")):
 if config.get("gtk_theme", "default") != "default":
     os.environ['GTK_THEME'] = config.get("gtk_theme")
 
+# Force use X11 backend
+os.unsetenv("WAYLAND_DISPLAY")
+os.environ["GDK_BACKEND"]="x11"
+
 # Force show mouse cursor & fix background
 os.system("xsetroot -cursor_name left_ptr &>/dev/null")
 os.system("xsetroot -solid black &>/dev/null")
