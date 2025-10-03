@@ -14,6 +14,8 @@ from frontend.keyboardview import kbdpreview
 from installer import InstallerEngine, Setup, NON_LATIN_KB_LAYOUTS
 from logger import _file as LOG_FILE_PATH
 
+from gi.repository import Gio
+
 gettext.bindtextdomain('xkeyboard-config', '/usr/share/locale')
 gettext.textdomain('xkeyboard-config')
 l = gettext.gettext
@@ -927,13 +929,27 @@ class InstallerWindow:
         if config.get("allow_auto_novariant", True):
             self.setup.keyboard_variant = ""
 
+    def _get_cmdline_kbd(self):
+        layout = ""
+        variant = ""
+        with open("/proc/cmdline","r") as f:
+            cmdline = f.read()
+            for word in cmdline.split():
+                if "keyboard-layouts=" in word:
+                    layout = word.split("=")[1]
+                elif "keyboard-variants=" in word:
+                    variant = word.split("=")[1]
+        return (layout, variant)
+
     def build_kb_lists(self):
         ''' Do some xml kung-fu and load the keyboard stuffs '''
         # Determine the layouts in use
-        keyboard_geom = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(model)/{print $2}'")
-        self.setup.keyboard_layout = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(layout)/{print $2}'")
-        self.setup.keyboard_variant = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(variant)/{print $2}'")
-        self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
+        (self.setup.keyboard_layout, self.setup.keyboard_variant) = self._get_cmdline_kbd()
+        if self.setup.keyboard_layout == "":
+            # X11 way
+            self.setup.keyboard_layout = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(layout)/{print $2}'")
+            self.setup.keyboard_variant = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(variant)/{print $2}'")
+            self.keyboardview.update(self.setup.keyboard_layout, self.setup.keyboard_variant)
         if "," in self.setup.keyboard_layout:
             self.setup.keyboard_layout = self.setup.keyboard_layout.split(",")[
                 0]
@@ -949,6 +965,7 @@ class InstallerWindow:
         variants = defaultdict(_ListStore_factory)
 
         # Keyboard model
+        keyboard_geom = subprocess.getoutput("setxkbmap -query 2>/dev/null | awk '/^(model)/{print $2}'")
         for model in common.get_keyboard_model_list():
             iterator = models.append(model)
             if model[1] == keyboard_geom:
