@@ -1,5 +1,4 @@
 DESTDIR=/
-XINITRCDIR=/etc/X11/Xsession.d/
 all: clean build
 
 build: buildmo
@@ -45,12 +44,12 @@ install:
 	mkdir -p $(DESTDIR)/usr/bin/ || true
 	mkdir -p $(DESTDIR)/etc/xdg/autostart/
 	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/scalable/status/
-	mkdir -p $(DESTDIR)/$(XINITRCDIR) || true
+	mkdir -p $(DESTDIR)/etc/profile.d || true
 	mkdir -p $(DESTDIR)/usr/share/polkit-1/actions/ || true
 	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/symbolic/status/ || true
 	install data/17g-welcome.desktop $(DESTDIR)/etc/xdg/autostart/
 	install data/live-installer.desktop $(DESTDIR)/usr/share/applications/live-installer.desktop
-	install data/00-live $(DESTDIR)/$(XINITRCDIR)/00-live
+	install data/profile.sh $(DESTDIR)/etc/profile.d/live-installer.sh
 	install data/live-installer.sh $(DESTDIR)/usr/bin/live-installer
 	install data/org.17g.installer.policy $(DESTDIR)/usr/share/polkit-1/actions/
 	@if [ -f custom/live-installer.desktop ] ; then \
@@ -70,7 +69,6 @@ uninstall:
 	rm -rf $(DESTDIR)/lib/live-installer
 	rm -f $(DESTDIR)/usr/bin/live-installer
 	rm -f $(DESTDIR)/usr/share/applications/live-installer.desktop
-	rm -f $(DESTDIR)/$(XINITRCDIR)/00-live
 	rm -f $(DESTDIR)/usr/share/polkit-1/actions/org.17g.installer.policy
 	rm -f $(DESTDIR)/etc/xdg/autostart/17g-welcome.desktop
 clean:
