@@ -508,6 +508,7 @@ class InstallerEngine:
         return False
 
     def disable_grub_saved(self):
+        os.makedirs("/target/etc/default/grub.d/", exist_ok=True)
         with open("/target/etc/default/grub.d/disable-saved.conf","w") as f:
             f.write("GRUB_DEFAULT=0\n")
             f.write("GRUB_SAVEDEFAULT=false\n")
