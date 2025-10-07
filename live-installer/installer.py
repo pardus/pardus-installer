@@ -509,9 +509,18 @@ class InstallerEngine:
 
     def disable_grub_saved(self):
         os.makedirs("/target/etc/default/grub.d/", exist_ok=True)
-        with open("/target/etc/default/grub.d/disable-saved.conf","w") as f:
-            f.write("GRUB_DEFAULT=0\n")
-            f.write("GRUB_SAVEDEFAULT=false\n")
+        conf = None
+        with open("/target/etc/default/grub","r") as f:
+            conf=f.read()
+        if conf == None:
+            return
+        with open("/target/etc/default/grub","w") as f:
+            for line in conf.split("\n"):
+                if line.startswith("GRUB_SAVEDEFAULT"):
+                    f.write("#"+line+"\n")
+                elif line.startswith("GRUB_DEFAULT") and "saved" in line:
+                    f.write("GRUB_DEFAULT=0\n")
+                f.write(line+"\n")
 
     def write_fstab(self):
         # write the /etc/fstab
@@ -525,8 +534,6 @@ class InstallerEngine:
         if self.setup.expert_mode:
             log("  --> Expert mode detected")
         elif self.setup.automated:
-            if self.setup.fstype == "btrfs":
-                self.disable_grub_saved()
             if self.setup.lvm:
                 # Don't use UUIDs with LVM
                 fstab.write("%s /  ext4 defaults 0 1\n" %
@@ -560,7 +567,6 @@ class InstallerEngine:
                         fstab_fsck_option = "1"
                     else:
                         fstab_fsck_option = "0"
-                        self.disable_grub_saved()
                     rw="rw"
                     if partition.read_only:
                         rw="ro"
@@ -845,6 +851,8 @@ class InstallerEngine:
         if self.setup.luks and "enable_luks" in config.initramfs:
             for cmd in config.initramfs["enable_luks"]:
                 self.run(cmd)
+        if self.setup.automated and self.setup.fstype == "btrfs":
+            self.disable_grub_saved()
 
         # install GRUB bootloader (EFI & Legacy)
         log(" --> Configuring Grub")
