@@ -520,7 +520,8 @@ class InstallerEngine:
                     f.write("#"+line+"\n")
                 elif line.startswith("GRUB_DEFAULT") and "saved" in line:
                     f.write("GRUB_DEFAULT=0\n")
-                f.write(line+"\n")
+                else:
+                    f.write(line+"\n")
 
     def write_fstab(self):
         # write the /etc/fstab
