@@ -1,3 +1,11 @@
+pardus-installer (4.0.0~alpha5) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * disable grub saved method changed
+  * fix minor issue about grub config
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Wed, 08 Oct 2025 10:18:40 +0300
+
 pardus-installer (4.0.0~alpha4) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
