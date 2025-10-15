@@ -34,9 +34,9 @@ fetch_deb "grub-common" "grub2-common" "os-prober" "gettext-base" \
 if [ -d /sys/firmware/efi ] ; then
     fetch_deb "efibootmgr" 
     if [ "$(cat /sys/firmware/efi/fw_platform_size)" == "32" ] ; then
-        fetch_deb "grub-efi-ia32" "grub-efi-ia32-bin"
+        fetch_deb "grub-efi-ia32" "grub-efi-ia32-bin grub-efi-ia32-unsigned"
     else
-        fetch_deb "grub-efi-amd64" "grub-efi-amd64-bin"
+        fetch_deb "grub-efi-amd64" "grub-efi-amd64-bin grub-efi-amd64-unsigned"
     fi
 else
     fetch_deb "grub-pc" "grub-pc-bin"
