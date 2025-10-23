@@ -543,7 +543,13 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
 
     format_cmd = 'mkfs.ext4 -F {}'
     if rootfs_type == "btrfs":
-        format_cmd = 'mkfs.btrfs -f {}'
+        format_cmd = 'mkfs.btrfs -f {0} ;' + \
+                     'mount {0} /mnt ;' + \
+                     'btrfs sub create /mnt/@ ;' + \
+                     'btrfs sub create /mnt/@home ;' + \
+                     'btrfs sub set-default /mnt/@ ;' + \
+                     'umount -lf /mnt'
+
 
     mkpart = (
         # (condition, mount_as, format_as, mkfs command, size_mb)

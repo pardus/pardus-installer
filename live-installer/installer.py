@@ -345,6 +345,8 @@ class InstallerEngine:
             self.do_mount(self.auto_root_partition, "/target", "ext4", None)
         else:
             self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
+            if self.setup.fstype == "btrfs"
+                self.do_mount(self.auto_root_partition, "/target/home", self.setup.fstype, "defaults,rw,subvol=@home")
 
         if (self.auto_boot_partition is not None):
             self.run("mkdir -p /target/boot")
@@ -544,7 +546,10 @@ class InstallerEngine:
                                 self.auto_swap_partition)
             else:
                 fstab.write("# %s\n" % self.auto_root_partition)
-                fstab.write("%s /  %s defaults 0 1\n" %
+                fstab.write("%s /  %s defaults,rw 0 1\n" %
+                            (self.get_blkid(self.auto_root_partition), self.setup.fstype))
+                if self.setup.fstype == "btrfs":
+                    fstab.write("%s /home  %s defaults,rw,subvol=@home 0 1\n" %
                             (self.get_blkid(self.auto_root_partition), self.setup.fstype))
                 fstab.write("# %s\n" % self.auto_swap_partition)
                 if self.auto_swap_partition:
@@ -552,11 +557,11 @@ class InstallerEngine:
                                 self.get_blkid(self.auto_swap_partition))
             if (self.auto_boot_partition is not None):
                 fstab.write("# %s\n" % self.auto_boot_partition)
-                fstab.write("%s /boot  ext4 defaults 0 1\n" %
+                fstab.write("%s /boot  ext4 defaults,rw 0 1\n" %
                             self.get_blkid(self.auto_boot_partition))
             if (self.auto_efi_partition is not None):
                 fstab.write("# %s\n" % self.auto_efi_partition)
-                fstab.write("%s /boot/efi  vfat defaults 0 1\n" %
+                fstab.write("%s /boot/efi  vfat,rw defaults 0 1\n" %
                             self.get_blkid(self.auto_efi_partition))
         else:
             for partition in self.setup.partitions:
