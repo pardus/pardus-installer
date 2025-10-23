@@ -344,10 +344,13 @@ class InstallerEngine:
             self.auto_root_partition = "/dev/{}/root".format(lvm)
             self.do_mount(self.auto_root_partition, "/target", "ext4", None)
         else:
-            self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
             if self.setup.fstype == "btrfs":
+                self.do_mount(self.auto_root_partition, "/target", "btrfs", "defaults,rw,subvol=@")
                 self.run("mkdir -p /target/home")
-                self.do_mount(self.auto_root_partition, "/target/home", self.setup.fstype, "defaults,rw,subvol=@home")
+                self.run("ln -s ./@/boot /target/boot")
+                self.do_mount(self.auto_root_partition, "/target/home", "btrfs", "defaults,rw,subvol=@home")
+            else:
+                self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
 
         if (self.auto_boot_partition is not None):
             self.run("mkdir -p /target/boot")
