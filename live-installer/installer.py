@@ -549,13 +549,17 @@ class InstallerEngine:
                                 self.auto_swap_partition)
             else:
                 fstab.write("# %s\n" % self.auto_root_partition)
-                fstab.write("%s /  %s defaults,rw 0 1\n" %
-                            (self.get_blkid(self.auto_root_partition), self.setup.fstype))
                 if self.setup.fstype == "btrfs":
+                    fstab.write("%s /  %s defaults,rw,subvol=@ 0 1\n" %
+                            (self.get_blkid(self.auto_root_partition), "btrfs"))
                     fstab.write("%s /home  %s defaults,rw,subvol=@home 0 1\n" %
+                            (self.get_blkid(self.auto_root_partition), "btrfs"))
+                else:
+                    fstab.write("%s /  %s defaults,rw 0 1\n" %
                             (self.get_blkid(self.auto_root_partition), self.setup.fstype))
-                fstab.write("# %s\n" % self.auto_swap_partition)
+
                 if self.auto_swap_partition:
+                    fstab.write("# %s\n" % self.auto_swap_partition)
                     fstab.write("%s none   swap sw 0 0\n" %
                                 self.get_blkid(self.auto_swap_partition))
             if (self.auto_boot_partition is not None):
