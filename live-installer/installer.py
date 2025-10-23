@@ -345,7 +345,8 @@ class InstallerEngine:
             self.do_mount(self.auto_root_partition, "/target", "ext4", None)
         else:
             self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
-            if self.setup.fstype == "btrfs"
+            if self.setup.fstype == "btrfs":
+                self.run("mkdir -p /target/home")
                 self.do_mount(self.auto_root_partition, "/target/home", self.setup.fstype, "defaults,rw,subvol=@home")
 
         if (self.auto_boot_partition is not None):
