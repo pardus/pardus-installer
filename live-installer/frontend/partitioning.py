@@ -545,6 +545,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
     if rootfs_type == "btrfs":
         format_cmd = 'mkfs.btrfs -f {0} ;' + \
                      'mount {0} /mnt ;' + \
+                     'ln -s @/boot /mnt/boot ;' + \
                      'btrfs sub create /mnt/@ ;' + \
                      'btrfs sub create /mnt/@home ;' + \
                      'umount -lf /mnt'

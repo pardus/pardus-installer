@@ -347,7 +347,6 @@ class InstallerEngine:
             if self.setup.fstype == "btrfs":
                 self.do_mount(self.auto_root_partition, "/target", "btrfs", "defaults,rw,subvol=@")
                 self.run("mkdir -p /target/home")
-                self.run("ln -s ./@/boot /target/boot")
                 self.do_mount(self.auto_root_partition, "/target/home", "btrfs", "defaults,rw,subvol=@home")
             else:
                 self.do_mount(self.auto_root_partition, "/target", self.setup.fstype, None)
