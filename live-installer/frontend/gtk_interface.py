@@ -14,7 +14,7 @@ from frontend.keyboardview import kbdpreview
 from installer import InstallerEngine, Setup, NON_LATIN_KB_LAYOUTS
 from logger import _file as LOG_FILE_PATH
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 gettext.bindtextdomain('xkeyboard-config', '/usr/share/locale')
 gettext.textdomain('xkeyboard-config')
@@ -42,7 +42,7 @@ class InstallerWindow:
         Gtk.main()
 
     def __init__(self, fullscreen=False):
-
+        GLib.set_prgname("17g-installer")
         # build the setup object (where we put all our choices) and the
         # installer
         self.setup = Setup()

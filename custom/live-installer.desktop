@@ -30,3 +30,5 @@ Terminal=false
 # Describes the categories in which this entry should be shown
 Categories=System;X-Pardus-Apps;
 
+# The name of program
+StartupWMClass=17g-installer
