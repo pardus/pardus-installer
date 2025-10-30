@@ -354,7 +354,7 @@ class InstallerWindow:
         self.i18n()
 
         # make sure we're on the right page (no pun.)
-        #self.activate_page(0)
+        self.activate_page(0)
         self.builder.get_object("label_automated_warning").hide()
         self.builder.get_object("button_back").set_sensitive(False)
         self.slideshow()
@@ -425,8 +425,16 @@ class InstallerWindow:
         self.terminal = Vte.Terminal()
         self.text_logs_container.pack_start(self.terminal, True, True, 0)
         self.terminal.show()
-        nex = self.PAGE_INSTALL
-        self.activate_page(nex, nex)
+        self.text_logs_container.hide()
+
+        def update_vte_color(vte):
+            style_context = self.window.get_style_context()
+            background_color= style_context.get_background_color(Gtk.StateFlags.NORMAL);
+            foreground_color= style_context.get_color(Gtk.StateFlags.NORMAL);
+            vte.set_color_background(background_color)
+            vte.set_color_foreground(foreground_color)
+
+        update_vte_color(self.terminal)
 
         self.monitor_logs(self.logfile)
 
