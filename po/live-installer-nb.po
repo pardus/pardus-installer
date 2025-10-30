@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-06 19:10+0300\n"
+"POT-Creation-Date: 2025-08-16 15:45+0300\n"
 "PO-Revision-Date: 2018-08-26 23:12+0000\n"
 "Last-Translator: Thomas Olsen <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -23,19 +23,19 @@ msgid "Welcome to the 17g Installer."
 msgstr ""
 
 #: live-installer/resources/interface.ui:88
+#: live-installer/frontend/gtk_interface.py:531
 #: live-installer/frontend/tui_interface.py:36
-#: live-installer/frontend/gtk_interface.py:507
 msgid ""
 "This program will ask you some questions and set up system on your computer."
 msgstr ""
 
 #: live-installer/resources/interface.ui:143
-#: live-installer/frontend/gtk_interface.py:509
+#: live-installer/frontend/gtk_interface.py:533
 msgid "I accept the terms of the License Agreement"
 msgstr ""
 
 #: live-installer/resources/interface.ui:214
-#: live-installer/frontend/gtk_interface.py:518
+#: live-installer/frontend/gtk_interface.py:542
 msgid "Keyboard Model:"
 msgstr ""
 
@@ -44,12 +44,12 @@ msgid "Type here to test your keyboard"
 msgstr ""
 
 #: live-installer/resources/interface.ui:377
-#: live-installer/resources/interface.ui:1965
-#: live-installer/resources/interface.ui:2417
-#: live-installer/resources/interface.ui:2429
-#: live-installer/resources/interface.ui:2441
-#: live-installer/resources/interface.ui:2622
-#: live-installer/resources/interface.ui:2634
+#: live-installer/resources/interface.ui:2061
+#: live-installer/resources/interface.ui:2530
+#: live-installer/resources/interface.ui:2542
+#: live-installer/resources/interface.ui:2554
+#: live-installer/resources/interface.ui:2735
+#: live-installer/resources/interface.ui:2747
 msgid "label"
 msgstr ""
 
@@ -58,245 +58,250 @@ msgid "Continent"
 msgstr ""
 
 #: live-installer/resources/interface.ui:426
+#: live-installer/frontend/gtk_interface.py:508
 #: live-installer/frontend/tui_interface.py:53
-#: live-installer/frontend/gtk_interface.py:484
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: live-installer/resources/interface.ui:484
-#: live-installer/frontend/gtk_interface.py:544
+#: live-installer/resources/interface.ui:485
+#: live-installer/frontend/gtk_interface.py:568
 msgid "Automated Installation"
 msgstr ""
 
-#: live-installer/resources/interface.ui:500
+#: live-installer/resources/interface.ui:501
 msgid "Erase a disk and install LMDE on it."
 msgstr ""
 
-#: live-installer/resources/interface.ui:528
-#: live-installer/frontend/gtk_interface.py:547
+#: live-installer/resources/interface.ui:533
+#: live-installer/frontend/gtk_interface.py:571
 msgid "Disk:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:573
-#: live-installer/frontend/gtk_interface.py:574
+#: live-installer/resources/interface.ui:570
+#, fuzzy
+msgid "Type:"
+msgstr "Skriv"
+
+#: live-installer/resources/interface.ui:625
+#: live-installer/frontend/gtk_interface.py:596
 #, fuzzy
 msgid "Create swap partition"
 msgstr "Endre partisjon"
 
-#: live-installer/resources/interface.ui:595
+#: live-installer/resources/interface.ui:647
 msgid "1"
 msgstr ""
 
-#: live-installer/resources/interface.ui:613
+#: live-installer/resources/interface.ui:665
 #: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:604
+#: live-installer/frontend/partitioning.py:603
 msgid "GB"
 msgstr "GB"
 
-#: live-installer/resources/interface.ui:658
-#: live-installer/frontend/gtk_interface.py:555
-msgid "Use LVM (Logical Volume Management)"
-msgstr ""
-
-#: live-installer/resources/interface.ui:705
-#: live-installer/frontend/gtk_interface.py:549
+#: live-installer/resources/interface.ui:734
+#: live-installer/frontend/gtk_interface.py:573
 msgid "Encrypt the operating system"
 msgstr ""
 
-#: live-installer/resources/interface.ui:735
-#: live-installer/frontend/gtk_interface.py:551
+#: live-installer/resources/interface.ui:764
+#: live-installer/frontend/gtk_interface.py:575
 msgid "Passphrase"
 msgstr ""
 
-#: live-installer/resources/interface.ui:751
-#: live-installer/frontend/gtk_interface.py:553
+#: live-installer/resources/interface.ui:780
+#: live-installer/frontend/gtk_interface.py:577
 msgid "Confirm passphrase"
 msgstr ""
 
-#: live-installer/resources/interface.ui:785
-#: live-installer/frontend/gtk_interface.py:572
+#: live-installer/resources/interface.ui:814
+#: live-installer/frontend/gtk_interface.py:594
 msgid "This provides extra security but it can take hours."
 msgstr ""
 
-#: live-installer/resources/interface.ui:799
-#: live-installer/frontend/gtk_interface.py:570
+#: live-installer/resources/interface.ui:827
+#: live-installer/frontend/gtk_interface.py:592
 msgid "Fill the disk with random data"
 msgstr ""
 
-#: live-installer/resources/interface.ui:884
-#: live-installer/frontend/gtk_interface.py:557
+#: live-installer/resources/interface.ui:859
+#: live-installer/frontend/gtk_interface.py:818
+msgid "Please provide a passphrase for the encryption."
+msgstr ""
+
+#: live-installer/resources/interface.ui:930
+#: live-installer/frontend/gtk_interface.py:579
 msgid "Manual Partitioning"
 msgstr ""
 
-#: live-installer/resources/interface.ui:900
+#: live-installer/resources/interface.ui:946
 msgid "Manually create, resize or choose partitions for LMDE."
 msgstr ""
 
-#: live-installer/resources/interface.ui:965
+#: live-installer/resources/interface.ui:1009
 msgid "Remove windows & Install"
 msgstr ""
 
-#: live-installer/resources/interface.ui:981
+#: live-installer/resources/interface.ui:1025
 msgid "Remove existsing windows and install LMDE on it."
 msgstr ""
 
-#: live-installer/resources/interface.ui:1033
-#: live-installer/frontend/gtk_interface.py:561
+#: live-installer/resources/interface.ui:1075
+#: live-installer/frontend/gtk_interface.py:583
 #, fuzzy
 msgid "Expert Mode"
 msgstr "Ekspertmodus"
 
-#: live-installer/resources/interface.ui:1049
+#: live-installer/resources/interface.ui:1091
 msgid "The setup tool will not do partitioning."
 msgstr ""
 
-#: live-installer/resources/interface.ui:1111
-#: live-installer/frontend/gtk_interface.py:606
+#: live-installer/resources/interface.ui:1151
+#: live-installer/frontend/gtk_interface.py:628
 msgid "Minimal installation"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1127
-#: live-installer/frontend/gtk_interface.py:607
+#: live-installer/resources/interface.ui:1167
+#: live-installer/frontend/gtk_interface.py:629
 msgid ""
 "This will only install a minimal desktop environment with a browser and "
 "utilities."
 msgstr ""
 
-#: live-installer/resources/interface.ui:1160
-#: live-installer/frontend/gtk_interface.py:604
+#: live-installer/resources/interface.ui:1200
+#: live-installer/frontend/gtk_interface.py:626
 msgid "Install system with updates"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1176
-#: live-installer/frontend/gtk_interface.py:605
+#: live-installer/resources/interface.ui:1216
+#: live-installer/frontend/gtk_interface.py:627
 msgid "If you connect internet, updates will install."
 msgstr ""
 
-#: live-installer/resources/interface.ui:1278
-#: live-installer/frontend/gtk_interface.py:578
+#: live-installer/resources/interface.ui:1318
+#: live-installer/frontend/gtk_interface.py:600
 msgid "Refresh"
 msgstr "Oppdater"
 
-#: live-installer/resources/interface.ui:1325
-#: live-installer/frontend/gtk_interface.py:580
+#: live-installer/resources/interface.ui:1365
+#: live-installer/frontend/gtk_interface.py:602
 msgid "Delete"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1372
-#: live-installer/frontend/gtk_interface.py:581
+#: live-installer/resources/interface.ui:1412
+#: live-installer/frontend/gtk_interface.py:603
 #, fuzzy
 msgid "Format"
 msgstr "Formater som"
 
-#: live-installer/resources/interface.ui:1419
-#: live-installer/frontend/partitioning.py:282
-#: live-installer/frontend/gtk_interface.py:582
-#: live-installer/frontend/gtk_interface.py:966
+#: live-installer/resources/interface.ui:1459
+#: live-installer/frontend/gtk_interface.py:604
+#: live-installer/frontend/gtk_interface.py:1005
+#: live-installer/frontend/partitioning.py:278
 msgid "Create"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1455
-#: live-installer/frontend/gtk_interface.py:595
+#: live-installer/resources/interface.ui:1495
+#: live-installer/frontend/gtk_interface.py:617
 msgid "Install the GRUB boot menu on:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1529
+#: live-installer/resources/interface.ui:1569
 #, fuzzy
 msgid "Edit Partitions"
 msgstr "Endre på partisjoner"
 
-#: live-installer/resources/interface.ui:1553
+#: live-installer/resources/interface.ui:1593
 msgid "Legacy"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1611
-#: live-installer/frontend/gtk_interface.py:523
+#: live-installer/resources/interface.ui:1651
+#: live-installer/frontend/gtk_interface.py:547
 msgid "Your name:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1654
-#: live-installer/frontend/gtk_interface.py:525
+#: live-installer/resources/interface.ui:1694
+#: live-installer/frontend/gtk_interface.py:549
 msgid "Your computer's name:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1669
-#: live-installer/frontend/gtk_interface.py:529
+#: live-installer/resources/interface.ui:1709
+#: live-installer/frontend/gtk_interface.py:553
 msgid "Pick a username:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1682
-#: live-installer/frontend/gtk_interface.py:527
+#: live-installer/resources/interface.ui:1722
+#: live-installer/frontend/gtk_interface.py:551
 msgid "The name it uses when it talks to other computers."
 msgstr ""
 
-#: live-installer/resources/interface.ui:1715
-#: live-installer/frontend/gtk_interface.py:531
+#: live-installer/resources/interface.ui:1755
+#: live-installer/frontend/gtk_interface.py:555
 msgid "Choose a password:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1759
-#: live-installer/frontend/gtk_interface.py:536
+#: live-installer/resources/interface.ui:1799
+#: live-installer/frontend/gtk_interface.py:560
 msgid "Log in automatically"
 msgstr "Logg inn automatisk"
 
-#: live-installer/resources/interface.ui:1774
-#: live-installer/frontend/gtk_interface.py:538
+#: live-installer/resources/interface.ui:1814
+#: live-installer/frontend/gtk_interface.py:562
 msgid "Require my password to log in"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1789
-#: live-installer/frontend/gtk_interface.py:540
+#: live-installer/resources/interface.ui:1829
+#: live-installer/frontend/gtk_interface.py:564
 msgid "Encrypt my home folder"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1813
-#: live-installer/frontend/gtk_interface.py:533
+#: live-installer/resources/interface.ui:1853
+#: live-installer/frontend/gtk_interface.py:557
 msgid "Confirm your password:"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1842
+#: live-installer/resources/interface.ui:1882
 msgid "Length must be minimum 8 characters"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1915
-#: live-installer/frontend/gtk_interface.py:612
+#: live-installer/resources/interface.ui:1955
+#: live-installer/frontend/gtk_interface.py:634
 msgid "Automated installation enabled!"
 msgstr ""
 
-#: live-installer/resources/interface.ui:1984
+#: live-installer/resources/interface.ui:2106
 msgid "0.0"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2016
-#: live-installer/frontend/gtk_interface.py:608
+#: live-installer/resources/interface.ui:2145
+#: live-installer/frontend/gtk_interface.py:630
 msgid "Please do not turn off your computer during the installation process."
 msgstr ""
 
-#: live-installer/resources/interface.ui:2085
+#: live-installer/resources/interface.ui:2198
 #: live-installer/resources/welcome.ui:206
 msgid "17g team"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2289
-#: live-installer/resources/interface.ui:2329
-#: live-installer/frontend/gtk_interface.py:478
+#: live-installer/resources/interface.ui:2402
+#: live-installer/resources/interface.ui:2442
+#: live-installer/frontend/gtk_interface.py:502
 msgid "Welcome"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2453
+#: live-installer/resources/interface.ui:2566
 msgid "/dev/sda1"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2505
+#: live-installer/resources/interface.ui:2618
 msgid "read only"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2518
+#: live-installer/resources/interface.ui:2631
 msgid "Use default Btrfs subvolumes"
 msgstr ""
 
-#: live-installer/resources/interface.ui:2678
-#: live-installer/frontend/partitioning.py:888
+#: live-installer/resources/interface.ui:2791
+#: live-installer/frontend/partitioning.py:887
 #, fuzzy
 msgid "Format subvolume"
 msgstr "Formater som"
@@ -329,12 +334,665 @@ msgstr ""
 msgid "Welcome to 17g"
 msgstr ""
 
+#: live-installer/frontend/gtk_interface.py:110
+#: live-installer/frontend/gtk_interface.py:538
+msgid "Country"
+msgstr "Land"
+
+#: live-installer/frontend/gtk_interface.py:119
+#: live-installer/frontend/gtk_interface.py:506
+#: live-installer/frontend/gtk_interface.py:537
+#: live-installer/frontend/tui_interface.py:45
+msgid "Language"
+msgstr "Språk"
+
+#: live-installer/frontend/gtk_interface.py:170
+msgid "Ext4 (Default)"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:172
+msgid "LVM (Logical Volume Manager)"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:173
+msgid "Btrfs"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:303
+msgid "Layout"
+msgstr "Utforming"
+
+#: live-installer/frontend/gtk_interface.py:311
+msgid "Variant"
+msgstr "Variant"
+
+#: live-installer/frontend/gtk_interface.py:329
+msgid "Calculating file indexes ..."
+msgstr "Kalkulerer filindekser ..."
+
+#: live-installer/frontend/gtk_interface.py:491
+#: live-installer/frontend/gtk_interface.py:494
+#: live-installer/frontend/gtk_interface.py:1212
+#: live-installer/frontend/gtk_interface.py:1237
+#: live-installer/frontend/gtk_interface.py:1260
+#: live-installer/frontend/gtk_interface.py:1280
+#: live-installer/frontend/gtk_interface.py:1284
+#: live-installer/frontend/gtk_interface.py:1294
+#: live-installer/frontend/gtk_interface.py:1298
+#: live-installer/frontend/gtk_interface.py:1303
+#: live-installer/frontend/gtk_interface.py:1317
+#: live-installer/frontend/gtk_interface.py:1323
+#: live-installer/frontend/gtk_interface.py:1329
+#: live-installer/frontend/gtk_interface.py:1334
+#: live-installer/frontend/gtk_interface.py:1339
+#: live-installer/frontend/gtk_interface.py:1398
+#: live-installer/frontend/gtk_interface.py:1477
+#: live-installer/frontend/partitioning.py:440
+#: live-installer/frontend/partitioning.py:523
+msgid "Installer"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:504
+msgid "License Agreement"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:506
+#: live-installer/frontend/tui_interface.py:40
+msgid "What language would you like to use?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:508
+#: live-installer/frontend/tui_interface.py:49
+msgid "Where are you?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:510
+msgid "Keyboard layout"
+msgstr "Tastaturoppsett"
+
+#: live-installer/frontend/gtk_interface.py:510
+msgid "What is your keyboard layout?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:512
+msgid "User account"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:512
+msgid "Who are you?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:514
+msgid "Installation Type"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:514
+#: live-installer/frontend/gtk_interface.py:516
+#, fuzzy
+msgid "Where do you want to install system?"
+msgstr "Er du sikker på at du vil avslutte installasjonsprogrammet?"
+
+#: live-installer/frontend/gtk_interface.py:516
+msgid "Partitioning"
+msgstr "Partisjonering"
+
+#: live-installer/frontend/gtk_interface.py:518
+msgid "Summary"
+msgstr "Oppsummering."
+
+#: live-installer/frontend/gtk_interface.py:518
+msgid "Check that everything is correct"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:520
+msgid "Installing"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:520
+msgid "Please wait..."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:523
+#: live-installer/frontend/gtk_interface.py:635
+msgid "Automated Install"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:524
+msgid "Back"
+msgstr "Tilbake"
+
+#: live-installer/frontend/gtk_interface.py:525
+#: live-installer/frontend/gtk_interface.py:1345
+msgid "Next"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:529
+#: live-installer/frontend/tui_interface.py:34
+#, python-format
+msgid "Welcome to the %s Installer."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:544
+msgid "Type here to test your keyboard layout"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:570
+msgid "Erase a disk and install system on it."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:581
+msgid "Manually create, resize or choose partitions for system."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:585
+msgid "The setup tool will not do partitioning"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:587
+msgid "Remove Windows & Install"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:589
+msgid "Remove existsing windows and install system on it."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:599
+#: live-installer/frontend/gtk_interface.py:601
+msgid "Edit partitions"
+msgstr "Endre på partisjoner"
+
+#: live-installer/frontend/gtk_interface.py:606
+msgid "Device"
+msgstr "Enhet"
+
+#: live-installer/frontend/gtk_interface.py:607
+#: live-installer/frontend/tui_interface.py:77
+msgid "Type"
+msgstr "Skriv"
+
+#: live-installer/frontend/gtk_interface.py:608
+msgid "Operating system"
+msgstr "Operativsystem"
+
+#: live-installer/frontend/gtk_interface.py:609
+msgid "Mount point"
+msgstr "Monteringspunkt"
+
+#: live-installer/frontend/gtk_interface.py:610
+msgid "Format as"
+msgstr "Formater som"
+
+#: live-installer/frontend/gtk_interface.py:611
+msgid "Size"
+msgstr "Størrelse"
+
+#: live-installer/frontend/gtk_interface.py:612
+#: live-installer/frontend/gtk_interface.py:1014
+#: live-installer/frontend/partitioning.py:463
+#: live-installer/frontend/partitioning.py:686
+msgid "Free space"
+msgstr "Tilgjengelig plass"
+
+#: live-installer/frontend/gtk_interface.py:620
+#: live-installer/frontend/partitioning.py:213
+msgid "Read only"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:648
+#: live-installer/frontend/gtk_interface.py:1400
+msgid "Warning"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:649
+#: live-installer/frontend/gtk_interface.py:1401
+#, python-format
+msgid "This will delete all the data on %s. Are you sure?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:674
+#: live-installer/frontend/gtk_interface.py:1267
+msgid "Install"
+msgstr "Installer"
+
+#: live-installer/frontend/gtk_interface.py:824
+#: live-installer/frontend/gtk_interface.py:1253
+msgid "Your passwords do not match."
+msgstr "Passordene du oppga stemmer ikke overens."
+
+#: live-installer/frontend/gtk_interface.py:830
+msgid "Quit?"
+msgstr "Avslutt?"
+
+#: live-installer/frontend/gtk_interface.py:831
+msgid "Are you sure you want to quit the installer?"
+msgstr "Er du sikker på at du vil avslutte installasjonsprogrammet?"
+
+#: live-installer/frontend/gtk_interface.py:1016
+#: live-installer/frontend/gtk_interface.py:1045
+#: live-installer/frontend/partitioning.py:190
+#: live-installer/frontend/partitioning.py:199
+#: live-installer/frontend/partitioning.py:201
+#: live-installer/frontend/partitioning.py:236
+#: live-installer/frontend/partitioning.py:274
+#: live-installer/frontend/partitioning.py:336
+#: live-installer/frontend/partitioning.py:348
+#: live-installer/frontend/partitioning.py:352
+#: live-installer/frontend/partitioning.py:775
+msgid "btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1023
+#: live-installer/frontend/gtk_interface.py:1031
+#: live-installer/frontend/partitioning.py:287
+msgid "Create a subvolume"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1033
+#: live-installer/frontend/gtk_interface.py:1047
+#: live-installer/frontend/gtk_interface.py:1064
+#: live-installer/frontend/gtk_interface.py:1079
+#: live-installer/frontend/gtk_interface.py:1263
+msgid "Are you sure?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1034
+msgid "New partition will created at {}"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1048
+msgid "subvolume {} will removed from {}."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1065
+msgid "Partition {} will removed from {}."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1080
+msgid "Partition {} will formated from {}."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1213
+msgid "Please choose a language"
+msgstr "Vennligst velg et språk"
+
+#: live-installer/frontend/gtk_interface.py:1238
+#, fuzzy
+msgid "Please provide a kayboard layout for your computer."
+msgstr "Vennligst oppgi et passord for din brukerkonto."
+
+#: live-installer/frontend/gtk_interface.py:1258
+msgid "Please provide your full name."
+msgstr "Vennligst oppgi ditt fulle navn."
+
+#: live-installer/frontend/gtk_interface.py:1263
+#, fuzzy
+msgid "Your passwords is not strong."
+msgstr "Passordene du oppga stemmer ikke overens."
+
+#: live-installer/frontend/gtk_interface.py:1281
+#: live-installer/frontend/gtk_interface.py:1295
+msgid ""
+"Root filesystem type not specified. Installation will continue without disk "
+"formatting. Do you want to continue?"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1285
+#: live-installer/frontend/gtk_interface.py:1299
+#, fuzzy
+msgid ""
+"The root partition is too small. It should be at least 16GB. Do you want to "
+"continue?"
+msgstr ""
+"EFI partisjonen er ikke oppstartsbar. Vennligst rediger partisjonsflaggene."
+
+#: live-installer/frontend/gtk_interface.py:1303
+msgid "Please select a root (/) partition."
+msgstr "Vennligst velg en rotpartisjon(/)."
+
+#: live-installer/frontend/gtk_interface.py:1304
+#, python-format
+msgid ""
+"A root partition is needed to install %s on.\n"
+"\n"
+" - Mount point: /\n"
+" - Recommended size: 30GB\n"
+" - Recommended filesystem format: ext4\n"
+"\n"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1318
+#, fuzzy
+msgid "The EFI partition is not bootable. Do you want to set boot flag?"
+msgstr ""
+"EFI partisjonen er ikke oppstartsbar. Vennligst rediger partisjonsflaggene."
+
+#: live-installer/frontend/gtk_interface.py:1324
+#, fuzzy
+msgid "The EFI partition is too small. It must be at least 100MB."
+msgstr "EFI partisjonen må formateres som vfat."
+
+#: live-installer/frontend/gtk_interface.py:1330
+#: live-installer/frontend/gtk_interface.py:1335
+msgid "The EFI partition must be formatted as vfat."
+msgstr "EFI partisjonen må formateres som vfat."
+
+#: live-installer/frontend/gtk_interface.py:1339
+msgid "Please select an EFI partition."
+msgstr "Vennligst velg en EFI-partisjon."
+
+#: live-installer/frontend/gtk_interface.py:1340
+msgid ""
+"An EFI system partition is needed with the following requirements:\n"
+"\n"
+" - Mount point: /boot/efi\n"
+" - Partition flags: Bootable\n"
+" - Size: at least 100MB \n"
+" - Format: vfat or fat32\n"
+"\n"
+"To ensure compatibility with Windows we recommend you use the first "
+"partition of the disk as the EFI system partition.\n"
+" "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1396
+msgid "Please select a disk."
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1478
+#, fuzzy
+msgid "Please provide a device to install grub."
+msgstr "Vennligst oppgi et brukernavn."
+
+#: live-installer/frontend/gtk_interface.py:1526
+msgid "Localization"
+msgstr "Plassering"
+
+#: live-installer/frontend/gtk_interface.py:1527
+msgid "Language: "
+msgstr "Språk: "
+
+#: live-installer/frontend/gtk_interface.py:1528
+msgid "Timezone: "
+msgstr "Tidssone: "
+
+#: live-installer/frontend/gtk_interface.py:1529
+msgid "Keyboard layout: "
+msgstr "Tastaturutforming: "
+
+#: live-installer/frontend/gtk_interface.py:1533
+msgid "User settings"
+msgstr "Brukerinnstillinger"
+
+#: live-installer/frontend/gtk_interface.py:1537
+msgid "Real name: "
+msgstr "Virkelig navn: "
+
+#: live-installer/frontend/gtk_interface.py:1538
+msgid "Username: "
+msgstr "Brukernavn: "
+
+#: live-installer/frontend/gtk_interface.py:1541
+#: live-installer/frontend/gtk_interface.py:1544
+msgid "Password: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1546
+msgid "Automatic login: "
+msgstr "Automatisk innlogging: "
+
+#: live-installer/frontend/gtk_interface.py:1546
+#: live-installer/frontend/gtk_interface.py:1599
+#: live-installer/frontend/gtk_interface.py:1603
+msgid "enabled"
+msgstr "aktivert"
+
+#: live-installer/frontend/gtk_interface.py:1547
+#: live-installer/frontend/gtk_interface.py:1600
+#: live-installer/frontend/gtk_interface.py:1603
+msgid "disabled"
+msgstr "deaktivert"
+
+#: live-installer/frontend/gtk_interface.py:1548
+msgid "System settings"
+msgstr "Systeminnstillinger"
+
+#: live-installer/frontend/gtk_interface.py:1550
+msgid "Computer's name: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1553
+#: live-installer/frontend/gtk_interface.py:1555
+msgid "Bios type: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1557
+msgid "Install updates after installation"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1558
+msgid "Filesystem operations"
+msgstr "Filsystemhandlinger"
+
+#: live-installer/frontend/gtk_interface.py:1559
+#, python-format
+msgid "Install bootloader on %s"
+msgstr "Installer oppstartslaster på %s"
+
+#: live-installer/frontend/gtk_interface.py:1560
+msgid "Do not install bootloader"
+msgstr "Ikke installer oppstartslasteren"
+
+#: live-installer/frontend/gtk_interface.py:1562
+msgid "Use already-mounted /target."
+msgstr "Bruk den allerede monterte /target."
+
+#: live-installer/frontend/gtk_interface.py:1570
+#, python-format
+msgid " (with %s GB swap)"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1574
+#, python-format
+msgid "Automated installation on %s"
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1575
+#, fuzzy
+msgid "Type: "
+msgstr "Skriv"
+
+#: live-installer/frontend/gtk_interface.py:1579
+#, python-format
+msgid "Format %(path)s as %(filesystem)s"
+msgstr "Formater %(path)s som %(filesystem)s"
+
+#: live-installer/frontend/gtk_interface.py:1583
+#, python-format
+msgid "Mount %(path)s as %(mount)s"
+msgstr "Monter %(path)s som %(mount)s"
+
+#: live-installer/frontend/gtk_interface.py:1588
+#, python-format
+msgid "Create btrfs subvolume %(path)s under %(parentPath)s "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1592
+#, fuzzy, python-format
+msgid "Mount %(path)s subvolume as %(mount)s"
+msgstr "Monter %(path)s som %(mount)s"
+
+#: live-installer/frontend/gtk_interface.py:1599
+msgid "LVM: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1602
+msgid "Disk Encryption: "
+msgstr ""
+
+#: live-installer/frontend/gtk_interface.py:1656
+#: live-installer/installer.py:888
+msgid "Installation finished"
+msgstr "Installasjonen er fullført"
+
+#: live-installer/frontend/gtk_interface.py:1657
+msgid ""
+"The installation is now complete. Do you want to restart your computer to "
+"use the new system?"
+msgstr ""
+"Installasjonen er nå fullført. Vil du starte datamaskinen på nytt for å ta i "
+"bruk det nye systemet?"
+
+#: live-installer/frontend/gtk_interface.py:1689
+#: live-installer/frontend/gtk_interface.py:1693
+#: live-installer/frontend/gtk_interface.py:1702
+#: live-installer/frontend/gtk_interface.py:1711
+msgid "Installation error"
+msgstr "Installasjonsfeil"
+
+#: live-installer/frontend/gtk_interface.py:1725
+msgid "Error"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:72
+msgid "B"
+msgstr "B"
+
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:602
+msgid "kB"
+msgstr "kB"
+
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:602
+msgid "MB"
+msgstr "MB"
+
+#: live-installer/frontend/partitioning.py:73
+#: live-installer/frontend/partitioning.py:603
+msgid "TB"
+msgstr "TB"
+
+#: live-installer/frontend/partitioning.py:80
+msgid "Removable:"
+msgstr "Flyttbar:"
+
+#: live-installer/frontend/partitioning.py:195
+msgid "Edit Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:241
+msgid "The name of a subvolume must not start or end with a forward slash"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:245
+msgid "The name of a subvolume must not be blank or contain a space"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:252
+#, python-format
+msgid "Subvolume with name '%s' already exists"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:341
+msgid "Edit"
+msgstr "Endre"
+
+#: live-installer/frontend/partitioning.py:353
+#: live-installer/frontend/partitioning.py:360
+#: live-installer/frontend/partitioning.py:364
+#: live-installer/frontend/partitioning.py:371
+#: live-installer/frontend/partitioning.py:380
+#, fuzzy, python-format
+msgid "Assign to %s"
+msgstr "Tildel til /"
+
+#: live-installer/frontend/partitioning.py:387
+msgid "Create btrfs subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:441
+msgid ""
+"Disk: {} partition table broken or not exists. Do you want to create new "
+"partition table?"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:540
+#, python-format
+msgid ""
+"The partition table couldn't be written for %s. Restart the computer and try "
+"again."
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:589
+#, python-format
+msgid ""
+"The partition %s could not be created. The installation will stop. Restart "
+"the computer and try again."
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:684
+msgid "Logical partition"
+msgstr "Logisk partisjon"
+
+#: live-installer/frontend/partitioning.py:685
+msgid "Extended partition"
+msgstr "Utvidet partisjon"
+
+#: live-installer/frontend/partitioning.py:689
+#: live-installer/frontend/partitioning.py:823
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: live-installer/frontend/partitioning.py:740
+msgid "bootloader/recovery"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:753
+#, fuzzy
+msgid "EFI System Partition"
+msgstr "Endre partisjon"
+
+#: live-installer/frontend/partitioning.py:789
+msgid "Edit partition"
+msgstr "Endre partisjon"
+
+#: live-installer/frontend/partitioning.py:791
+msgid "Device:"
+msgstr "Enhet:"
+
+#: live-installer/frontend/partitioning.py:793
+msgid "Format as:"
+msgstr "Formater som:"
+
+#: live-installer/frontend/partitioning.py:795
+#: live-installer/frontend/partitioning.py:882
+msgid "Mount point:"
+msgstr "Monteringspunkt:"
+
+#: live-installer/frontend/partitioning.py:796
+#: live-installer/frontend/partitioning.py:891
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: live-installer/frontend/partitioning.py:797
+#: live-installer/frontend/partitioning.py:892
 #: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
 #: live-installer/frontend/dialogs.py:54
-#: live-installer/frontend/partitioning.py:798
-#: live-installer/frontend/partitioning.py:893
 msgid "OK"
 msgstr "Ok"
+
+#: live-installer/frontend/partitioning.py:873
+msgid "Create Subvolume"
+msgstr ""
+
+#: live-installer/frontend/partitioning.py:880
+msgid "Name:"
+msgstr ""
+
+#: live-installer/frontend/timezones.py:140
+#, fuzzy
+msgid "Select timezone"
+msgstr "Tidssone"
 
 #: live-installer/frontend/dialogs.py:41
 msgid "No"
@@ -343,34 +1001,6 @@ msgstr "Nei"
 #: live-installer/frontend/dialogs.py:42
 msgid "Yes"
 msgstr "Ja"
-
-#: live-installer/frontend/timezones.py:140
-#, fuzzy
-msgid "Select timezone"
-msgstr "Tidssone"
-
-#: live-installer/frontend/tui_interface.py:34
-#: live-installer/frontend/gtk_interface.py:505
-#, python-format
-msgid "Welcome to the %s Installer."
-msgstr ""
-
-#: live-installer/frontend/tui_interface.py:40
-#: live-installer/frontend/gtk_interface.py:482
-msgid "What language would you like to use?"
-msgstr ""
-
-#: live-installer/frontend/tui_interface.py:45
-#: live-installer/frontend/gtk_interface.py:118
-#: live-installer/frontend/gtk_interface.py:482
-#: live-installer/frontend/gtk_interface.py:513
-msgid "Language"
-msgstr "Språk"
-
-#: live-installer/frontend/tui_interface.py:49
-#: live-installer/frontend/gtk_interface.py:484
-msgid "Where are you?"
-msgstr ""
 
 #: live-installer/frontend/tui_interface.py:57
 msgid "What keyboard would you like to use?"
@@ -385,11 +1015,6 @@ msgstr "Tastaturoppsett"
 #, fuzzy
 msgid "Installation type?"
 msgstr "Installasjon midlertidig stoppet"
-
-#: live-installer/frontend/tui_interface.py:77
-#: live-installer/frontend/gtk_interface.py:585
-msgid "Type"
-msgstr "Skriv"
 
 #: live-installer/frontend/tui_interface.py:80
 msgid "Select a disk?"
@@ -421,620 +1046,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr ""
 
-#: live-installer/frontend/partitioning.py:72
-msgid "B"
-msgstr "B"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:603
-msgid "kB"
-msgstr "kB"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:603
-msgid "MB"
-msgstr "MB"
-
-#: live-installer/frontend/partitioning.py:73
-#: live-installer/frontend/partitioning.py:604
-msgid "TB"
-msgstr "TB"
-
-#: live-installer/frontend/partitioning.py:80
-msgid "Removable:"
-msgstr "Flyttbar:"
-
-#: live-installer/frontend/partitioning.py:190
-#: live-installer/frontend/partitioning.py:199
-#: live-installer/frontend/partitioning.py:201
-#: live-installer/frontend/partitioning.py:236
-#: live-installer/frontend/partitioning.py:278
-#: live-installer/frontend/partitioning.py:340
-#: live-installer/frontend/partitioning.py:352
-#: live-installer/frontend/partitioning.py:356
-#: live-installer/frontend/partitioning.py:776
-#: live-installer/frontend/gtk_interface.py:977
-#: live-installer/frontend/gtk_interface.py:1006
-msgid "btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:195
-msgid "Edit Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:213
-#: live-installer/frontend/gtk_interface.py:598
-msgid "Read only"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:241
-msgid "The name of a subvolume must not start or end with a forward slash"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:245
-msgid "The name of a subvolume must not be blank or contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:249
-msgid "The mount point of a subvolume must not contain a space"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:256
-#, python-format
-msgid "Subvolume with name '%s' already exists"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:291
-#: live-installer/frontend/gtk_interface.py:984
-#: live-installer/frontend/gtk_interface.py:992
-msgid "Create a subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:345
-msgid "Edit"
-msgstr "Endre"
-
-#: live-installer/frontend/partitioning.py:357
-#: live-installer/frontend/partitioning.py:364
-#: live-installer/frontend/partitioning.py:368
-#: live-installer/frontend/partitioning.py:375
-#: live-installer/frontend/partitioning.py:384
-#, fuzzy, python-format
-msgid "Assign to %s"
-msgstr "Tildel til /"
-
-#: live-installer/frontend/partitioning.py:391
-msgid "Create btrfs subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:446
-#: live-installer/frontend/partitioning.py:529
-#: live-installer/frontend/gtk_interface.py:467
-#: live-installer/frontend/gtk_interface.py:470
-#: live-installer/frontend/gtk_interface.py:1173
-#: live-installer/frontend/gtk_interface.py:1198
-#: live-installer/frontend/gtk_interface.py:1221
-#: live-installer/frontend/gtk_interface.py:1241
-#: live-installer/frontend/gtk_interface.py:1245
-#: live-installer/frontend/gtk_interface.py:1255
-#: live-installer/frontend/gtk_interface.py:1259
-#: live-installer/frontend/gtk_interface.py:1264
-#: live-installer/frontend/gtk_interface.py:1278
-#: live-installer/frontend/gtk_interface.py:1284
-#: live-installer/frontend/gtk_interface.py:1290
-#: live-installer/frontend/gtk_interface.py:1295
-#: live-installer/frontend/gtk_interface.py:1300
-#: live-installer/frontend/gtk_interface.py:1365
-#: live-installer/frontend/gtk_interface.py:1444
-msgid "Installer"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:447
-msgid ""
-"Disk: {} partition table broken or not exists. Do you want to create new "
-"partition table?"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:469
-#: live-installer/frontend/partitioning.py:687
-#: live-installer/frontend/gtk_interface.py:590
-#: live-installer/frontend/gtk_interface.py:975
-msgid "Free space"
-msgstr "Tilgjengelig plass"
-
-#: live-installer/frontend/partitioning.py:545
-#, python-format
-msgid ""
-"The partition table couldn't be written for %s. Restart the computer and try "
-"again."
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:590
-#, python-format
-msgid ""
-"The partition %s could not be created. The installation will stop. Restart "
-"the computer and try again."
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:685
-msgid "Logical partition"
-msgstr "Logisk partisjon"
-
-#: live-installer/frontend/partitioning.py:686
-msgid "Extended partition"
-msgstr "Utvidet partisjon"
-
-#: live-installer/frontend/partitioning.py:690
-#: live-installer/frontend/partitioning.py:824
-msgid "Unknown"
-msgstr "Ukjent"
-
-#: live-installer/frontend/partitioning.py:741
-msgid "bootloader/recovery"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:754
-#, fuzzy
-msgid "EFI System Partition"
-msgstr "Endre partisjon"
-
-#: live-installer/frontend/partitioning.py:790
-msgid "Edit partition"
-msgstr "Endre partisjon"
-
-#: live-installer/frontend/partitioning.py:792
-msgid "Device:"
-msgstr "Enhet:"
-
-#: live-installer/frontend/partitioning.py:794
-msgid "Format as:"
-msgstr "Formater som:"
-
-#: live-installer/frontend/partitioning.py:796
-#: live-installer/frontend/partitioning.py:883
-msgid "Mount point:"
-msgstr "Monteringspunkt:"
-
-#: live-installer/frontend/partitioning.py:797
-#: live-installer/frontend/partitioning.py:892
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: live-installer/frontend/partitioning.py:874
-msgid "Create Subvolume"
-msgstr ""
-
-#: live-installer/frontend/partitioning.py:881
-msgid "Name:"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:109
-#: live-installer/frontend/gtk_interface.py:514
-msgid "Country"
-msgstr "Land"
-
-#: live-installer/frontend/gtk_interface.py:290
-msgid "Layout"
-msgstr "Utforming"
-
-#: live-installer/frontend/gtk_interface.py:298
-msgid "Variant"
-msgstr "Variant"
-
-#: live-installer/frontend/gtk_interface.py:316
-msgid "Calculating file indexes ..."
-msgstr "Kalkulerer filindekser ..."
-
-#: live-installer/frontend/gtk_interface.py:480
-msgid "License Agreement"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:486
-msgid "Keyboard layout"
-msgstr "Tastaturoppsett"
-
-#: live-installer/frontend/gtk_interface.py:486
-msgid "What is your keyboard layout?"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:488
-msgid "User account"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:488
-msgid "Who are you?"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:490
-msgid "Installation Type"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:490
-#: live-installer/frontend/gtk_interface.py:492
-#, fuzzy
-msgid "Where do you want to install system?"
-msgstr "Er du sikker på at du vil avslutte installasjonsprogrammet?"
-
-#: live-installer/frontend/gtk_interface.py:492
-msgid "Partitioning"
-msgstr "Partisjonering"
-
-#: live-installer/frontend/gtk_interface.py:494
-msgid "Summary"
-msgstr "Oppsummering."
-
-#: live-installer/frontend/gtk_interface.py:494
-msgid "Check that everything is correct"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:496
-msgid "Installing"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:496
-msgid "Please wait..."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:499
-#: live-installer/frontend/gtk_interface.py:613
-msgid "Automated Install"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:500
-msgid "Back"
-msgstr "Tilbake"
-
-#: live-installer/frontend/gtk_interface.py:501
-#: live-installer/frontend/gtk_interface.py:1306
-msgid "Next"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:520
-msgid "Type here to test your keyboard layout"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:546
-msgid "Erase a disk and install system on it."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:559
-msgid "Manually create, resize or choose partitions for system."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:563
-msgid "The setup tool will not do partitioning"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:565
-msgid "Remove Windows & Install"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:567
-msgid "Remove existsing windows and install system on it."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:577
-#: live-installer/frontend/gtk_interface.py:579
-msgid "Edit partitions"
-msgstr "Endre på partisjoner"
-
-#: live-installer/frontend/gtk_interface.py:584
-msgid "Device"
-msgstr "Enhet"
-
-#: live-installer/frontend/gtk_interface.py:586
-msgid "Operating system"
-msgstr "Operativsystem"
-
-#: live-installer/frontend/gtk_interface.py:587
-msgid "Mount point"
-msgstr "Monteringspunkt"
-
-#: live-installer/frontend/gtk_interface.py:588
-msgid "Format as"
-msgstr "Formater som"
-
-#: live-installer/frontend/gtk_interface.py:589
-msgid "Size"
-msgstr "Størrelse"
-
-#: live-installer/frontend/gtk_interface.py:626
-#: live-installer/frontend/gtk_interface.py:1367
-msgid "Warning"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:627
-#: live-installer/frontend/gtk_interface.py:1368
-#, python-format
-msgid "This will delete all the data on %s. Are you sure?"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:652
-#: live-installer/frontend/gtk_interface.py:1228
-msgid "Install"
-msgstr "Installer"
-
-#: live-installer/frontend/gtk_interface.py:785
-msgid "Please provide a passphrase for the encryption."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:787
-#: live-installer/frontend/gtk_interface.py:1214
-msgid "Your passwords do not match."
-msgstr "Passordene du oppga stemmer ikke overens."
-
-#: live-installer/frontend/gtk_interface.py:792
-msgid "Quit?"
-msgstr "Avslutt?"
-
-#: live-installer/frontend/gtk_interface.py:793
-msgid "Are you sure you want to quit the installer?"
-msgstr "Er du sikker på at du vil avslutte installasjonsprogrammet?"
-
-#: live-installer/frontend/gtk_interface.py:994
-#: live-installer/frontend/gtk_interface.py:1008
-#: live-installer/frontend/gtk_interface.py:1025
-#: live-installer/frontend/gtk_interface.py:1040
-#: live-installer/frontend/gtk_interface.py:1224
-#: live-installer/frontend/gtk_interface.py:1362
-msgid "Are you sure?"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:995
-msgid "New partition will created at {}"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1009
-msgid "subvolume {} will removed from {}."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1026
-msgid "Partition {} will removed from {}."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1041
-msgid "Partition {} will formated from {}."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1174
-msgid "Please choose a language"
-msgstr "Vennligst velg et språk"
-
-#: live-installer/frontend/gtk_interface.py:1199
-#, fuzzy
-msgid "Please provide a kayboard layout for your computer."
-msgstr "Vennligst oppgi et passord for din brukerkonto."
-
-#: live-installer/frontend/gtk_interface.py:1219
-msgid "Please provide your full name."
-msgstr "Vennligst oppgi ditt fulle navn."
-
-#: live-installer/frontend/gtk_interface.py:1224
-#: live-installer/frontend/gtk_interface.py:1362
-#, fuzzy
-msgid "Your passwords is not strong."
-msgstr "Passordene du oppga stemmer ikke overens."
-
-#: live-installer/frontend/gtk_interface.py:1242
-#: live-installer/frontend/gtk_interface.py:1256
-msgid ""
-"Root filesystem type not specified. Installation will continue without disk "
-"formatting. Do you want to continue?"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1246
-#: live-installer/frontend/gtk_interface.py:1260
-#, fuzzy
-msgid ""
-"The root partition is too small. It should be at least 16GB. Do you want to "
-"continue?"
-msgstr ""
-"EFI partisjonen er ikke oppstartsbar. Vennligst rediger partisjonsflaggene."
-
-#: live-installer/frontend/gtk_interface.py:1264
-msgid "Please select a root (/) partition."
-msgstr "Vennligst velg en rotpartisjon(/)."
-
-#: live-installer/frontend/gtk_interface.py:1265
-#, python-format
-msgid ""
-"A root partition is needed to install %s on.\n"
-"\n"
-" - Mount point: /\n"
-" - Recommended size: 30GB\n"
-" - Recommended filesystem format: ext4\n"
-"\n"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1279
-#, fuzzy
-msgid "The EFI partition is not bootable. Do you want to set boot flag?"
-msgstr ""
-"EFI partisjonen er ikke oppstartsbar. Vennligst rediger partisjonsflaggene."
-
-#: live-installer/frontend/gtk_interface.py:1285
-#, fuzzy
-msgid "The EFI partition is too small. It must be at least 100MB."
-msgstr "EFI partisjonen må formateres som vfat."
-
-#: live-installer/frontend/gtk_interface.py:1291
-#: live-installer/frontend/gtk_interface.py:1296
-msgid "The EFI partition must be formatted as vfat."
-msgstr "EFI partisjonen må formateres som vfat."
-
-#: live-installer/frontend/gtk_interface.py:1300
-msgid "Please select an EFI partition."
-msgstr "Vennligst velg en EFI-partisjon."
-
-#: live-installer/frontend/gtk_interface.py:1301
-msgid ""
-"An EFI system partition is needed with the following requirements:\n"
-"\n"
-" - Mount point: /boot/efi\n"
-" - Partition flags: Bootable\n"
-" - Size: at least 100MB \n"
-" - Format: vfat or fat32\n"
-"\n"
-"To ensure compatibility with Windows we recommend you use the first "
-"partition of the disk as the EFI system partition.\n"
-" "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1356
-msgid "Please select a disk."
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1445
-#, fuzzy
-msgid "Please provide a device to install grub."
-msgstr "Vennligst oppgi et brukernavn."
-
-#: live-installer/frontend/gtk_interface.py:1493
-msgid "Localization"
-msgstr "Plassering"
-
-#: live-installer/frontend/gtk_interface.py:1494
-msgid "Language: "
-msgstr "Språk: "
-
-#: live-installer/frontend/gtk_interface.py:1495
-msgid "Timezone: "
-msgstr "Tidssone: "
-
-#: live-installer/frontend/gtk_interface.py:1496
-msgid "Keyboard layout: "
-msgstr "Tastaturutforming: "
-
-#: live-installer/frontend/gtk_interface.py:1500
-msgid "User settings"
-msgstr "Brukerinnstillinger"
-
-#: live-installer/frontend/gtk_interface.py:1504
-msgid "Real name: "
-msgstr "Virkelig navn: "
-
-#: live-installer/frontend/gtk_interface.py:1505
-msgid "Username: "
-msgstr "Brukernavn: "
-
-#: live-installer/frontend/gtk_interface.py:1508
-#: live-installer/frontend/gtk_interface.py:1511
-msgid "Password: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1513
-msgid "Automatic login: "
-msgstr "Automatisk innlogging: "
-
-#: live-installer/frontend/gtk_interface.py:1513
-#: live-installer/frontend/gtk_interface.py:1563
-#: live-installer/frontend/gtk_interface.py:1567
-msgid "enabled"
-msgstr "aktivert"
-
-#: live-installer/frontend/gtk_interface.py:1514
-#: live-installer/frontend/gtk_interface.py:1564
-#: live-installer/frontend/gtk_interface.py:1567
-msgid "disabled"
-msgstr "deaktivert"
-
-#: live-installer/frontend/gtk_interface.py:1515
-msgid "System settings"
-msgstr "Systeminnstillinger"
-
-#: live-installer/frontend/gtk_interface.py:1517
-msgid "Computer's name: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1520
-#: live-installer/frontend/gtk_interface.py:1522
-msgid "Bios type: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1524
-msgid "Install updates after installation"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1525
-msgid "Filesystem operations"
-msgstr "Filsystemhandlinger"
-
-#: live-installer/frontend/gtk_interface.py:1526
-#, python-format
-msgid "Install bootloader on %s"
-msgstr "Installer oppstartslaster på %s"
-
-#: live-installer/frontend/gtk_interface.py:1527
-msgid "Do not install bootloader"
-msgstr "Ikke installer oppstartslasteren"
-
-#: live-installer/frontend/gtk_interface.py:1529
-msgid "Use already-mounted /target."
-msgstr "Bruk den allerede monterte /target."
-
-#: live-installer/frontend/gtk_interface.py:1537
-#, python-format
-msgid " (with %s GB swap)"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1541
-#, python-format
-msgid "Automated installation on %s"
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1545
-#, python-format
-msgid "Format %(path)s as %(filesystem)s"
-msgstr "Formater %(path)s som %(filesystem)s"
-
-#: live-installer/frontend/gtk_interface.py:1549
-#, python-format
-msgid "Mount %(path)s as %(mount)s"
-msgstr "Monter %(path)s som %(mount)s"
-
-#: live-installer/frontend/gtk_interface.py:1554
-#, python-format
-msgid "Create btrfs subvolume %(path)s under %(parentPath)s "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1558
-#, fuzzy, python-format
-msgid "Mount %(path)s subvolume as %(mount)s"
-msgstr "Monter %(path)s som %(mount)s"
-
-#: live-installer/frontend/gtk_interface.py:1563
-msgid "LVM: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1566
-msgid "Disk Encryption: "
-msgstr ""
-
-#: live-installer/frontend/gtk_interface.py:1578
-#: live-installer/installer.py:881
-msgid "Installation finished"
-msgstr "Installasjonen er fullført"
-
-#: live-installer/frontend/gtk_interface.py:1579
-msgid ""
-"The installation is now complete. Do you want to restart your computer to "
-"use the new system?"
-msgstr ""
-"Installasjonen er nå fullført. Vil du starte datamaskinen på nytt for å ta i "
-"bruk det nye systemet?"
-
-#: live-installer/frontend/gtk_interface.py:1611
-#: live-installer/frontend/gtk_interface.py:1615
-#: live-installer/frontend/gtk_interface.py:1624
-#: live-installer/frontend/gtk_interface.py:1633
-msgid "Installation error"
-msgstr "Installasjonsfeil"
-
-#: live-installer/frontend/gtk_interface.py:1647
-msgid "Error"
-msgstr ""
-
-#: live-installer/main.py:38
+#: live-installer/main.py:41
 msgid "You must be root!"
 msgstr ""
 
@@ -1170,7 +1182,7 @@ msgstr "Legger til ny bruker til systemet"
 msgid "Writing filesystem mount information to /etc/fstab"
 msgstr "Skriver filsystemets monteringsinformasjon til /etc/fstab"
 
-#: live-installer/installer.py:257 live-installer/installer.py:404
+#: live-installer/installer.py:257 live-installer/installer.py:406
 #, python-format
 msgid "Mounting %(partition)s on %(mountpoint)s"
 msgstr "Monterer %(partition)s i %(mountpoint)s"
@@ -1185,54 +1197,54 @@ msgstr ""
 msgid "Creating partitions on %s"
 msgstr ""
 
-#: live-installer/installer.py:366
+#: live-installer/installer.py:368
 #, python-format
 msgid "Formatting %(partition)s as %(format)s ..."
 msgstr "Formaterer %(partition)s som %(format)s ..."
 
-#: live-installer/installer.py:594
+#: live-installer/installer.py:596
 msgid "Setting hostname"
 msgstr "Setter vertsnavn"
 
-#: live-installer/installer.py:619
+#: live-installer/installer.py:621
 msgid "Setting locale"
 msgstr "Setter opp område-opplysninger"
 
-#: live-installer/installer.py:659
+#: live-installer/installer.py:661
 #, fuzzy
 msgid "Setting timezone"
 msgstr "Setter vertsnavn"
 
-#: live-installer/installer.py:694
+#: live-installer/installer.py:696
 msgid "Setting keyboard options"
 msgstr "Setter opp tastaturinnstillinger"
 
-#: live-installer/installer.py:771
+#: live-installer/installer.py:773
 #, fuzzy
 msgid "Removing extra packages"
 msgstr "Fjerner midlertidige innstillinger (pakker)"
 
-#: live-installer/installer.py:777
+#: live-installer/installer.py:779
 msgid "Clearing package manager"
 msgstr ""
 
-#: live-installer/installer.py:796
+#: live-installer/installer.py:803
 msgid "Generating initramfs"
 msgstr ""
 
-#: live-installer/installer.py:801
+#: live-installer/installer.py:808
 msgid "Preparing bootloader installation"
 msgstr ""
 
-#: live-installer/installer.py:821
+#: live-installer/installer.py:828
 msgid "Installing bootloader"
 msgstr "Installerer oppstartslasteren"
 
-#: live-installer/installer.py:833
+#: live-installer/installer.py:840
 msgid "Configuring bootloader"
 msgstr "Konfigurerer oppstartslasteren"
 
-#: live-installer/installer.py:841
+#: live-installer/installer.py:848
 msgid ""
 "WARNING: The grub bootloader was not configured properly! You need to "
 "configure it manually."
@@ -1240,15 +1252,15 @@ msgstr ""
 "ADVARSEL: Oppstartslasteren (grub) ble ikke ordentlig konfigurert. Du må "
 "konfigurere den manuelt."
 
-#: live-installer/installer.py:854
+#: live-installer/installer.py:861
 msgid "Trying to install updates"
 msgstr ""
 
-#: live-installer/installer.py:907
+#: live-installer/installer.py:914
 msgid "Checking bootloader"
 msgstr "Sjekker oppstartslasteren"
 
-#: live-installer/installer.py:944
+#: live-installer/installer.py:951
 msgid "Failed to run command (Exited with {}):"
 msgstr ""
 
