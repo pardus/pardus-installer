@@ -587,7 +587,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
                     break
                 if num_tries < 5:
                     num_tries += 1
-                    err(("Could not find %s, waiting 1s..." % partition_path))
+                    print(("Could not find %s, waiting 1s..." % partition_path))
                     os.system("sync")
                     time.sleep(1)
                 else:
@@ -760,7 +760,7 @@ class Partition(PartitionBase):
                         break
             except Exception as detail:
                 # best effort
-                err("Could not read partition flags for %s: %s" %
+                print("Could not read partition flags for %s: %s" %
                     (self.path, detail))
         while 0 == os.system('umount ' + TMP_MOUNTPOINT):
             True # dummy action
