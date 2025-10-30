@@ -49,7 +49,7 @@ if __name__ == "__main__":
             from frontend.welcome import welcome
             win = welcome()
         else:
-            err("Welcome screen disabled by config.")
+            print("Welcome screen disabled by config.")
             exit(0)
     elif "--tui" in sys.argv:
         from frontend.tui_interface import InstallerWindow

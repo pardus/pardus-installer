@@ -12,9 +12,10 @@ from frontend import *
 from frontend.dialogs import QuestionDialog, ErrorDialog, WarningDialog
 from frontend.keyboardview import kbdpreview
 from installer import InstallerEngine, Setup, NON_LATIN_KB_LAYOUTS
-from logger import _file as LOG_FILE_PATH
 
-from gi.repository import Gio, GLib
+gi.require_version('Vte', '2.91')
+
+from gi.repository import Gio, GLib, Vte
 
 gettext.bindtextdomain('xkeyboard-config', '/usr/share/locale')
 gettext.textdomain('xkeyboard-config')
@@ -339,13 +340,9 @@ class InstallerWindow:
         self.gtkimages.append(img)
         self.gtkpixbufs.append(pixbuf)
         self.buffer = Gtk.TextBuffer()
-        self.text_logs = self.builder.get_object("text_logs")
         self.text_logs_container = self.builder.get_object("text_logs_container")
         self.slidebox = self.builder.get_object("slidebox")
-        self.log_file = open(LOG_FILE_PATH, "r")
-        threading.Thread(target=self.monitor_logs,daemon=True).start()
-        self.size_allocation_handler = self.text_logs.connect("size-allocate", self.scroll_to_bottom)
-        self.text_logs.connect("map", self.scroll_to_bottom)
+        self.logfile = config.get("log_file", "/var/log/17g-installer.log")
 
         # build partition list
         self.should_pulse = False
@@ -357,7 +354,7 @@ class InstallerWindow:
         self.i18n()
 
         # make sure we're on the right page (no pun.)
-        self.activate_page(0)
+        #self.activate_page(0)
         self.builder.get_object("label_automated_warning").hide()
         self.builder.get_object("button_back").set_sensitive(False)
         self.slideshow()
@@ -424,6 +421,14 @@ class InstallerWindow:
             self.builder.get_object("progress_%d" % self.PAGE_USER).hide()
 
         self.ui_init = True
+        # vte for logs
+        self.terminal = Vte.Terminal()
+        self.text_logs_container.pack_start(self.terminal, True, True, 0)
+        self.terminal.show()
+        nex = self.PAGE_INSTALL
+        self.activate_page(nex, nex)
+
+        self.monitor_logs(self.logfile)
 
         if self.testmode:
             self.builder.get_object("label_install_progress").set_text("text "*100)
@@ -465,6 +470,22 @@ class InstallerWindow:
                     timezones.select_timezone(row)
                     break
             break
+
+    def monitor_logs(self, path):
+        # Spawn a shell in the terminal
+        self.terminal.spawn_async(
+                Vte.PtyFlags.DEFAULT,
+                "/",
+                ["/usr/bin/tail", "-f", path],
+                None,
+                GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                None,
+                None,
+                -1,
+                None,
+                None,
+                None
+            )
 
     def manually_edit_partitions(self,widget):
         """ Edit only known disks, selected one first """
@@ -1620,47 +1641,15 @@ class InstallerWindow:
                                    bold(_("enabled") if _lux else _("disabled")),))
         self.builder.get_object("treeview_overview").expand_all()
 
-    def continuously_read_file(self, file_path):
-        with open(file_path, 'r') as file:
-            file.seek(0,2)
-            while True:
-                line = file.readline()
-                if not line:
-                    time.sleep(0.1)
-                    continue
-                yield line
-
-    def monitor_logs(self):
-        for line in self.continuously_read_file(LOG_FILE_PATH):
-            self.buffer.insert(self.buffer.get_end_iter(), line)
-            self.text_logs.set_buffer(self.buffer)
-            # This is neccecary to prevent a bug that sometimes causes the text_logs_containers not scrolling to the bottom
-            time.sleep(0.1)
-
-            # Scroll to the bottom of the text_logs_container if necessary
-            adj = self.text_logs_container.get_vadjustment()
-            adj_value = adj.get_upper() - adj.get_page_size()
-            if adj_value - adj.get_page_size() < adj.get_value():
-                GLib.idle_add(adj.set_value, adj_value)
-
     def show_logs(self, widget):
         if widget.get_active():
             self.slidebox.set_visible(False)
             self.text_logs_container.set_visible(True)
-            # Scroll to the bottom of the text_logs GtkTextView when the text_logs_container is visible
-            self.text_logs.handler_unblock(self.size_allocation_handler)
         else:
             self.text_logs_container.set_visible(False)
             self.slidebox.set_visible(True)
-            # This will prevent a bug that sometimes causes the text_logs_containers not scrolling to the bottom
-            self.text_logs.handler_unblock(self.size_allocation_handler)
-    
-    def scroll_to_bottom(self, widget, *args):
-        adj = self.text_logs_container.get_vadjustment()
-        adj_value = adj.get_upper() - adj.get_page_size()
-        GLib.idle_add(adj.set_value, adj_value)
-        # Blocking the handler allows the user to scroll to the top of the text_logs_container
-        self.text_logs.handler_block(self.size_allocation_handler)
+
+
 
     @idle
     def show_error_dialog(self, message, detail):
