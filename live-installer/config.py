@@ -3,7 +3,8 @@ import sys
 import subprocess
 import yaml
 from glob import glob
-from logger import log, err, inf, set_logfile
+
+from logger import set_logfile
 
 sys.path.insert(1, '/lib/live-installer')
 if (os.path.isdir("/lib/live-installer")):
@@ -15,8 +16,8 @@ def load_config(config_path):
     if os.path.isfile(config_path):
         file = open(config_path, "r")
         content = file.read()
-        inf("#Reading yaml file:" + config_path)
-        log("Loading: "+config_path)
+        print("#Reading yaml file:" + config_path)
+        print("Loading: "+config_path)
     else:
         err("{} doesn't exists. Please create config file!".format(config_path))
         return {}
@@ -135,7 +136,7 @@ def package_manager(process, packages=[]):
 def update_initramfs():
     commands = []
     for command in initramfs["commands"]:
-        log(initramfs)
+        print(initramfs)
         if "{kernel_version}" in command:
             kernel_version = subprocess.getoutput("uname -r")
             command = command.replace('{kernel_version}', kernel_version)

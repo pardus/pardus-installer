@@ -434,19 +434,19 @@ class InstallerWindow:
             if not os.path.exists("/tmp/winroot"):
                 os.mkdir("/tmp/winroot")
             for disk_path in partitioning.get_partitions():
-                log("Searching: {}".format(disk_path))
+                print("Searching: {}".format(disk_path))
                 if 0 == os.system(
                         "mount -o ro {} /tmp/winroot".format(disk_path)):
                     if os.path.exists(
                             "/tmp/winroot/Windows/System32/ntoskrnl.exe"):
                         self.setup.winroot = disk_path
-                        log("Found windows rootfs: {}".format(disk_path))
+                        print("Found windows rootfs: {}".format(disk_path))
                     elif os.path.exists("/tmp/winroot/EFI/Microsoft/Boot/bootmgfw.efi"):
                         self.setup.winefi = disk_path
-                        log("Found windows efifs: {}".format(disk_path))
+                        print("Found windows efifs: {}".format(disk_path))
                     elif os.path.exists("/tmp/winroot/bootmgr"):
                         self.setup.winboot = disk_path
-                        log("Found windows boot: {}".format(disk_path))
+                        print("Found windows boot: {}".format(disk_path))
                 while 0 == os.system("umount -lf /tmp/winroot"):
                     True # dummy action
             if self.setup.winroot and (
@@ -495,7 +495,7 @@ class InstallerWindow:
             window_title = config.get(
                 "distro_title", "17g") + " - " + _("Installer")
         except BaseException:
-            err("\"distro_title\" varible not found on config. Using default.")
+            print("\"distro_title\" varible not found on config. Using default.")
         self.window.set_title(window_title)
 
         # Header
@@ -1684,7 +1684,7 @@ class InstallerWindow:
 
     @asynchronous
     def do_install(self):
-        log(" ## INSTALLATION ")
+        print(" ## INSTALLATION ")
         ''' Actually perform the installation .. '''
 
         self.installer.set_progress_hook(self.update_progress)
@@ -1732,7 +1732,7 @@ class InstallerWindow:
             while(self.showing_last_dialog):
                 time.sleep(0.1)
 
-            log(" ## INSTALLATION COMPLETE ")
+            print(" ## INSTALLATION COMPLETE ")
 
         Gtk.main_quit()
         sys.exit(0)
@@ -1745,7 +1745,7 @@ class InstallerWindow:
     @idle
     def update_progress(self, current=0, total=0, pulse=True, done=False, message="", nolog=""):
         if not nolog:
-            log(message)
+            print(message)
         if not current:
             current = 1
         if not total:

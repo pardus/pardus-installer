@@ -4,7 +4,7 @@ from frontend import *
 
 class Dialog(Gtk.MessageDialog):
     def __init__(self, style, buttons, title, text, text2=None, parent=None):
-        err(text)
+        print(text)
         Gtk.MessageDialog.__init__(self, parent, 0, style, buttons)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_icon_from_file("./branding/icon.svg")

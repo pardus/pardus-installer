@@ -43,17 +43,17 @@ def get_disks():
     live_device = re.sub('[0-9]+$', '', live_device)
     if live_device is not None and live_device.startswith('/dev/'):
         exclude_devices.append(live_device)
-        log("Excluding %s (detected as the live device)" % live_device)
+        print("Excluding %s (detected as the live device)" % live_device)
     lsblk = shell_exec(
         'LC_ALL=en_US.UTF-8 lsblk -rindo TYPE,NAME,RM,SIZE,MODEL | sort -k3,2')
     for line in lsblk.stdout:
         try:
             elements = str(line).strip().split(" ")
             if len(elements) < 4:
-                log("Can't parse blkid output: %s" % elements)
+                print("Can't parse blkid output: %s" % elements)
                 continue
             elif len(elements) < 5:
-                log("Can't find model in blkid output: %s" % elements)
+                print("Can't find model in blkid output: %s" % elements)
                 typevar, device, removable, size, model = elements[
                     0], elements[1], elements[2], elements[3], elements[1]
             else:
@@ -80,7 +80,7 @@ def get_disks():
                     description = _('Removable:') + ' ' + description
                 disks.append((device, description))
         except Exception as detail:
-            log("Could not parse blkid output: %s (%s)" % (line, detail))
+            print("Could not parse blkid output: %s (%s)" % (line, detail))
     return disks
 
 
@@ -120,7 +120,7 @@ def get_btrfs_partition_subvolumes(partition):
             subvolume.parent = partition
             subvolume.exists_on_disk = True
             subvolumes.append(subvolume)
-            log("subvolume: %s" % subvolume.name)
+            print("subvolume: %s" % subvolume.name)
         return subvolumes
     except:
         return []
@@ -167,12 +167,12 @@ def build_partitions(_installer):
     installer.window.get_window().set_cursor(
         Gdk.Cursor.new(Gdk.CursorType.WATCH))  # "busy" cursor
     installer.window.set_sensitive(False)
-    log("Starting PartitionSetup()")
+    print("Starting PartitionSetup()")
     partition_setup = PartitionSetup()
-    log("Finished PartitionSetup()")
+    print("Finished PartitionSetup()")
     if partition_setup.disks:
         installer._selected_disk = partition_setup.disks[0][0]
-    log("Showing the partition screen")
+    print("Showing the partition screen")
     installer.builder.get_object("treeview_disks").set_model(partition_setup)
     installer.builder.get_object("treeview_disks").expand_all()
     installer.window.get_window().set_cursor(None)
@@ -424,18 +424,18 @@ class PartitionSetup(Gtk.TreeStore):
 
         os.popen('mkdir -p ' + TMP_MOUNTPOINT)
         self.disks = get_disks()
-        log('Disks: ', self.disks)
+        print('Disks: ', self.disks)
         already_done_full_disk_format = False
         for disk_path, disk_description in self.disks:
             try:
                 disk_device = parted.getDevice(disk_path)
             except Exception as detail:
-                log("Found an issue while looking for the disk: %s" % detail)
+                print("Found an issue while looking for the disk: %s" % detail)
                 continue
             try:
                 disk = parted.Disk(disk_device)
             except Exception as detail:
-                log("Found an issue while looking for the disk: %s" % detail)
+                print("Found an issue while looking for the disk: %s" % detail)
                 from frontend.gtk_interface import QuestionDialog
                 if QuestionDialog(_("Installer"),
                     _("Disk: {} partition table broken or not exists. Do you want to create new partition table?").format(disk_path)):
@@ -465,7 +465,7 @@ class PartitionSetup(Gtk.TreeStore):
                     part.raw_size *= part.partition.geometry.device.sectorSize
                     part.size = to_human_readable(part.raw_size)
                     part.free_space = part.size
-                log("{} {}".format(partition.path.replace("-", ""), part.size))
+                print("{} {}".format(partition.path.replace("-", ""), part.size))
                 # skip ranges <5MB
                 if part.raw_size > 5242880:
                     partitions.append(part)
@@ -577,7 +577,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
             size_mb = partition[4]
             end = '{}MB'.format(start_mb + size_mb) if size_mb else '100%'
             mkpart_cmd = 'mkpart primary {}MB {}'.format(start_mb, end)
-            log("Executing: " + mkpart_cmd)
+            print("Executing: " + mkpart_cmd)
             run_parted(mkpart_cmd)
             partition_path = "%s%s%d" % (
                 device.path, partition_prefix, partition_number)
@@ -596,7 +596,7 @@ def full_disk_format(device, create_boot=False, create_swap=False,swap_size=1024
                     Gtk.main_quit()
                     sys.exit(1)
             mkfs = mkfs.format(partition_path)
-            log("Executing: " + mkfs)
+            print("Executing: " + mkfs)
             os.system(mkfs)
             start_mb += size_mb + 1
     if is_efi_supported():
@@ -764,14 +764,14 @@ class Partition(PartitionBase):
                     (self.path, detail))
         while 0 == os.system('umount ' + TMP_MOUNTPOINT):
             True # dummy action
-        log(("- Disk: {}\n"+"  - {}\n"*5).format(self.name,self.description, self.size, self.type, self.free_space,self.mbr))
+        print(("- Disk: {}\n"+"  - {}\n"*5).format(self.name,self.description, self.size, self.type, self.free_space,self.mbr))
 
     def set_boot(self):
         os.system("parted --script --align optimal {} set {} boot on".format(self.mbr,self.partition.number))
 
 
     def print_partition(self):
-        log("Device: %s, format as: %s, mount as: %s" %
+        print("Device: %s, format as: %s, mount as: %s" %
             (self.path, self.format_as, self.mount_as))
 
 
