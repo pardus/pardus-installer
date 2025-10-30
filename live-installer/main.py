@@ -5,9 +5,6 @@ from utils import *
 from frontend import *
 from frontend.dialogs import ErrorDialog
 
-single_instance()
-
-
 gettext.install("live-installer", "/usr/share/locale")
 sys.path.insert(1, '/lib/live-installer')
 if (os.path.isdir("/lib/live-installer")):
@@ -33,7 +30,7 @@ def exceptdebug(e, v, tb):
     traceback.print_tb(tb)
 
 
-sys.excapthook = exceptdebug
+sys.excepthook = exceptdebug
 
 # main entry
 if __name__ == "__main__":
@@ -41,6 +38,9 @@ if __name__ == "__main__":
         os.environ["TEST"]="1"
     if "--expert" in sys.argv:
         os.environ["EXPERT_MODE"]="1"
+    
+    # Check for single instance (after test mode is set)
+    single_instance()
     if not is_root() and "--test" not in sys.argv:
         ErrorDialog(config.get("distro_title", "17g"), _("You must be root!"))
         exit(1)
