@@ -423,8 +423,11 @@ class InstallerWindow:
         self.ui_init = True
         # vte for logs
         self.terminal = Vte.Terminal()
-        self.text_logs_container.pack_start(self.terminal, True, True, 0)
-        self.terminal.show()
+        self.terminal.set_input_enabled(False)
+        vte_scroll = Gtk.ScrolledWindow()
+        vte_scroll.add(self.terminal)
+        self.text_logs_container.pack_start(vte_scroll, True, True, 0)
+        vte_scroll.show_all()
         self.text_logs_container.hide()
 
         def update_vte_color(vte):
