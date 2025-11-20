@@ -1,3 +1,18 @@
+pardus-installer (4.0.0~beta1) unstable; urgency=medium
+
+  [ muhammedsaidckr ]
+  * fix test mode permission error
+  * Fix typo in excepthook assignment
+
+  [ Ali Riza KESKIN ]
+  * log mechanism changed
+  * log container replaced with vte.terminal
+  * vte color fix
+  * disable vte input and added scrolledwindow
+  * fix logging issues
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 20 Nov 2025 16:12:16 +0300
+
 pardus-installer (4.0.0~alpha8) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
