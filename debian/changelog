@@ -1,3 +1,13 @@
+pardus-installer (4.0.0) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * add new icon
+
+  [ Yusuf Düzgün ]
+  * add pardus25 slides
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 24 Nov 2025 12:31:33 +0300
+
 pardus-installer (4.0.0~beta1) unstable; urgency=medium
 
   [ muhammedsaidckr ]
