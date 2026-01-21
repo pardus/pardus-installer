@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-12 18:20+0300\n"
+"POT-Creation-Date: 2025-08-16 15:45+0300\n"
 "PO-Revision-Date: 2024-05-06 19:21+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
@@ -24,8 +24,8 @@ msgid "Welcome to the 17g Installer."
 msgstr "17g Kurucuya Hoş Geldiniz."
 
 #: live-installer/resources/interface.ui:88
-#: live-installer/frontend/tui_interface.py:36
 #: live-installer/frontend/gtk_interface.py:531
+#: live-installer/frontend/tui_interface.py:36
 msgid ""
 "This program will ask you some questions and set up system on your computer."
 msgstr ""
@@ -60,8 +60,8 @@ msgid "Continent"
 msgstr "Bölge"
 
 #: live-installer/resources/interface.ui:426
-#: live-installer/frontend/tui_interface.py:53
 #: live-installer/frontend/gtk_interface.py:508
+#: live-installer/frontend/tui_interface.py:53
 msgid "Timezone"
 msgstr "Zaman dilimi"
 
@@ -194,9 +194,9 @@ msgid "Format"
 msgstr "Biçimlendir"
 
 #: live-installer/resources/interface.ui:1459
-#: live-installer/frontend/partitioning.py:278
 #: live-installer/frontend/gtk_interface.py:604
 #: live-installer/frontend/gtk_interface.py:1005
+#: live-installer/frontend/partitioning.py:278
 msgid "Create"
 msgstr "Oluştur"
 
@@ -333,384 +333,17 @@ msgstr ""
 msgid "Welcome to 17g"
 msgstr "Hoş geldiniz"
 
-#: live-installer/validate.py:12
-msgid "Please provide a username."
-msgstr "Lütfen bir kullanıcı adı belirleyin."
-
-#: live-installer/validate.py:14
-msgid "Your username is invalid."
-msgstr "Kullanıcı adınız geçersiz."
-
-#: live-installer/validate.py:16
-msgid "Your username is too long"
-msgstr "Kullanıcı adınız çok uzun"
-
-#: live-installer/validate.py:18
-msgid "Your username is unavailable"
-msgstr "Kullanıcı adınız kullanılamıyor"
-
-#: live-installer/validate.py:20
-msgid "Your username cannot start with numbers."
-msgstr "Kullanıcı adınız sayı ile başlayamaz."
-
-#: live-installer/validate.py:23
-msgid "Your username must be lower case."
-msgstr "Kullanıcı adınız küçük karakterler olmalı."
-
-#: live-installer/validate.py:26
-msgid "Your username may not contain whitespace characters."
-msgstr "Kullanıcı adınızda boşluk bulunamaz."
-
-#: live-installer/validate.py:33
-msgid "Please provide a name for your computer."
-msgstr "Lütfen bir bilgisayar adı belirleyin."
-
-#: live-installer/validate.py:35
-msgid "The computer's name is invalid."
-msgstr "Bilgisayar adını geçersiz."
-
-#: live-installer/validate.py:37
-msgid "The computer's name is too long."
-msgstr "Bilgisayar adını çok uzun."
-
-#: live-installer/validate.py:39
-msgid "The computer's name should not starts or ends with -"
-msgstr "Bilgisayar adını - ile başlayamaz veya bitemez"
-
-#: live-installer/validate.py:42
-msgid "The computer's name must be lower case."
-msgstr "Bilgisayar adınız küçük harfler içermeli."
-
-#: live-installer/validate.py:45
-msgid "The computer's name may not contain whitespace characters."
-msgstr "Bilgisayar adınızda boşluk bulunamaz."
-
-#: live-installer/validate.py:48
-msgid ""
-"The computer's name must consist of only a-z or A-Z or 0-9 or - characters"
-msgstr ""
-"Bilgisayar adınında sadece a-Z veya A-Z veya 0-9 karakterleri veya - "
-"bulunabilir."
-
-#: live-installer/validate.py:59
-msgid "Your passwords is too short."
-msgstr "Parolanız çok kısa."
-
-#: live-installer/validate.py:63
-msgid "Your password is numeric"
-msgstr "Parolanız sadece sayıdan oluşuyor"
-
-#: live-installer/validate.py:67
-msgid "Your password must have big letters"
-msgstr "Parolanız büyük karakter içermelidir"
-
-#: live-installer/validate.py:71
-msgid "Your password must have small letters"
-msgstr "Parolanız küçük karakter içermelidir"
-
-#: live-installer/validate.py:75
-msgid "Your password must not be the same as the user name"
-msgstr "Parolanız kullanıcı adı ile aynı olmamalıdır"
-
-#: live-installer/validate.py:79
-msgid "Your password length must be minimum 8 characters"
-msgstr "Parolanız en az 8 karakterli olmalıdır"
-
-#: live-installer/validate.py:99
-msgid "Your password must have exclusive characters"
-msgstr "Parolanız özel karakter içermelidir"
-
-#: live-installer/validate.py:103
-msgid "Your password must have numbers"
-msgstr "Parolanız sayı içermelidir"
-
-#: live-installer/validate.py:107
-msgid "Please provide a password for your user account."
-msgstr "Lütfen kullanıcı hesabınız için parola belirleyin."
-
-#: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
-#: live-installer/frontend/dialogs.py:54
-#: live-installer/frontend/partitioning.py:797
-#: live-installer/frontend/partitioning.py:892
-msgid "OK"
-msgstr "Tamam"
-
-#: live-installer/frontend/dialogs.py:41
-msgid "No"
-msgstr "Hayır"
-
-#: live-installer/frontend/dialogs.py:42
-msgid "Yes"
-msgstr "Evet"
-
-#: live-installer/frontend/welcome.py:32
-#, python-format
-msgid "Try %s"
-msgstr "%s dene"
-
-#: live-installer/frontend/welcome.py:36
-#, python-format
-msgid "You are currently running %s from live media."
-msgstr "Şu anda %s canlı ortamdan çalışıyor."
-
-#: live-installer/frontend/welcome.py:38
-#, python-format
-msgid ""
-"You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
-"Menu later."
-msgstr ""
-"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
-"yükle\" seçebilirsiniz."
-
-#: live-installer/frontend/welcome.py:39
-#, python-format
-msgid "Welcome to %s"
-msgstr "Hoş geldiniz %s"
-
-#: live-installer/frontend/tui_interface.py:34
-#: live-installer/frontend/gtk_interface.py:529
-#, python-format
-msgid "Welcome to the %s Installer."
-msgstr "%s Kurucuya Hoş Geldiniz."
-
-#: live-installer/frontend/tui_interface.py:40
-#: live-installer/frontend/gtk_interface.py:506
-msgid "What language would you like to use?"
-msgstr "Hangi dili kullanmak istiyorsunuz?"
-
-#: live-installer/frontend/tui_interface.py:45
-#: live-installer/frontend/gtk_interface.py:119
-#: live-installer/frontend/gtk_interface.py:506
-#: live-installer/frontend/gtk_interface.py:537
-msgid "Language"
-msgstr "Dil"
-
-#: live-installer/frontend/tui_interface.py:49
-#: live-installer/frontend/gtk_interface.py:508
-msgid "Where are you?"
-msgstr "Neredesiniz?"
-
-#: live-installer/frontend/tui_interface.py:57
-msgid "What keyboard would you like to use?"
-msgstr "Hangi dili kullanmak istiyorsunuz?"
-
-#: live-installer/frontend/tui_interface.py:64
-msgid "Keyboard Model"
-msgstr "Klavye modeli"
-
-#: live-installer/frontend/tui_interface.py:73
-msgid "Installation type?"
-msgstr "Kurulum türü?"
-
-#: live-installer/frontend/tui_interface.py:77
-#: live-installer/frontend/gtk_interface.py:607
-msgid "Type"
-msgstr "Tür"
-
-#: live-installer/frontend/tui_interface.py:80
-msgid "Select a disk?"
-msgstr "Lütfen bir disk seçin?"
-
-#: live-installer/frontend/tui_interface.py:84
-msgid "Disk"
-msgstr "Disk"
-
-#: live-installer/frontend/timezones.py:140
-msgid "Select timezone"
-msgstr "Zaman dilimi seçin"
-
-#: live-installer/frontend/partitioning.py:72
-msgid "B"
-msgstr "B"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:602
-msgid "kB"
-msgstr "kB"
-
-#: live-installer/frontend/partitioning.py:72
-#: live-installer/frontend/partitioning.py:602
-msgid "MB"
-msgstr "MB"
-
-#: live-installer/frontend/partitioning.py:73
-#: live-installer/frontend/partitioning.py:603
-msgid "TB"
-msgstr "TB"
-
-#: live-installer/frontend/partitioning.py:80
-msgid "Removable:"
-msgstr "Taşınabilir:"
-
-#: live-installer/frontend/partitioning.py:190
-#: live-installer/frontend/partitioning.py:199
-#: live-installer/frontend/partitioning.py:201
-#: live-installer/frontend/partitioning.py:236
-#: live-installer/frontend/partitioning.py:274
-#: live-installer/frontend/partitioning.py:336
-#: live-installer/frontend/partitioning.py:348
-#: live-installer/frontend/partitioning.py:352
-#: live-installer/frontend/partitioning.py:775
-#: live-installer/frontend/gtk_interface.py:1016
-#: live-installer/frontend/gtk_interface.py:1045
-msgid "btrfs subvolume"
-msgstr "btrfs altbölümü"
-
-#: live-installer/frontend/partitioning.py:195
-msgid "Edit Subvolume"
-msgstr "Altbölümü düzenle"
-
-#: live-installer/frontend/partitioning.py:213
-#: live-installer/frontend/gtk_interface.py:620
-msgid "Read only"
-msgstr "Salt okunur"
-
-#: live-installer/frontend/partitioning.py:241
-msgid "The name of a subvolume must not start or end with a forward slash"
-msgstr "Bir altbölümün adı eğik çizgi ile başlayamaz veya bitemez"
-
-#: live-installer/frontend/partitioning.py:245
-msgid "The name of a subvolume must not be blank or contain a space"
-msgstr "Bir altbölümün adı boş olamaz ya da boşluk içeremez"
-
-#: live-installer/frontend/partitioning.py:252
-#, python-format
-msgid "Subvolume with name '%s' already exists"
-msgstr "'%s' ismine sahip bir altbölüm halihazırda mevcut"
-
-#: live-installer/frontend/partitioning.py:287
-#: live-installer/frontend/gtk_interface.py:1023
-#: live-installer/frontend/gtk_interface.py:1031
-msgid "Create a subvolume"
-msgstr "Bir altbölüm oluştur"
-
-#: live-installer/frontend/partitioning.py:341
-msgid "Edit"
-msgstr "Düzenle"
-
-#: live-installer/frontend/partitioning.py:353
-#: live-installer/frontend/partitioning.py:360
-#: live-installer/frontend/partitioning.py:364
-#: live-installer/frontend/partitioning.py:371
-#: live-installer/frontend/partitioning.py:380
-#, python-format
-msgid "Assign to %s"
-msgstr "%s olarak ata"
-
-#: live-installer/frontend/partitioning.py:387
-msgid "Create btrfs subvolume"
-msgstr "btrfs altbölümü oluştur"
-
-#: live-installer/frontend/partitioning.py:440
-#: live-installer/frontend/partitioning.py:523
-#: live-installer/frontend/gtk_interface.py:491
-#: live-installer/frontend/gtk_interface.py:494
-#: live-installer/frontend/gtk_interface.py:1212
-#: live-installer/frontend/gtk_interface.py:1237
-#: live-installer/frontend/gtk_interface.py:1260
-#: live-installer/frontend/gtk_interface.py:1280
-#: live-installer/frontend/gtk_interface.py:1284
-#: live-installer/frontend/gtk_interface.py:1294
-#: live-installer/frontend/gtk_interface.py:1298
-#: live-installer/frontend/gtk_interface.py:1303
-#: live-installer/frontend/gtk_interface.py:1317
-#: live-installer/frontend/gtk_interface.py:1323
-#: live-installer/frontend/gtk_interface.py:1329
-#: live-installer/frontend/gtk_interface.py:1334
-#: live-installer/frontend/gtk_interface.py:1339
-#: live-installer/frontend/gtk_interface.py:1398
-#: live-installer/frontend/gtk_interface.py:1477
-msgid "Installer"
-msgstr "Kurucu"
-
-#: live-installer/frontend/partitioning.py:441
-msgid ""
-"Disk: {} partition table broken or not exists. Do you want to create new "
-"partition table?"
-msgstr ""
-"Disk: {} bölümlendirme tablosu bozuk veya mevcut değil. Yeni bölüm tablosu "
-"oluşturmak istiyor musunuz?"
-
-#: live-installer/frontend/partitioning.py:463
-#: live-installer/frontend/partitioning.py:686
-#: live-installer/frontend/gtk_interface.py:612
-#: live-installer/frontend/gtk_interface.py:1014
-msgid "Free space"
-msgstr "Boş alan"
-
-#: live-installer/frontend/partitioning.py:540
-#, python-format
-msgid ""
-"The partition table couldn't be written for %s. Restart the computer and try "
-"again."
-msgstr ""
-"Bölüm tablosu %s için yazılamadı. Bilgisayarı yeniden başlatın ve tekrar "
-"deneyin."
-
-#: live-installer/frontend/partitioning.py:589
-#, python-format
-msgid ""
-"The partition %s could not be created. The installation will stop. Restart "
-"the computer and try again."
-msgstr ""
-"%s bölümü oluşturulamadı. Kurulum duracaktır. Bilgisayarı yeniden başlatın "
-"ve tekrar deneyin."
-
-#: live-installer/frontend/partitioning.py:684
-msgid "Logical partition"
-msgstr "Mantıksal bölüm"
-
-#: live-installer/frontend/partitioning.py:685
-msgid "Extended partition"
-msgstr "Genişletilmiş bölüm"
-
-#: live-installer/frontend/partitioning.py:689
-#: live-installer/frontend/partitioning.py:823
-msgid "Unknown"
-msgstr "Bilinmeyen"
-
-#: live-installer/frontend/partitioning.py:740
-msgid "bootloader/recovery"
-msgstr "önyükleyici/kurtarma"
-
-#: live-installer/frontend/partitioning.py:753
-msgid "EFI System Partition"
-msgstr "EFI Sistem Bölümü"
-
-#: live-installer/frontend/partitioning.py:789
-msgid "Edit partition"
-msgstr "Bölümleri düzenle"
-
-#: live-installer/frontend/partitioning.py:791
-msgid "Device:"
-msgstr "Donanım:"
-
-#: live-installer/frontend/partitioning.py:793
-msgid "Format as:"
-msgstr "Biçimleme türü:"
-
-#: live-installer/frontend/partitioning.py:795
-#: live-installer/frontend/partitioning.py:882
-msgid "Mount point:"
-msgstr "Bağlama noktası:"
-
-#: live-installer/frontend/partitioning.py:796
-#: live-installer/frontend/partitioning.py:891
-msgid "Cancel"
-msgstr "İptal"
-
-#: live-installer/frontend/partitioning.py:873
-msgid "Create Subvolume"
-msgstr "Altbölüm oluştur"
-
-#: live-installer/frontend/partitioning.py:880
-msgid "Name:"
-msgstr "isim:"
-
 #: live-installer/frontend/gtk_interface.py:110
 #: live-installer/frontend/gtk_interface.py:538
 msgid "Country"
 msgstr "Ülke"
+
+#: live-installer/frontend/gtk_interface.py:119
+#: live-installer/frontend/gtk_interface.py:506
+#: live-installer/frontend/gtk_interface.py:537
+#: live-installer/frontend/tui_interface.py:45
+msgid "Language"
+msgstr "Dil"
 
 #: live-installer/frontend/gtk_interface.py:170
 msgid "Ext4 (Default)"
@@ -736,9 +369,41 @@ msgstr "Değişken"
 msgid "Calculating file indexes ..."
 msgstr "Dosya indexleri hesaplanıyor ..."
 
+#: live-installer/frontend/gtk_interface.py:491
+#: live-installer/frontend/gtk_interface.py:494
+#: live-installer/frontend/gtk_interface.py:1212
+#: live-installer/frontend/gtk_interface.py:1237
+#: live-installer/frontend/gtk_interface.py:1260
+#: live-installer/frontend/gtk_interface.py:1280
+#: live-installer/frontend/gtk_interface.py:1284
+#: live-installer/frontend/gtk_interface.py:1294
+#: live-installer/frontend/gtk_interface.py:1298
+#: live-installer/frontend/gtk_interface.py:1303
+#: live-installer/frontend/gtk_interface.py:1317
+#: live-installer/frontend/gtk_interface.py:1323
+#: live-installer/frontend/gtk_interface.py:1329
+#: live-installer/frontend/gtk_interface.py:1334
+#: live-installer/frontend/gtk_interface.py:1339
+#: live-installer/frontend/gtk_interface.py:1398
+#: live-installer/frontend/gtk_interface.py:1477
+#: live-installer/frontend/partitioning.py:440
+#: live-installer/frontend/partitioning.py:523
+msgid "Installer"
+msgstr "Kurucu"
+
 #: live-installer/frontend/gtk_interface.py:504
 msgid "License Agreement"
 msgstr "Lisans Sözleşmesi"
+
+#: live-installer/frontend/gtk_interface.py:506
+#: live-installer/frontend/tui_interface.py:40
+msgid "What language would you like to use?"
+msgstr "Hangi dili kullanmak istiyorsunuz?"
+
+#: live-installer/frontend/gtk_interface.py:508
+#: live-installer/frontend/tui_interface.py:49
+msgid "Where are you?"
+msgstr "Neredesiniz?"
 
 #: live-installer/frontend/gtk_interface.py:510
 msgid "Keyboard layout"
@@ -799,6 +464,12 @@ msgstr "Geri"
 msgid "Next"
 msgstr "İleri"
 
+#: live-installer/frontend/gtk_interface.py:529
+#: live-installer/frontend/tui_interface.py:34
+#, python-format
+msgid "Welcome to the %s Installer."
+msgstr "%s Kurucuya Hoş Geldiniz."
+
 #: live-installer/frontend/gtk_interface.py:544
 msgid "Type here to test your keyboard layout"
 msgstr "Klavyenizi test etmek için buraya yazın"
@@ -834,6 +505,11 @@ msgstr "Bölümleri düzenle"
 msgid "Device"
 msgstr "Donanım"
 
+#: live-installer/frontend/gtk_interface.py:607
+#: live-installer/frontend/tui_interface.py:77
+msgid "Type"
+msgstr "Tür"
+
 #: live-installer/frontend/gtk_interface.py:608
 msgid "Operating system"
 msgstr "İşletim sistemi"
@@ -849,6 +525,18 @@ msgstr "Biçimlendirme türü"
 #: live-installer/frontend/gtk_interface.py:611
 msgid "Size"
 msgstr "Boyut"
+
+#: live-installer/frontend/gtk_interface.py:612
+#: live-installer/frontend/gtk_interface.py:1014
+#: live-installer/frontend/partitioning.py:463
+#: live-installer/frontend/partitioning.py:686
+msgid "Free space"
+msgstr "Boş alan"
+
+#: live-installer/frontend/gtk_interface.py:620
+#: live-installer/frontend/partitioning.py:213
+msgid "Read only"
+msgstr "Salt okunur"
 
 #: live-installer/frontend/gtk_interface.py:648
 #: live-installer/frontend/gtk_interface.py:1400
@@ -878,6 +566,26 @@ msgstr "Çıkış?"
 #: live-installer/frontend/gtk_interface.py:831
 msgid "Are you sure you want to quit the installer?"
 msgstr "Kurulumdan çıkmak istediğinizden emin misiniz?"
+
+#: live-installer/frontend/gtk_interface.py:1016
+#: live-installer/frontend/gtk_interface.py:1045
+#: live-installer/frontend/partitioning.py:190
+#: live-installer/frontend/partitioning.py:199
+#: live-installer/frontend/partitioning.py:201
+#: live-installer/frontend/partitioning.py:236
+#: live-installer/frontend/partitioning.py:274
+#: live-installer/frontend/partitioning.py:336
+#: live-installer/frontend/partitioning.py:348
+#: live-installer/frontend/partitioning.py:352
+#: live-installer/frontend/partitioning.py:775
+msgid "btrfs subvolume"
+msgstr "btrfs altbölümü"
+
+#: live-installer/frontend/gtk_interface.py:1023
+#: live-installer/frontend/gtk_interface.py:1031
+#: live-installer/frontend/partitioning.py:287
+msgid "Create a subvolume"
+msgstr "Bir altbölüm oluştur"
 
 #: live-installer/frontend/gtk_interface.py:1033
 #: live-installer/frontend/gtk_interface.py:1047
@@ -925,8 +633,8 @@ msgid ""
 "Root filesystem type not specified. Installation will continue without disk "
 "formatting. Do you want to continue?"
 msgstr ""
-"Kök dosya sistemi seçilmedi. Kurulum biçimlendirme olmadan devam "
-"edecek.Devam etmek istiyor musunuz?"
+"Kök dosya sistemi seçilmedi. Kurulum biçimlendirme olmadan devam edecek."
+"Devam etmek istiyor musunuz?"
 
 #: live-installer/frontend/gtk_interface.py:1285
 #: live-installer/frontend/gtk_interface.py:1299
@@ -1158,9 +866,301 @@ msgstr "Kurulum hatası"
 msgid "Error"
 msgstr "Hata"
 
+#: live-installer/frontend/partitioning.py:72
+msgid "B"
+msgstr "B"
+
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:602
+msgid "kB"
+msgstr "kB"
+
+#: live-installer/frontend/partitioning.py:72
+#: live-installer/frontend/partitioning.py:602
+msgid "MB"
+msgstr "MB"
+
+#: live-installer/frontend/partitioning.py:73
+#: live-installer/frontend/partitioning.py:603
+msgid "TB"
+msgstr "TB"
+
+#: live-installer/frontend/partitioning.py:80
+msgid "Removable:"
+msgstr "Taşınabilir:"
+
+#: live-installer/frontend/partitioning.py:195
+msgid "Edit Subvolume"
+msgstr "Altbölümü düzenle"
+
+#: live-installer/frontend/partitioning.py:241
+msgid "The name of a subvolume must not start or end with a forward slash"
+msgstr "Bir altbölümün adı eğik çizgi ile başlayamaz veya bitemez"
+
+#: live-installer/frontend/partitioning.py:245
+msgid "The name of a subvolume must not be blank or contain a space"
+msgstr "Bir altbölümün adı boş olamaz ya da boşluk içeremez"
+
+#: live-installer/frontend/partitioning.py:252
+#, python-format
+msgid "Subvolume with name '%s' already exists"
+msgstr "'%s' ismine sahip bir altbölüm halihazırda mevcut"
+
+#: live-installer/frontend/partitioning.py:341
+msgid "Edit"
+msgstr "Düzenle"
+
+#: live-installer/frontend/partitioning.py:353
+#: live-installer/frontend/partitioning.py:360
+#: live-installer/frontend/partitioning.py:364
+#: live-installer/frontend/partitioning.py:371
+#: live-installer/frontend/partitioning.py:380
+#, python-format
+msgid "Assign to %s"
+msgstr "%s olarak ata"
+
+#: live-installer/frontend/partitioning.py:387
+msgid "Create btrfs subvolume"
+msgstr "btrfs altbölümü oluştur"
+
+#: live-installer/frontend/partitioning.py:441
+msgid ""
+"Disk: {} partition table broken or not exists. Do you want to create new "
+"partition table?"
+msgstr ""
+"Disk: {} bölümlendirme tablosu bozuk veya mevcut değil. Yeni bölüm tablosu "
+"oluşturmak istiyor musunuz?"
+
+#: live-installer/frontend/partitioning.py:540
+#, python-format
+msgid ""
+"The partition table couldn't be written for %s. Restart the computer and try "
+"again."
+msgstr ""
+"Bölüm tablosu %s için yazılamadı. Bilgisayarı yeniden başlatın ve tekrar "
+"deneyin."
+
+#: live-installer/frontend/partitioning.py:589
+#, python-format
+msgid ""
+"The partition %s could not be created. The installation will stop. Restart "
+"the computer and try again."
+msgstr ""
+"%s bölümü oluşturulamadı. Kurulum duracaktır. Bilgisayarı yeniden başlatın "
+"ve tekrar deneyin."
+
+#: live-installer/frontend/partitioning.py:684
+msgid "Logical partition"
+msgstr "Mantıksal bölüm"
+
+#: live-installer/frontend/partitioning.py:685
+msgid "Extended partition"
+msgstr "Genişletilmiş bölüm"
+
+#: live-installer/frontend/partitioning.py:689
+#: live-installer/frontend/partitioning.py:823
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: live-installer/frontend/partitioning.py:740
+msgid "bootloader/recovery"
+msgstr "önyükleyici/kurtarma"
+
+#: live-installer/frontend/partitioning.py:753
+msgid "EFI System Partition"
+msgstr "EFI Sistem Bölümü"
+
+#: live-installer/frontend/partitioning.py:789
+msgid "Edit partition"
+msgstr "Bölümleri düzenle"
+
+#: live-installer/frontend/partitioning.py:791
+msgid "Device:"
+msgstr "Donanım:"
+
+#: live-installer/frontend/partitioning.py:793
+msgid "Format as:"
+msgstr "Biçimleme türü:"
+
+#: live-installer/frontend/partitioning.py:795
+#: live-installer/frontend/partitioning.py:882
+msgid "Mount point:"
+msgstr "Bağlama noktası:"
+
+#: live-installer/frontend/partitioning.py:796
+#: live-installer/frontend/partitioning.py:891
+msgid "Cancel"
+msgstr "İptal"
+
+#: live-installer/frontend/partitioning.py:797
+#: live-installer/frontend/partitioning.py:892
+#: live-installer/frontend/dialogs.py:35 live-installer/frontend/dialogs.py:48
+#: live-installer/frontend/dialogs.py:54
+msgid "OK"
+msgstr "Tamam"
+
+#: live-installer/frontend/partitioning.py:873
+msgid "Create Subvolume"
+msgstr "Altbölüm oluştur"
+
+#: live-installer/frontend/partitioning.py:880
+msgid "Name:"
+msgstr "isim:"
+
+#: live-installer/frontend/timezones.py:140
+msgid "Select timezone"
+msgstr "Zaman dilimi seçin"
+
+#: live-installer/frontend/dialogs.py:41
+msgid "No"
+msgstr "Hayır"
+
+#: live-installer/frontend/dialogs.py:42
+msgid "Yes"
+msgstr "Evet"
+
+#: live-installer/frontend/tui_interface.py:57
+msgid "What keyboard would you like to use?"
+msgstr "Hangi dili kullanmak istiyorsunuz?"
+
+#: live-installer/frontend/tui_interface.py:64
+msgid "Keyboard Model"
+msgstr "Klavye modeli"
+
+#: live-installer/frontend/tui_interface.py:73
+msgid "Installation type?"
+msgstr "Kurulum türü?"
+
+#: live-installer/frontend/tui_interface.py:80
+msgid "Select a disk?"
+msgstr "Lütfen bir disk seçin?"
+
+#: live-installer/frontend/tui_interface.py:84
+msgid "Disk"
+msgstr "Disk"
+
+#: live-installer/frontend/welcome.py:32
+#, python-format
+msgid "Try %s"
+msgstr "%s dene"
+
+#: live-installer/frontend/welcome.py:36
+#, python-format
+msgid "You are currently running %s from live media."
+msgstr "Şu anda %s canlı ortamdan çalışıyor."
+
+#: live-installer/frontend/welcome.py:38
+#, python-format
+msgid ""
+"You can install %s now, or chose \"Install to Hard Drive\" in the Appication "
+"Menu later."
+msgstr ""
+"Şimdi %s yükleyebilirsiniz, veya Daha sonra uygulama menüsünden \"diske "
+"yükle\" seçebilirsiniz."
+
+#: live-installer/frontend/welcome.py:39
+#, python-format
+msgid "Welcome to %s"
+msgstr "Hoş geldiniz %s"
+
 #: live-installer/main.py:41
 msgid "You must be root!"
 msgstr "Root olmalısınız!"
+
+#: live-installer/validate.py:12
+msgid "Please provide a username."
+msgstr "Lütfen bir kullanıcı adı belirleyin."
+
+#: live-installer/validate.py:14
+msgid "Your username is invalid."
+msgstr "Kullanıcı adınız geçersiz."
+
+#: live-installer/validate.py:16
+msgid "Your username is too long"
+msgstr "Kullanıcı adınız çok uzun"
+
+#: live-installer/validate.py:18
+msgid "Your username is unavailable"
+msgstr "Kullanıcı adınız kullanılamıyor"
+
+#: live-installer/validate.py:20
+msgid "Your username cannot start with numbers."
+msgstr "Kullanıcı adınız sayı ile başlayamaz."
+
+#: live-installer/validate.py:23
+msgid "Your username must be lower case."
+msgstr "Kullanıcı adınız küçük karakterler olmalı."
+
+#: live-installer/validate.py:26
+msgid "Your username may not contain whitespace characters."
+msgstr "Kullanıcı adınızda boşluk bulunamaz."
+
+#: live-installer/validate.py:33
+msgid "Please provide a name for your computer."
+msgstr "Lütfen bir bilgisayar adı belirleyin."
+
+#: live-installer/validate.py:35
+msgid "The computer's name is invalid."
+msgstr "Bilgisayar adını geçersiz."
+
+#: live-installer/validate.py:37
+msgid "The computer's name is too long."
+msgstr "Bilgisayar adını çok uzun."
+
+#: live-installer/validate.py:39
+msgid "The computer's name should not starts or ends with -"
+msgstr "Bilgisayar adını - ile başlayamaz veya bitemez"
+
+#: live-installer/validate.py:42
+msgid "The computer's name must be lower case."
+msgstr "Bilgisayar adınız küçük harfler içermeli."
+
+#: live-installer/validate.py:45
+msgid "The computer's name may not contain whitespace characters."
+msgstr "Bilgisayar adınızda boşluk bulunamaz."
+
+#: live-installer/validate.py:48
+msgid ""
+"The computer's name must consist of only a-z or A-Z or 0-9 or - characters"
+msgstr ""
+"Bilgisayar adınında sadece a-Z veya A-Z veya 0-9 karakterleri veya - "
+"bulunabilir."
+
+#: live-installer/validate.py:59
+msgid "Your passwords is too short."
+msgstr "Parolanız çok kısa."
+
+#: live-installer/validate.py:63
+msgid "Your password is numeric"
+msgstr "Parolanız sadece sayıdan oluşuyor"
+
+#: live-installer/validate.py:67
+msgid "Your password must have big letters"
+msgstr "Parolanız büyük karakter içermelidir"
+
+#: live-installer/validate.py:71
+msgid "Your password must have small letters"
+msgstr "Parolanız küçük karakter içermelidir"
+
+#: live-installer/validate.py:75
+msgid "Your password must not be the same as the user name"
+msgstr "Parolanız kullanıcı adı ile aynı olmamalıdır"
+
+#: live-installer/validate.py:79
+msgid "Your password length must be minimum 8 characters"
+msgstr "Parolanız en az 8 karakterli olmalıdır"
+
+#: live-installer/validate.py:99
+msgid "Your password must have exclusive characters"
+msgstr "Parolanız özel karakter içermelidir"
+
+#: live-installer/validate.py:103
+msgid "Your password must have numbers"
+msgstr "Parolanız sayı içermelidir"
+
+#: live-installer/validate.py:107
+msgid "Please provide a password for your user account."
+msgstr "Lütfen kullanıcı hesabınız için parola belirleyin."
 
 #: live-installer/installer.py:139 live-installer/installer.py:160
 #, python-format

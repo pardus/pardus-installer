@@ -17,9 +17,9 @@ run: build
 	build/lib/live-installer/main.py
 
 pot:
-	xgettext -o live-installer.pot --from-code="utf-8" live-installer/resources/*.ui `find live-installer -type f -iname "*.py"`
+	xgettext -o po/live-installer.pot --from-code="utf-8" live-installer/resources/*.ui `find live-installer -type f -iname "*.py"`
 	for file in `ls po/*.po`; do \
-            msgmerge $$file live-installer.pot -o $$file.new ; \
+            msgmerge $$file po/live-installer.pot -o $$file.new ; \
 	    rm -f $$file ; \
 	    mv $$file.new $$file ; \
 	done \
