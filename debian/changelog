@@ -1,3 +1,13 @@
+pardus-installer (4.0.1) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+
+  [ Edip Hazuri ]
+  * fix: add missing VTE dependency
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 21 May 2026 17:02:06 +0300
+
 pardus-installer (4.0.0) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
