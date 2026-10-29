@@ -209,7 +209,8 @@ class InstallerEngine:
                 self.run("chroot||usermod -aG {} {}".format(group, self.setup.username), False)
 
             if is_cmd("openssl") and config.get("use_usermod", True):
-                pass_hash = subprocess.run(["openssl", "passwd", "-6", self.setup.password1], capture_output=True)
+                pass_hash = subprocess.run(["openssl", "passwd", "-6", "-stdin"],
+                                           input=self.setup.password1.encode("utf-8"), capture_output=True)
                 pass_hash = pass_hash.stdout.decode("utf-8").strip()
                 os.system("chroot /target usermod -p '{0}' {1}".format(pass_hash, self.setup.username))
                 if config.get("set_root_password", True):
@@ -229,6 +230,7 @@ class InstallerEngine:
                 self.run("chroot||cat /tmp/.passwd | passwd '{0}'".format(self.setup.username))
                 if config.get("set_root_password", True):
                     self.run("chroot||cat /tmp/.passwd | passwd")
+                self.run("chroot||rm -f /tmp/.passwd")
 
             if config.get("keep_userdata", True):
                 live_home = subprocess.getoutput("grep x:1000 /etc/passwd").split(":")[5]
@@ -309,12 +311,10 @@ class InstallerEngine:
         if self.setup.luks:
             print(" --> Encrypting root partition %s" %
                 self.auto_root_partition)
-            with open("/tmp/.lukspass","w") as f:
-                f.write("{0}\n{0}\n".format(self.setup.passphrase1))
-                f.flush()
-            self.run("cat /tmp/.lukspass | cryptsetup --force-password luksFormat {}".format(self.auto_root_partition))
+            lukspass = "{0}\n{0}\n".format(self.setup.passphrase1)
+            self.run_with_input(["cryptsetup", "--force-password", "luksFormat", self.auto_root_partition], lukspass)
             print(" --> Opening root partition %s" % self.auto_root_partition)
-            self.run("cat /tmp/.lukspass | cryptsetup luksOpen {} {}".format(self.auto_root_partition,config.get("distro_codename","linux")))
+            self.run_with_input(["cryptsetup", "luksOpen", self.auto_root_partition, config.get("distro_codename","linux")], lukspass)
             self.auto_root_partition = "/dev/mapper/{}".format(config.get("distro_codename","linux"))
 
         # Setup LVM
@@ -994,6 +994,15 @@ class InstallerEngine:
         if 0 != i and vital:
             self.error_message(message=(_("Failed to run command (Exited with {}):")+"\n {}").format(
             str(i), cmd))
+        return i
+
+    def run_with_input(self, cmd, data):
+        # For secrets: data goes over stdin, never into a file or argv
+        print("Running: " + " ".join(cmd))
+        i = subprocess.run(cmd, input=data.encode("utf-8")).returncode
+        if 0 != i:
+            self.error_message(message=(_("Failed to run command (Exited with {}):")+"\n {}").format(
+            str(i), " ".join(cmd)))
         return i
 # Represents the choices made by the user
 
