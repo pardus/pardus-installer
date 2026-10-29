@@ -990,7 +990,7 @@ class InstallerEngine:
     def run(self,cmd,vital=True):
         if "{distro_codename}" in cmd:
             cmd = cmd.replace("{distro_codename}", config.get("distro_codename", "linux"))
-        i = int(run(cmd,vital)/256)
+        i = run(cmd,vital)
         if 0 != i and vital:
             self.error_message(message=(_("Failed to run command (Exited with {}):")+"\n {}").format(
             str(i), cmd))
