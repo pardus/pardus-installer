@@ -199,9 +199,16 @@ class InstallerEngine:
             self.update_progress(_("Adding new user to the system"))
             # TODO: support encryption
 
-            self.run('chroot||useradd -m -s {shell} -c \"{realname}\" {username}'.format(
-                shell=config.get("using_shell", "/bin/bash"), realname=self.setup.real_name,
-                username=self.setup.username))
+            # The real name is free text. Don't pass it through a shell, an
+            # apostrophe in it broke the command and no user was created. ":"
+            # separates the fields of /etc/passwd, useradd refuses it.
+            i = subprocess.run(["chroot", "/target", "useradd", "-m",
+                                "-s", config.get("using_shell", "/bin/bash"),
+                                "-c", self.setup.real_name.replace(":", " "),
+                                self.setup.username]).returncode
+            if i != 0:
+                self.error_message(message=(_("Failed to run command (Exited with {}):")+"\n {}").format(
+                    str(i), "useradd"))
 
             # Add user to additional groups
             for group in config.get("additional_user_groups", [
