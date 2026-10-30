@@ -87,9 +87,9 @@ def run(cmd, vital=True):
         mode = cmd.split("||")[0].strip()
         cmd = cmd.split("||")[1].strip()
         if mode == "chroot":
-            i = do_run_in_chroot(cmd)
+            i = int(do_run_in_chroot(cmd)/256)
         else:
-            i = os.system(cmd)
+            i = int(os.system(cmd)/256)
     else:
         i = int(os.system(cmd)/256)
     if vital and i != 0:

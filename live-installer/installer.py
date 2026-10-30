@@ -924,7 +924,8 @@ class InstallerEngine:
         for partition in self.setup.partitions:
             if(partition.mount_as is not None and partition.mount_as != "" and partition.mount_as != "/" and partition.mount_as != "swap"):
                 self.do_unmount("/target" + partition.mount_as)
-        self.run("cat '{0}'> /target/'{0}'".format(self.logfile))
+        # Not vital: fails when /var is a separate partition, it is unmounted above
+        self.run("cat '{0}'> /target/'{0}'".format(self.logfile), vital=False)
         os.sync()
         self.do_unmount("/target")
         self.do_unmount("/source")
@@ -990,7 +991,7 @@ class InstallerEngine:
     def run(self,cmd,vital=True):
         if "{distro_codename}" in cmd:
             cmd = cmd.replace("{distro_codename}", config.get("distro_codename", "linux"))
-        i = int(run(cmd,vital)/256)
+        i = run(cmd,vital)
         if 0 != i and vital:
             self.error_message(message=(_("Failed to run command (Exited with {}):")+"\n {}").format(
             str(i), cmd))
